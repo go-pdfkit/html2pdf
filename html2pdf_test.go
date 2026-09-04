@@ -9,24 +9,32 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/go-pdfkit/pdfkit"
 	"github.com/go-webengine/engine/css"
 	"github.com/go-webengine/engine/dom"
 	"github.com/go-webengine/engine/layout"
 	"github.com/go-webengine/engine/paint"
 )
 
-// parseAndLayoutForTest mirrors Export's own parse+cascade+layout steps, for
-// tests that need to inspect the box tree collectAtoms sees rather than only
-// the final PDF bytes.
+// parseAndLayoutForTest mirrors Export's own parse+cascade+layout steps at
+// the print column's own width (no viewport scaling), for tests that need to
+// inspect the box tree collectAtoms sees rather than only the final PDF
+// bytes.
 func parseAndLayoutForTest(htmlSrc string) (*layout.Box, error) {
+	o := (Options{}).resolved()
+	contentWPx := (o.PageSize.Width - 2*pdfkit.Mm(o.MarginMm)) / pxToPt
+	return layoutAtWidthForTest(htmlSrc, contentWPx)
+}
+
+// layoutAtWidthForTest lays out htmlSrc at an arbitrary viewport width.
+func layoutAtWidthForTest(htmlSrc string, widthPx float64) (*layout.Box, error) {
 	root, err := dom.Parse(htmlSrc)
 	if err != nil {
 		return nil, err
 	}
 	sm := css.Cascade(root)
 	fonts := paint.NewFonts()
-	contentWPx := (Options{}).resolved().PageSize.Width / pxToPt
-	box, _ := layout.LayoutDocument(root, sm, contentWPx, fonts, nil)
+	box, _ := layout.LayoutDocument(root, sm, widthPx, fonts, nil)
 	return box, nil
 }
 
@@ -238,6 +246,58 @@ func TestHasDescendantTrNilChildren(t *testing.T) {
 func TestCollectAtomsHandlesNilBox(t *testing.T) {
 	if got := collectAtoms(nil); got != nil {
 		t.Errorf("collectAtoms(nil) = %v, want nil", got)
+	}
+}
+
+func TestExportScalesAWideFixedWidthPageToFitTheColumn(t *testing.T) {
+	// A fixed-width sidebar beside flexible prose is the real shape this
+	// guards against (RFC 9110's table-of-contents column, found via the
+	// corpus): the sidebar's own width never changes, but the prose next to
+	// it gets whatever the viewport has left over — squeezed to a sliver at
+	// the print column's own ~642px, much roomier at ViewportPx's 1024px —
+	// so it wraps into far fewer lines at the wider layout.
+	html := `<html><body style="margin:0"><div style="display:flex">` +
+		`<div style="width:300px;flex-shrink:0">sidebar</div>` +
+		`<div>` + strings.Repeat("word ", 400) + `</div>` +
+		`</div></body></html>`
+
+	narrow, err := parseAndLayoutForTest(html)
+	if err != nil {
+		t.Fatalf("layout: %v", err)
+	}
+	narrowLines := len(collectAtoms(narrow))
+
+	wideBox, err := layoutAtWidthForTest(html, 1024)
+	if err != nil {
+		t.Fatalf("layout: %v", err)
+	}
+	wideLines := len(collectAtoms(wideBox))
+
+	if wideLines >= narrowLines {
+		t.Errorf("wide-viewport layout produced %d line atoms, want fewer than the %d from a 642px-equivalent layout", wideLines, narrowLines)
+	}
+
+	doc, err := Export(html, Options{})
+	if err != nil {
+		t.Fatalf("Export: %v", err)
+	}
+	var buf bytes.Buffer
+	if err := doc.Write(&buf); err != nil {
+		t.Fatalf("Write: %v", err)
+	}
+}
+
+func TestExportViewportNeverNarrowerThanPrintColumn(t *testing.T) {
+	// A ViewportPx set below the print column's own width must not shrink
+	// the layout further — it's clamped up to the column width (scale 1, no
+	// downscaling) rather than upscaling the page.
+	doc, err := Export(`<html><body>x</body></html>`, Options{ViewportPx: 10})
+	if err != nil {
+		t.Fatalf("Export: %v", err)
+	}
+	var buf bytes.Buffer
+	if err := doc.Write(&buf); err != nil {
+		t.Fatalf("Write: %v", err)
 	}
 }
 

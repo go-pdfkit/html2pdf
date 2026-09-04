@@ -4,14 +4,14 @@
 
 | URL | Status | Pages | PDF | Text chars | Fetch | Render |
 |---|---|---|---|---|---|---|
-| [https://example.com/](https://example.com/) | ✅ | 1 | 26285 B | 127 | 41ms | 31ms |
-| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 34 | 3530766 B | 63005 | 135ms | 108ms |
-| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 17 | 1347476 B | 23256 | 49ms | 144ms |
-| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 9 | 825623 B | 13334 | 165ms | 38ms |
-| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 86 | 8258945 B | 150642 | 487ms | 104ms |
-| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 428 | 28285153 B | 450968 | 207ms | 488ms |
-| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 4 | 239893 B | 4022 | 469ms | 33ms |
-| [https://react.dev/](https://react.dev/) | ✅ | 7 | 501695 B | 7909 | 55ms | 43ms |
+| [https://example.com/](https://example.com/) | ✅ | 1 | 26601 B | 127 | 41ms | 63ms |
+| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 18 | 3694522 B | 63058 | 186ms | 178ms |
+| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 9 | 1389439 B | 22970 | 54ms | 230ms |
+| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 6 | 849596 B | 13470 | 446ms | 57ms |
+| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 49 | 8516859 B | 150969 | 233ms | 177ms |
+| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 120 | 28978109 B | 449957 | 300ms | 675ms |
+| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 2 | 248721 B | 3985 | 450ms | 45ms |
+| [https://react.dev/](https://react.dev/) | ✅ | 5 | 526645 B | 7965 | 91ms | 58ms |
 
 <!-- BEGIN ANALYSIS -->
 
@@ -37,25 +37,35 @@ into instead, so its real rows become the atoms. After the fix: 4 pages,
 content from the top of page 1, 4009 characters extracted (~3×). Regression
 test: `TestExportNestedLayoutTableSplitsAcrossPages`.
 
-### Real limitation, not a bug: narrow print column vs. desktop-only responsive CSS
+### Fixed: narrow print column vs. desktop-only responsive CSS (`Options.ViewportPx`)
 
-`rfc-editor.org`'s RFC 9110 page renders technically correctly but
+`rfc-editor.org`'s RFC 9110 page rendered technically correctly but
 inefficiently: 428 pages for a document whose official PDF runs closer to
-180. `out/www-rfc-editor-org-rfc-rfc9110-html-p1-001.png` shows why — the
-page's table-of-contents sidebar sits *beside* the article in a fixed-width
-column, and at html2pdf's 170mm (≈642px) print column that squeezes the
-actual prose down to under half the page width, so it wraps into roughly
-twice the line count it would at full desktop width. The page was designed
-for a 1200px+ viewport with no narrower breakpoint that drops the sidebar;
-html2pdf has no `@media print` handling or "render wide, shrink to fit" mode
-to compensate. `pkg.go.dev/net/http` at 86 pages is plausibly just genuinely
-long (net/http is one of the largest stdlib packages) rather than showing the
-same artifact — not confirmed either way.
+180. The page's table-of-contents sidebar sits *beside* the article in a
+fixed-width column with no breakpoint that drops it below desktop width, so
+laying out directly at html2pdf's print column (170mm, ≈642px) squeezed the
+prose to under half the page width — roughly double the line count it needed.
 
-**Possible future direction**: lay out at a wider virtual viewport (matching
-what the page's own CSS was designed for) and scale the result down to the
-print column, the way a browser's print dialog often does — real work, not
-attempted here.
+Fix: `Export` now lays out at a wider virtual viewport (`Options.ViewportPx`,
+default 1024px) and scales the whole page down to fit the print column,
+same idea as a browser print dialog's "shrink to fit". Result, this run vs.
+the one that found the problem:
+
+| Page | Before | After |
+|---|---|---|
+| RFC 9110 | 428 pages | **120 pages** |
+| `pkg.go.dev/net/http` | 86 | 49 |
+| Wikipedia (Go) | 34 | 18 |
+| Wikipedia (countries list) | 17 | 9 |
+| `go.dev/blog` | 9 | 6 |
+| Hacker News | 4 | 2 |
+| `react.dev` | 7 | 5 |
+
+Extracted text length stayed within 1% on every page — this is a layout
+density change, not a content change. `out/www-rfc-editor-org-rfc-rfc9110-html-p1-001.png`
+and `out/news-ycombinator-com-p1-1.png` after the fix both show full-width,
+readable text at a normal size — the scale-down doesn't make anything too
+small to read at these ratios (642/1024 ≈ 0.63×).
 
 ### Confirmed-expected: `react.dev` shows only its static shell
 

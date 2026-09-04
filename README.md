@@ -35,6 +35,19 @@ through one. A table row that would overflow the page moves to the next page
 whole; a paragraph may still break between its own lines, same as printed
 text always has.
 
+## Layout width vs. print width
+
+A page is laid out at `Options.ViewportPx` (default 1024px), then scaled down
+to fit the print column — not laid out directly at the print column's own
+width (a plain A4 page is under 650px wide). Many real pages carry a
+fixed-width element sized for a desktop viewport (a sidebar, a multi-column
+nav) that a browser's own responsive CSS only collapses below some
+breakpoint; laying out narrower than that breakpoint just squeezes the rest
+of the page into a sliver instead of dropping the sidebar. Confirmed against
+RFC 9110's HTML edition, whose table-of-contents sidebar did exactly this —
+see [`corpus/CORPUS.md`](corpus/CORPUS.md) for the before/after page counts
+across all 8 corpus pages.
+
 ## Scope
 
 This renders **static** HTML: no JavaScript, no external stylesheets, no
@@ -56,11 +69,12 @@ Two gaps, both inherited from — not introduced by — the layout engine:
 
 ## Status
 
-Early — validated so far against a hand-built regression suite
-(`html2pdf_test.go`) and one real multi-page report. A corpus run against
-public real-world pages, in the spirit of go-webengine's own
-[`bench/`](https://github.com/go-webengine/engine/tree/main/bench), is
-tracked in [`corpus/`](corpus/) and [`CORPUS.md`](CORPUS.md).
+Validated against a hand-built regression suite (`html2pdf_test.go`, ~94%
+statement coverage) and a corpus of 8 real public pages
+([`corpus/`](corpus/), in the spirit of go-webengine's own
+[`bench/`](https://github.com/go-webengine/engine/tree/main/bench)) — see
+[`corpus/CORPUS.md`](corpus/CORPUS.md) for current results and the bugs the
+corpus run has found so far.
 
 ## License
 
