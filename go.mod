@@ -4,7 +4,7 @@ go 1.26.4
 
 require (
 	github.com/go-opentype/fonts v0.9.0
-	github.com/go-pdfkit/pdfkit v0.11.0
+	github.com/go-pdfkit/pdfkit v0.11.1-0.20260904144759-052e432ce8ac
 	github.com/go-webengine/engine v0.3.12-0.20260904213653-218d80e0325d
 )
 
