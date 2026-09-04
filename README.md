@@ -24,7 +24,7 @@ doc.Write(f)
 
 Or from the shell:
 
-```
+```sh
 go run ./cmd/html2pdf -in report.html -out report.pdf
 ```
 
@@ -56,16 +56,20 @@ package bundles — Inter (sans), Lora (serif), Go Mono (mono) — so the glyphs
 drawn always match the metrics the layout pass measured against; there is no
 web-font fetch to fail silently.
 
-Two gaps, both inherited from — not introduced by — the layout engine:
+Images — raster `<img>`, `<img src="*.svg">` and inline `<svg>` — go through
+the engine's own fetch/decode/size pipeline (`Engine.LoadImages`) and are
+embedded as bitmaps, so they're laid out and drawn exactly as the engine's
+raster canvas would draw them. A relative `src` resolves against
+`Options.BaseURL`; an image that fails to fetch or decode is simply left out,
+as on the raster canvas. This is the one place `Export` touches the network.
+
+One gap remains, inherited from — not introduced by — the layout engine:
 
 - **Inline-level background/border/padding does not paint.** A styled
   `<span>` never gets its own box in go-webengine's layout (confirmed against
   its reference raster painter too — a shared engine limitation). Style the
   *containing* block/table-cell instead of an inner inline element when you
   need a filled badge or pill.
-- **Inline `<svg>` and `<img>` are not painted yet.** Build charts from plain
-  block/table markup (backgrounds, borders, percentage widths) rather than
-  inline SVG until this lands.
 
 ## Status
 

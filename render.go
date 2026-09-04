@@ -5,14 +5,18 @@
 package html2pdf
 
 import (
+	"image"
+
 	"github.com/go-pdfkit/pdfkit"
 	"github.com/go-webengine/engine/css"
+	"github.com/go-webengine/engine/dom"
 	"github.com/go-webengine/engine/layout"
 )
 
 // exporter holds the state for painting one page's slice of the box tree.
 type exporter struct {
 	fonts    *fontSet
+	imgs     map[*dom.Node]image.Image // decoded bitmaps, keyed by <img>/<svg> element
 	pageWPt  float64
 	pageHPt  float64
 	marginPt float64
@@ -102,13 +106,18 @@ func (e *exporter) paintBorders(b *layout.Box, top, bot, x0, y0, x1, y1 float64)
 	}
 }
 
-// paintLine draws one line box's text items, skipping the line entirely if it
-// doesn't intersect the current page slice.
+// paintLine draws one line box's items — text runs, and image items as
+// embedded bitmaps — skipping the line entirely if it doesn't intersect the
+// current page slice.
 func (e *exporter) paintLine(line *layout.LineBox) {
 	if line.Y+line.H <= e.pageTop || line.Y >= e.pageBot {
 		return
 	}
 	for _, it := range line.Items {
+		if it.Image != nil {
+			e.paintImage(it)
+			continue
+		}
 		if it.Text == "" || it.Style == nil {
 			continue
 		}
@@ -118,4 +127,22 @@ func (e *exporter) paintLine(line *layout.LineBox) {
 		x, y := e.toPdf(it.X, it.Y+it.Ascent)
 		_ = e.p.TextShaped(x, y, it.Text)
 	}
+}
+
+// paintImage embeds an image item's decoded bitmap into the box layout gave
+// it. The engine's raster painter blits the bitmap at (X, Y) at its native
+// size, which its loader already made equal to (ImgW, ImgH) — so that box,
+// scaled to the print column, is the destination rectangle. An element whose
+// fetch or decode failed has no bitmap and draws nothing, same as on the
+// raster canvas. Unlike a background, an image that straddles a page break is
+// not clipped per page — it's an atom (its own line box), so pagination
+// already keeps it whole; the page-slice test on the line is enough.
+func (e *exporter) paintImage(it *layout.InlineItem) {
+	bmp, ok := e.imgs[it.Image]
+	if !ok || bmp == nil || it.ImgW <= 0 || it.ImgH <= 0 {
+		return
+	}
+	x0, y0 := e.toPdf(it.X, it.Y)
+	x1, y1 := e.toPdf(it.X+it.ImgW, it.Y+it.ImgH)
+	e.p.DrawImage(bmp, pdfkit.Rect{X: x0, Y: y1, Width: x1 - x0, Height: y0 - y1})
 }
