@@ -1,0 +1,32 @@
+# Validation corpus for html2pdf — real public, document-shaped pages.
+# One URL per line; blank lines and #-comments are ignored.
+#
+# html2pdf renders STATIC HTML only (no JS, no external stylesheets/fonts),
+# so this corpus favours genuinely document-shaped public pages — articles,
+# specs, reference docs — over app-shell sites, plus one deliberately
+# JS-heavy page to keep that known gap honest rather than untested.
+
+# 1. Minimal static baseline (centred column, tiny inline CSS).
+https://example.com/
+
+# 2. Encyclopaedia article: infobox, inline images, mixed prose + tables.
+https://en.wikipedia.org/wiki/Go_(programming_language)
+
+# 3. Table-heavy reference page: one big data table, little prose.
+https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)
+
+# 4. Blog article: long-form prose, code blocks, a handful of images.
+https://go.dev/blog/subtests
+
+# 5. Technical docs page: dense monospace prose, nested lists, cross-links.
+https://pkg.go.dev/net/http
+
+# 6. Long structured spec document — the canonical "print this to PDF" case.
+https://www.rfc-editor.org/rfc/rfc9110.html
+
+# 7. Old-school table/font-tag layout, extremely high real-world traffic.
+https://news.ycombinator.com/
+
+# 8. Deliberately JS-heavy SPA — documents the no-JavaScript gap honestly
+#    rather than leaving it untested.
+https://react.dev/

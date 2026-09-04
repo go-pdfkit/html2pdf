@@ -1,0 +1,90 @@
+[
+  {
+    "url": "https://example.com/",
+    "slug": "example-com",
+    "ok": true,
+    "fetch_ms": 41,
+    "render_ms": 31,
+    "pdf_bytes": 26285,
+    "pages": 1,
+    "text_chars": 127,
+    "html_bytes": 559
+  },
+  {
+    "url": "https://en.wikipedia.org/wiki/Go_(programming_language)",
+    "slug": "en-wikipedia-org-wiki-Go_programming_language",
+    "ok": true,
+    "fetch_ms": 135,
+    "render_ms": 108,
+    "pdf_bytes": 3530766,
+    "pages": 34,
+    "text_chars": 63005,
+    "html_bytes": 734710
+  },
+  {
+    "url": "https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)",
+    "slug": "en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations",
+    "ok": true,
+    "fetch_ms": 49,
+    "render_ms": 144,
+    "pdf_bytes": 1347476,
+    "pages": 17,
+    "text_chars": 23256,
+    "html_bytes": 773512
+  },
+  {
+    "url": "https://go.dev/blog/subtests",
+    "slug": "go-dev-blog-subtests",
+    "ok": true,
+    "fetch_ms": 165,
+    "render_ms": 38,
+    "pdf_bytes": 825623,
+    "pages": 9,
+    "text_chars": 13334,
+    "html_bytes": 46512
+  },
+  {
+    "url": "https://pkg.go.dev/net/http",
+    "slug": "pkg-go-dev-net-http",
+    "ok": true,
+    "fetch_ms": 487,
+    "render_ms": 104,
+    "pdf_bytes": 8258945,
+    "pages": 86,
+    "text_chars": 150642,
+    "html_bytes": 482331
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+    "slug": "www-rfc-editor-org-rfc-rfc9110-html",
+    "ok": true,
+    "fetch_ms": 207,
+    "render_ms": 488,
+    "pdf_bytes": 28285153,
+    "pages": 428,
+    "text_chars": 450968,
+    "html_bytes": 1187554
+  },
+  {
+    "url": "https://news.ycombinator.com/",
+    "slug": "news-ycombinator-com",
+    "ok": true,
+    "fetch_ms": 469,
+    "render_ms": 33,
+    "pdf_bytes": 239893,
+    "pages": 4,
+    "text_chars": 4022,
+    "html_bytes": 34654
+  },
+  {
+    "url": "https://react.dev/",
+    "slug": "react-dev",
+    "ok": true,
+    "fetch_ms": 55,
+    "render_ms": 43,
+    "pdf_bytes": 501695,
+    "pages": 7,
+    "text_chars": 7909,
+    "html_bytes": 272458
+  }
+]

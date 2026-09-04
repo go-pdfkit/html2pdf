@@ -1,0 +1,4 @@
+# Rendered PDFs are large and fully regenerable from urls.txt — keep the
+# page-1 PNG previews (small, useful as a visual record) but not these.
+out/*.pdf
+corpus

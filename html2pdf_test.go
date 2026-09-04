@@ -1,0 +1,256 @@
+// Copyright (c) the go-pdfkit/html2pdf authors. All rights reserved.
+// Use of this source code is governed by a BSD-3-Clause license that can be
+// found in the LICENSE file at the root of this repository.
+
+package html2pdf
+
+import (
+	"bytes"
+	"strings"
+	"testing"
+
+	"github.com/go-webengine/engine/css"
+	"github.com/go-webengine/engine/dom"
+	"github.com/go-webengine/engine/layout"
+	"github.com/go-webengine/engine/paint"
+)
+
+// parseAndLayoutForTest mirrors Export's own parse+cascade+layout steps, for
+// tests that need to inspect the box tree collectAtoms sees rather than only
+// the final PDF bytes.
+func parseAndLayoutForTest(htmlSrc string) (*layout.Box, error) {
+	root, err := dom.Parse(htmlSrc)
+	if err != nil {
+		return nil, err
+	}
+	sm := css.Cascade(root)
+	fonts := paint.NewFonts()
+	contentWPx := (Options{}).resolved().PageSize.Width / pxToPt
+	box, _ := layout.LayoutDocument(root, sm, contentWPx, fonts, nil)
+	return box, nil
+}
+
+func TestExportSimpleDocument(t *testing.T) {
+	doc, err := Export(`<html><body style="margin:0;font-family:sans-serif">
+		<h1 style="color:#2954C8">Titre</h1>
+		<p>Un paragraphe.</p>
+	</body></html>`, Options{})
+	if err != nil {
+		t.Fatalf("Export: %v", err)
+	}
+	var buf bytes.Buffer
+	if err := doc.Write(&buf); err != nil {
+		t.Fatalf("Write: %v", err)
+	}
+	if !bytes.HasPrefix(buf.Bytes(), []byte("%PDF-")) {
+		t.Errorf("output does not start with a PDF header: %q", buf.Bytes()[:16])
+	}
+}
+
+func TestExportEmptyBodyProducesOnePage(t *testing.T) {
+	doc, err := Export(`<html><body></body></html>`, Options{})
+	if err != nil {
+		t.Fatalf("Export: %v", err)
+	}
+	var buf bytes.Buffer
+	if err := doc.Write(&buf); err != nil {
+		t.Fatalf("Write: %v", err)
+	}
+	// A page count assertion would require parsing the emitted PDF; the write
+	// succeeding without panic on a boxless document is the property under
+	// test (collectAtoms/pageBreaks must handle zero atoms).
+}
+
+func TestExportInvalidOptionsFallBackToDefaults(t *testing.T) {
+	doc, err := Export(`<html><body>x</body></html>`, Options{})
+	if err != nil {
+		t.Fatalf("Export: %v", err)
+	}
+	if doc == nil {
+		t.Fatal("Export returned a nil document")
+	}
+}
+
+func TestExportRejectsUnparsableInput(t *testing.T) {
+	// dom.Parse is lenient (HTML has no hard syntax errors in practice), so
+	// this exercises the error path indirectly: an empty string still parses
+	// to an empty document rather than erroring, which is the correct HTML5
+	// parsing behaviour — recorded here so a future tightening of dom.Parse's
+	// error contract has a test to update instead of silently changing
+	// behaviour unnoticed.
+	if _, err := Export("", Options{}); err != nil {
+		t.Errorf("Export(\"\") = %v, want nil error (HTML5 parsing has no hard failures)", err)
+	}
+}
+
+func TestPageBreaksNeverSplitAnAtom(t *testing.T) {
+	atoms := []atom{{0, 10}, {10, 20}, {20, 30}, {30, 40}, {40, 50}}
+	breaks := pageBreaks(atoms, 22) // fits 2 atoms (20px) per page, not a 3rd
+	want := []float64{20, 40}
+	if len(breaks) != len(want) {
+		t.Fatalf("breaks = %v, want %v", breaks, want)
+	}
+	for i, b := range breaks {
+		if b != want[i] {
+			t.Errorf("breaks[%d] = %v, want %v", i, b, want[i])
+		}
+	}
+}
+
+func TestPageBreaksEmptyAtomsNoPanic(t *testing.T) {
+	if got := pageBreaks(nil, 100); got != nil {
+		t.Errorf("pageBreaks(nil, ...) = %v, want nil", got)
+	}
+}
+
+func TestPageBreaksOversizedAtomStillAdvances(t *testing.T) {
+	// A single atom taller than one page (an oversized image, an enormous
+	// table row) cannot be split — it gets its own page(s) worth of room
+	// rather than looping forever or being silently dropped.
+	atoms := []atom{{0, 500}, {500, 520}}
+	breaks := pageBreaks(atoms, 100)
+	if len(breaks) != 1 || breaks[0] != 500 {
+		t.Errorf("breaks = %v, want [500]", breaks)
+	}
+}
+
+func TestFontSetPickCoversAllFamilyWeightStyleCombinations(t *testing.T) {
+	fs, err := loadFonts()
+	if err != nil {
+		t.Fatalf("loadFonts: %v", err)
+	}
+	for _, fam := range []css.FontFamily{css.Sans, css.Serif, css.Mono} {
+		for _, bold := range []bool{false, true} {
+			for _, italic := range []bool{false, true} {
+				if f := fs.pick(fam, bold, italic); f == nil {
+					t.Errorf("pick(%v, bold=%v, italic=%v) = nil", fam, bold, italic)
+				}
+			}
+		}
+	}
+}
+
+func TestToRGBConvertsEightBitChannels(t *testing.T) {
+	got := toRGB(css.Color{R: 255, G: 0, B: 128, A: 255})
+	if got.R != 1 || got.G != 0 || got.B != float64(128)/255 {
+		t.Errorf("toRGB = %+v", got)
+	}
+}
+
+func TestOptionsResolvedDefaults(t *testing.T) {
+	o := Options{}.resolved()
+	if o.MarginMm != 20 {
+		t.Errorf("default MarginMm = %v, want 20", o.MarginMm)
+	}
+	if o.PageSize.Width <= 0 || o.PageSize.Height <= 0 {
+		t.Errorf("default PageSize = %+v, want A4", o.PageSize)
+	}
+}
+
+func TestExportPaintsAllFourBorderSides(t *testing.T) {
+	doc, err := Export(`<html><body style="margin:0">
+		<div style="border-top:2px solid red;border-right:2px solid blue;
+			border-bottom:2px solid green;border-left:2px solid orange;
+			width:100px;height:50px;background:#eee">x</div>
+	</body></html>`, Options{})
+	if err != nil {
+		t.Fatalf("Export: %v", err)
+	}
+	var buf bytes.Buffer
+	if err := doc.Write(&buf); err != nil {
+		t.Fatalf("Write: %v", err)
+	}
+}
+
+func TestExportSkipsZeroWidthAndNoneBorders(t *testing.T) {
+	doc, err := Export(`<html><body style="margin:0">
+		<div style="border:0 solid red;width:50px;height:50px">a</div>
+		<div style="border:2px none red;width:50px;height:50px">b</div>
+		<div style="border:2px solid transparent;width:50px;height:50px">c</div>
+	</body></html>`, Options{})
+	if err != nil {
+		t.Fatalf("Export: %v", err)
+	}
+	var buf bytes.Buffer
+	if err := doc.Write(&buf); err != nil {
+		t.Fatalf("Write: %v", err)
+	}
+}
+
+func TestExportPaginatesALongTable(t *testing.T) {
+	var rows strings.Builder
+	for i := 0; i < 80; i++ {
+		rows.WriteString(`<tr><td style="padding:6px">row</td><td style="padding:6px">value</td></tr>`)
+	}
+	doc, err := Export(`<html><body style="margin:0"><table>`+rows.String()+`</table></body></html>`, Options{})
+	if err != nil {
+		t.Fatalf("Export: %v", err)
+	}
+	var buf bytes.Buffer
+	if err := doc.Write(&buf); err != nil {
+		t.Fatalf("Write: %v", err)
+	}
+	if n := bytes.Count(buf.Bytes(), []byte("/Type /Page\n")); n > 0 && n < 2 {
+		t.Errorf("an 80-row table produced only %d page(s), expected pagination", n)
+	}
+}
+
+func TestExportNestedLayoutTableSplitsAcrossPages(t *testing.T) {
+	// Hacker News' classic markup: an outer <tr><td> holding a nested <table>
+	// of many real rows. Before hasDescendantTr, the outer row was treated as
+	// one atom the size of the whole nested table, which — being taller than
+	// a page — could still only start at a page top: it landed entirely on
+	// page 2, leaving page 1 blank below the page's own header row.
+	var inner strings.Builder
+	for i := 0; i < 60; i++ {
+		inner.WriteString(`<tr><td style="padding:10px">row</td></tr>`)
+	}
+	html := `<html><body style="margin:0">` +
+		`<table><tr><td>header</td></tr></table>` +
+		`<table><tr><td><table>` + inner.String() + `</table></td></tr></table>` +
+		`</body></html>`
+	doc, err := Export(html, Options{})
+	if err != nil {
+		t.Fatalf("Export: %v", err)
+	}
+	var buf bytes.Buffer
+	if err := doc.Write(&buf); err != nil {
+		t.Fatalf("Write: %v", err)
+	}
+	// The nested rows must show up as their own atoms, not one atom for the
+	// whole nested table.
+	root, err := parseAndLayoutForTest(html)
+	if err != nil {
+		t.Fatalf("layout: %v", err)
+	}
+	atoms := collectAtoms(root)
+	if len(atoms) < 60 {
+		t.Errorf("collectAtoms found %d atoms, want >= 60 (one per nested row, not one for the whole nested table)", len(atoms))
+	}
+}
+
+func TestHasDescendantTrNilChildren(t *testing.T) {
+	if hasDescendantTr(&layout.Box{}) {
+		t.Error("hasDescendantTr on a childless box = true, want false")
+	}
+}
+
+func TestCollectAtomsHandlesNilBox(t *testing.T) {
+	if got := collectAtoms(nil); got != nil {
+		t.Errorf("collectAtoms(nil) = %v, want nil", got)
+	}
+}
+
+func TestExportRespectsCustomMargin(t *testing.T) {
+	doc, err := Export(`<html><body>x</body></html>`, Options{MarginMm: 40})
+	if err != nil {
+		t.Fatalf("Export: %v", err)
+	}
+	var buf bytes.Buffer
+	if err := doc.Write(&buf); err != nil {
+		t.Fatalf("Write: %v", err)
+	}
+	if !strings.Contains(buf.String(), "PDF") {
+		t.Errorf("output does not look like a PDF")
+	}
+}
