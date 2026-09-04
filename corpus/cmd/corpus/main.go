@@ -94,14 +94,15 @@ func pdfTextChars(path string) int {
 
 // renderWithRecover isolates a panic in the layout/paint pipeline to one
 // corpus entry instead of aborting the whole run — real-world pages are
-// exactly where an unanticipated shape shows up first.
-func renderWithRecover(html string) (pdfBytes []byte, err error) {
+// exactly where an unanticipated shape shows up first. baseURL lets a
+// relative <img src> resolve, so image-bearing pages are exercised for real.
+func renderWithRecover(html, baseURL string) (pdfBytes []byte, err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			err = fmt.Errorf("panic: %v", r)
 		}
 	}()
-	doc, exportErr := html2pdf.Export(html, html2pdf.Options{})
+	doc, exportErr := html2pdf.Export(html, html2pdf.Options{BaseURL: baseURL})
 	if exportErr != nil {
 		return nil, exportErr
 	}
@@ -149,7 +150,7 @@ func run() int {
 		r.HTMLBytes = len(doc.HTML)
 
 		t1 := time.Now()
-		pdfBytes, err := renderWithRecover(doc.HTML)
+		pdfBytes, err := renderWithRecover(doc.HTML, doc.URL)
 		r.RenderMs = time.Since(t1).Milliseconds()
 		if err != nil {
 			r.Error = "render: " + err.Error()

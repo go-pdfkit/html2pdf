@@ -16,10 +16,14 @@
 // background/border/padding do not paint: go-webengine's layout does not
 // give a styled inline run its own box, only block/table/flex-level elements
 // do (confirmed in the reference raster painter too — this is a shared engine
-// limitation, not something this package works around). Inline `<svg>` and
-// `<img>` are not yet painted; a document that needs a chart should draw it
-// with plain block/table markup (backgrounds, borders, percentage widths)
-// rather than inline SVG.
+// limitation, not something this package works around).
+//
+// Images — raster <img>, <img src="*.svg"> and inline <svg> — are fetched,
+// decoded and sized by the engine's own pipeline (Engine.LoadImages) and
+// embedded as bitmaps, so they are laid out and drawn exactly as the engine's
+// raster canvas would. A relative src resolves against Options.BaseURL; an
+// image that fails to fetch or decode is simply left out. This is the one
+// place Export touches the network.
 //
 // # Quick start
 //
@@ -31,9 +35,11 @@
 package html2pdf
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/go-pdfkit/pdfkit"
+	"github.com/go-webengine/engine"
 	"github.com/go-webengine/engine/css"
 	"github.com/go-webengine/engine/dom"
 	"github.com/go-webengine/engine/layout"
@@ -68,6 +74,11 @@ type Options struct {
 	// a common small-desktop/tablet breakpoint. Set below the print column's
 	// own width (rare) to lay out 1:1 with no scaling.
 	ViewportPx float64
+
+	// BaseURL is the document's own URL, used to resolve a relative <img src>
+	// (and to satisfy same-origin-shaped fetch logic in the engine). Leave it
+	// empty for a document whose images are all absolute or data: URIs.
+	BaseURL string
 }
 
 func (o Options) resolved() Options {
@@ -111,7 +122,14 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	scale := contentWPx / viewportPx
 	pageHViewportPx := contentHPx / scale // page-height budget in viewport space
 
-	box, _ := layout.LayoutDocument(root, sm, viewportPx, fonts, nil)
+	// Images go through the engine's own fetch/decode/size pipeline so their
+	// boxes are laid out at the exact size the bitmaps come back at (an image
+	// wider than the viewport is already scaled down there) — the same maps
+	// RenderDocument feeds to its raster painter.
+	imgDoc := &engine.Document{URL: opts.BaseURL, Root: root, HTML: htmlSrc}
+	imgSizes, imgs := engine.New().LoadImages(context.Background(), imgDoc, sm, int(viewportPx))
+
+	box, _ := layout.LayoutDocument(root, sm, viewportPx, fonts, imgSizes)
 
 	fs, err := loadFonts()
 	if err != nil {
@@ -123,7 +141,7 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	tops := append([]float64{0}, breaks...)
 
 	doc := pdfkit.New(pdfkit.Options{})
-	e := &exporter{fonts: fs, pageWPt: pageWPt, pageHPt: pageHPt, marginPt: marginPt, scale: scale}
+	e := &exporter{fonts: fs, imgs: imgs, pageWPt: pageWPt, pageHPt: pageHPt, marginPt: marginPt, scale: scale}
 	for i, top := range tops {
 		bot := pageHViewportPx * 1e9 // effectively unbounded: the last page
 		if i+1 < len(tops) {

@@ -4,14 +4,14 @@
 
 | URL | Status | Pages | PDF | Text chars | Fetch | Render |
 |---|---|---|---|---|---|---|
-| [https://example.com/](https://example.com/) | ✅ | 1 | 26601 B | 127 | 41ms | 63ms |
-| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 18 | 3694522 B | 63058 | 186ms | 178ms |
-| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 9 | 1389439 B | 22970 | 54ms | 230ms |
-| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 6 | 849596 B | 13470 | 446ms | 57ms |
-| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 49 | 8516859 B | 150969 | 233ms | 177ms |
-| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 120 | 28978109 B | 449957 | 300ms | 675ms |
-| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 2 | 248721 B | 3985 | 450ms | 45ms |
-| [https://react.dev/](https://react.dev/) | ✅ | 5 | 526645 B | 7965 | 91ms | 58ms |
+| [https://example.com/](https://example.com/) | ✅ | 1 | 26601 B | 127 | 38ms | 31ms |
+| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 18 | 3737845 B | 63064 | 140ms | 244ms |
+| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 9 | 1402676 B | 22953 | 43ms | 595ms |
+| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 6 | 984773 B | 13478 | 166ms | 601ms |
+| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 49 | 8656699 B | 150974 | 207ms | 1109ms |
+| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 120 | 28978109 B | 449957 | 241ms | 464ms |
+| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 257685 B | 4074 | 467ms | 471ms |
+| [https://react.dev/](https://react.dev/) | ✅ | 12 | 9095777 B | 7977 | 47ms | 558ms |
 
 <!-- BEGIN ANALYSIS -->
 
@@ -66,6 +66,34 @@ density change, not a content change. `out/www-rfc-editor-org-rfc-rfc9110-html-p
 and `out/news-ycombinator-com-p1-1.png` after the fix both show full-width,
 readable text at a normal size — the scale-down doesn't make anything too
 small to read at these ratios (642/1024 ≈ 0.63×).
+
+### Images now painted — `<img>`, `<img src="*.svg">` and inline `<svg>`
+
+Both image gaps the README used to document are closed in one step. Rather
+than re-implement fetch/decode/budgeting, `Export` calls the engine's own
+pipeline — `Engine.LoadImages`, exported for exactly this in
+go-webengine/engine#114 — and hands its intrinsic-size map to
+`layout.LayoutDocument` and its bitmap map to the PDF painter. So an image is
+laid out at, and drawn at, precisely the size the engine's raster canvas would
+use; an inline `<svg>` arrives already rasterised by the same path.
+
+Embedded image XObjects per page, this run: Wikipedia (Go) 30, countries
+list 10, `go.dev/blog` 40, Hacker News 6, `pkg.go.dev/net/http` 88,
+`react.dev` 166, `example.com` 0 and RFC 9110 0 (neither carries an `<img>`).
+Wikipedia's logo and react.dev's logo/icons land in the right place at the
+right size on their page-1 previews. Text length is unchanged everywhere.
+
+Two things to read correctly in the table above after this change:
+
+- **`react.dev` grew 5→12 pages and 0.5→9 MB.** That is 166 icon-sized
+  inline SVGs, each rasterised and stored as raw FlateDecode RGB samples —
+  pdfkit does not JPEG-encode or deduplicate identical bitmaps. Correct, but
+  heavy; deduplicating repeated bitmaps into one shared XObject is the
+  obvious next saving.
+- **Render times rose** (`pkg.go.dev` 177→1109 ms, countries 143→595 ms):
+  image fetch + decode now runs inside `Export`, so the Render column is
+  network-bound for image-bearing pages. The Fetch column still measures only
+  the page's own HTML.
 
 ### Confirmed-expected: `react.dev` shows only its static shell
 
