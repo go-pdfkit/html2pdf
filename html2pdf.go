@@ -198,8 +198,11 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	}
 	// Compress content and font streams: a text-heavy page's PDF is 6–16×
 	// smaller for it (RFC 9110 29 → ~5 MB) and the output stays deterministic,
-	// flate being deterministic. Image streams pick their own filter.
-	doc := pdfkit.New(pdfkit.Options{Compress: true, Title: title, Author: opts.Author, Subject: opts.Subject, Keywords: opts.Keywords})
+	// flate being deterministic. Image streams pick their own filter. Object
+	// streams (PDF 1.5) pack the thousands of small non-stream objects a
+	// linked document carries — one annotation per clickable line — into
+	// flated streams: ~14 B per link instead of ~200 (pdfkit #29).
+	doc := pdfkit.New(pdfkit.Options{Compress: true, ObjectStreams: true, Title: title, Author: opts.Author, Subject: opts.Subject, Keywords: opts.Keywords})
 	e := &exporter{fonts: fs, imgs: imgs, pageWPt: pageWPt, pageHPt: pageHPt, marginPt: marginPt, scale: scale}
 	for i, top := range tops {
 		bot := pageHViewportPx * 1e9 // effectively unbounded: the last page

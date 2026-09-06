@@ -6,7 +6,10 @@ package html2pdf
 
 import (
 	"bytes"
+	"compress/zlib"
+	"io"
 	"net/url"
+	"regexp"
 	"strings"
 	"testing"
 
@@ -16,6 +19,11 @@ import (
 	"github.com/go-webengine/engine/paint"
 )
 
+// exportBytes renders html and returns the PDF's bytes followed by the
+// inflated body of every flate stream in it, so a test can look for a
+// dictionary string whether it sits bare in the file or packed in a PDF 1.5
+// object stream (Export writes those: annotations, destinations, the Info
+// dictionary all live compressed).
 func exportBytes(t *testing.T, html string, opts Options) []byte {
 	t.Helper()
 	doc, err := Export(html, opts)
@@ -26,7 +34,17 @@ func exportBytes(t *testing.T, html string, opts Options) []byte {
 	if err := doc.Write(&buf); err != nil {
 		t.Fatalf("Write: %v", err)
 	}
-	return buf.Bytes()
+	pdf := buf.Bytes()
+	out := append([]byte(nil), pdf...)
+	for _, m := range regexp.MustCompile(`(?s)stream\r?\n(.*?)\r?\nendstream`).FindAllSubmatch(pdf, -1) {
+		if r, err := zlib.NewReader(bytes.NewReader(m[1])); err == nil {
+			if body, err := io.ReadAll(r); err == nil {
+				out = append(append(out, '\n'), body...)
+			}
+			r.Close()
+		}
+	}
+	return out
 }
 
 func TestExportWritesExternalLinkAsURIAction(t *testing.T) {

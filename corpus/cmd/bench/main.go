@@ -13,7 +13,6 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -27,6 +26,7 @@ import (
 	"time"
 
 	"github.com/go-pdfkit/html2pdf/corpus/internal/mdreport"
+	"github.com/go-pdfkit/html2pdf/corpus/internal/pdfstat"
 )
 
 const defaultChrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
@@ -121,7 +121,7 @@ func finish(t *toolResult, pdf string) {
 		t.PDFBytes = st.Size()
 	}
 	if b, err := os.ReadFile(pdf); err == nil {
-		t.Links = bytes.Count(b, []byte("/Subtype /Link")) + bytes.Count(b, []byte("/Subtype/Link"))
+		t.Links = pdfstat.CountLinks(b)
 	}
 	t.Pages = pdfPages(pdf)
 	t.TextChars = pdfTextChars(pdf)
