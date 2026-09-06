@@ -40,6 +40,8 @@ github.com/go-opentype/opentype v0.12.0 h1:wBlcDi+3ZaNZXEt5z+Ixr11/cYYwi5W+jX6yT
 github.com/go-opentype/opentype v0.12.0/go.mod h1:AOixevJf7XQaH7+WG+OMIOZEbYPXfMqklVk26Y6YTUU=
 github.com/go-opentype/shape v0.5.0 h1:jHNaOMHNBdDj5EixOevlrrsi92svMxvVMKN7GYaPfxo=
 github.com/go-opentype/shape v0.5.0/go.mod h1:3ImRYNIj6zpwWQ/DV3BWhgMFfmzDITH6XpZw2auQHTo=
+github.com/go-pdfkit/conformance v0.0.0-20260906162116-fab16ad7d062 h1:YPi+3SARt0poF57vMY7x3qJA+gXbsOJCXCGKBJsHLCY=
+github.com/go-pdfkit/conformance v0.0.0-20260906162116-fab16ad7d062/go.mod h1:x7QS4+KyXNhayV6uI4eo+/tHkQddwMg51C0kDlxSV0w=
 github.com/go-pdfkit/pdfkit v0.11.1-0.20260906121306-2b1cee2c4ed8 h1:4CoLkyLRHQrQZCuGfIqw/8XTyn1AQ6QJW5exrzW24a4=
 github.com/go-pdfkit/pdfkit v0.11.1-0.20260906121306-2b1cee2c4ed8/go.mod h1:LpQxQDLkZ/0zc8zg9lQsEbUFNo2NOlvcT2Tn/l3hI5M=
 github.com/go-pdfkit/reader v0.6.0 h1:KAabNOYUcTlZlNBTbG9bEhWP1NiZhjuhzUdavdTdfes=
