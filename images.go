@@ -11,10 +11,11 @@ import (
 	"image/jpeg"
 	"math"
 
+	"github.com/go-gfx/gfx/raster"
+	"github.com/go-gfx/gfx/resample"
 	"github.com/go-pdfkit/pdfkit"
 	"github.com/go-webengine/engine"
 	"github.com/go-webengine/engine/layout"
-	xdraw "golang.org/x/image/draw"
 )
 
 // jpegQuality is the quality a lossy source is re-encoded at when its bytes
@@ -66,7 +67,8 @@ func (e *exporter) paintImage(it *layout.InlineItem) {
 
 // downsampleFor scales bmp down so that it carries no more than dpi pixels
 // per inch of the rectangle it is painted into; a bitmap already at or
-// below that density is returned as it is. Catmull-Rom, deterministic.
+// below that density is returned as it is. go-gfx's bicubic resampler —
+// the one the engine itself sizes images with — deterministic.
 func downsampleFor(bmp image.Image, r pdfkit.Rect, dpi float64) image.Image {
 	b := bmp.Bounds()
 	maxW := int(math.Ceil(r.Width / 72 * dpi))
@@ -83,9 +85,11 @@ func downsampleFor(bmp image.Image, r pdfkit.Rect, dpi float64) image.Image {
 	if h < 1 {
 		h = 1
 	}
-	dst := image.NewNRGBA(image.Rect(0, 0, w, h))
-	xdraw.CatmullRom.Scale(dst, dst.Bounds(), bmp, b, xdraw.Src, nil)
-	return dst
+	out, err := resample.Resize(raster.FromImage(bmp), w, h, resample.Bicubic)
+	if err != nil {
+		return bmp
+	}
+	return out.ToNRGBA()
 }
 
 // bitmapIsSource reports whether the engine's bitmap still has exactly the

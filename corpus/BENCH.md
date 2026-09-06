@@ -1,18 +1,18 @@
 # html2pdf vs headless Chrome — 2026-09-06
 
-Machine: Apple M4 Max, 16 cores; load average at start: { 15.55 14.25 13.40 }. Chrome: Google Chrome 152.0.7977.76. 5 runs per tool per input, interleaved; medians. Both tools timed as child processes under `/usr/bin/time -l` (wall-clock to PDF on disk, start-up and any fetch included; RSS = peak resident set).
+Machine: Apple M4 Max, 16 cores; load average at start: { 96.94 90.16 57.72 }. Chrome: Google Chrome 152.0.7977.76. 5 runs per tool per input, interleaved; medians. Both tools timed as child processes under `/usr/bin/time -l` (wall-clock to PDF on disk, start-up and any fetch included; RSS = peak resident set).
 
 | Input | html2pdf | Chrome | Chrome ÷ html2pdf | PDF html2pdf | PDF Chrome | Pages | Text chars | Links | RSS html2pdf | RSS Chrome |
 |---|---|---|---|---|---|---|---|---|---|---|
-| https://example.com/ | 0.08 s | 2.37 s | 29.6× | 0.0 MB | 0.0 MB | 1 / 1 | 127 / 128 | 1 / 1 | 49.2 MB | 241.1 MB |
-| https://en.wikipedia.org/wiki/Go_(programming_language) | 0.62 s | 2.98 s | 4.8× | 0.2 MB | 1.7 MB | 13 / 25 | 55984 / 67289 | 710 / 838 | 100.3 MB | 362.3 MB |
-| https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations) | 0.75 s | 2.84 s | 3.8× | 0.1 MB | 1.7 MB | 7 / 12 | 19479 / 21977 | 876 / 1481 | 100.4 MB | 358.2 MB |
-| https://go.dev/blog/subtests | 0.88 s | 3.87 s | 4.4× | 0.1 MB | 0.2 MB | 5 / 7 | 12031 / 11742 | 31 / 15 | 69.9 MB | 352.7 MB |
-| https://pkg.go.dev/net/http | 1.61 s | 4.39 s | 2.7× | 0.4 MB | 6.3 MB | 51 / 86 | 145137 / 150480 | 1790 / 16374 | 119.9 MB | 677.3 MB |
-| https://www.rfc-editor.org/rfc/rfc9110.html | 0.79 s | 4.50 s | 5.7× | 1.1 MB | 4.5 MB | 85 / 169 | 444905 / 445667 | 3398 / 3506 | 180.5 MB | 550.0 MB |
-| https://news.ycombinator.com/ | 1.23 s | 3.27 s | 2.7× | 0.0 MB | 0.4 MB | 1 / 2 | 3657 / 3710 | 228 / 260 | 57.1 MB | 257.8 MB |
-| https://react.dev/ | 0.99 s | 3.12 s | 3.2× | 7.8 MB | 2.7 MB | 8 / 9 | 7737 / 6809 | 158 / 59 | 251.6 MB | 301.4 MB |
-| fixtures/longdoc.html | 0.41 s | 2.53 s | 6.2× | 0.9 MB | 2.4 MB | 100 / 135 | 590571 / 591170 | 0 / 0 | 144.7 MB | 372.3 MB |
+| https://example.com/ | 0.10 s | 2.12 s | 21.2× | 0.0 MB | 0.0 MB | 1 / 1 | 127 / 128 | 1 / 1 | 49.0 MB | 237.1 MB |
+| https://en.wikipedia.org/wiki/Go_(programming_language) | 0.85 s | 2.69 s | 3.2× | 0.2 MB | 1.7 MB | 13 / 25 | 55984 / 67289 | 710 / 838 | 100.1 MB | 357.1 MB |
+| https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations) | 1.08 s | 2.76 s | 2.6× | 0.1 MB | 1.7 MB | 7 / 12 | 19479 / 21977 | 876 / 1481 | 99.2 MB | 353.2 MB |
+| https://go.dev/blog/subtests | 0.90 s | 3.37 s | 3.7× | 0.1 MB | 0.2 MB | 5 / 7 | 12031 / 11742 | 31 / 15 | 69.4 MB | 347.9 MB |
+| https://pkg.go.dev/net/http | 1.86 s | 5.84 s | 3.1× | 0.4 MB | 6.3 MB | 51 / 86 | 145128 / 150472 | 1790 / 16374 | 109.7 MB | 674.0 MB |
+| https://www.rfc-editor.org/rfc/rfc9110.html | 1.24 s | 5.70 s | 4.6× | 1.1 MB | 4.5 MB | 85 / 169 | 444905 / 445667 | 3398 / 3506 | 182.1 MB | 544.0 MB |
+| https://news.ycombinator.com/ | 1.27 s | 29.33 s | 23.1× | 0.0 MB | 0.4 MB | 1 / 2 | 3759 / 3815 | 228 / 260 | 56.0 MB | 248.1 MB |
+| https://react.dev/ | 1.00 s | 2.39 s | 2.4× | 0.8 MB | 2.7 MB | 8 / 9 | 7737 / 6809 | 158 / 59 | 302.2 MB | 298.6 MB |
+| fixtures/longdoc.html | 0.38 s | 1.85 s | 4.9× | 0.9 MB | 2.4 MB | 100 / 135 | 590571 / 591170 | 0 / 0 | 146.3 MB | 367.7 MB |
 
 <!-- BEGIN ANALYSIS -->
 
@@ -191,3 +191,29 @@ first version lost exactly one object stream of 1 000 annotations because
 its regexp ate a data byte before `endstream` when the flate data ended in
 0x0D. The number that exposed it was pdf.js's `getAnnotations` (3398), not
 anything in the file. A count of the PDF's bytes is not a reader's count.
+
+### Images stored by their source — 2026-09-06 (engine #137)
+
+The one page where we were larger than Chrome is not any more: react.dev
+7.83 MB → **0.78 MB** against Chrome's 2.7 MB — and Chrome's file has none of
+the eight photographs (they are `loading="lazy"`; headless print never
+fetched them), ours has all eight as 54–129 KB JPEGs at their full 1024 px.
+Everything else is byte-identical or within a few hundred bytes (JPEG
+thumbnails on Wikipedia and pkg.go.dev now pass through instead of being
+re-flated). Pages, text and links did not move; every reader still passes
+with no warning on the DCTDecode streams (JUDGES.md).
+
+What it costs: react.dev's peak RSS 246 → 302 MB, the JPEG encoder's
+working set on eight 1024-px bitmaps. The time columns of this run were
+taken at a load average above 14 (see the header) and Hacker News's Chrome
+median of 29 s is that page's server, not Chrome — compare sizes here,
+times in the earlier tables.
+
+Policy, from the bibliography (CORPUS.md has the sources): a JPEG the engine
+did not resize is embedded byte for byte; any other lossy source that is
+opaque is re-encoded as JPEG at quality 85 (Chrome's own output measures
+at about 50); PNG, GIF, SVG rasters and anything with transparency stay
+flate with a soft mask. `Options.ImageDPI` / `-image-dpi` is the cap
+WeasyPrint calls `--dpi`; 0, the default, keeps every fetched pixel as both
+references do. The resampler is go-gfx's, the engine's own — not a second
+library for the same job.

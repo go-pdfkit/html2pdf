@@ -23,7 +23,7 @@
 // background-image and box-shadow on an inline element do not.
 //
 // Images — raster <img>, <img src="*.svg"> and inline <svg> — are fetched,
-// decoded and sized by the engine's own pipeline (Engine.LoadImages) and
+// decoded and sized by the engine's own pipeline (Engine.LoadImageSet) and
 // embedded so they are laid out and drawn exactly as the engine's raster
 // canvas would: a JPEG source as its own bytes (DCTDecode), any other lossy
 // source re-encoded as JPEG when opaque, everything else as a flate bitmap

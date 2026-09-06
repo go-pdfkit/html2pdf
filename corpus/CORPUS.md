@@ -4,14 +4,14 @@
 
 | URL | Status | Pages | PDF | Text chars | Links | Fetch | Render |
 |---|---|---|---|---|---|---|---|
-| [https://example.com/](https://example.com/) | ✅ | 1 | 6887 B | 127 | 1 | 43ms | 32ms |
-| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 13 | 251175 B | 55984 | 710 | 120ms | 472ms |
-| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 7 | 125708 B | 19479 | 876 | 34ms | 701ms |
-| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 5 | 60542 B | 12031 | 31 | 254ms | 691ms |
-| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 51 | 383631 B | 145137 | 1790 | 314ms | 1406ms |
-| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 85 | 1055265 B | 444905 | 3398 | 221ms | 555ms |
-| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 28032 B | 3702 | 228 | 471ms | 775ms |
-| [https://react.dev/](https://react.dev/) | ✅ | 8 | 7829423 B | 7737 | 158 | 123ms | 1223ms |
+| [https://example.com/](https://example.com/) | ✅ | 1 | 6887 B | 127 | 1 | 48ms | 39ms |
+| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 13 | 250572 B | 55984 | 710 | 121ms | 755ms |
+| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 7 | 125708 B | 19479 | 876 | 65ms | 853ms |
+| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 5 | 60542 B | 12031 | 31 | 210ms | 858ms |
+| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 51 | 383530 B | 145128 | 1790 | 235ms | 1444ms |
+| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 85 | 1055265 B | 444905 | 3398 | 266ms | 870ms |
+| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 28409 B | 3810 | 228 | 463ms | 798ms |
+| [https://react.dev/](https://react.dev/) | ✅ | 8 | 782493 B | 7737 | 158 | 139ms | 1321ms |
 
 <!-- BEGIN ANALYSIS -->
 
@@ -297,3 +297,46 @@ and `page-break-*` are not read — pagination is still the atom rule; and a
 `@font-face` is still not fetched, so a site's own web font is set in the
 bundled family of its generic (react.dev's page-1 render is the same text in
 Inter).
+
+### Images stored by their source — 2026-09-06 (engine [#137](https://github.com/go-webengine/engine/pull/137))
+
+Bibliography first, this time. Skia — Chrome's PDF backend — embeds a JPEG
+source as its own bytes (DCTDecode) when it is YCbCr or grey with a
+top-left orientation, stores everything else as a flate bitmap with a soft
+mask for alpha, re-encodes opaque bitmaps as JPEG only when its
+`fEncodingQuality` is set at or below 100 (Chrome's output measures at about
+quality 50 from its quantisation tables), and never downsamples. WeasyPrint
+never downsamples by default either and offers `--dpi` as the cap. Neither
+reference had what we did: decode everything and store it as flate at the
+fetched size — react.dev's eight WebP photographs at 1024 px, 0.5–1.3 MB
+each, ~7 MB of a 7.8 MB file.
+
+`Engine.LoadImageSet` now hands the exporter each image's fetched bytes,
+sniffed format and lossiness beside its bitmap, and `Export` stores pixels by
+the source (`images.go`): a JPEG the engine did not resize is embedded byte
+for byte; any other lossy source that is opaque — a resized JPEG, a lossy
+WebP — is re-encoded as JPEG at quality 85; PNG, GIF, SVG rasters and
+anything with transparency stay flate with a soft mask, so line art and
+screenshots keep every pixel. `Options.ImageDPI` (CLI `-image-dpi`) is
+WeasyPrint's lever; 0, the default, keeps every fetched pixel as both
+references do.
+
+Same eight pages, same evening, before → after:
+
+| Page | PDF | Pages / links / text |
+|---|---|---|
+| react.dev | 7 829 423 → **782 493 B** (−90 %) | unchanged (8 / 158 / 7 737) |
+| Wikipedia (Go) | 251 175 → 250 572 B | unchanged |
+| pkg.go.dev | 383 631 → 383 530 B | unchanged |
+| the other five | byte-identical | unchanged |
+
+react.dev's photographs are now JPEGs of 54–129 KB each at their full
+1024 px (`pdfimages -list`: 38 JPEG, 81 flate — the flate ones are the
+site's SVG icons and the images with transparency). Wikipedia and
+pkg.go.dev moved by a few hundred bytes: their JPEG thumbnails pass through
+instead of being re-flated.
+
+One thing the comparison with Chrome had hidden: Chrome's react.dev PDF
+(2.7 MB) contains **no photographs at all** — they are `loading="lazy"` and
+headless print-to-PDF never fetched them; its 41 JPEGs are rasterised
+gradients. Our file has all eight and is now a third of Chrome's.
