@@ -34,6 +34,7 @@ type result struct {
 	TextChars  int    `json:"text_chars"`
 	HTMLBytes  int    `json:"html_bytes"`
 	PdfInfoErr string `json:"pdfinfo_err,omitempty"`
+	Links      int    `json:"links"` // link annotations written (external URI + in-document GoTo)
 }
 
 func slugify(rawurl string) string {
@@ -158,6 +159,7 @@ func run() int {
 			continue
 		}
 		r.PDFBytes = len(pdfBytes)
+		r.Links = bytes.Count(pdfBytes, []byte("/Subtype /Link"))
 
 		outPath := filepath.Join(*outDir, r.Slug+".pdf")
 		if err := os.WriteFile(outPath, pdfBytes, 0o644); err != nil {

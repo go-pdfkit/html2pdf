@@ -51,6 +51,20 @@ RFC 9110's HTML edition, whose table-of-contents sidebar did exactly this —
 see [`corpus/CORPUS.md`](corpus/CORPUS.md) for the before/after page counts
 across all 8 corpus pages.
 
+## Navigation
+
+An `<a href>` becomes a link annotation — a URI action for an http(s) target,
+a GoTo to a named destination for a fragment that points at an element id in
+the document — one clickable rectangle per line the anchor spans, so the
+clickable area follows the text; an anchor that lays out no text at all (a
+link around an empty, CSS-drawn block) gets the block's own rectangle, as a
+browser's print does. Every element id becomes a named
+destination, the headings become the viewer's bookmark tree (`<h1>` at the
+top level, deeper headings nested under the last shallower one), and the
+`<title>` fills the PDF's Title unless `Options.Title` is set (`Author`,
+`Subject`, `Keywords` likewise). `javascript:`, `mailto:`, `tel:` and
+fragments nobody anchors are dropped rather than written as dead links.
+
 ## Scope
 
 This renders **static** HTML: no JavaScript, no external stylesheets, no

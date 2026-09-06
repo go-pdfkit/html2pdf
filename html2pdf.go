@@ -24,6 +24,17 @@
 // image that fails to fetch or decode is simply left out. This is the one
 // place Export touches the network.
 //
+// # Navigation
+//
+// An <a href> becomes a link annotation — a URI action for an http(s)
+// target, a GoTo to a named destination for a fragment that points at an
+// element id in the document — one clickable rectangle per line the anchor
+// spans, or the box of an anchor that lays out no text (see links.go). Every
+// element id becomes a named destination, and
+// the headings become the viewer's bookmark tree (<h1> at the top level,
+// deeper headings nested under the last shallower one). The <title> fills
+// the PDF's Title unless Options.Title is set.
+//
 // # Quick start
 //
 //	doc, err := html2pdf.Export(htmlSource, html2pdf.Options{})
@@ -36,6 +47,8 @@ package html2pdf
 import (
 	"context"
 	"fmt"
+	"net/url"
+	"strings"
 
 	"github.com/go-pdfkit/pdfkit"
 	"github.com/go-webengine/engine"
@@ -75,9 +88,15 @@ type Options struct {
 	ViewportPx float64
 
 	// BaseURL is the document's own URL, used to resolve a relative <img src>
-	// (and to satisfy same-origin-shaped fetch logic in the engine). Leave it
-	// empty for a document whose images are all absolute or data: URIs.
+	// and a relative <a href> (and to satisfy same-origin-shaped fetch logic
+	// in the engine). A link whose href is this URL plus a fragment becomes an
+	// in-document jump. Leave it empty for a document whose images and links
+	// are all absolute or data: URIs.
 	BaseURL string
+
+	// Title, Author, Subject and Keywords fill the PDF's information
+	// dictionary. An empty Title is taken from the document's <title>.
+	Title, Author, Subject, Keywords string
 }
 
 func (o Options) resolved() Options {
@@ -139,10 +158,25 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	breaks := pageBreaks(atoms, pageHViewportPx)
 	tops := append([]float64{0}, breaks...)
 
+	// Navigation: the anchors' clickable runs, the ids they can jump to, and
+	// the headings that become the viewer's bookmark tree.
+	base, _ := url.Parse(opts.BaseURL)
+	ids := collectIDs(box)
+	idSet := make(map[string]struct{}, len(ids))
+	for id := range ids {
+		idSet[id] = struct{}{}
+	}
+	links := collectLinks(box, base, idSet)
+	heads := collectHeadings(box)
+
+	title := opts.Title
+	if title == "" {
+		title = strings.Join(strings.Fields(dom.Title(root)), " ")
+	}
 	// Compress content and font streams: a text-heavy page's PDF is 6–16×
 	// smaller for it (RFC 9110 29 → ~5 MB) and the output stays deterministic,
 	// flate being deterministic. Image streams pick their own filter.
-	doc := pdfkit.New(pdfkit.Options{Compress: true})
+	doc := pdfkit.New(pdfkit.Options{Compress: true, Title: title, Author: opts.Author, Subject: opts.Subject, Keywords: opts.Keywords})
 	e := &exporter{fonts: fs, imgs: imgs, pageWPt: pageWPt, pageHPt: pageHPt, marginPt: marginPt, scale: scale}
 	for i, top := range tops {
 		bot := pageHViewportPx * 1e9 // effectively unbounded: the last page
@@ -155,6 +189,47 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 		}
 		e.p = doc.AddPage(opts.PageSize)
 		e.paintBox(box)
+		e.addLinks(links)
+		e.addDests(ids)
+	}
+	for _, h := range heads {
+		doc.AddOutlineItem(h.title, h.level, pageIndexOf(h.y, tops))
 	}
 	return doc, nil
+}
+
+// addLinks attaches the clickable runs that start on the current page: a
+// URI action for an external target, a GoTo to a named destination for an
+// in-document one. A text run breaks per line, and pagination breaks between
+// lines, so it is on exactly one page; a box run (an atom-less anchor) may
+// straddle a break and is clipped to the page it starts on.
+func (e *exporter) addLinks(links []linkRun) {
+	for _, l := range links {
+		if l.y < e.pageTop || l.y >= e.pageBot {
+			continue
+		}
+		bottom := l.y + l.h
+		if bottom > e.pageBot {
+			bottom = e.pageBot
+		}
+		x0, y0 := e.toPdf(l.x, l.y)
+		x1, y1 := e.toPdf(l.x+l.w, bottom)
+		r := pdfkit.Rect{X: x0, Y: y1, Width: x1 - x0, Height: y0 - y1}
+		if l.uri != "" {
+			e.p.AddLink(r, l.uri)
+		} else {
+			e.p.AddNamedLink(r, l.dest)
+		}
+	}
+}
+
+// addDests anchors, on the current page, every id whose element sits on it.
+func (e *exporter) addDests(ids map[string]anchorPoint) {
+	for id, pt := range ids {
+		if pt.y < e.pageTop || pt.y >= e.pageBot {
+			continue
+		}
+		x, y := e.toPdf(pt.x, pt.y)
+		e.p.AddNamedDest(id, x, y)
+	}
 }

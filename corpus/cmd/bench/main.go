@@ -13,6 +13,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -53,6 +54,7 @@ type toolResult struct {
 	PDFBytes  int64    `json:"pdf_bytes"`
 	Pages     int      `json:"pages"`
 	TextChars int      `json:"text_chars"`
+	Links     int      `json:"links"` // link annotations in the PDF
 }
 
 type result struct {
@@ -117,6 +119,9 @@ func finish(t *toolResult, pdf string) {
 	t.MedianRSS = medianInt(rss)
 	if st, err := os.Stat(pdf); err == nil {
 		t.PDFBytes = st.Size()
+	}
+	if b, err := os.ReadFile(pdf); err == nil {
+		t.Links = bytes.Count(b, []byte("/Subtype /Link")) + bytes.Count(b, []byte("/Subtype/Link"))
 	}
 	t.Pages = pdfPages(pdf)
 	t.TextChars = pdfTextChars(pdf)
@@ -276,8 +281,8 @@ func run() int {
 		"%d runs per tool per input, interleaved; medians. Both tools timed as child processes under "+
 		"`/usr/bin/time -l` (wall-clock to PDF on disk, start-up and any fetch included; RSS = peak resident set).\n\n",
 		sysctl("machdep.cpu.brand_string"), sysctl("hw.ncpu"), sysctl("vm.loadavg"), chromeVersion(*chrome), *n)
-	b.WriteString("| Input | html2pdf | Chrome | Chrome ÷ html2pdf | PDF html2pdf | PDF Chrome | Pages | Text chars | RSS html2pdf | RSS Chrome |\n")
-	b.WriteString("|---|---|---|---|---|---|---|---|---|---|\n")
+	b.WriteString("| Input | html2pdf | Chrome | Chrome ÷ html2pdf | PDF html2pdf | PDF Chrome | Pages | Text chars | Links | RSS html2pdf | RSS Chrome |\n")
+	b.WriteString("|---|---|---|---|---|---|---|---|---|---|---|\n")
 	for _, r := range results {
 		a, c := r.HTML2PDF, r.Chrome
 		ratio := "—"
@@ -291,9 +296,9 @@ func run() int {
 		if c.Failures > 0 {
 			cs += fmt.Sprintf(" (%d fail)", c.Failures)
 		}
-		fmt.Fprintf(&b, "| %s | %s | %s | %s | %s | %s | %d / %d | %d / %d | %s | %s |\n",
+		fmt.Fprintf(&b, "| %s | %s | %s | %s | %s | %s | %d / %d | %d / %d | %d / %d | %s | %s |\n",
 			r.Input.Name, as, cs, ratio, fmtMB(a.PDFBytes), fmtMB(c.PDFBytes),
-			a.Pages, c.Pages, a.TextChars, c.TextChars, fmtMB(a.MedianRSS), fmtMB(c.MedianRSS))
+			a.Pages, c.Pages, a.TextChars, c.TextChars, a.Links, c.Links, fmtMB(a.MedianRSS), fmtMB(c.MedianRSS))
 	}
 	b.WriteString("\n")
 	if err := mdreport.Write(*reportPath, b.String()); err != nil {
