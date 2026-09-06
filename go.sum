@@ -40,8 +40,8 @@ github.com/go-opentype/opentype v0.12.0 h1:wBlcDi+3ZaNZXEt5z+Ixr11/cYYwi5W+jX6yT
 github.com/go-opentype/opentype v0.12.0/go.mod h1:AOixevJf7XQaH7+WG+OMIOZEbYPXfMqklVk26Y6YTUU=
 github.com/go-opentype/shape v0.5.0 h1:jHNaOMHNBdDj5EixOevlrrsi92svMxvVMKN7GYaPfxo=
 github.com/go-opentype/shape v0.5.0/go.mod h1:3ImRYNIj6zpwWQ/DV3BWhgMFfmzDITH6XpZw2auQHTo=
-github.com/go-pdfkit/pdfkit v0.11.1-0.20260904144759-052e432ce8ac h1:9o00jUhpjnqN8lbvS8wfOM5n5ybMn6lZOOOOtXQPEdo=
-github.com/go-pdfkit/pdfkit v0.11.1-0.20260904144759-052e432ce8ac/go.mod h1:NSn++aXoOrlB4AxwzY8mMzjG/v9fBGFGyQ/eZ0wRD5k=
+github.com/go-pdfkit/pdfkit v0.11.1-0.20260906084818-9fdac5c3b5c7 h1:sGUYCcJfyBYdQiHZFQFbl6iUINFlbiBKbzf8nFxygqA=
+github.com/go-pdfkit/pdfkit v0.11.1-0.20260906084818-9fdac5c3b5c7/go.mod h1:NSn++aXoOrlB4AxwzY8mMzjG/v9fBGFGyQ/eZ0wRD5k=
 github.com/go-richdoc/richdoc v0.3.0 h1:BPUHZ0NUrmDVffs2jJcj6ur8mqlccZpZVpCOsuQT9gQ=
 github.com/go-richdoc/richdoc v0.3.0/go.mod h1:aCX8ulqg5CoKqSWgWeEWul1Oj0d2VxQeaQNI0+jsm7c=
 github.com/go-sourcemap/sourcemap v2.1.4+incompatible h1:a+iTbH5auLKxaNwQFg0B+TCYl6lbukKPc7b5x0n1s6Q=

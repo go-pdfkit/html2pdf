@@ -1,18 +1,18 @@
 # html2pdf vs headless Chrome — 2026-09-06
 
-Machine: Apple M4 Max, 16 cores; load average at start: { 19.47 15.17 12.01 }. Chrome: Google Chrome 152.0.7977.76. 5 runs per tool per input, interleaved; medians. Both tools timed as child processes under `/usr/bin/time -l` (wall-clock to PDF on disk, start-up and any fetch included; RSS = peak resident set).
+Machine: Apple M4 Max, 16 cores; load average at start: { 17.83 12.36 10.96 }. Chrome: Google Chrome 152.0.7977.76. 5 runs per tool per input, interleaved; medians. Both tools timed as child processes under `/usr/bin/time -l` (wall-clock to PDF on disk, start-up and any fetch included; RSS = peak resident set).
 
 | Input | html2pdf | Chrome | Chrome ÷ html2pdf | PDF html2pdf | PDF Chrome | Pages | Text chars | RSS html2pdf | RSS Chrome |
 |---|---|---|---|---|---|---|---|---|---|
-| https://example.com/ | 0.07 s | 1.63 s | 23.3× | 0.0 MB | 0.0 MB | 1 / 1 | 127 / 128 | 48.3 MB | 241.9 MB |
-| https://en.wikipedia.org/wiki/Go_(programming_language) | 0.39 s | 2.13 s | 5.5× | 0.6 MB | 1.7 MB | 18 / 25 | 63044 / 67289 | 104.4 MB | 360.4 MB |
-| https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations) | 0.54 s | 2.18 s | 4.0× | 0.2 MB | 1.6 MB | 9 / 12 | 22953 / 21987 | 97.6 MB | 356.9 MB |
-| https://go.dev/blog/subtests | 0.76 s | 3.13 s | 4.1× | 0.3 MB | 0.2 MB | 6 / 7 | 13478 / 11742 | 74.5 MB | 352.7 MB |
-| https://pkg.go.dev/net/http | 1.69 s | 3.48 s | 2.1× | 1.3 MB | 6.3 MB | 49 / 86 | 150974 / 150480 | 141.5 MB | 673.8 MB |
-| https://www.rfc-editor.org/rfc/rfc9110.html | 0.94 s | 3.26 s | 3.5× | 4.7 MB | 4.5 MB | 120 / 169 | 449844 / 445667 | 239.2 MB | 549.8 MB |
-| https://news.ycombinator.com/ | 0.97 s | 2.61 s | 2.7× | 0.0 MB | 0.4 MB | 1 / 2 | 3809 / 3872 | 56.7 MB | 252.9 MB |
-| https://react.dev/ | 0.67 s | 2.58 s | 3.9× | 4.8 MB | 2.7 MB | 13 / 9 | 8038 / 6809 | 152.9 MB | 300.3 MB |
-| fixtures/longdoc.html | 0.80 s | 2.13 s | 2.7× | 6.5 MB | 2.4 MB | 100 / 135 | 590571 / 591170 | 235.7 MB | 372.2 MB |
+| https://example.com/ | 0.07 s | 1.67 s | 23.9× | 0.0 MB | 0.0 MB | 1 / 1 | 127 / 128 | 48.0 MB | 242.1 MB |
+| https://en.wikipedia.org/wiki/Go_(programming_language) | 0.35 s | 2.23 s | 6.4× | 0.2 MB | 1.7 MB | 18 / 25 | 63079 / 67289 | 102.6 MB | 361.9 MB |
+| https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations) | 0.54 s | 2.30 s | 4.3× | 0.1 MB | 1.6 MB | 9 / 12 | 22951 / 21987 | 96.6 MB | 356.6 MB |
+| https://go.dev/blog/subtests | 0.72 s | 3.09 s | 4.3× | 0.2 MB | 0.2 MB | 6 / 7 | 13481 / 11742 | 71.2 MB | 352.7 MB |
+| https://pkg.go.dev/net/http | 1.66 s | 3.67 s | 2.2× | 0.4 MB | 6.3 MB | 49 / 86 | 151040 / 150480 | 110.3 MB | 677.5 MB |
+| https://www.rfc-editor.org/rfc/rfc9110.html | 0.78 s | 3.90 s | 5.0× | 1.0 MB | 4.5 MB | 120 / 169 | 449848 / 445667 | 187.3 MB | 549.7 MB |
+| https://news.ycombinator.com/ | 0.96 s | 2.53 s | 2.6× | 0.0 MB | 0.4 MB | 1 / 2 | 3812 / 3875 | 56.6 MB | 252.6 MB |
+| https://react.dev/ | 0.73 s | 2.52 s | 3.5× | 4.7 MB | 2.7 MB | 13 / 9 | 8045 / 6809 | 152.6 MB | 302.1 MB |
+| fixtures/longdoc.html | 0.41 s | 1.99 s | 4.9× | 0.9 MB | 2.4 MB | 100 / 135 | 590571 / 591170 | 169.0 MB | 372.1 MB |
 
 <!-- BEGIN ANALYSIS -->
 
@@ -57,17 +57,42 @@ byte-deterministic). Result: RFC 9110 **4.7 MB**, Wikipedia 0.6 MB (Chrome
 1.7), the countries list 0.2 MB (1.6), `pkg.go.dev` 1.3 MB (6.3) — html2pdf
 now ships the *smaller* file on five of nine inputs.
 
-Two inputs are still larger, for different reasons:
+Two inputs were still larger after compression, for different reasons — the
+first is now fixed upstream (next section), the second remains:
 
-- **`longdoc`, 6.5 vs 2.4 MB, no images**: what remains is how text is
-  written. html2pdf emits one positioned text object per laid-out run (a word
-  or a few), each with its own font selection; Chrome packs a whole line into
-  one `TJ` array with kerning offsets. Batching a line's runs into one text
-  object is the next saving, in pdfkit or here — not attempted in this pass.
-- **`react.dev`, 4.8 vs 2.7 MB**: bitmaps. Its icons are inline SVGs the
+- **`longdoc`, 6.5 vs 2.4 MB, no images**: how text was written. pdfkit's
+  `TextShaped` positioned **every glyph** with its own absolute `Tm` + `Tj`
+  (5,683 `Tj` for 748 text objects on one page — 411 KB decompressed against
+  Chrome's 30 KB), at 17-digit coordinates, and every word re-set the same
+  font and colour. Fixed in pdfkit
+  [#28](https://github.com/go-pdfkit/pdfkit/pull/28): one `TJ` array per
+  baseline segment, numbers only where shaping departs from the font's own
+  advances, unchanged state not rewritten, four-decimal coordinates.
+- **`react.dev`, 4.7 vs 2.7 MB**: bitmaps. Its icons are inline SVGs the
   engine rasterises, and html2pdf embeds them as flate-compressed RGB
   samples; Chrome keeps them as vector paths. Dedup already halved this page;
   keeping SVG vector would need a path exporter in the engine.
+
+### Update — one `TJ` per run (pdfkit #28), same morning
+
+The table above is this run. Against the previous one (compressed streams,
+per-glyph `Tm`), same machine, load now ~12–17:
+
+| Input | PDF before | PDF after | Chrome | html2pdf time before → after |
+|---|---|---|---|---|
+| RFC 9110 | 4.7 MB | **1.0 MB** | 4.5 MB | 0.94 → 0.78 s |
+| `longdoc` | 6.5 MB | **0.9 MB** | 2.4 MB | 0.80 → 0.41 s |
+| `pkg.go.dev/net/http` | 1.3 MB | 0.4 MB | 6.3 MB | 1.69 → 1.66 s |
+| Wikipedia (Go) | 0.6 MB | 0.2 MB | 1.7 MB | 0.39 → 0.35 s |
+| `react.dev` | 4.8 MB | 4.7 MB | 2.7 MB | 0.67 → 0.73 s |
+
+html2pdf now writes the smaller file on eight of nine inputs — `longdoc`,
+the pure-text case that was 2.7× *larger* than Chrome's, is 2.7× *smaller* —
+and got faster on the text-heavy pages, there being less to flate. Page
+counts and extracted text are unchanged (the same glyphs land in the same
+places; only how the stream says so changed — pdfkit's own tests pin the pen
+arithmetic for kerning, offsets and marks). `react.dev` is untouched, as
+expected: it is bitmaps, not text.
 
 ### Pages and text: not a like-for-like layout, by design
 
