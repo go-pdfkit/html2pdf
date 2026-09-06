@@ -98,6 +98,16 @@ lands exactly where the raster canvas puts it. Not painted on inline
 elements: `border-radius`, `background-image`/gradients, `box-shadow` — a
 fragment paints a flat background and straight borders.
 
+## Output
+
+PDF 1.5. Content and font streams are flated; every non-stream object — the
+link annotations (one per clickable line), named destinations, outline
+items, the Info dictionary — is packed into flated object streams with a
+cross-reference stream (pdfkit's `ObjectStreams`), which is what keeps a
+document with thousands of links close to its text size (RFC 9110: 3 398
+links, 1.06 MB; Chrome 4.5 MB). Fonts are embedded as subsets. Output is
+deterministic: the same input gives the same bytes.
+
 ## Status
 
 Validated three ways, all in [`corpus/`](corpus/) (in the spirit of
