@@ -36,11 +36,12 @@ func exportBytes(t *testing.T, html string, opts Options) []byte {
 	}
 	pdf := buf.Bytes()
 	out := append([]byte(nil), pdf...)
-	for _, m := range regexp.MustCompile(`(?s)stream\r?\n(.*?)\r?\nendstream`).FindAllSubmatch(pdf, -1) {
+	// No optional "\r" before "endstream": flate data can end in 0x0D, and
+	// eating it truncates the zlib trailer (see corpus/internal/pdfstat).
+	for _, m := range regexp.MustCompile(`(?s)stream\r?\n(.*?)\nendstream`).FindAllSubmatch(pdf, -1) {
 		if r, err := zlib.NewReader(bytes.NewReader(m[1])); err == nil {
-			if body, err := io.ReadAll(r); err == nil {
-				out = append(append(out, '\n'), body...)
-			}
+			body, _ := io.ReadAll(r)
+			out = append(append(out, '\n'), body...)
 			r.Close()
 		}
 	}

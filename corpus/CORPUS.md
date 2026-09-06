@@ -4,14 +4,14 @@
 
 | URL | Status | Pages | PDF | Text chars | Links | Fetch | Render |
 |---|---|---|---|---|---|---|---|
-| [https://example.com/](https://example.com/) | ✅ | 1 | 8336 B | 127 | 1 | 45ms | 32ms |
-| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 13 | 482251 B | 55984 | 710 | 119ms | 455ms |
-| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 7 | 368389 B | 19479 | 876 | 36ms | 686ms |
-| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 5 | 71496 B | 12031 | 31 | 184ms | 698ms |
-| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 51 | 735288 B | 145137 | 1790 | 326ms | 1355ms |
-| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 85 | 1803534 B | 444905 | 3398 | 219ms | 539ms |
-| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 71742 B | 3802 | 228 | 466ms | 773ms |
-| [https://react.dev/](https://react.dev/) | ✅ | 8 | 7872333 B | 7737 | 158 | 129ms | 1072ms |
+| [https://example.com/](https://example.com/) | ✅ | 1 | 6887 B | 127 | 1 | 46ms | 33ms |
+| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 13 | 251175 B | 55984 | 710 | 116ms | 492ms |
+| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 7 | 125708 B | 19479 | 876 | 36ms | 715ms |
+| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 5 | 60542 B | 12031 | 31 | 195ms | 669ms |
+| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 51 | 383631 B | 145137 | 1790 | 593ms | 1375ms |
+| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 85 | 1055265 B | 444905 | 2398 | 261ms | 565ms |
+| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 28244 B | 3741 | 228 | 449ms | 797ms |
+| [https://react.dev/](https://react.dev/) | ✅ | 8 | 7829423 B | 7737 | 158 | 115ms | 864ms |
 
 <!-- BEGIN ANALYSIS -->
 
@@ -251,3 +251,49 @@ rectangle (unit test `TestCollectLinksGivesAnAtomlessAnchorItsBoxRect`).
 The anchors that are dropped on purpose — `mailto:`, `javascript:`,
 fragments nobody anchors — are the rest of the gap to the raw `<a href>`
 count; a dead link is worse than plain text.
+
+### External stylesheets and the print medium — 2026-09-06 (engine [#133](https://github.com/go-webengine/engine/pull/133))
+
+The "no external stylesheets" line in Scope was **self-inflicted**: the engine
+had fetched `<link rel="stylesheet">` sheets (with `@import` chains, media
+selection and bounds) for its own renders all along, and `Export` called
+`css.Cascade(root)` with no sheets and the default viewport width. Engine
+#133 exports that loader (`Engine.LoadStylesheets`, the way `LoadImages` was
+exported for images) and adds `css.Media` so a cascade can be evaluated for
+**print**: `@media print` blocks and `<link media="print">` apply, screen-only
+ones do not. `Export` now does both, for `Options.Media` = print by default.
+
+This is the largest fidelity change since images. Same eight pages, same
+morning, before → after (before = #14's run):
+
+| Page | Pages | Links | Text chars | PDF |
+|---|---|---|---|---|
+| Wikipedia (Go) | 18 → 13 | 1143 → 710 (Chrome 838) | 63 079 → 55 984 (Chrome 67 289) | 597 → 482 KB |
+| countries table | 9 → 7 | 1119 → 876 (1481) | 22 951 → 19 479 (21 977) | 419 → 368 KB |
+| go.dev/blog | 6 → 5 | 90 → 31 (15) | 13 481 → 12 031 (11 742) | 200 → 71 KB |
+| pkg.go.dev | 49 → 51 | 2013 → 1790 (16 374) | 151 040 → 145 137 (150 480) | 826 → 735 KB |
+| RFC 9110 | 120 → 85 | 5553 → 3398 (3506) | 449 848 → 444 905 (445 667) | 2.2 → 1.8 MB |
+| Hacker News | 1 → 1 | 198 → 228 (260) | 3 757 → 3 802 (3 857) | 65 → 72 KB |
+| react.dev | 13 → 8 | 140 → 158 (59) | 8 045 → 7 737 (6 809) | 4.8 → 7.9 MB |
+
+What the eye sees (page-1 renders in `out/`): Wikipedia went from a dump of
+its navigation lists in the UA's serif to the article as printed — serif
+headings, the infobox at the right with the logo, superscript references,
+sidebar and menus gone. RFC 9110 lost its table-of-contents sidebar and the
+pilcrows (its print CSS hides both) and reflowed to the full column, which
+is where 120 → 85 pages comes from; its link count is now within 3 % of
+Chrome's. Hacker News has its orange bar, grey metadata and numbering, and
+**all 228 navigable anchors** are clickable — the 30 vote arrows that #14
+could not size are 10 × 10 px now that `news.css` is applied.
+
+Every reader still passes with no warning (JUDGES.md). Consensus on
+Wikipedia's page 1 rose 5.9 → 8.7 %: the page is now dense small text with
+an infobox, where Ghostscript (Δ11.9 %) and Quartz (Δ14.2 %) anti-alias
+heavier than poppler; MuPDF and pdf.js stay at 1–3 %. Same cause as before,
+more of it on the page.
+
+Two things this does not do yet: `@page` (margins, size, headers from CSS)
+and `page-break-*` are not read — pagination is still the atom rule; and a
+`@font-face` is still not fetched, so a site's own web font is set in the
+bundled family of its generic (react.dev's page-1 render is the same text in
+Inter).
