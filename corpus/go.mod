@@ -3,6 +3,7 @@ module github.com/go-pdfkit/html2pdf/corpus
 go 1.26.4
 
 require (
+	github.com/go-pdfkit/conformance v0.0.0-20260906162116-fab16ad7d062
 	github.com/go-pdfkit/html2pdf v0.0.0
 	github.com/go-pdfkit/pdfkit v0.11.1-0.20260906121306-2b1cee2c4ed8
 	github.com/go-pdfkit/reader v0.6.0

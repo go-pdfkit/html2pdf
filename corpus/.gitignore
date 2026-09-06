@@ -4,3 +4,4 @@ out/*.pdf
 corpus
 out/**/*.pdf
 out/judges/
+.judges-node/
