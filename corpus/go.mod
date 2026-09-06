@@ -25,7 +25,7 @@ require (
 	github.com/go-opentype/fonts v0.9.0 // indirect
 	github.com/go-opentype/opentype v0.12.0 // indirect
 	github.com/go-opentype/shape v0.5.0 // indirect
-	github.com/go-pdfkit/pdfkit v0.11.1-0.20260904144759-052e432ce8ac // indirect
+	github.com/go-pdfkit/pdfkit v0.11.1-0.20260906084818-9fdac5c3b5c7 // indirect
 	github.com/go-richdoc/richdoc v0.3.0 // indirect
 	github.com/go-sourcemap/sourcemap v2.1.4+incompatible // indirect
 	github.com/go-typeset/bidi v0.3.0 // indirect

@@ -4,14 +4,14 @@
 
 | URL | Status | Pages | PDF | Text chars | Fetch | Render |
 |---|---|---|---|---|---|---|
-| [https://example.com/](https://example.com/) | ✅ | 1 | 8943 B | 127 | 45ms | 33ms |
-| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 18 | 630404 B | 63044 | 118ms | 259ms |
-| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 9 | 228222 B | 22953 | 42ms | 516ms |
-| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 6 | 270805 B | 13478 | 182ms | 537ms |
-| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 49 | 1289572 B | 150974 | 469ms | 1323ms |
-| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 120 | 4683687 B | 449844 | 252ms | 714ms |
-| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 47973 B | 3809 | 450ms | 495ms |
-| [https://react.dev/](https://react.dev/) | ✅ | 13 | 4789356 B | 8038 | 131ms | 809ms |
+| [https://example.com/](https://example.com/) | ✅ | 1 | 7905 B | 127 | 44ms | 31ms |
+| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 18 | 215610 B | 63079 | 123ms | 236ms |
+| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 9 | 78288 B | 22951 | 34ms | 496ms |
+| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 6 | 180648 B | 13481 | 263ms | 524ms |
+| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 49 | 385845 B | 151040 | 212ms | 1179ms |
+| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 120 | 981952 B | 449848 | 218ms | 466ms |
+| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 21686 B | 3812 | 492ms | 514ms |
+| [https://react.dev/](https://react.dev/) | ✅ | 13 | 4734109 B | 8045 | 171ms | 543ms |
 
 <!-- BEGIN ANALYSIS -->
 
@@ -206,3 +206,16 @@ is the first run with it. RFC 9110 28,979,365 → **4,683,687 B**, Wikipedia
 Page counts and text lengths unchanged; the output stays byte-deterministic
 (`TestExportCompressesContentStreams`). Render time rises by the flate cost
 on the big text pages (~0.3 s on RFC 9110).
+
+### One `TJ` per run — 2026-09-06 (pdfkit [#28](https://github.com/go-pdfkit/pdfkit/pull/28))
+
+Second finding from [`BENCH.md`](BENCH.md): with streams compressed, pure
+text was still 2.7× Chrome's size because pdfkit's `TextShaped` positioned
+every glyph with its own `Tm` + `Tj`. It now writes one `TJ` array per
+baseline segment (numbers only where kerning or a mark departs from the
+font's advances), stops rewriting unchanged font/colour state, and prints
+four-decimal coordinates. Corpus bytes, previous run → this run: RFC 9110
+4,683,687 → **981,952**, Wikipedia (Go) 630,404 → 215,610,
+`pkg.go.dev/net/http` 1,289,572 → 385,845, countries list 228,222 → 78,288,
+`react.dev` 4,789,356 → 4,734,109 (bitmaps). Pages and extracted text
+unchanged.
