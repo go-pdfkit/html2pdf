@@ -4,14 +4,14 @@
 
 | URL | Status | Pages | PDF | Text chars | Links | Fetch | Render |
 |---|---|---|---|---|---|---|---|
-| [https://example.com/](https://example.com/) | ✅ | 1 | 8336 B | 127 | 1 | 43ms | 31ms |
-| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 18 | 596551 B | 63079 | 1143 | 114ms | 234ms |
-| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 9 | 419279 B | 22951 | 1119 | 34ms | 506ms |
-| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 6 | 199998 B | 13481 | 90 | 209ms | 513ms |
-| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 49 | 825554 B | 151040 | 2013 | 339ms | 1107ms |
-| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 120 | 2244491 B | 449848 | 5553 | 238ms | 497ms |
-| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 65460 B | 3757 | 198 | 467ms | 490ms |
-| [https://react.dev/](https://react.dev/) | ✅ | 13 | 4773305 B | 8045 | 140 | 134ms | 559ms |
+| [https://example.com/](https://example.com/) | ✅ | 1 | 8336 B | 127 | 1 | 45ms | 32ms |
+| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 13 | 482251 B | 55984 | 710 | 119ms | 455ms |
+| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 7 | 368389 B | 19479 | 876 | 36ms | 686ms |
+| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 5 | 71496 B | 12031 | 31 | 184ms | 698ms |
+| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 51 | 735288 B | 145137 | 1790 | 326ms | 1355ms |
+| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 85 | 1803534 B | 444905 | 3398 | 219ms | 539ms |
+| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 71742 B | 3802 | 228 | 466ms | 773ms |
+| [https://react.dev/](https://react.dev/) | ✅ | 8 | 7872333 B | 7737 | 158 | 129ms | 1072ms |
 
 <!-- BEGIN ANALYSIS -->
 
