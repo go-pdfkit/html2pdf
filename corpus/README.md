@@ -85,11 +85,17 @@ Chrome's PDFs of the same pages — and writes `JUDGES.md` + `judges.json`:
 | Quartz (`sips`) | macOS ImageIO — Preview's engine | page-1 render |
 
 A judge whose binary is absent is skipped with a note, never faked. Each
-cell reads `pages · text ratio · Δrender`: pages reported, extracted-text
-length as a ratio of poppler's, and how far the page-1 render is from
-poppler's after both are box-downsampled to the same width (mean grey Δ /
-share of pixels off by more than 48). A judge that disagrees on Chrome's
-PDFs too is judge noise; one that disagrees only on ours is a defect.
+cell reads `pages · text ratio · Δworst (page)`: pages reported,
+extracted-text length as a ratio of poppler's (non-whitespace characters —
+Ghostscript pads lines with layout spaces, pdfium separates runs), and the
+largest distance of its renders from poppler's over a sample of pages — the
+first, the middle and the last, at 96 dpi, share of pixels whose grey level
+moves by more than 48/255 after both are downsampled to the same width —
+with the page it happened on. Text and page counts cover every page. A
+`consensus` column gives the mean pairwise distance between *all* judges'
+renders of a page (worst page), so no reader is privileged as the truth. A
+judge that disagrees on Chrome's PDFs too is judge noise; one that disagrees
+only on ours is a defect.
 
 ```sh
 cd judges && npm install          # pdfjs-dist + @napi-rs/canvas, once
