@@ -77,12 +77,19 @@ fragment paints a flat background and straight borders.
 
 ## Status
 
-Validated against a hand-built regression suite (`html2pdf_test.go`, ~94%
-statement coverage) and a corpus of 8 real public pages
-([`corpus/`](corpus/), in the spirit of go-webengine's own
-[`bench/`](https://github.com/go-webengine/engine/tree/main/bench)) — see
-[`corpus/CORPUS.md`](corpus/CORPUS.md) for current results and the bugs the
-corpus run has found so far.
+Validated three ways, all in [`corpus/`](corpus/) (in the spirit of
+go-webengine's own [`bench/`](https://github.com/go-webengine/engine/tree/main/bench)):
+
+- a hand-built regression suite (`html2pdf_test.go`, ~94% statement
+  coverage) and a corpus of 8 real public pages —
+  [`corpus/CORPUS.md`](corpus/CORPUS.md), with the bugs the corpus has found;
+- a timing/size bench against headless Chrome's own print-to-PDF —
+  [`corpus/BENCH.md`](corpus/BENCH.md);
+- every reference reader on the machine — qpdf, poppler, MuPDF, Ghostscript,
+  pdfium (Chrome's engine), pdf.js (Firefox's) and Quartz (Preview's) — run
+  over every output, with Chrome's PDFs as the control:
+  [`corpus/JUDGES.md`](corpus/JUDGES.md). Being the smallest file means
+  nothing if one reader in the field disagrees about it.
 
 ## License
 
