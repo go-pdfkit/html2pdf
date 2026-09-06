@@ -4,14 +4,14 @@
 
 | URL | Status | Pages | PDF | Text chars | Fetch | Render |
 |---|---|---|---|---|---|---|
-| [https://example.com/](https://example.com/) | ✅ | 1 | 26601 B | 127 | 44ms | 31ms |
-| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 18 | 3729585 B | 63044 | 120ms | 222ms |
-| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 9 | 1402667 B | 22953 | 34ms | 486ms |
-| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 6 | 978154 B | 13478 | 184ms | 508ms |
-| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 49 | 8634499 B | 150974 | 580ms | 1179ms |
-| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 120 | 28979365 B | 449844 | 249ms | 462ms |
-| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 240013 B | 3793 | 457ms | 485ms |
-| [https://react.dev/](https://react.dev/) | ✅ | 13 | 5215046 B | 8038 | 137ms | 582ms |
+| [https://example.com/](https://example.com/) | ✅ | 1 | 8943 B | 127 | 45ms | 33ms |
+| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 18 | 630404 B | 63044 | 118ms | 259ms |
+| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 9 | 228222 B | 22953 | 42ms | 516ms |
+| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 6 | 270805 B | 13478 | 182ms | 537ms |
+| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 49 | 1289572 B | 150974 | 469ms | 1323ms |
+| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 120 | 4683687 B | 449844 | 252ms | 714ms |
+| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 47973 B | 3809 | 450ms | 495ms |
+| [https://react.dev/](https://react.dev/) | ✅ | 13 | 4789356 B | 8038 | 131ms | 809ms |
 
 <!-- BEGIN ANALYSIS -->
 
@@ -193,3 +193,16 @@ transparent background, zero width, nil style).
 
 Not painted on inline elements, as on blocks here: `border-radius`,
 `background-image`/gradients, `box-shadow` — flat fill, straight edges.
+
+### Compressed streams — 2026-09-06
+
+Found by [`BENCH.md`](BENCH.md), not by this corpus: against headless
+Chrome on the same inputs, html2pdf's text-only PDFs were 6–16× larger
+(RFC 9110 29.0 MB vs 4.5) — every content stream written raw, because
+`Export` never set `pdfkit.Options.Compress`. Enabled since; the table above
+is the first run with it. RFC 9110 28,979,365 → **4,683,687 B**, Wikipedia
+(Go) 3,729,585 → 630,404, `pkg.go.dev/net/http` 8,634,499 → 1,289,572,
+`react.dev` 5,215,046 → 4,789,356 (bitmaps, already flate — little to gain).
+Page counts and text lengths unchanged; the output stays byte-deterministic
+(`TestExportCompressesContentStreams`). Render time rises by the flate cost
+on the big text pages (~0.3 s on RFC 9110).

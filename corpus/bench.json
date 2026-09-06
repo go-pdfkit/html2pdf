@@ -1,0 +1,596 @@
+[
+  {
+    "input": {
+      "name": "https://example.com/",
+      "url": "https://example.com/"
+    },
+    "html2pdf": {
+      "samples": [
+        {
+          "real_sec": 0.58,
+          "max_rss_bytes": 54673408
+        },
+        {
+          "real_sec": 0.07,
+          "max_rss_bytes": 48332800
+        },
+        {
+          "real_sec": 0.07,
+          "max_rss_bytes": 48381952
+        },
+        {
+          "real_sec": 0.07,
+          "max_rss_bytes": 47546368
+        },
+        {
+          "real_sec": 0.07,
+          "max_rss_bytes": 46645248
+        }
+      ],
+      "median_sec": 0.07,
+      "median_rss_bytes": 48332800,
+      "failures": 0,
+      "pdf_bytes": 8943,
+      "pages": 1,
+      "text_chars": 127
+    },
+    "chrome": {
+      "samples": [
+        {
+          "real_sec": 2.34,
+          "max_rss_bytes": 241942528
+        },
+        {
+          "real_sec": 1.61,
+          "max_rss_bytes": 242286592
+        },
+        {
+          "real_sec": 1.79,
+          "max_rss_bytes": 241156096
+        },
+        {
+          "real_sec": 1.58,
+          "max_rss_bytes": 241664000
+        },
+        {
+          "real_sec": 1.63,
+          "max_rss_bytes": 242827264
+        }
+      ],
+      "median_sec": 1.63,
+      "median_rss_bytes": 241942528,
+      "failures": 0,
+      "pdf_bytes": 35456,
+      "pages": 1,
+      "text_chars": 128
+    }
+  },
+  {
+    "input": {
+      "name": "https://en.wikipedia.org/wiki/Go_(programming_language)",
+      "url": "https://en.wikipedia.org/wiki/Go_(programming_language)"
+    },
+    "html2pdf": {
+      "samples": [
+        {
+          "real_sec": 0.39,
+          "max_rss_bytes": 115474432
+        },
+        {
+          "real_sec": 0.39,
+          "max_rss_bytes": 100581376
+        },
+        {
+          "real_sec": 0.39,
+          "max_rss_bytes": 103956480
+        },
+        {
+          "real_sec": 0.38,
+          "max_rss_bytes": 115638272
+        },
+        {
+          "real_sec": 0.39,
+          "max_rss_bytes": 104398848
+        }
+      ],
+      "median_sec": 0.39,
+      "median_rss_bytes": 104398848,
+      "failures": 0,
+      "pdf_bytes": 617903,
+      "pages": 18,
+      "text_chars": 63044
+    },
+    "chrome": {
+      "samples": [
+        {
+          "real_sec": 2.2,
+          "max_rss_bytes": 358547456
+        },
+        {
+          "real_sec": 2.15,
+          "max_rss_bytes": 362512384
+        },
+        {
+          "real_sec": 2.12,
+          "max_rss_bytes": 360251392
+        },
+        {
+          "real_sec": 2.09,
+          "max_rss_bytes": 360398848
+        },
+        {
+          "real_sec": 2.13,
+          "max_rss_bytes": 361545728
+        }
+      ],
+      "median_sec": 2.13,
+      "median_rss_bytes": 360398848,
+      "failures": 0,
+      "pdf_bytes": 1671529,
+      "pages": 25,
+      "text_chars": 67289
+    }
+  },
+  {
+    "input": {
+      "name": "https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)",
+      "url": "https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)"
+    },
+    "html2pdf": {
+      "samples": [
+        {
+          "real_sec": 0.54,
+          "max_rss_bytes": 100384768
+        },
+        {
+          "real_sec": 0.53,
+          "max_rss_bytes": 97615872
+        },
+        {
+          "real_sec": 0.55,
+          "max_rss_bytes": 96813056
+        },
+        {
+          "real_sec": 0.55,
+          "max_rss_bytes": 95125504
+        },
+        {
+          "real_sec": 0.52,
+          "max_rss_bytes": 104513536
+        }
+      ],
+      "median_sec": 0.54,
+      "median_rss_bytes": 97615872,
+      "failures": 0,
+      "pdf_bytes": 230909,
+      "pages": 9,
+      "text_chars": 22953
+    },
+    "chrome": {
+      "samples": [
+        {
+          "real_sec": 2.17,
+          "max_rss_bytes": 355647488
+        },
+        {
+          "real_sec": 2.18,
+          "max_rss_bytes": 357236736
+        },
+        {
+          "real_sec": 2.26,
+          "max_rss_bytes": 357974016
+        },
+        {
+          "real_sec": 2.17,
+          "max_rss_bytes": 356909056
+        },
+        {
+          "real_sec": 2.22,
+          "max_rss_bytes": 348798976
+        }
+      ],
+      "median_sec": 2.18,
+      "median_rss_bytes": 356909056,
+      "failures": 0,
+      "pdf_bytes": 1634643,
+      "pages": 12,
+      "text_chars": 21987
+    }
+  },
+  {
+    "input": {
+      "name": "https://go.dev/blog/subtests",
+      "url": "https://go.dev/blog/subtests"
+    },
+    "html2pdf": {
+      "samples": [
+        {
+          "real_sec": 0.74,
+          "max_rss_bytes": 69828608
+        },
+        {
+          "real_sec": 0.86,
+          "max_rss_bytes": 74530816
+        },
+        {
+          "real_sec": 0.81,
+          "max_rss_bytes": 80543744
+        },
+        {
+          "real_sec": 0.74,
+          "max_rss_bytes": 71024640
+        },
+        {
+          "real_sec": 0.76,
+          "max_rss_bytes": 74743808
+        }
+      ],
+      "median_sec": 0.76,
+      "median_rss_bytes": 74530816,
+      "failures": 0,
+      "pdf_bytes": 270805,
+      "pages": 6,
+      "text_chars": 13478
+    },
+    "chrome": {
+      "samples": [
+        {
+          "real_sec": 3.2,
+          "max_rss_bytes": 351404032
+        },
+        {
+          "real_sec": 3.13,
+          "max_rss_bytes": 352829440
+        },
+        {
+          "real_sec": 3.09,
+          "max_rss_bytes": 352681984
+        },
+        {
+          "real_sec": 3.36,
+          "max_rss_bytes": 351600640
+        },
+        {
+          "real_sec": 2.97,
+          "max_rss_bytes": 353304576
+        }
+      ],
+      "median_sec": 3.13,
+      "median_rss_bytes": 352681984,
+      "failures": 0,
+      "pdf_bytes": 225264,
+      "pages": 7,
+      "text_chars": 11742
+    }
+  },
+  {
+    "input": {
+      "name": "https://pkg.go.dev/net/http",
+      "url": "https://pkg.go.dev/net/http"
+    },
+    "html2pdf": {
+      "samples": [
+        {
+          "real_sec": 1.69,
+          "max_rss_bytes": 130465792
+        },
+        {
+          "real_sec": 1.71,
+          "max_rss_bytes": 141541376
+        },
+        {
+          "real_sec": 1.48,
+          "max_rss_bytes": 134414336
+        },
+        {
+          "real_sec": 7.85,
+          "max_rss_bytes": 145571840
+        },
+        {
+          "real_sec": 1.55,
+          "max_rss_bytes": 146046976
+        }
+      ],
+      "median_sec": 1.69,
+      "median_rss_bytes": 141541376,
+      "failures": 0,
+      "pdf_bytes": 1289572,
+      "pages": 49,
+      "text_chars": 150974
+    },
+    "chrome": {
+      "samples": [
+        {
+          "real_sec": 3.48,
+          "max_rss_bytes": 660389888
+        },
+        {
+          "real_sec": 3.58,
+          "max_rss_bytes": 676134912
+        },
+        {
+          "real_sec": 3.33,
+          "max_rss_bytes": 678133760
+        },
+        {
+          "real_sec": 3.39,
+          "max_rss_bytes": 663453696
+        },
+        {
+          "real_sec": 3.5,
+          "max_rss_bytes": 673792000
+        }
+      ],
+      "median_sec": 3.48,
+      "median_rss_bytes": 673792000,
+      "failures": 0,
+      "pdf_bytes": 6341743,
+      "pages": 86,
+      "text_chars": 150480
+    }
+  },
+  {
+    "input": {
+      "name": "https://www.rfc-editor.org/rfc/rfc9110.html",
+      "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
+    },
+    "html2pdf": {
+      "samples": [
+        {
+          "real_sec": 0.99,
+          "max_rss_bytes": 239222784
+        },
+        {
+          "real_sec": 0.94,
+          "max_rss_bytes": 236306432
+        },
+        {
+          "real_sec": 0.94,
+          "max_rss_bytes": 245710848
+        },
+        {
+          "real_sec": 0.93,
+          "max_rss_bytes": 240058368
+        },
+        {
+          "real_sec": 0.92,
+          "max_rss_bytes": 237633536
+        }
+      ],
+      "median_sec": 0.94,
+      "median_rss_bytes": 239222784,
+      "failures": 0,
+      "pdf_bytes": 4683687,
+      "pages": 120,
+      "text_chars": 449844
+    },
+    "chrome": {
+      "samples": [
+        {
+          "real_sec": 3.53,
+          "max_rss_bytes": 549945344
+        },
+        {
+          "real_sec": 3.26,
+          "max_rss_bytes": 549830656
+        },
+        {
+          "real_sec": 3.5,
+          "max_rss_bytes": 549453824
+        },
+        {
+          "real_sec": 3.24,
+          "max_rss_bytes": 534429696
+        },
+        {
+          "real_sec": 3.22,
+          "max_rss_bytes": 550305792
+        }
+      ],
+      "median_sec": 3.26,
+      "median_rss_bytes": 549830656,
+      "failures": 0,
+      "pdf_bytes": 4543104,
+      "pages": 169,
+      "text_chars": 445667
+    }
+  },
+  {
+    "input": {
+      "name": "https://news.ycombinator.com/",
+      "url": "https://news.ycombinator.com/"
+    },
+    "html2pdf": {
+      "samples": [
+        {
+          "real_sec": 0.97,
+          "max_rss_bytes": 56672256
+        },
+        {
+          "real_sec": 0.98,
+          "max_rss_bytes": 56770560
+        },
+        {
+          "real_sec": 0.97,
+          "max_rss_bytes": 55083008
+        },
+        {
+          "real_sec": 0.94,
+          "max_rss_bytes": 60882944
+        },
+        {
+          "real_sec": 0.94,
+          "max_rss_bytes": 54804480
+        }
+      ],
+      "median_sec": 0.97,
+      "median_rss_bytes": 56672256,
+      "failures": 0,
+      "pdf_bytes": 47973,
+      "pages": 1,
+      "text_chars": 3809
+    },
+    "chrome": {
+      "samples": [
+        {
+          "real_sec": 2.61,
+          "max_rss_bytes": 253198336
+        },
+        {
+          "real_sec": 2.61,
+          "max_rss_bytes": 252887040
+        },
+        {
+          "real_sec": 2.58,
+          "max_rss_bytes": 251789312
+        },
+        {
+          "real_sec": 2.65,
+          "max_rss_bytes": 257409024
+        },
+        {
+          "real_sec": 2.6,
+          "max_rss_bytes": 251576320
+        }
+      ],
+      "median_sec": 2.61,
+      "median_rss_bytes": 252887040,
+      "failures": 0,
+      "pdf_bytes": 357971,
+      "pages": 2,
+      "text_chars": 3872
+    }
+  },
+  {
+    "input": {
+      "name": "https://react.dev/",
+      "url": "https://react.dev/"
+    },
+    "html2pdf": {
+      "samples": [
+        {
+          "real_sec": 0.73,
+          "max_rss_bytes": 139493376
+        },
+        {
+          "real_sec": 0.67,
+          "max_rss_bytes": 144867328
+        },
+        {
+          "real_sec": 0.65,
+          "max_rss_bytes": 152895488
+        },
+        {
+          "real_sec": 0.67,
+          "max_rss_bytes": 156270592
+        },
+        {
+          "real_sec": 0.97,
+          "max_rss_bytes": 157892608
+        }
+      ],
+      "median_sec": 0.67,
+      "median_rss_bytes": 152895488,
+      "failures": 0,
+      "pdf_bytes": 4789356,
+      "pages": 13,
+      "text_chars": 8038
+    },
+    "chrome": {
+      "samples": [
+        {
+          "real_sec": 2.58,
+          "max_rss_bytes": 300269568
+        },
+        {
+          "real_sec": 2.5,
+          "max_rss_bytes": 300728320
+        },
+        {
+          "real_sec": 2.57,
+          "max_rss_bytes": 299892736
+        },
+        {
+          "real_sec": 2.69,
+          "max_rss_bytes": 294584320
+        },
+        {
+          "real_sec": 2.68,
+          "max_rss_bytes": 302628864
+        }
+      ],
+      "median_sec": 2.58,
+      "median_rss_bytes": 300269568,
+      "failures": 0,
+      "pdf_bytes": 2678577,
+      "pages": 9,
+      "text_chars": 6809
+    }
+  },
+  {
+    "input": {
+      "name": "fixtures/longdoc.html",
+      "file": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/fixtures/longdoc.html"
+    },
+    "html2pdf": {
+      "samples": [
+        {
+          "real_sec": 0.8,
+          "max_rss_bytes": 235683840
+        },
+        {
+          "real_sec": 0.84,
+          "max_rss_bytes": 244645888
+        },
+        {
+          "real_sec": 0.8,
+          "max_rss_bytes": 231800832
+        },
+        {
+          "real_sec": 0.78,
+          "max_rss_bytes": 224903168
+        },
+        {
+          "real_sec": 0.78,
+          "max_rss_bytes": 241434624
+        }
+      ],
+      "median_sec": 0.8,
+      "median_rss_bytes": 235683840,
+      "failures": 0,
+      "pdf_bytes": 6465269,
+      "pages": 100,
+      "text_chars": 590571
+    },
+    "chrome": {
+      "samples": [
+        {
+          "real_sec": 2.14,
+          "max_rss_bytes": 372195328
+        },
+        {
+          "real_sec": 2.14,
+          "max_rss_bytes": 375947264
+        },
+        {
+          "real_sec": 2.13,
+          "max_rss_bytes": 372064256
+        },
+        {
+          "real_sec": 2.1,
+          "max_rss_bytes": 372228096
+        },
+        {
+          "real_sec": 2.05,
+          "max_rss_bytes": 372391936
+        }
+      ],
+      "median_sec": 2.13,
+      "median_rss_bytes": 372228096,
+      "failures": 0,
+      "pdf_bytes": 2411082,
+      "pages": 135,
+      "text_chars": 591170
+    }
+  }
+]
