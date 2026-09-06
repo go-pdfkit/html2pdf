@@ -301,6 +301,118 @@ func TestExportViewportNeverNarrowerThanPrintColumn(t *testing.T) {
 	}
 }
 
+// allLinesForTest returns every line box in a layout tree, document order.
+func allLinesForTest(b *layout.Box) []*layout.LineBox {
+	var out []*layout.LineBox
+	var walk func(*layout.Box)
+	walk = func(b *layout.Box) {
+		if b == nil {
+			return
+		}
+		out = append(out, b.Lines...)
+		for _, c := range b.Children {
+			walk(c)
+		}
+	}
+	walk(b)
+	return out
+}
+
+// decoratedSpanHTML is a styled inline element long enough to wrap inside a
+// narrow container, so the engine fragments it across at least two lines.
+const decoratedSpanHTML = `<html><body style="margin:0"><div style="width:240px">` +
+	`before <span style="background:#ffe08a;border:2px solid #b5711a;padding:2px 6px">` +
+	`a highlighted run of words that keeps going well past the end of the line` +
+	`</span> after</div></body></html>`
+
+func TestExportPaintsInlineFragments(t *testing.T) {
+	// The engine must actually deliver fragments (LineBox.Inlines, engine
+	// #128) for the pinned version — otherwise the paint path below is dead
+	// code and this test guards nothing.
+	root, err := layoutAtWidthForTest(decoratedSpanHTML, 1024)
+	if err != nil {
+		t.Fatalf("layout: %v", err)
+	}
+	var frags, firsts, lasts int
+	for _, line := range allLinesForTest(root) {
+		for _, fr := range line.Inlines {
+			frags++
+			if fr.First {
+				firsts++
+			}
+			if fr.Last {
+				lasts++
+			}
+			if fr.Style == nil || fr.W <= 0 || fr.H <= 0 {
+				t.Errorf("fragment with no style or no size: %+v", fr)
+			}
+		}
+	}
+	if frags < 2 || firsts != 1 || lasts != 1 {
+		t.Fatalf("fragments=%d first=%d last=%d, want a span wrapped over >=2 lines with exactly one First and one Last", frags, firsts, lasts)
+	}
+
+	doc, err := Export(decoratedSpanHTML, Options{})
+	if err != nil {
+		t.Fatalf("Export: %v", err)
+	}
+	var buf bytes.Buffer
+	if err := doc.Write(&buf); err != nil {
+		t.Fatalf("Write: %v", err)
+	}
+}
+
+func TestPaintDecorationClipsToThePageSlice(t *testing.T) {
+	// Drive paintDecoration directly with a real fragment style, at
+	// positions that exercise every clipping branch: fully above the page
+	// slice, straddling its top (top border must not draw), inside, straddling
+	// its bottom (bottom border must not draw), fully below; plus a middle
+	// fragment (neither First nor Last), a transparent background, a zero
+	// width and a nil style. A precise page-break placement in a real
+	// document would be far more brittle than this.
+	root, err := layoutAtWidthForTest(decoratedSpanHTML, 1024)
+	if err != nil {
+		t.Fatalf("layout: %v", err)
+	}
+	var st *css.Style
+	for _, line := range allLinesForTest(root) {
+		if len(line.Inlines) > 0 {
+			st = line.Inlines[0].Style
+			break
+		}
+	}
+	if st == nil {
+		t.Fatal("no inline fragment to borrow a style from")
+	}
+	noBg := *st
+	noBg.Background.A = 0
+
+	doc := pdfkit.New(pdfkit.Options{})
+	e := &exporter{
+		pageWPt:  pdfkit.A4.Width,
+		pageHPt:  pdfkit.A4.Height,
+		marginPt: pdfkit.Mm(20),
+		scale:    1,
+		pageTop:  100,
+		pageBot:  200,
+		p:        doc.AddPage(pdfkit.A4),
+	}
+	e.paintDecoration(st, 10, 10, 50, 20, true, true)    // fully above: skipped
+	e.paintDecoration(st, 10, 90, 50, 20, true, true)    // straddles top
+	e.paintDecoration(st, 10, 120, 50, 20, true, true)   // inside, all four edges
+	e.paintDecoration(st, 10, 150, 50, 20, false, false) // middle fragment: no left/right
+	e.paintDecoration(st, 10, 190, 50, 20, true, true)   // straddles bottom
+	e.paintDecoration(st, 10, 300, 50, 20, true, true)   // fully below: skipped
+	e.paintDecoration(&noBg, 10, 120, 50, 20, true, true)
+	e.paintDecoration(st, 10, 120, 0, 20, true, true) // zero width: skipped
+	e.paintDecoration(nil, 10, 120, 50, 20, true, true)
+
+	var buf bytes.Buffer
+	if err := doc.Write(&buf); err != nil {
+		t.Fatalf("Write: %v", err)
+	}
+}
+
 func TestExportRespectsCustomMargin(t *testing.T) {
 	doc, err := Export(`<html><body>x</body></html>`, Options{MarginMm: 40})
 	if err != nil {

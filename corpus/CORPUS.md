@@ -4,14 +4,14 @@
 
 | URL | Status | Pages | PDF | Text chars | Fetch | Render |
 |---|---|---|---|---|---|---|
-| [https://example.com/](https://example.com/) | ✅ | 1 | 26601 B | 127 | 40ms | 33ms |
-| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 18 | 3732448 B | 63064 | 114ms | 217ms |
-| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 9 | 1402676 B | 22953 | 37ms | 495ms |
-| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 6 | 978154 B | 13478 | 173ms | 516ms |
-| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 49 | 8634363 B | 150974 | 199ms | 1116ms |
-| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 120 | 28978109 B | 449957 | 201ms | 452ms |
-| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 240064 B | 3792 | 455ms | 489ms |
-| [https://react.dev/](https://react.dev/) | ✅ | 12 | 5215737 B | 7977 | 126ms | 603ms |
+| [https://example.com/](https://example.com/) | ✅ | 1 | 26601 B | 127 | 44ms | 31ms |
+| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 18 | 3729585 B | 63044 | 120ms | 222ms |
+| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 9 | 1402667 B | 22953 | 34ms | 486ms |
+| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 6 | 978154 B | 13478 | 184ms | 508ms |
+| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 49 | 8634499 B | 150974 | 580ms | 1179ms |
+| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 120 | 28979365 B | 449844 | 249ms | 462ms |
+| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 240013 B | 3793 | 457ms | 485ms |
+| [https://react.dev/](https://react.dev/) | ✅ | 13 | 5215046 B | 8038 | 137ms | 582ms |
 
 <!-- BEGIN ANALYSIS -->
 
@@ -154,3 +154,42 @@ Three things worth reading off this table:
 part of the page that ships in the HTML itself. No JavaScript runs, so
 nothing that hydrates client-side appears. This is the documented scope
 limitation working as expected, not a failure.
+
+### Inline decoration now painted — 2026-09-06 (engine [#128](https://github.com/go-webengine/engine/pull/128))
+
+The last gap the README documented is closed at the source: go-webengine now
+gives a styled inline element its own per-line box fragments
+(`LineBox.Inlines []InlineFragment{Node, Style, X, Y, W, H, First, Last}`, in
+document px, outermost element first) and reserves its horizontal
+padding+border in the line advance. html2pdf paints each fragment through the
+same `paintDecoration` path a block box uses — background, then borders with
+`box-decoration-break: slice` semantics: the left border only on the
+element's `First` fragment, the right only on its `Last`, top and bottom on
+every fragment, all clipped to the page slice like a block's.
+
+**Corpus effect: none on page counts, as it should be** — decoration is
+paint, not layout. 7 of 8 pages keep their page count and text length to
+within live-page noise; `react.dev` goes 12→13 pages / +61 extracted chars,
+which is the *engine version bump itself* (its #127 stopped a flex container
+mixing bare text with an element from silently dropping the text), not this
+change. Five page-1 previews changed pixels for the same reason (engine #124
+inline margins re-flowed RFC 9110's author block, for one) — none of the
+corpus front pages has a decorated inline element to show the feature.
+
+**So the proof is a synthetic page**, `fixtures/inline-decoration.html`
+(reproduce line in the file): a span with background+border+padding wrapped
+over two lines shows the left border on its first fragment only and the right
+on its last only; a `<code>` badge gets a full box; a background pill paints
+under a nested italic's `border-bottom`. One thing that looks like a defect
+and isn't: the wrapped span's yellow bottom padding peeks out on the following
+line under "and a", wherever the next line's own pill doesn't paint over it.
+CSS does not grow a line box for an inline element's vertical padding, so it
+overflows into the next line's band; a browser shows the same strip. Unit
+proof: `TestExportPaintsInlineFragments` (the pinned engine really emits
+fragments — exactly one First and one Last for a wrapped span — and the PDF
+writes) and `TestPaintDecorationClipsToThePageSlice` (every clipping branch:
+above / straddling top / inside / middle fragment / straddling bottom / below,
+transparent background, zero width, nil style).
+
+Not painted on inline elements, as on blocks here: `border-radius`,
+`background-image`/gradients, `box-shadow` — flat fill, straight edges.
