@@ -5,9 +5,8 @@
 package html2pdf
 
 import (
-	"image"
-
 	"github.com/go-pdfkit/pdfkit"
+	"github.com/go-webengine/engine"
 	"github.com/go-webengine/engine/css"
 	"github.com/go-webengine/engine/dom"
 	"github.com/go-webengine/engine/layout"
@@ -16,7 +15,8 @@ import (
 // exporter holds the state for painting one page's slice of the box tree.
 type exporter struct {
 	fonts    *fontSet
-	imgs     map[*dom.Node]image.Image // decoded bitmaps, keyed by <img>/<svg> element
+	imgs     map[*dom.Node]*engine.LoadedImage // bitmaps and their sources, keyed by <img>/<svg> element
+	imageDPI float64                           // Options.ImageDPI; 0 = keep the engine's pixels
 	pageWPt  float64
 	pageHPt  float64
 	marginPt float64
@@ -156,12 +156,3 @@ func (e *exporter) paintLine(line *layout.LineBox) {
 // raster canvas. Unlike a background, an image that straddles a page break is
 // not clipped per page — it's an atom (its own line box), so pagination
 // already keeps it whole; the page-slice test on the line is enough.
-func (e *exporter) paintImage(it *layout.InlineItem) {
-	bmp, ok := e.imgs[it.Image]
-	if !ok || bmp == nil || it.ImgW <= 0 || it.ImgH <= 0 {
-		return
-	}
-	x0, y0 := e.toPdf(it.X, it.Y)
-	x1, y1 := e.toPdf(it.X+it.ImgW, it.Y+it.ImgH)
-	e.p.DrawImage(bmp, pdfkit.Rect{X: x0, Y: y1, Width: x1 - x0, Height: y0 - y1})
-}

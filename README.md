@@ -83,11 +83,18 @@ Width features (`min-width`, `max-width`) are evaluated at `ViewportPx` under
 either.
 
 Images — raster `<img>`, `<img src="*.svg">` and inline `<svg>` — go through
-the engine's own fetch/decode/size pipeline (`Engine.LoadImages`) and are
-embedded as bitmaps, so they're laid out and drawn exactly as the engine's
-raster canvas would draw them. A relative `src` resolves against
-`Options.BaseURL`; an image that fails to fetch or decode is simply left out,
-as on the raster canvas. This is the one place `Export` touches the network.
+the engine's own fetch/decode/size pipeline (`Engine.LoadImageSet`), so
+they're laid out and drawn exactly as the engine's raster canvas would. How
+the pixels are stored follows the source, the way Chrome's PDF backend
+decides it: a JPEG the engine did not resize is embedded byte for byte
+(DCTDecode); any other lossy source (a resized JPEG, a lossy WebP) that is
+opaque is re-encoded as JPEG at quality 85; PNG, GIF, SVG rasters and
+anything with transparency are flate bitmaps with a soft mask, so line art
+and screenshots keep every pixel. `Options.ImageDPI` (CLI `-image-dpi`) caps
+a bitmap's density at its painted size — 0, the default, keeps every fetched
+pixel as Chrome and WeasyPrint do; WeasyPrint's `--dpi` is the same lever. A
+relative `src` resolves against `BaseURL`; an image that fails to fetch or
+decode is left out.
 
 Inline-level decoration — a styled `<span>`, `<code>`, `<a>`… with a
 background, border or padding — paints too, fragmented per line the way CSS
