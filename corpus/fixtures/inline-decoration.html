@@ -1,0 +1,15 @@
+<!-- Synthetic check for inline-level decoration (engine #128 -> html2pdf):
+     a span with background+border+padding wrapping over two lines, a <code>
+     badge, and a background pill with a nested border-bottom italic.
+     Reproduce (from corpus/):
+       go run ../cmd/html2pdf -in fixtures/inline-decoration.html -out /tmp/inline-decoration.pdf
+       pdftoppm -png -r 110 -f 1 -l 1 /tmp/inline-decoration.pdf /tmp/inline-decoration
+     Expected: left border only on the span's first fragment, right border only
+     on its last; the yellow bottom padding of the wrapped span peeks out under
+     "and a" on the next line where nothing paints over it -- that is CSS
+     (inline padding does not grow the line) and what a browser shows too. -->
+<html><body style="margin:0;font-family:sans-serif;font-size:18px">
+<div style="width:520px;line-height:1.8">
+before <span style="background:#ffe08a;border:3px solid #b5711a;padding:2px 8px">a highlighted run of words that keeps going well past the end of the line so it wraps</span> after,
+then a <code style="background:#e8eefc;border:1px solid #2954c8;padding:1px 4px">badge</code> and a <b style="background:#ddf0e4">bold pill with <i style="border-bottom:2px solid #1f7a4c">nested italic</i> inside</b>.
+</div></body></html>

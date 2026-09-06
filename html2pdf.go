@@ -13,10 +13,9 @@
 // @font-face (text uses the three families go-webengine's own paint package
 // bundles — Inter for sans, Lora for serif, Go Mono for mono — so the glyphs
 // drawn always match the metrics layout measured against). Inline-level
-// background/border/padding do not paint: go-webengine's layout does not
-// give a styled inline run its own box, only block/table/flex-level elements
-// do (confirmed in the reference raster painter too — this is a shared engine
-// limitation, not something this package works around).
+// background and borders paint per line fragment from the engine's own
+// LineBox.Inlines (box-decoration-break: slice); border-radius,
+// background-image and box-shadow on an inline element do not.
 //
 // Images — raster <img>, <img src="*.svg"> and inline <svg> — are fetched,
 // decoded and sized by the engine's own pipeline (Engine.LoadImages) and

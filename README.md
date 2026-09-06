@@ -63,13 +63,14 @@ raster canvas would draw them. A relative `src` resolves against
 `Options.BaseURL`; an image that fails to fetch or decode is simply left out,
 as on the raster canvas. This is the one place `Export` touches the network.
 
-One gap remains, inherited from — not introduced by — the layout engine:
-
-- **Inline-level background/border/padding does not paint.** A styled
-  `<span>` never gets its own box in go-webengine's layout (confirmed against
-  its reference raster painter too — a shared engine limitation). Style the
-  *containing* block/table-cell instead of an inner inline element when you
-  need a filled badge or pill.
+Inline-level decoration — a styled `<span>`, `<code>`, `<a>`… with a
+background, border or padding — paints too, fragmented per line the way CSS
+does (`box-decoration-break: slice`: the left border only on an element's
+first fragment, the right only on its last). The geometry comes from the
+engine's own `LineBox.Inlines` (go-webengine/engine#128), so a badge or pill
+lands exactly where the raster canvas puts it. Not painted on inline
+elements: `border-radius`, `background-image`/gradients, `box-shadow` — a
+fragment paints a flat background and straight borders.
 
 ## Status
 
