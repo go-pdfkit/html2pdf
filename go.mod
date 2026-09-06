@@ -5,7 +5,8 @@ go 1.26.4
 require (
 	github.com/go-opentype/fonts v0.9.0
 	github.com/go-pdfkit/pdfkit v0.11.1-0.20260906121306-2b1cee2c4ed8
-	github.com/go-webengine/engine v0.3.12-0.20260906115442-22511ec80056
+	github.com/go-webengine/engine v0.3.12-0.20260906154647-2135ba38bd89
+	golang.org/x/image v0.45.0
 )
 
 require (
@@ -41,7 +42,6 @@ require (
 	github.com/srwiley/rasterx v0.0.0-20220730225603-2ab79fcdd4ef // indirect
 	github.com/tannevaled/gobig2 v0.1.0 // indirect
 	golang.org/x/crypto v0.55.0 // indirect
-	golang.org/x/image v0.45.0 // indirect
 	golang.org/x/net v0.58.0 // indirect
 	golang.org/x/sys v0.47.0 // indirect
 	golang.org/x/text v0.41.0 // indirect

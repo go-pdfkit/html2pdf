@@ -24,10 +24,13 @@
 //
 // Images — raster <img>, <img src="*.svg"> and inline <svg> — are fetched,
 // decoded and sized by the engine's own pipeline (Engine.LoadImages) and
-// embedded as bitmaps, so they are laid out and drawn exactly as the engine's
-// raster canvas would. A relative src resolves against Options.BaseURL; an
-// image that fails to fetch or decode is simply left out. Stylesheets and
-// images are the two places Export touches the network.
+// embedded so they are laid out and drawn exactly as the engine's raster
+// canvas would: a JPEG source as its own bytes (DCTDecode), any other lossy
+// source re-encoded as JPEG when opaque, everything else as a flate bitmap
+// with a soft mask for transparency — see images.go and Options.ImageDPI. A
+// relative src resolves against Options.BaseURL; an image that fails to
+// fetch or decode is simply left out. Stylesheets and images are the two
+// places Export touches the network.
 //
 // # Navigation
 //
@@ -103,6 +106,14 @@ type Options struct {
 	// dictionary. An empty Title is taken from the document's <title>.
 	Title, Author, Subject, Keywords string
 
+	// ImageDPI caps the pixel density of an embedded bitmap at its painted
+	// size: a bitmap that would exceed it — a 1024 px photograph painted
+	// 60 mm wide is 430 dpi — is downsampled to it. Zero (the default) keeps
+	// every pixel the engine fetched, which is what Chrome's print and
+	// WeasyPrint do by default; WeasyPrint's --dpi is the same lever. 150
+	// is a sound print value, 96 the screen's.
+	ImageDPI float64
+
 	// Media is the CSS medium the page is styled for: "print" (the zero
 	// value) applies the page's @media print rules and print-only
 	// stylesheets and skips its screen-only ones — a browser's print
@@ -168,7 +179,11 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	media := css.Media{Type: opts.Media, Width: viewportPx}
 	sheets := eng.LoadStylesheets(ctx, webDoc, media)
 	sm := css.CascadeMedia(root, media, sheets)
-	imgSizes, imgs := eng.LoadImages(ctx, webDoc, sm, int(viewportPx))
+	imgs := eng.LoadImageSet(ctx, webDoc, sm, int(viewportPx))
+	imgSizes := make(map[*dom.Node][2]float64, len(imgs))
+	for n, li := range imgs {
+		imgSizes[n] = li.Size
+	}
 
 	box, _ := layout.LayoutDocument(root, sm, viewportPx, fonts, imgSizes)
 
@@ -203,7 +218,7 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	// linked document carries — one annotation per clickable line — into
 	// flated streams: ~14 B per link instead of ~200 (pdfkit #29).
 	doc := pdfkit.New(pdfkit.Options{Compress: true, ObjectStreams: true, Title: title, Author: opts.Author, Subject: opts.Subject, Keywords: opts.Keywords})
-	e := &exporter{fonts: fs, imgs: imgs, pageWPt: pageWPt, pageHPt: pageHPt, marginPt: marginPt, scale: scale}
+	e := &exporter{fonts: fs, imgs: imgs, imageDPI: opts.ImageDPI, pageWPt: pageWPt, pageHPt: pageHPt, marginPt: marginPt, scale: scale}
 	for i, top := range tops {
 		bot := pageHViewportPx * 1e9 // effectively unbounded: the last page
 		if i+1 < len(tops) {
