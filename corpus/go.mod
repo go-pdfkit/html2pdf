@@ -4,7 +4,7 @@ go 1.26.4
 
 require (
 	github.com/go-pdfkit/html2pdf v0.0.0
-	github.com/go-webengine/engine v0.3.12-0.20260906080832-fa7a628f17d2
+	github.com/go-webengine/engine v0.3.12-0.20260906115442-22511ec80056
 )
 
 require (

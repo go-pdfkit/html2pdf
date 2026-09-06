@@ -67,11 +67,20 @@ fragments nobody anchors are dropped rather than written as dead links.
 
 ## Scope
 
-This renders **static** HTML: no JavaScript, no external stylesheets, no
-`@font-face`. Text is set in the three families go-webengine's own paint
-package bundles — Inter (sans), Lora (serif), Go Mono (mono) — so the glyphs
-drawn always match the metrics the layout pass measured against; there is no
-web-font fetch to fail silently.
+This renders **static** HTML: no JavaScript, no `@font-face`. Text is set in
+the three families go-webengine's own paint package bundles — Inter (sans),
+Lora (serif), Go Mono (mono) — so the glyphs drawn always match the metrics
+the layout pass measured against; there is no web-font fetch to fail silently.
+
+External stylesheets — `<link rel="stylesheet">` and their `@import` chains —
+are fetched through the engine's own bounded loader (`Engine.LoadStylesheets`:
+64 sheets, 4 MB each, two `@import` levels, 10 s) and cascaded for the
+**print** medium by default (`Options.Media`, CLI `-media`): a page's
+`@media print` rules and print-only stylesheets apply, its screen-only ones do
+not — a browser's print preview, where a site's navigation, sidebars and
+footers are usually hidden. `-media screen` styles the page as displayed.
+Width features (`min-width`, `max-width`) are evaluated at `ViewportPx` under
+either.
 
 Images — raster `<img>`, `<img src="*.svg">` and inline `<svg>` — go through
 the engine's own fetch/decode/size pipeline (`Engine.LoadImages`) and are
