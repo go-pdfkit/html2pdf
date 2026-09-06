@@ -1,0 +1,2134 @@
+[
+  {
+    "file": "out/bench/en-wikipedia-org-wiki-Go_programming_language.chrome.pdf",
+    "bytes": 1671529,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 78
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 25,
+        "text_chars": 58290,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.chrome/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 174
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 25,
+        "text_chars": 58302,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.chrome/mupdf.png",
+        "mean_diff": 7.018857388316151,
+        "diff_pct": 5.4493127147766325,
+        "ms": 92
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 58270,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.chrome/gs.png",
+        "mean_diff": 10.928797250859107,
+        "diff_pct": 9.084192439862543,
+        "ms": 252
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 25,
+        "text_chars": 58293,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.chrome/pdfium.png",
+        "mean_diff": 6.830429553264604,
+        "diff_pct": 5.244845360824742,
+        "ms": 170
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 25,
+        "text_chars": 58302,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.chrome/pdfjs.png",
+        "mean_diff": 6.468213058419244,
+        "diff_pct": 4.103951890034364,
+        "ms": 552
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.chrome/quartz.png",
+        "mean_diff": 9.310223367697594,
+        "diff_pct": 7.515463917525773,
+        "ms": 129
+      }
+    ]
+  },
+  {
+    "file": "out/bench/en-wikipedia-org-wiki-Go_programming_language.html2pdf.pdf",
+    "bytes": 208312,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 24
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 18,
+        "text_chars": 52778,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 85
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 18,
+        "text_chars": 52778,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/mupdf.png",
+        "mean_diff": 0.4105437352245863,
+        "diff_pct": 0.06855791962174941,
+        "ms": 39
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 52778,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/gs.png",
+        "mean_diff": 1.6568794326241134,
+        "diff_pct": 1.5106382978723405,
+        "ms": 965
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 18,
+        "text_chars": 52778,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/pdfium.png",
+        "mean_diff": 0.978321513002364,
+        "diff_pct": 0.7667454688731284,
+        "ms": 138
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 18,
+        "text_chars": 52778,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/pdfjs.png",
+        "mean_diff": 0.4802994483845548,
+        "diff_pct": 0.10717100078802207,
+        "ms": 466
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/quartz.png",
+        "mean_diff": 1.2355003940110323,
+        "diff_pct": 1.066193853427896,
+        "ms": 82
+      }
+    ]
+  },
+  {
+    "file": "out/bench/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.chrome.pdf",
+    "bytes": 1638452,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 78
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 12,
+        "text_chars": 17495,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.chrome/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 118
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 12,
+        "text_chars": 17495,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.chrome/mupdf.png",
+        "mean_diff": 2.1656701030927836,
+        "diff_pct": 1.3144329896907216,
+        "ms": 89
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 17757,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.chrome/gs.png",
+        "mean_diff": 4.1213831615120275,
+        "diff_pct": 3.3487972508591066,
+        "ms": 272
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 12,
+        "text_chars": 17495,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.chrome/pdfium.png",
+        "mean_diff": 2.4470189003436427,
+        "diff_pct": 1.7439862542955327,
+        "ms": 120
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 12,
+        "text_chars": 17495,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.chrome/pdfjs.png",
+        "mean_diff": 2.116056701030928,
+        "diff_pct": 1.0017182130584192,
+        "ms": 478
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.chrome/quartz.png",
+        "mean_diff": 2.9277319587628865,
+        "diff_pct": 1.986254295532646,
+        "ms": 114
+      }
+    ]
+  },
+  {
+    "file": "out/bench/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf.pdf",
+    "bytes": 81164,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 11
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 9,
+        "text_chars": 19704,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 61
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 9,
+        "text_chars": 19704,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/mupdf.png",
+        "mean_diff": 0.3660914105594957,
+        "diff_pct": 0.06382978723404255,
+        "ms": 25
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 19704,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/gs.png",
+        "mean_diff": 1.5501182033096927,
+        "diff_pct": 1.41371158392435,
+        "ms": 525
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 9,
+        "text_chars": 19704,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/pdfium.png",
+        "mean_diff": 0.9234672970843184,
+        "diff_pct": 0.747832939322301,
+        "ms": 77
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 9,
+        "text_chars": 19704,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/pdfjs.png",
+        "mean_diff": 0.45322301024428685,
+        "diff_pct": 0.09850275807722617,
+        "ms": 448
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/quartz.png",
+        "mean_diff": 1.1712135539795114,
+        "diff_pct": 1.0236406619385343,
+        "ms": 174
+      }
+    ]
+  },
+  {
+    "file": "out/bench/example-com.chrome.pdf",
+    "bytes": 35456,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 6
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 109,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com.chrome/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 50
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 109,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com.chrome/mupdf.png",
+        "mean_diff": 1.2343298969072165,
+        "diff_pct": 0.25257731958762886,
+        "ms": 39
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 109,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com.chrome/gs.png",
+        "mean_diff": 0.9763659793814433,
+        "diff_pct": 0.7774914089347079,
+        "ms": 89
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 109,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com.chrome/pdfium.png",
+        "mean_diff": 0.41648625429553265,
+        "diff_pct": 0.22250859106529208,
+        "ms": 40
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 109,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com.chrome/pdfjs.png",
+        "mean_diff": 0.4269243986254296,
+        "diff_pct": 0.2534364261168385,
+        "ms": 435
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com.chrome/quartz.png",
+        "mean_diff": 0.4031529209621993,
+        "diff_pct": 0.2259450171821306,
+        "ms": 183
+      }
+    ]
+  },
+  {
+    "file": "out/bench/example-com.html2pdf.pdf",
+    "bytes": 7905,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 4
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 109,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com.html2pdf/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 43
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 109,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com.html2pdf/mupdf.png",
+        "mean_diff": 0.1295744680851064,
+        "diff_pct": 0.014184397163120567,
+        "ms": 16
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 109,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com.html2pdf/gs.png",
+        "mean_diff": 0.38022852639873916,
+        "diff_pct": 0.32466509062253746,
+        "ms": 73
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 109,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com.html2pdf/pdfium.png",
+        "mean_diff": 0.18605200945626477,
+        "diff_pct": 0.09929078014184398,
+        "ms": 38
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 109,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com.html2pdf/pdfjs.png",
+        "mean_diff": 0.14882584712371946,
+        "diff_pct": 0.04412923561859732,
+        "ms": 384
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com.html2pdf/quartz.png",
+        "mean_diff": 0.2524507486209614,
+        "diff_pct": 0.1875492513790386,
+        "ms": 93
+      }
+    ]
+  },
+  {
+    "file": "out/bench/fixtures-longdoc-html.chrome.pdf",
+    "bytes": 2411082,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 134
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 135,
+        "text_chars": 516244,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/fixtures-longdoc-html.chrome/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 256
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 135,
+        "text_chars": 516246,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/fixtures-longdoc-html.chrome/mupdf.png",
+        "mean_diff": 4.782027491408935,
+        "diff_pct": 2.281786941580756,
+        "ms": 168
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 511347,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/fixtures-longdoc-html.chrome/gs.png",
+        "mean_diff": 8.677053264604812,
+        "diff_pct": 6.5506872852233675,
+        "ms": 621
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 135,
+        "text_chars": 516244,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/fixtures-longdoc-html.chrome/pdfium.png",
+        "mean_diff": 5.293788659793814,
+        "diff_pct": 2.890893470790378,
+        "ms": 532
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 135,
+        "text_chars": 516246,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/fixtures-longdoc-html.chrome/pdfjs.png",
+        "mean_diff": 4.546743986254295,
+        "diff_pct": 1.2646048109965635,
+        "ms": 739
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/fixtures-longdoc-html.chrome/quartz.png",
+        "mean_diff": 7.725042955326461,
+        "diff_pct": 4.935567010309279,
+        "ms": 139
+      }
+    ]
+  },
+  {
+    "file": "out/bench/fixtures-longdoc-html.html2pdf.pdf",
+    "bytes": 873180,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 144
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 100,
+        "text_chars": 516246,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/fixtures-longdoc-html.html2pdf/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 361
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 100,
+        "text_chars": 516246,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/fixtures-longdoc-html.html2pdf/mupdf.png",
+        "mean_diff": 4.675634357762017,
+        "diff_pct": 1.2663514578408195,
+        "ms": 176
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 516246,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/fixtures-longdoc-html.html2pdf/gs.png",
+        "mean_diff": 16.548486997635933,
+        "diff_pct": 15.249014972419229,
+        "ms": 10748
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 100,
+        "text_chars": 516246,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/fixtures-longdoc-html.html2pdf/pdfium.png",
+        "mean_diff": 11.328589440504334,
+        "diff_pct": 9.222222222222221,
+        "ms": 1046
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 100,
+        "text_chars": 516246,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/fixtures-longdoc-html.html2pdf/pdfjs.png",
+        "mean_diff": 4.488534278959811,
+        "diff_pct": 1.2868400315208826,
+        "ms": 782
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/fixtures-longdoc-html.html2pdf/quartz.png",
+        "mean_diff": 13.302978723404255,
+        "diff_pct": 11.865248226950355,
+        "ms": 152
+      }
+    ]
+  },
+  {
+    "file": "out/bench/go-dev-blog-subtests.chrome.pdf",
+    "bytes": 225264,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 19
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 7,
+        "text_chars": 9884,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.chrome/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 107
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 7,
+        "text_chars": 9885,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.chrome/mupdf.png",
+        "mean_diff": 4.677560137457045,
+        "diff_pct": 3.377147766323024,
+        "ms": 133
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 9885,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.chrome/gs.png",
+        "mean_diff": 9.019690721649484,
+        "diff_pct": 7.975085910652921,
+        "ms": 376
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 7,
+        "text_chars": 9884,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.chrome/pdfium.png",
+        "mean_diff": 4.0425171821305845,
+        "diff_pct": 2.856529209621993,
+        "ms": 102
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 7,
+        "text_chars": 9885,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.chrome/pdfjs.png",
+        "mean_diff": 4.000455326460481,
+        "diff_pct": 2.7938144329896906,
+        "ms": 1237
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.chrome/quartz.png",
+        "mean_diff": 4.296314432989691,
+        "diff_pct": 3.1082474226804124,
+        "ms": 199
+      }
+    ]
+  },
+  {
+    "file": "out/bench/go-dev-blog-subtests.html2pdf.pdf",
+    "bytes": 180648,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 25
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 6,
+        "text_chars": 11369,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 94
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 6,
+        "text_chars": 11369,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/mupdf.png",
+        "mean_diff": 0.6880141843971631,
+        "diff_pct": 0.09613869188337273,
+        "ms": 32
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 11369,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/gs.png",
+        "mean_diff": 3.196099290780142,
+        "diff_pct": 2.8289992119779352,
+        "ms": 239
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 6,
+        "text_chars": 11369,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/pdfium.png",
+        "mean_diff": 1.890977147360126,
+        "diff_pct": 1.5027580772261624,
+        "ms": 70
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 6,
+        "text_chars": 11369,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/pdfjs.png",
+        "mean_diff": 0.7393144208037825,
+        "diff_pct": 0.13396375098502758,
+        "ms": 424
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/quartz.png",
+        "mean_diff": 2.414066193853428,
+        "diff_pct": 2.015760441292356,
+        "ms": 81
+      }
+    ]
+  },
+  {
+    "file": "out/bench/news-ycombinator-com.chrome.pdf",
+    "bytes": 357974,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 35
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 2,
+        "text_chars": 3153,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 432
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 2,
+        "text_chars": 3153,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/mupdf.png",
+        "mean_diff": 3.174390034364261,
+        "diff_pct": 1.2173539518900343,
+        "ms": 57
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 3153,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/gs.png",
+        "mean_diff": 5.662027491408935,
+        "diff_pct": 3.777491408934708,
+        "ms": 428
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 2,
+        "text_chars": 3153,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/pdfium.png",
+        "mean_diff": 2.629432989690722,
+        "diff_pct": 1.1984536082474226,
+        "ms": 103
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 2,
+        "text_chars": 3153,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/pdfjs.png",
+        "mean_diff": 2.645816151202749,
+        "diff_pct": 0.7396907216494846,
+        "ms": 588
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/quartz.png",
+        "mean_diff": 4.876280068728522,
+        "diff_pct": 2.7981099656357387,
+        "ms": 121
+      }
+    ]
+  },
+  {
+    "file": "out/bench/news-ycombinator-com.html2pdf.pdf",
+    "bytes": 21686,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 8
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 3153,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.html2pdf/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 115
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 3153,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.html2pdf/mupdf.png",
+        "mean_diff": 3.2556816390858945,
+        "diff_pct": 0.5350669818754925,
+        "ms": 25
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 3153,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.html2pdf/gs.png",
+        "mean_diff": 11.112852639873916,
+        "diff_pct": 10.620173364854216,
+        "ms": 137
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 3153,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.html2pdf/pdfium.png",
+        "mean_diff": 6.559960598896769,
+        "diff_pct": 5.073286052009457,
+        "ms": 53
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 3153,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.html2pdf/pdfjs.png",
+        "mean_diff": 2.864381402679275,
+        "diff_pct": 0.39401103230890466,
+        "ms": 430
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.html2pdf/quartz.png",
+        "mean_diff": 8.077659574468084,
+        "diff_pct": 6.606776989755713,
+        "ms": 148
+      }
+    ]
+  },
+  {
+    "file": "out/bench/pkg-go-dev-net-http.chrome.pdf",
+    "bytes": 6341743,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 295
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 86,
+        "text_chars": 127415,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.chrome/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 392
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 86,
+        "text_chars": 127429,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.chrome/mupdf.png",
+        "mean_diff": 2.7122766323024057,
+        "diff_pct": 1.4527491408934707,
+        "ms": 948
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 127429,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.chrome/gs.png",
+        "mean_diff": 5.553780068728522,
+        "diff_pct": 4.72680412371134,
+        "ms": 3003
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 86,
+        "text_chars": 127415,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.chrome/pdfium.png",
+        "mean_diff": 2.1840292096219933,
+        "diff_pct": 1.3376288659793814,
+        "ms": 677
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 86,
+        "text_chars": 127429,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.chrome/pdfjs.png",
+        "mean_diff": 2.4983333333333335,
+        "diff_pct": 1.447594501718213,
+        "ms": 802
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.chrome/quartz.png",
+        "mean_diff": 3.240549828178694,
+        "diff_pct": 1.4836769759450172,
+        "ms": 154
+      }
+    ]
+  },
+  {
+    "file": "out/bench/pkg-go-dev-net-http.html2pdf.pdf",
+    "bytes": 385845,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 40
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 49,
+        "text_chars": 125449,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 125
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 49,
+        "text_chars": 125449,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/mupdf.png",
+        "mean_diff": 0.6375098502758078,
+        "diff_pct": 0.13396375098502758,
+        "ms": 56
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 125451,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/gs.png",
+        "mean_diff": 2.7813869188337272,
+        "diff_pct": 2.491725768321513,
+        "ms": 1970
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 49,
+        "text_chars": 125451,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/pdfium.png",
+        "mean_diff": 1.6958628841607566,
+        "diff_pct": 1.4121355397951143,
+        "ms": 247
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 49,
+        "text_chars": 125449,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/pdfjs.png",
+        "mean_diff": 0.6815287628053586,
+        "diff_pct": 0.15130023640661938,
+        "ms": 505
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/quartz.png",
+        "mean_diff": 2.18478329393223,
+        "diff_pct": 1.8825847123719464,
+        "ms": 78
+      }
+    ]
+  },
+  {
+    "file": "out/bench/react-dev.chrome.pdf",
+    "bytes": 2678577,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 49
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 9,
+        "text_chars": 5649,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.chrome/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 78
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 9,
+        "text_chars": 5649,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.chrome/mupdf.png",
+        "mean_diff": 0.2456786941580756,
+        "diff_pct": 0.11082474226804123,
+        "ms": 201
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 5651,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.chrome/gs.png",
+        "mean_diff": 0.5227835051546392,
+        "diff_pct": 0.3943298969072165,
+        "ms": 281
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 9,
+        "text_chars": 5650,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.chrome/pdfium.png",
+        "mean_diff": 0.24241408934707903,
+        "diff_pct": 0.1211340206185567,
+        "ms": 268
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 9,
+        "text_chars": 5649,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.chrome/pdfjs.png",
+        "mean_diff": 0.22164948453608246,
+        "diff_pct": 0.07130584192439862,
+        "ms": 493
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.chrome/quartz.png",
+        "mean_diff": 0.43413230240549827,
+        "diff_pct": 0.28951890034364264,
+        "ms": 85
+      }
+    ]
+  },
+  {
+    "file": "out/bench/react-dev.html2pdf.pdf",
+    "bytes": 4734109,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 25
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 13,
+        "text_chars": 6647,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 74
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 13,
+        "text_chars": 6647,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/mupdf.png",
+        "mean_diff": 1.1851379038613081,
+        "diff_pct": 0.43656422379826637,
+        "ms": 27
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 6647,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/gs.png",
+        "mean_diff": 4.725035460992908,
+        "diff_pct": 4.0236406619385345,
+        "ms": 260
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 13,
+        "text_chars": 6647,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/pdfium.png",
+        "mean_diff": 3.347399527186761,
+        "diff_pct": 2.8786446020488574,
+        "ms": 114
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 13,
+        "text_chars": 6647,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/pdfjs.png",
+        "mean_diff": 1.2851536643026005,
+        "diff_pct": 0.48148148148148145,
+        "ms": 425
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/quartz.png",
+        "mean_diff": 4.010480693459417,
+        "diff_pct": 3.512214342001576,
+        "ms": 128
+      }
+    ]
+  },
+  {
+    "file": "out/bench/www-rfc-editor-org-rfc-rfc9110-html.chrome.pdf",
+    "bytes": 4543104,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 375
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 169,
+        "text_chars": 376539,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.chrome/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 396
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 169,
+        "text_chars": 376613,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.chrome/mupdf.png",
+        "mean_diff": 3.2356525157232703,
+        "diff_pct": 2.3128930817610063,
+        "ms": 267
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 377127,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.chrome/gs.png",
+        "mean_diff": 5.230070754716981,
+        "diff_pct": 4.465408805031447,
+        "ms": 6758
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 169,
+        "text_chars": 376542,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.chrome/pdfium.png",
+        "mean_diff": 4.004544025157233,
+        "diff_pct": 2.9732704402515724,
+        "ms": 1231
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 169,
+        "text_chars": 376613,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.chrome/pdfjs.png",
+        "mean_diff": 2.850880503144654,
+        "diff_pct": 1.449685534591195,
+        "ms": 916
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.chrome/quartz.png",
+        "mean_diff": 4.600275157232704,
+        "diff_pct": 3.70125786163522,
+        "ms": 185
+      }
+    ]
+  },
+  {
+    "file": "out/bench/www-rfc-editor-org-rfc-rfc9110-html.html2pdf.pdf",
+    "bytes": 981952,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 133
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 120,
+        "text_chars": 378290,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 321
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 120,
+        "text_chars": 378293,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/mupdf.png",
+        "mean_diff": 3.138747044917258,
+        "diff_pct": 1.0047281323877069,
+        "ms": 153
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 378293,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/gs.png",
+        "mean_diff": 10.644231678486998,
+        "diff_pct": 9.91016548463357,
+        "ms": 6103
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 120,
+        "text_chars": 378293,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/pdfium.png",
+        "mean_diff": 7.360780141843971,
+        "diff_pct": 6.250591016548463,
+        "ms": 766
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 120,
+        "text_chars": 378293,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/pdfjs.png",
+        "mean_diff": 2.908400315208826,
+        "diff_pct": 0.8132387706855791,
+        "ms": 734
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/quartz.png",
+        "mean_diff": 8.460441292356187,
+        "diff_pct": 7.657210401891253,
+        "ms": 102
+      }
+    ]
+  },
+  {
+    "file": "out/en-wikipedia-org-wiki-Go_programming_language.pdf",
+    "bytes": 215610,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 26
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 18,
+        "text_chars": 52778,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 90
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 18,
+        "text_chars": 52778,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/mupdf.png",
+        "mean_diff": 0.4105437352245863,
+        "diff_pct": 0.06855791962174941,
+        "ms": 40
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 52778,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/gs.png",
+        "mean_diff": 1.6568794326241134,
+        "diff_pct": 1.5106382978723405,
+        "ms": 1007
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 18,
+        "text_chars": 52778,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/pdfium.png",
+        "mean_diff": 0.978321513002364,
+        "diff_pct": 0.7667454688731284,
+        "ms": 141
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 18,
+        "text_chars": 52778,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/pdfjs.png",
+        "mean_diff": 0.4802994483845548,
+        "diff_pct": 0.10717100078802207,
+        "ms": 472
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/quartz.png",
+        "mean_diff": 1.2355003940110323,
+        "diff_pct": 1.066193853427896,
+        "ms": 151
+      }
+    ]
+  },
+  {
+    "file": "out/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.pdf",
+    "bytes": 78288,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 12
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 9,
+        "text_chars": 19704,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 62
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 9,
+        "text_chars": 19704,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/mupdf.png",
+        "mean_diff": 0.3660914105594957,
+        "diff_pct": 0.06382978723404255,
+        "ms": 25
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 19704,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/gs.png",
+        "mean_diff": 1.5501182033096927,
+        "diff_pct": 1.41371158392435,
+        "ms": 358
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 9,
+        "text_chars": 19704,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/pdfium.png",
+        "mean_diff": 0.9234672970843184,
+        "diff_pct": 0.747832939322301,
+        "ms": 82
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 9,
+        "text_chars": 19704,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/pdfjs.png",
+        "mean_diff": 0.45322301024428685,
+        "diff_pct": 0.09850275807722617,
+        "ms": 445
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/quartz.png",
+        "mean_diff": 1.1712135539795114,
+        "diff_pct": 1.0236406619385343,
+        "ms": 71
+      }
+    ]
+  },
+  {
+    "file": "out/example-com.pdf",
+    "bytes": 7905,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 5
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 109,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 44
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 109,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com/mupdf.png",
+        "mean_diff": 0.1295744680851064,
+        "diff_pct": 0.014184397163120567,
+        "ms": 17
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 109,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com/gs.png",
+        "mean_diff": 0.38022852639873916,
+        "diff_pct": 0.32466509062253746,
+        "ms": 75
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 109,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com/pdfium.png",
+        "mean_diff": 0.18605200945626477,
+        "diff_pct": 0.09929078014184398,
+        "ms": 40
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 109,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com/pdfjs.png",
+        "mean_diff": 0.14882584712371946,
+        "diff_pct": 0.04412923561859732,
+        "ms": 418
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/example-com/quartz.png",
+        "mean_diff": 0.2524507486209614,
+        "diff_pct": 0.1875492513790386,
+        "ms": 70
+      }
+    ]
+  },
+  {
+    "file": "out/go-dev-blog-subtests.pdf",
+    "bytes": 180648,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 10
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 6,
+        "text_chars": 11369,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 78
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 6,
+        "text_chars": 11369,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/mupdf.png",
+        "mean_diff": 0.6880141843971631,
+        "diff_pct": 0.09613869188337273,
+        "ms": 24
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 11369,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/gs.png",
+        "mean_diff": 3.196099290780142,
+        "diff_pct": 2.8289992119779352,
+        "ms": 239
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 6,
+        "text_chars": 11369,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/pdfium.png",
+        "mean_diff": 1.890977147360126,
+        "diff_pct": 1.5027580772261624,
+        "ms": 70
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 6,
+        "text_chars": 11369,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/pdfjs.png",
+        "mean_diff": 0.7393144208037825,
+        "diff_pct": 0.13396375098502758,
+        "ms": 438
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/quartz.png",
+        "mean_diff": 2.414066193853428,
+        "diff_pct": 2.015760441292356,
+        "ms": 144
+      }
+    ]
+  },
+  {
+    "file": "out/news-ycombinator-com.pdf",
+    "bytes": 21686,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 6
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 3153,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 116
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 3153,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com/mupdf.png",
+        "mean_diff": 3.2556816390858945,
+        "diff_pct": 0.5350669818754925,
+        "ms": 25
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 3153,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com/gs.png",
+        "mean_diff": 11.112852639873916,
+        "diff_pct": 10.620173364854216,
+        "ms": 137
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 3153,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com/pdfium.png",
+        "mean_diff": 6.559960598896769,
+        "diff_pct": 5.073286052009457,
+        "ms": 58
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 3153,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com/pdfjs.png",
+        "mean_diff": 2.864381402679275,
+        "diff_pct": 0.39401103230890466,
+        "ms": 441
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com/quartz.png",
+        "mean_diff": 8.077659574468084,
+        "diff_pct": 6.606776989755713,
+        "ms": 73
+      }
+    ]
+  },
+  {
+    "file": "out/pkg-go-dev-net-http.pdf",
+    "bytes": 385845,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 38
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 49,
+        "text_chars": 125449,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 131
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 49,
+        "text_chars": 125449,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/mupdf.png",
+        "mean_diff": 0.6375098502758078,
+        "diff_pct": 0.13396375098502758,
+        "ms": 57
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 125451,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/gs.png",
+        "mean_diff": 2.7813869188337272,
+        "diff_pct": 2.491725768321513,
+        "ms": 1953
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 49,
+        "text_chars": 125451,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/pdfium.png",
+        "mean_diff": 1.6958628841607566,
+        "diff_pct": 1.4121355397951143,
+        "ms": 262
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 49,
+        "text_chars": 125449,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/pdfjs.png",
+        "mean_diff": 0.6815287628053586,
+        "diff_pct": 0.15130023640661938,
+        "ms": 533
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/quartz.png",
+        "mean_diff": 2.18478329393223,
+        "diff_pct": 1.8825847123719464,
+        "ms": 91
+      }
+    ]
+  },
+  {
+    "file": "out/react-dev.pdf",
+    "bytes": 4734109,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 22
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 13,
+        "text_chars": 6647,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 75
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 13,
+        "text_chars": 6647,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/mupdf.png",
+        "mean_diff": 1.1851379038613081,
+        "diff_pct": 0.43656422379826637,
+        "ms": 28
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 6647,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/gs.png",
+        "mean_diff": 4.725035460992908,
+        "diff_pct": 4.0236406619385345,
+        "ms": 254
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 13,
+        "text_chars": 6647,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/pdfium.png",
+        "mean_diff": 3.347399527186761,
+        "diff_pct": 2.8786446020488574,
+        "ms": 115
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 13,
+        "text_chars": 6647,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/pdfjs.png",
+        "mean_diff": 1.2851536643026005,
+        "diff_pct": 0.48148148148148145,
+        "ms": 426
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/quartz.png",
+        "mean_diff": 4.010480693459417,
+        "diff_pct": 3.512214342001576,
+        "ms": 85
+      }
+    ]
+  },
+  {
+    "file": "out/www-rfc-editor-org-rfc-rfc9110-html.pdf",
+    "bytes": 981952,
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 133
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 120,
+        "text_chars": 378290,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/poppler.png",
+        "mean_diff": 0,
+        "diff_pct": 0,
+        "ms": 320
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 120,
+        "text_chars": 378293,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/mupdf.png",
+        "mean_diff": 3.138747044917258,
+        "diff_pct": 1.0047281323877069,
+        "ms": 154
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 378293,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/gs.png",
+        "mean_diff": 10.644231678486998,
+        "diff_pct": 9.91016548463357,
+        "ms": 7681
+      },
+      {
+        "judge": "pdfium",
+        "ok": true,
+        "warnings": 0,
+        "pages": 120,
+        "text_chars": 378293,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/pdfium.png",
+        "mean_diff": 7.360780141843971,
+        "diff_pct": 6.250591016548463,
+        "ms": 902
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 120,
+        "text_chars": 378293,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/pdfjs.png",
+        "mean_diff": 2.908400315208826,
+        "diff_pct": 0.8132387706855791,
+        "ms": 757
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "render": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/quartz.png",
+        "mean_diff": 8.460441292356187,
+        "diff_pct": 7.657210401891253,
+        "ms": 95
+      }
+    ]
+  }
+]
