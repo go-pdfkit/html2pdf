@@ -1,7 +1,7 @@
 [
   {
     "file": "out/bench/en-wikipedia-org-wiki-Go_programming_language.chrome.pdf",
-    "bytes": 1671529,
+    "bytes": 1736212,
     "sampled_pages": [
       1,
       13,
@@ -16,7 +16,7 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 95
+        "ms": 87
       },
       {
         "judge": "poppler",
@@ -60,7 +60,7 @@
         },
         "worst_pct": 7.613152804642167,
         "worst_page": 25,
-        "ms": 163
+        "ms": 170
       },
       {
         "judge": "gs",
@@ -89,7 +89,7 @@
         },
         "worst_pct": 9.338974854932301,
         "worst_page": 25,
-        "ms": 442
+        "ms": 460
       },
       {
         "judge": "pdfium",
@@ -129,7 +129,7 @@
         },
         "worst_pct": 7.5178916827853,
         "worst_page": 25,
-        "ms": 1287
+        "ms": 1156
       },
       {
         "judge": "quartz",
@@ -148,7 +148,7 @@
         },
         "worst_pct": 10.841392649903288,
         "worst_page": 1,
-        "ms": 186
+        "ms": 98
       }
     ],
     "consensus": {
@@ -161,11 +161,11 @@
   },
   {
     "file": "out/bench/en-wikipedia-org-wiki-Go_programming_language.html2pdf.pdf",
-    "bytes": 582630,
+    "bytes": 241314,
     "sampled_pages": [
       1,
-      9,
-      18
+      7,
+      13
     ],
     "verdicts": [
       {
@@ -176,18 +176,18 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 42
+        "ms": 33
       },
       {
         "judge": "poppler",
         "ok": true,
         "warnings": 0,
-        "pages": 18,
-        "text_chars": 52778,
+        "pages": 13,
+        "text_chars": 47177,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/poppler_p1.png",
-          "18": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/poppler_p18.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/poppler_p9.png"
+          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/poppler_p13.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/poppler_p7.png"
         },
         "worst_pct": 0,
         "worst_page": 0,
@@ -197,59 +197,59 @@
         "judge": "mupdf",
         "ok": true,
         "warnings": 0,
-        "pages": 18,
-        "text_chars": 52778,
+        "pages": 13,
+        "text_chars": 47177,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/mupdf_p1.png",
-          "18": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/mupdf_p18.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/mupdf_p9.png"
+          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/mupdf_p13.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/mupdf_p7.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 0.4928274336283186,
-            "diff_pct": 0.33539823008849556
+            "mean_diff": 5.5358539823008845,
+            "diff_pct": 4.028761061946903
           },
-          "18": {
-            "mean_diff": 0.715433628318584,
-            "diff_pct": 0.4269911504424779
+          "13": {
+            "mean_diff": 4.078508849557522,
+            "diff_pct": 2.7738938053097346
           },
-          "9": {
-            "mean_diff": 4.416592920353982,
-            "diff_pct": 3.299557522123894
+          "7": {
+            "mean_diff": 3.0896725663716813,
+            "diff_pct": 2.0035398230088495
           }
         },
-        "worst_pct": 3.299557522123894,
-        "worst_page": 9,
-        "ms": 86
+        "worst_pct": 4.028761061946903,
+        "worst_page": 1,
+        "ms": 119
       },
       {
         "judge": "gs",
         "ok": true,
         "warnings": 0,
         "pages": 0,
-        "text_chars": 52778,
+        "text_chars": 47177,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/gs_p1.png",
-          "18": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/gs_p18.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/gs_p9.png"
+          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/gs_p13.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/gs_p7.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.1449159292035398,
-            "diff_pct": 1.0995575221238938
+            "mean_diff": 12.800230088495574,
+            "diff_pct": 11.893805309734514
           },
-          "18": {
-            "mean_diff": 2.2381858407079647,
-            "diff_pct": 2.171238938053097
+          "13": {
+            "mean_diff": 8.16999557522124,
+            "diff_pct": 7.198230088495575
           },
-          "9": {
-            "mean_diff": 12.108482300884956,
-            "diff_pct": 11.737168141592921
+          "7": {
+            "mean_diff": 8.23508407079646,
+            "diff_pct": 7.541592920353982
           }
         },
-        "worst_pct": 11.737168141592921,
-        "worst_page": 9,
-        "ms": 1091
+        "worst_pct": 11.893805309734514,
+        "worst_page": 1,
+        "ms": 1474
       },
       {
         "judge": "pdfium",
@@ -266,30 +266,30 @@
         "judge": "pdfjs",
         "ok": true,
         "warnings": 0,
-        "pages": 18,
-        "text_chars": 52778,
+        "pages": 13,
+        "text_chars": 47177,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/pdfjs_p1.png",
-          "18": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/pdfjs_p18.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/pdfjs_p9.png"
+          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/pdfjs_p13.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language.html2pdf/pdfjs_p7.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 0.4843761061946903,
-            "diff_pct": 0.2243362831858407
+            "mean_diff": 5.089646017699115,
+            "diff_pct": 2.5004424778761063
           },
-          "18": {
-            "mean_diff": 0.7756327433628318,
-            "diff_pct": 0.25265486725663716
+          "13": {
+            "mean_diff": 3.6765530973451326,
+            "diff_pct": 1.7292035398230088
           },
-          "9": {
-            "mean_diff": 4.4406283185840705,
-            "diff_pct": 1.9256637168141593
+          "7": {
+            "mean_diff": 3.2144159292035397,
+            "diff_pct": 1.5765486725663718
           }
         },
-        "worst_pct": 1.9256637168141593,
-        "worst_page": 9,
-        "ms": 934
+        "worst_pct": 2.5004424778761063,
+        "worst_page": 1,
+        "ms": 1147
       },
       {
         "judge": "quartz",
@@ -302,26 +302,26 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.4246194690265486,
-            "diff_pct": 1.2619469026548673
+            "mean_diff": 16.024933628318585,
+            "diff_pct": 14.236283185840708
           }
         },
-        "worst_pct": 1.2619469026548673,
+        "worst_pct": 14.236283185840708,
         "worst_page": 1,
-        "ms": 113
+        "ms": 148
       }
     ],
     "consensus": {
-      "1": 0.7974336283185841,
-      "18": 1.0608407079646016,
-      "9": 5.900884955752212
+      "1": 8.653318584070796,
+      "13": 3.636946902654867,
+      "7": 3.9124631268436576
     },
-    "consensus_max": 5.900884955752212,
-    "consensus_page": 9
+    "consensus_max": 8.653318584070796,
+    "consensus_page": 1
   },
   {
     "file": "out/bench/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.chrome.pdf",
-    "bytes": 1733189,
+    "bytes": 1669406,
     "sampled_pages": [
       1,
       6,
@@ -336,7 +336,7 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 77
+        "ms": 107
       },
       {
         "judge": "poppler",
@@ -366,21 +366,21 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 2.132693423597679,
+            "mean_diff": 2.1310299806576403,
             "diff_pct": 1.6566731141199227
           },
           "12": {
-            "mean_diff": 3.6563491295938104,
-            "diff_pct": 3.154255319148936
+            "mean_diff": 3.6288491295938106,
+            "diff_pct": 3.129593810444874
           },
           "6": {
-            "mean_diff": 6.096571566731141,
-            "diff_pct": 5.117021276595745
+            "mean_diff": 5.885188588007737,
+            "diff_pct": 4.937620889748549
           }
         },
-        "worst_pct": 5.117021276595745,
+        "worst_pct": 4.937620889748549,
         "worst_page": 6,
-        "ms": 149
+        "ms": 181
       },
       {
         "judge": "gs",
@@ -395,21 +395,21 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 3.0048404255319148,
+            "mean_diff": 3.003409090909091,
             "diff_pct": 2.5705996131528046
           },
           "12": {
-            "mean_diff": 4.232635396518376,
-            "diff_pct": 3.735493230174081
+            "mean_diff": 4.202959381044487,
+            "diff_pct": 3.7108317214700195
           },
           "6": {
-            "mean_diff": 6.8006334622823985,
-            "diff_pct": 5.691489361702128
+            "mean_diff": 6.622765957446808,
+            "diff_pct": 5.546905222437137
           }
         },
-        "worst_pct": 5.691489361702128,
+        "worst_pct": 5.546905222437137,
         "worst_page": 6,
-        "ms": 404
+        "ms": 430
       },
       {
         "judge": "pdfium",
@@ -435,21 +435,21 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 2.143355899419729,
-            "diff_pct": 1.6450676982591876
+            "mean_diff": 2.1416441005802707,
+            "diff_pct": 1.6445841392649903
           },
           "12": {
-            "mean_diff": 3.6261411992263057,
-            "diff_pct": 3.1102514506769827
+            "mean_diff": 3.5986702127659576,
+            "diff_pct": 3.086073500967118
           },
           "6": {
-            "mean_diff": 6.017722437137331,
-            "diff_pct": 5.057543520309478
+            "mean_diff": 5.812587040618956,
+            "diff_pct": 4.882011605415861
           }
         },
-        "worst_pct": 5.057543520309478,
+        "worst_pct": 4.882011605415861,
         "worst_page": 6,
-        "ms": 977
+        "ms": 1086
       },
       {
         "judge": "quartz",
@@ -462,30 +462,30 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 4.065053191489362,
-            "diff_pct": 2.9874274661508706
+            "mean_diff": 4.0632833655706,
+            "diff_pct": 2.988394584139265
           }
         },
-        "worst_pct": 2.9874274661508706,
+        "worst_pct": 2.988394584139265,
         "worst_page": 1,
-        "ms": 168
+        "ms": 185
       }
     ],
     "consensus": {
-      "1": 1.9134429400386845,
-      "12": 2.7749838813668597,
-      "6": 3.9258542875564153
+      "1": 1.9134429400386843,
+      "12": 2.7625725338491294,
+      "6": 3.81785944551902
     },
-    "consensus_max": 3.9258542875564153,
+    "consensus_max": 3.81785944551902,
     "consensus_page": 6
   },
   {
     "file": "out/bench/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf.pdf",
-    "bytes": 422140,
+    "bytes": 128412,
     "sampled_pages": [
       1,
-      5,
-      9
+      4,
+      7
     ],
     "verdicts": [
       {
@@ -496,18 +496,18 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 23
+        "ms": 22
       },
       {
         "judge": "poppler",
         "ok": true,
         "warnings": 0,
-        "pages": 9,
-        "text_chars": 19704,
+        "pages": 7,
+        "text_chars": 15641,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/poppler_p1.png",
-          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/poppler_p5.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/poppler_p9.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/poppler_p4.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/poppler_p7.png"
         },
         "worst_pct": 0,
         "worst_page": 0,
@@ -517,59 +517,59 @@
         "judge": "mupdf",
         "ok": true,
         "warnings": 0,
-        "pages": 9,
-        "text_chars": 19704,
+        "pages": 7,
+        "text_chars": 15641,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/mupdf_p1.png",
-          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/mupdf_p5.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/mupdf_p9.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/mupdf_p4.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/mupdf_p7.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 0.4647345132743363,
-            "diff_pct": 0.31902654867256636
+            "mean_diff": 3.1424026548672566,
+            "diff_pct": 1.7778761061946902
           },
-          "5": {
-            "mean_diff": 2.9708938053097347,
-            "diff_pct": 1.6991150442477876
+          "4": {
+            "mean_diff": 3.057283185840708,
+            "diff_pct": 1.915929203539823
           },
-          "9": {
-            "mean_diff": 0,
-            "diff_pct": 0
+          "7": {
+            "mean_diff": 2.4300619469026548,
+            "diff_pct": 1.4402654867256637
           }
         },
-        "worst_pct": 1.6991150442477876,
-        "worst_page": 5,
-        "ms": 67
+        "worst_pct": 1.915929203539823,
+        "worst_page": 4,
+        "ms": 103
       },
       {
         "judge": "gs",
         "ok": true,
         "warnings": 0,
         "pages": 0,
-        "text_chars": 19704,
+        "text_chars": 15641,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/gs_p1.png",
-          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/gs_p5.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/gs_p9.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/gs_p4.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/gs_p7.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.0775929203539822,
-            "diff_pct": 1.0433628318584072
+            "mean_diff": 7.183845132743363,
+            "diff_pct": 6.184513274336283
           },
-          "5": {
-            "mean_diff": 8.090862831858407,
-            "diff_pct": 7.6646017699115045
+          "4": {
+            "mean_diff": 6.1018097345132745,
+            "diff_pct": 5.102654867256637
           },
-          "9": {
-            "mean_diff": 0,
-            "diff_pct": 0
+          "7": {
+            "mean_diff": 4.698323008849558,
+            "diff_pct": 4.0495575221238935
           }
         },
-        "worst_pct": 7.6646017699115045,
-        "worst_page": 5,
-        "ms": 469
+        "worst_pct": 6.184513274336283,
+        "worst_page": 1,
+        "ms": 873
       },
       {
         "judge": "pdfium",
@@ -586,30 +586,30 @@
         "judge": "pdfjs",
         "ok": true,
         "warnings": 0,
-        "pages": 9,
-        "text_chars": 19704,
+        "pages": 7,
+        "text_chars": 15641,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/pdfjs_p1.png",
-          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/pdfjs_p5.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/pdfjs_p9.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/pdfjs_p4.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf/pdfjs_p7.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 0.47401769911504427,
-            "diff_pct": 0.22566371681415928
+            "mean_diff": 3.1144911504424777,
+            "diff_pct": 1.3353982300884957
           },
-          "5": {
-            "mean_diff": 2.8277787610619467,
-            "diff_pct": 0.7646017699115044
+          "4": {
+            "mean_diff": 2.6879734513274336,
+            "diff_pct": 1.0265486725663717
           },
-          "9": {
-            "mean_diff": 0,
-            "diff_pct": 0
+          "7": {
+            "mean_diff": 2.239924778761062,
+            "diff_pct": 1.0898230088495575
           }
         },
-        "worst_pct": 0.7646017699115044,
-        "worst_page": 5,
-        "ms": 922
+        "worst_pct": 1.3353982300884957,
+        "worst_page": 1,
+        "ms": 1023
       },
       {
         "judge": "quartz",
@@ -622,22 +622,22 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.3675530973451326,
-            "diff_pct": 1.2176991150442478
+            "mean_diff": 10.657075221238937,
+            "diff_pct": 9.034513274336284
           }
         },
-        "worst_pct": 1.2176991150442478,
+        "worst_pct": 9.034513274336284,
         "worst_page": 1,
-        "ms": 95
+        "ms": 188
       }
     ],
     "consensus": {
-      "1": 0.7583185840707964,
-      "5": 3.639749262536873,
-      "9": 0
+      "1": 5.136946902654868,
+      "4": 2.5064896755162245,
+      "7": 2.2086283185840707
     },
-    "consensus_max": 3.639749262536873,
-    "consensus_page": 5
+    "consensus_max": 5.136946902654868,
+    "consensus_page": 1
   },
   {
     "file": "out/bench/example-com.chrome.pdf",
@@ -667,7 +667,7 @@
         },
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 61
+        "ms": 64
       },
       {
         "judge": "mupdf",
@@ -686,7 +686,7 @@
         },
         "worst_pct": 0.3916827852998066,
         "worst_page": 1,
-        "ms": 43
+        "ms": 49
       },
       {
         "judge": "gs",
@@ -705,7 +705,7 @@
         },
         "worst_pct": 0.6416827852998066,
         "worst_page": 1,
-        "ms": 89
+        "ms": 94
       },
       {
         "judge": "pdfium",
@@ -735,7 +735,7 @@
         },
         "worst_pct": 0.3994197292069632,
         "worst_page": 1,
-        "ms": 406
+        "ms": 423
       },
       {
         "judge": "quartz",
@@ -754,7 +754,7 @@
         },
         "worst_pct": 0.4985493230174081,
         "worst_page": 1,
-        "ms": 87
+        "ms": 123
       }
     ],
     "consensus": {
@@ -765,7 +765,7 @@
   },
   {
     "file": "out/bench/example-com.html2pdf.pdf",
-    "bytes": 8336,
+    "bytes": 6887,
     "sampled_pages": [
       1
     ],
@@ -791,7 +791,7 @@
         },
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 51
+        "ms": 55
       },
       {
         "judge": "mupdf",
@@ -810,7 +810,7 @@
         },
         "worst_pct": 0.0008849557522123894,
         "worst_page": 1,
-        "ms": 20
+        "ms": 36
       },
       {
         "judge": "gs",
@@ -829,7 +829,7 @@
         },
         "worst_pct": 0.23716814159292035,
         "worst_page": 1,
-        "ms": 80
+        "ms": 83
       },
       {
         "judge": "pdfium",
@@ -859,7 +859,7 @@
         },
         "worst_pct": 0.003097345132743363,
         "worst_page": 1,
-        "ms": 407
+        "ms": 517
       },
       {
         "judge": "quartz",
@@ -878,7 +878,7 @@
         },
         "worst_pct": 0.23539823008849559,
         "worst_page": 1,
-        "ms": 99
+        "ms": 213
       }
     ],
     "consensus": {
@@ -904,7 +904,7 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 125
+        "ms": 131
       },
       {
         "judge": "poppler",
@@ -948,7 +948,7 @@
         },
         "worst_pct": 2.991779497098646,
         "worst_page": 1,
-        "ms": 212
+        "ms": 268
       },
       {
         "judge": "gs",
@@ -977,7 +977,7 @@
         },
         "worst_pct": 6.959864603481625,
         "worst_page": 1,
-        "ms": 740
+        "ms": 801
       },
       {
         "judge": "pdfium",
@@ -1017,7 +1017,7 @@
         },
         "worst_pct": 1.9458413926499032,
         "worst_page": 68,
-        "ms": 1177
+        "ms": 1253
       },
       {
         "judge": "quartz",
@@ -1036,7 +1036,7 @@
         },
         "worst_pct": 8.385396518375241,
         "worst_page": 1,
-        "ms": 197
+        "ms": 154
       }
     ],
     "consensus": {
@@ -1049,7 +1049,7 @@
   },
   {
     "file": "out/bench/fixtures-longdoc-html.html2pdf.pdf",
-    "bytes": 900784,
+    "bytes": 852005,
     "sampled_pages": [
       1,
       50,
@@ -1064,7 +1064,7 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 143
+        "ms": 144
       },
       {
         "judge": "poppler",
@@ -1108,7 +1108,7 @@
         },
         "worst_pct": 2.0845132743362833,
         "worst_page": 1,
-        "ms": 221
+        "ms": 225
       },
       {
         "judge": "gs",
@@ -1137,7 +1137,7 @@
         },
         "worst_pct": 8.855309734513275,
         "worst_page": 1,
-        "ms": 10919
+        "ms": 10952
       },
       {
         "judge": "pdfium",
@@ -1177,7 +1177,7 @@
         },
         "worst_pct": 1.4256637168141593,
         "worst_page": 1,
-        "ms": 1241
+        "ms": 1253
       },
       {
         "judge": "quartz",
@@ -1196,7 +1196,7 @@
         },
         "worst_pct": 12.670353982300885,
         "worst_page": 1,
-        "ms": 205
+        "ms": 141
       }
     ],
     "consensus": {
@@ -1268,7 +1268,7 @@
         },
         "worst_pct": 5.607350096711799,
         "worst_page": 4,
-        "ms": 196
+        "ms": 203
       },
       {
         "judge": "gs",
@@ -1297,7 +1297,7 @@
         },
         "worst_pct": 8.553191489361701,
         "worst_page": 4,
-        "ms": 507
+        "ms": 443
       },
       {
         "judge": "pdfium",
@@ -1337,7 +1337,7 @@
         },
         "worst_pct": 5.700193423597679,
         "worst_page": 4,
-        "ms": 1106
+        "ms": 1079
       },
       {
         "judge": "quartz",
@@ -1356,7 +1356,7 @@
         },
         "worst_pct": 5.771760154738878,
         "worst_page": 1,
-        "ms": 103
+        "ms": 156
       }
     ],
     "consensus": {
@@ -1369,311 +1369,11 @@
   },
   {
     "file": "out/bench/go-dev-blog-subtests.html2pdf.pdf",
-    "bytes": 199998,
+    "bytes": 60542,
     "sampled_pages": [
       1,
       3,
-      6
-    ],
-    "verdicts": [
-      {
-        "judge": "qpdf",
-        "ok": true,
-        "warnings": 0,
-        "pages": 0,
-        "text_chars": -1,
-        "worst_pct": 0,
-        "worst_page": 0,
-        "ms": 11
-      },
-      {
-        "judge": "poppler",
-        "ok": true,
-        "warnings": 0,
-        "pages": 6,
-        "text_chars": 11369,
-        "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/poppler_p1.png",
-          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/poppler_p3.png",
-          "6": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/poppler_p6.png"
-        },
-        "worst_pct": 0,
-        "worst_page": 0,
-        "ms": 0
-      },
-      {
-        "judge": "mupdf",
-        "ok": true,
-        "warnings": 0,
-        "pages": 6,
-        "text_chars": 11369,
-        "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/mupdf_p1.png",
-          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/mupdf_p3.png",
-          "6": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/mupdf_p6.png"
-        },
-        "diffs": {
-          "1": {
-            "mean_diff": 0.7487522123893805,
-            "diff_pct": 0.46769911504424777
-          },
-          "3": {
-            "mean_diff": 2.2505442477876105,
-            "diff_pct": 1.6243362831858408
-          },
-          "6": {
-            "mean_diff": 1.2786150442477877,
-            "diff_pct": 0.75
-          }
-        },
-        "worst_pct": 1.6243362831858408,
-        "worst_page": 3,
-        "ms": 75
-      },
-      {
-        "judge": "gs",
-        "ok": true,
-        "warnings": 0,
-        "pages": 0,
-        "text_chars": 11369,
-        "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/gs_p1.png",
-          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/gs_p3.png",
-          "6": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/gs_p6.png"
-        },
-        "diffs": {
-          "1": {
-            "mean_diff": 2.0008938053097345,
-            "diff_pct": 1.9128318584070796
-          },
-          "3": {
-            "mean_diff": 5.057849557522124,
-            "diff_pct": 4.465044247787611
-          },
-          "6": {
-            "mean_diff": 1.8765309734513274,
-            "diff_pct": 1.5008849557522124
-          }
-        },
-        "worst_pct": 4.465044247787611,
-        "worst_page": 3,
-        "ms": 353
-      },
-      {
-        "judge": "pdfium",
-        "skipped": true,
-        "ok": false,
-        "warnings": 0,
-        "pages": 0,
-        "text_chars": -1,
-        "worst_pct": 0,
-        "worst_page": 0,
-        "ms": 0
-      },
-      {
-        "judge": "pdfjs",
-        "ok": true,
-        "warnings": 0,
-        "pages": 6,
-        "text_chars": 11369,
-        "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/pdfjs_p1.png",
-          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/pdfjs_p3.png",
-          "6": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/pdfjs_p6.png"
-        },
-        "diffs": {
-          "1": {
-            "mean_diff": 0.7422168141592921,
-            "diff_pct": 0.2345132743362832
-          },
-          "3": {
-            "mean_diff": 2.219429203539823,
-            "diff_pct": 0.9929203539823008
-          },
-          "6": {
-            "mean_diff": 1.9666504424778761,
-            "diff_pct": 1.4287610619469027
-          }
-        },
-        "worst_pct": 1.4287610619469027,
-        "worst_page": 6,
-        "ms": 867
-      },
-      {
-        "judge": "quartz",
-        "ok": true,
-        "warnings": 0,
-        "pages": 0,
-        "text_chars": -1,
-        "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/quartz_p1.png"
-        },
-        "diffs": {
-          "1": {
-            "mean_diff": 2.612809734513274,
-            "diff_pct": 2.3243362831858407
-          }
-        },
-        "worst_pct": 2.3243362831858407,
-        "worst_page": 1,
-        "ms": 82
-      }
-    ],
-    "consensus": {
-      "1": 1.4343362831858406,
-      "3": 2.419321533923304,
-      "6": 1.350589970501475
-    },
-    "consensus_max": 2.419321533923304,
-    "consensus_page": 3
-  },
-  {
-    "file": "out/bench/news-ycombinator-com.chrome.pdf",
-    "bytes": 358393,
-    "sampled_pages": [
-      1,
-      2
-    ],
-    "verdicts": [
-      {
-        "judge": "qpdf",
-        "ok": true,
-        "warnings": 0,
-        "pages": 0,
-        "text_chars": -1,
-        "worst_pct": 0,
-        "worst_page": 0,
-        "ms": 31
-      },
-      {
-        "judge": "poppler",
-        "ok": true,
-        "warnings": 0,
-        "pages": 2,
-        "text_chars": 3097,
-        "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/poppler_p1.png",
-          "2": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/poppler_p2.png"
-        },
-        "worst_pct": 0,
-        "worst_page": 0,
-        "ms": 0
-      },
-      {
-        "judge": "mupdf",
-        "ok": true,
-        "warnings": 0,
-        "pages": 2,
-        "text_chars": 3097,
-        "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/mupdf_p1.png",
-          "2": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/mupdf_p2.png"
-        },
-        "diffs": {
-          "1": {
-            "mean_diff": 3.45107833655706,
-            "diff_pct": 1.4941972920696325
-          },
-          "2": {
-            "mean_diff": 0.38024177949709864,
-            "diff_pct": 0.09187620889748549
-          }
-        },
-        "worst_pct": 1.4941972920696325,
-        "worst_page": 1,
-        "ms": 76
-      },
-      {
-        "judge": "gs",
-        "ok": true,
-        "warnings": 0,
-        "pages": 0,
-        "text_chars": 3097,
-        "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/gs_p1.png",
-          "2": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/gs_p2.png"
-        },
-        "diffs": {
-          "1": {
-            "mean_diff": 4.5604545454545455,
-            "diff_pct": 2.851063829787234
-          },
-          "2": {
-            "mean_diff": 0.4587137330754352,
-            "diff_pct": 0.5207930367504836
-          }
-        },
-        "worst_pct": 2.851063829787234,
-        "worst_page": 1,
-        "ms": 560
-      },
-      {
-        "judge": "pdfium",
-        "skipped": true,
-        "ok": false,
-        "warnings": 0,
-        "pages": 0,
-        "text_chars": -1,
-        "worst_pct": 0,
-        "worst_page": 0,
-        "ms": 0
-      },
-      {
-        "judge": "pdfjs",
-        "ok": true,
-        "warnings": 0,
-        "pages": 2,
-        "text_chars": 3097,
-        "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/pdfjs_p1.png",
-          "2": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/pdfjs_p2.png"
-        },
-        "diffs": {
-          "1": {
-            "mean_diff": 2.576271760154739,
-            "diff_pct": 1.006769825918762
-          },
-          "2": {
-            "mean_diff": 0.2418907156673114,
-            "diff_pct": 0.07156673114119923
-          }
-        },
-        "worst_pct": 1.006769825918762,
-        "worst_page": 1,
-        "ms": 798
-      },
-      {
-        "judge": "quartz",
-        "ok": true,
-        "warnings": 0,
-        "pages": 0,
-        "text_chars": -1,
-        "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/quartz_p1.png"
-        },
-        "diffs": {
-          "1": {
-            "mean_diff": 6.725971953578337,
-            "diff_pct": 4.663442940038685
-          }
-        },
-        "worst_pct": 4.663442940038685,
-        "worst_page": 1,
-        "ms": 132
-      }
-    ],
-    "consensus": {
-      "1": 2.5525628626692454,
-      "2": 0.14490651192778853
-    },
-    "consensus_max": 2.5525628626692454,
-    "consensus_page": 1
-  },
-  {
-    "file": "out/bench/news-ycombinator-com.html2pdf.pdf",
-    "bytes": 65465,
-    "sampled_pages": [
-      1
+      5
     ],
     "verdicts": [
       {
@@ -1690,52 +1390,352 @@
         "judge": "poppler",
         "ok": true,
         "warnings": 0,
-        "pages": 1,
-        "text_chars": 3097,
+        "pages": 5,
+        "text_chars": 10119,
         "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.html2pdf/poppler_p1.png"
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/poppler_p1.png",
+          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/poppler_p3.png",
+          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/poppler_p5.png"
         },
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 176
+        "ms": 0
       },
       {
         "judge": "mupdf",
         "ok": true,
         "warnings": 0,
-        "pages": 1,
-        "text_chars": 3097,
+        "pages": 5,
+        "text_chars": 10135,
         "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.html2pdf/mupdf_p1.png"
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/mupdf_p1.png",
+          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/mupdf_p3.png",
+          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/mupdf_p5.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 3.0484026548672567,
-            "diff_pct": 1.4902654867256637
+            "mean_diff": 1.971853982300885,
+            "diff_pct": 0.8756637168141593
+          },
+          "3": {
+            "mean_diff": 2.431278761061947,
+            "diff_pct": 1.2721238938053097
+          },
+          "5": {
+            "mean_diff": 1.3252699115044249,
+            "diff_pct": 0.9800884955752213
           }
         },
-        "worst_pct": 1.4902654867256637,
-        "worst_page": 1,
-        "ms": 34
+        "worst_pct": 1.2721238938053097,
+        "worst_page": 3,
+        "ms": 66
       },
       {
         "judge": "gs",
         "ok": true,
         "warnings": 0,
         "pages": 0,
-        "text_chars": 3097,
+        "text_chars": 10259,
+        "renders": {
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/gs_p1.png",
+          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/gs_p3.png",
+          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/gs_p5.png"
+        },
+        "diffs": {
+          "1": {
+            "mean_diff": 5.065092920353982,
+            "diff_pct": 4.538495575221239
+          },
+          "3": {
+            "mean_diff": 5.56495575221239,
+            "diff_pct": 5.095132743362832
+          },
+          "5": {
+            "mean_diff": 1.9346637168141594,
+            "diff_pct": 1.7632743362831858
+          }
+        },
+        "worst_pct": 5.095132743362832,
+        "worst_page": 3,
+        "ms": 330
+      },
+      {
+        "judge": "pdfium",
+        "skipped": true,
+        "ok": false,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "worst_pct": 0,
+        "worst_page": 0,
+        "ms": 0
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 5,
+        "text_chars": 10135,
+        "renders": {
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/pdfjs_p1.png",
+          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/pdfjs_p3.png",
+          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/pdfjs_p5.png"
+        },
+        "diffs": {
+          "1": {
+            "mean_diff": 1.9773274336283186,
+            "diff_pct": 0.6110619469026549
+          },
+          "3": {
+            "mean_diff": 2.233057522123894,
+            "diff_pct": 0.684070796460177
+          },
+          "5": {
+            "mean_diff": 1.1068008849557522,
+            "diff_pct": 0.6367256637168142
+          }
+        },
+        "worst_pct": 0.684070796460177,
+        "worst_page": 3,
+        "ms": 890
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "renders": {
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests.html2pdf/quartz_p1.png"
+        },
+        "diffs": {
+          "1": {
+            "mean_diff": 8.474110619469027,
+            "diff_pct": 7.199115044247788
+          }
+        },
+        "worst_pct": 7.199115044247788,
+        "worst_page": 1,
+        "ms": 65
+      }
+    ],
+    "consensus": {
+      "1": 3.9735840707964605,
+      "3": 2.476253687315634,
+      "5": 0.9526548672566372
+    },
+    "consensus_max": 3.9735840707964605,
+    "consensus_page": 1
+  },
+  {
+    "file": "out/bench/news-ycombinator-com.chrome.pdf",
+    "bytes": 356959,
+    "sampled_pages": [
+      1,
+      2
+    ],
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "worst_pct": 0,
+        "worst_page": 0,
+        "ms": 30
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 2,
+        "text_chars": 3001,
+        "renders": {
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/poppler_p1.png",
+          "2": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/poppler_p2.png"
+        },
+        "worst_pct": 0,
+        "worst_page": 0,
+        "ms": 0
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 2,
+        "text_chars": 3001,
+        "renders": {
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/mupdf_p1.png",
+          "2": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/mupdf_p2.png"
+        },
+        "diffs": {
+          "1": {
+            "mean_diff": 3.4207882011605415,
+            "diff_pct": 1.486943907156673
+          },
+          "2": {
+            "mean_diff": 0.3497388781431335,
+            "diff_pct": 0.06334622823984526
+          }
+        },
+        "worst_pct": 1.486943907156673,
+        "worst_page": 1,
+        "ms": 78
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 3001,
+        "renders": {
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/gs_p1.png",
+          "2": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/gs_p2.png"
+        },
+        "diffs": {
+          "1": {
+            "mean_diff": 4.428409090909091,
+            "diff_pct": 2.771276595744681
+          },
+          "2": {
+            "mean_diff": 0.4272147001934236,
+            "diff_pct": 0.5058027079303675
+          }
+        },
+        "worst_pct": 2.771276595744681,
+        "worst_page": 1,
+        "ms": 521
+      },
+      {
+        "judge": "pdfium",
+        "skipped": true,
+        "ok": false,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "worst_pct": 0,
+        "worst_page": 0,
+        "ms": 0
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 2,
+        "text_chars": 3001,
+        "renders": {
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/pdfjs_p1.png",
+          "2": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/pdfjs_p2.png"
+        },
+        "diffs": {
+          "1": {
+            "mean_diff": 2.461276595744681,
+            "diff_pct": 0.9676015473887815
+          },
+          "2": {
+            "mean_diff": 0.21515957446808512,
+            "diff_pct": 0.045454545454545456
+          }
+        },
+        "worst_pct": 0.9676015473887815,
+        "worst_page": 1,
+        "ms": 846
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "renders": {
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.chrome/quartz_p1.png"
+        },
+        "diffs": {
+          "1": {
+            "mean_diff": 6.208568665377176,
+            "diff_pct": 4.212282398452611
+          }
+        },
+        "worst_pct": 4.212282398452611,
+        "worst_page": 1,
+        "ms": 138
+      }
+    ],
+    "consensus": {
+      "1": 2.3360735009671183,
+      "2": 0.12935203094777561
+    },
+    "consensus_max": 2.3360735009671183,
+    "consensus_page": 1
+  },
+  {
+    "file": "out/bench/news-ycombinator-com.html2pdf.pdf",
+    "bytes": 27770,
+    "sampled_pages": [
+      1
+    ],
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "worst_pct": 0,
+        "worst_page": 0,
+        "ms": 7
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 3001,
+        "renders": {
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.html2pdf/poppler_p1.png"
+        },
+        "worst_pct": 0,
+        "worst_page": 0,
+        "ms": 146
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 3001,
+        "renders": {
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.html2pdf/mupdf_p1.png"
+        },
+        "diffs": {
+          "1": {
+            "mean_diff": 1.965358407079646,
+            "diff_pct": 0.07876106194690266
+          }
+        },
+        "worst_pct": 0.07876106194690266,
+        "worst_page": 1,
+        "ms": 31
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 3001,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.html2pdf/gs_p1.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 7.154725663716814,
-            "diff_pct": 7.214159292035398
+            "mean_diff": 3.326796460176991,
+            "diff_pct": 1.4814159292035398
           }
         },
-        "worst_pct": 7.214159292035398,
+        "worst_pct": 1.4814159292035398,
         "worst_page": 1,
-        "ms": 141
+        "ms": 192
       },
       {
         "judge": "pdfium",
@@ -1753,19 +1753,19 @@
         "ok": true,
         "warnings": 0,
         "pages": 1,
-        "text_chars": 3097,
+        "text_chars": 3001,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com.html2pdf/pdfjs_p1.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 2.5446637168141595,
-            "diff_pct": 0.6676991150442478
+            "mean_diff": 1.4972300884955752,
+            "diff_pct": 0.03008849557522124
           }
         },
-        "worst_pct": 0.6676991150442478,
+        "worst_pct": 0.03008849557522124,
         "worst_page": 1,
-        "ms": 435
+        "ms": 444
       },
       {
         "judge": "quartz",
@@ -1778,19 +1778,19 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 8.999070796460177,
-            "diff_pct": 8.273008849557522
+            "mean_diff": 5.3738761061946905,
+            "diff_pct": 3.3451327433628317
           }
         },
-        "worst_pct": 8.273008849557522,
+        "worst_pct": 3.3451327433628317,
         "worst_page": 1,
-        "ms": 88
+        "ms": 228
       }
     ],
     "consensus": {
-      "1": 4.9256194690265485
+      "1": 1.4159734513274338
     },
-    "consensus_max": 4.9256194690265485,
+    "consensus_max": 1.4159734513274338,
     "consensus_page": 1
   },
   {
@@ -1810,7 +1810,7 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 290
+        "ms": 291
       },
       {
         "judge": "poppler",
@@ -1854,7 +1854,7 @@
         },
         "worst_pct": 2.9298839458413926,
         "worst_page": 43,
-        "ms": 1301
+        "ms": 1312
       },
       {
         "judge": "gs",
@@ -1883,7 +1883,7 @@
         },
         "worst_pct": 4.431818181818182,
         "worst_page": 43,
-        "ms": 3142
+        "ms": 3157
       },
       {
         "judge": "pdfium",
@@ -1923,7 +1923,7 @@
         },
         "worst_pct": 2.985493230174081,
         "worst_page": 43,
-        "ms": 1321
+        "ms": 1561
       },
       {
         "judge": "quartz",
@@ -1942,7 +1942,7 @@
         },
         "worst_pct": 2.5565764023210833,
         "worst_page": 1,
-        "ms": 263
+        "ms": 183
       }
     ],
     "consensus": {
@@ -1955,11 +1955,11 @@
   },
   {
     "file": "out/bench/pkg-go-dev-net-http.html2pdf.pdf",
-    "bytes": 825554,
+    "bytes": 383631,
     "sampled_pages": [
       1,
-      25,
-      49
+      26,
+      51
     ],
     "verdicts": [
       {
@@ -1970,18 +1970,18 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 58
+        "ms": 51
       },
       {
         "judge": "poppler",
         "ok": true,
         "warnings": 0,
-        "pages": 49,
-        "text_chars": 125449,
+        "pages": 51,
+        "text_chars": 120334,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/poppler_p1.png",
-          "25": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/poppler_p25.png",
-          "49": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/poppler_p49.png"
+          "26": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/poppler_p26.png",
+          "51": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/poppler_p51.png"
         },
         "worst_pct": 0,
         "worst_page": 0,
@@ -1991,59 +1991,59 @@
         "judge": "mupdf",
         "ok": true,
         "warnings": 0,
-        "pages": 49,
-        "text_chars": 125449,
+        "pages": 51,
+        "text_chars": 120389,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/mupdf_p1.png",
-          "25": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/mupdf_p25.png",
-          "49": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/mupdf_p49.png"
+          "26": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/mupdf_p26.png",
+          "51": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/mupdf_p51.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 0.8151637168141593,
-            "diff_pct": 0.6053097345132743
+            "mean_diff": 1.6251681415929204,
+            "diff_pct": 0.6929203539823009
           },
-          "25": {
-            "mean_diff": 2.482840707964602,
-            "diff_pct": 1.845575221238938
+          "26": {
+            "mean_diff": 1.856004424778761,
+            "diff_pct": 0.8734513274336283
           },
-          "49": {
-            "mean_diff": 1.5286769911504425,
-            "diff_pct": 0.9221238938053097
+          "51": {
+            "mean_diff": 1.1759911504424778,
+            "diff_pct": 0.5376106194690266
           }
         },
-        "worst_pct": 1.845575221238938,
-        "worst_page": 25,
-        "ms": 124
+        "worst_pct": 0.8734513274336283,
+        "worst_page": 26,
+        "ms": 118
       },
       {
         "judge": "gs",
         "ok": true,
         "warnings": 0,
         "pages": 0,
-        "text_chars": 125451,
+        "text_chars": 120422,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/gs_p1.png",
-          "25": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/gs_p25.png",
-          "49": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/gs_p49.png"
+          "26": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/gs_p26.png",
+          "51": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/gs_p51.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.8143672566371682,
-            "diff_pct": 1.7508849557522124
+            "mean_diff": 2.896150442477876,
+            "diff_pct": 2.0517699115044246
           },
-          "25": {
-            "mean_diff": 6.286619469026549,
-            "diff_pct": 5.949115044247788
+          "26": {
+            "mean_diff": 3.0705663716814158,
+            "diff_pct": 2.5606194690265487
           },
-          "49": {
-            "mean_diff": 3.4729646017699114,
-            "diff_pct": 3.2827433628318583
+          "51": {
+            "mean_diff": 1.611504424778761,
+            "diff_pct": 1.2938053097345132
           }
         },
-        "worst_pct": 5.949115044247788,
-        "worst_page": 25,
-        "ms": 2089
+        "worst_pct": 2.5606194690265487,
+        "worst_page": 26,
+        "ms": 2619
       },
       {
         "judge": "pdfium",
@@ -2060,30 +2060,30 @@
         "judge": "pdfjs",
         "ok": true,
         "warnings": 0,
-        "pages": 49,
-        "text_chars": 125449,
+        "pages": 51,
+        "text_chars": 120390,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/pdfjs_p1.png",
-          "25": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/pdfjs_p25.png",
-          "49": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/pdfjs_p49.png"
+          "26": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/pdfjs_p26.png",
+          "51": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http.html2pdf/pdfjs_p51.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 0.762570796460177,
-            "diff_pct": 0.3566371681415929
+            "mean_diff": 1.4666725663716813,
+            "diff_pct": 0.5216814159292036
           },
-          "25": {
-            "mean_diff": 2.3487699115044247,
-            "diff_pct": 0.9491150442477876
+          "26": {
+            "mean_diff": 1.6946548672566373,
+            "diff_pct": 0.5632743362831858
           },
-          "49": {
-            "mean_diff": 1.8759734513274335,
-            "diff_pct": 1.2070796460176991
+          "51": {
+            "mean_diff": 0.9818761061946902,
+            "diff_pct": 0.4964601769911504
           }
         },
-        "worst_pct": 1.2070796460176991,
-        "worst_page": 49,
-        "ms": 1010
+        "worst_pct": 0.5632743362831858,
+        "worst_page": 26,
+        "ms": 1025
       },
       {
         "judge": "quartz",
@@ -2096,22 +2096,22 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 2.400730088495575,
-            "diff_pct": 2.147345132743363
+            "mean_diff": 5.412761061946902,
+            "diff_pct": 3.7761061946902656
           }
         },
-        "worst_pct": 2.147345132743363,
+        "worst_pct": 3.7761061946902656,
         "worst_page": 1,
-        "ms": 141
+        "ms": 167
       }
     ],
     "consensus": {
-      "1": 1.3253539823008849,
-      "25": 2.999705014749262,
-      "49": 2.1174041297935102
+      "1": 1.9053097345132746,
+      "26": 1.281637168141593,
+      "51": 0.7064159292035398
     },
-    "consensus_max": 2.999705014749262,
-    "consensus_page": 25
+    "consensus_max": 1.9053097345132746,
+    "consensus_page": 1
   },
   {
     "file": "out/bench/react-dev.chrome.pdf",
@@ -2130,7 +2130,7 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 45
+        "ms": 43
       },
       {
         "judge": "poppler",
@@ -2174,7 +2174,7 @@
         },
         "worst_pct": 0.6349129593810445,
         "worst_page": 5,
-        "ms": 398
+        "ms": 397
       },
       {
         "judge": "gs",
@@ -2203,7 +2203,7 @@
         },
         "worst_pct": 1.36605415860735,
         "worst_page": 5,
-        "ms": 793
+        "ms": 804
       },
       {
         "judge": "pdfium",
@@ -2243,7 +2243,7 @@
         },
         "worst_pct": 0.6068665377176016,
         "worst_page": 5,
-        "ms": 1817
+        "ms": 1629
       },
       {
         "judge": "quartz",
@@ -2262,7 +2262,7 @@
         },
         "worst_pct": 0.422147001934236,
         "worst_page": 1,
-        "ms": 270
+        "ms": 86
       }
     ],
     "consensus": {
@@ -2275,11 +2275,11 @@
   },
   {
     "file": "out/bench/react-dev.html2pdf.pdf",
-    "bytes": 4773305,
+    "bytes": 7829423,
     "sampled_pages": [
       1,
-      7,
-      13
+      4,
+      8
     ],
     "verdicts": [
       {
@@ -2290,18 +2290,18 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 25
+        "ms": 35
       },
       {
         "judge": "poppler",
         "ok": true,
         "warnings": 0,
-        "pages": 13,
-        "text_chars": 6647,
+        "pages": 8,
+        "text_chars": 6413,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/poppler_p1.png",
-          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/poppler_p13.png",
-          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/poppler_p7.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/poppler_p4.png",
+          "8": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/poppler_p8.png"
         },
         "worst_pct": 0,
         "worst_page": 0,
@@ -2311,59 +2311,59 @@
         "judge": "mupdf",
         "ok": true,
         "warnings": 0,
-        "pages": 13,
-        "text_chars": 6647,
+        "pages": 8,
+        "text_chars": 6413,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/mupdf_p1.png",
-          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/mupdf_p13.png",
-          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/mupdf_p7.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/mupdf_p4.png",
+          "8": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/mupdf_p8.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 0.9538008849557522,
-            "diff_pct": 0.5592920353982301
+            "mean_diff": 0.8327964601769912,
+            "diff_pct": 0.4646017699115044
           },
-          "13": {
-            "mean_diff": 0.8341858407079646,
-            "diff_pct": 0.35929203539823007
+          "4": {
+            "mean_diff": 1.3192433628318585,
+            "diff_pct": 0.7535398230088496
           },
-          "7": {
-            "mean_diff": 0.6825796460176992,
-            "diff_pct": 0
+          "8": {
+            "mean_diff": 0.2171504424778761,
+            "diff_pct": 0.12743362831858407
           }
         },
-        "worst_pct": 0.5592920353982301,
-        "worst_page": 1,
-        "ms": 121
+        "worst_pct": 0.7535398230088496,
+        "worst_page": 4,
+        "ms": 70
       },
       {
         "judge": "gs",
         "ok": true,
         "warnings": 0,
         "pages": 0,
-        "text_chars": 6647,
+        "text_chars": 6413,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/gs_p1.png",
-          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/gs_p13.png",
-          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/gs_p7.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/gs_p4.png",
+          "8": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/gs_p8.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 2.5436858407079646,
-            "diff_pct": 2.299557522123894
+            "mean_diff": 1.727216814159292,
+            "diff_pct": 1.4628318584070796
           },
-          "13": {
-            "mean_diff": 2.2043053097345133,
-            "diff_pct": 1.8353982300884957
+          "4": {
+            "mean_diff": 2.5538407079646017,
+            "diff_pct": 2.03141592920354
           },
-          "7": {
-            "mean_diff": 0.988929203539823,
-            "diff_pct": 0.19911504424778761
+          "8": {
+            "mean_diff": 0.4829867256637168,
+            "diff_pct": 0.42123893805309737
           }
         },
-        "worst_pct": 2.299557522123894,
-        "worst_page": 1,
-        "ms": 462
+        "worst_pct": 2.03141592920354,
+        "worst_page": 4,
+        "ms": 471
       },
       {
         "judge": "pdfium",
@@ -2380,30 +2380,30 @@
         "judge": "pdfjs",
         "ok": true,
         "warnings": 0,
-        "pages": 13,
-        "text_chars": 6647,
+        "pages": 8,
+        "text_chars": 6413,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/pdfjs_p1.png",
-          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/pdfjs_p13.png",
-          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/pdfjs_p7.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/pdfjs_p4.png",
+          "8": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev.html2pdf/pdfjs_p8.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.1107477876106195,
-            "diff_pct": 0.5
+            "mean_diff": 0.9873716814159292,
+            "diff_pct": 0.6265486725663717
           },
-          "13": {
-            "mean_diff": 1.1996681415929205,
-            "diff_pct": 0.5539823008849557
+          "4": {
+            "mean_diff": 1.4437522123893805,
+            "diff_pct": 0.863716814159292
           },
-          "7": {
-            "mean_diff": 0.9837389380530973,
-            "diff_pct": 0.18805309734513273
+          "8": {
+            "mean_diff": 0.21486725663716813,
+            "diff_pct": 0.10973451327433628
           }
         },
-        "worst_pct": 0.5539823008849557,
-        "worst_page": 13,
-        "ms": 1061
+        "worst_pct": 0.863716814159292,
+        "worst_page": 4,
+        "ms": 882
       },
       {
         "judge": "quartz",
@@ -2416,21 +2416,21 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 4.046867256637168,
-            "diff_pct": 3.3880530973451326
+            "mean_diff": 2.9636681415929202,
+            "diff_pct": 2.258407079646018
           }
         },
-        "worst_pct": 3.3880530973451326,
+        "worst_pct": 2.258407079646018,
         "worst_page": 1,
-        "ms": 151
+        "ms": 224
       }
     ],
     "consensus": {
-      "1": 2.025398230088496,
-      "13": 1.0221238938053097,
-      "7": 0.14336283185840706
+      "1": 1.3821681415929201,
+      "4": 1.0910029498525073,
+      "8": 0.20995575221238938
     },
-    "consensus_max": 2.025398230088496,
+    "consensus_max": 1.3821681415929201,
     "consensus_page": 1
   },
   {
@@ -2450,7 +2450,7 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 402
+        "ms": 366
       },
       {
         "judge": "poppler",
@@ -2494,7 +2494,7 @@
         },
         "worst_pct": 6.155309734513274,
         "worst_page": 85,
-        "ms": 355
+        "ms": 326
       },
       {
         "judge": "gs",
@@ -2523,7 +2523,7 @@
         },
         "worst_pct": 12.579646017699115,
         "worst_page": 85,
-        "ms": 7463
+        "ms": 6877
       },
       {
         "judge": "pdfium",
@@ -2563,7 +2563,7 @@
         },
         "worst_pct": 6.144690265486726,
         "worst_page": 85,
-        "ms": 1826
+        "ms": 1480
       },
       {
         "judge": "quartz",
@@ -2582,7 +2582,7 @@
         },
         "worst_pct": 7.285398230088496,
         "worst_page": 1,
-        "ms": 113
+        "ms": 163
       }
     ],
     "consensus": {
@@ -2595,11 +2595,11 @@
   },
   {
     "file": "out/bench/www-rfc-editor-org-rfc-rfc9110-html.html2pdf.pdf",
-    "bytes": 2244491,
+    "bytes": 1055265,
     "sampled_pages": [
       1,
-      60,
-      120
+      43,
+      85
     ],
     "verdicts": [
       {
@@ -2610,18 +2610,18 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 195
+        "ms": 153
       },
       {
         "judge": "poppler",
         "ok": true,
         "warnings": 0,
-        "pages": 120,
-        "text_chars": 378290,
+        "pages": 85,
+        "text_chars": 376178,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/poppler_p1.png",
-          "120": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/poppler_p120.png",
-          "60": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/poppler_p60.png"
+          "43": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/poppler_p43.png",
+          "85": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/poppler_p85.png"
         },
         "worst_pct": 0,
         "worst_page": 0,
@@ -2631,59 +2631,59 @@
         "judge": "mupdf",
         "ok": true,
         "warnings": 0,
-        "pages": 120,
-        "text_chars": 378293,
+        "pages": 85,
+        "text_chars": 376179,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/mupdf_p1.png",
-          "120": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/mupdf_p120.png",
-          "60": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/mupdf_p60.png"
+          "43": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/mupdf_p43.png",
+          "85": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/mupdf_p85.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.751641592920354,
-            "diff_pct": 0.7893805309734513
+            "mean_diff": 1.9363982300884957,
+            "diff_pct": 0.9761061946902655
           },
-          "120": {
-            "mean_diff": 0.9093407079646018,
-            "diff_pct": 0.5858407079646017
+          "43": {
+            "mean_diff": 3.6818318584070795,
+            "diff_pct": 2.043362831858407
           },
-          "60": {
-            "mean_diff": 1.2584823008849557,
-            "diff_pct": 0.5128318584070797
+          "85": {
+            "mean_diff": 0.7065442477876106,
+            "diff_pct": 0.44557522123893806
           }
         },
-        "worst_pct": 0.7893805309734513,
-        "worst_page": 1,
-        "ms": 239
+        "worst_pct": 2.043362831858407,
+        "worst_page": 43,
+        "ms": 229
       },
       {
         "judge": "gs",
         "ok": true,
         "warnings": 0,
         "pages": 0,
-        "text_chars": 378293,
+        "text_chars": 376179,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/gs_p1.png",
-          "120": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/gs_p120.png",
-          "60": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/gs_p60.png"
+          "43": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/gs_p43.png",
+          "85": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/gs_p85.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 6.252269911504425,
-            "diff_pct": 5.840265486725664
+            "mean_diff": 4.586070796460177,
+            "diff_pct": 4.088053097345132
           },
-          "120": {
-            "mean_diff": 2.014849557522124,
-            "diff_pct": 1.854424778761062
+          "43": {
+            "mean_diff": 10.040185840707965,
+            "diff_pct": 9.445132743362832
           },
-          "60": {
-            "mean_diff": 4.345805309734513,
-            "diff_pct": 3.966371681415929
+          "85": {
+            "mean_diff": 1.6267035398230087,
+            "diff_pct": 1.4991150442477876
           }
         },
-        "worst_pct": 5.840265486725664,
-        "worst_page": 1,
-        "ms": 8193
+        "worst_pct": 9.445132743362832,
+        "worst_page": 43,
+        "ms": 9289
       },
       {
         "judge": "pdfium",
@@ -2700,30 +2700,30 @@
         "judge": "pdfjs",
         "ok": true,
         "warnings": 0,
-        "pages": 120,
-        "text_chars": 378293,
+        "pages": 85,
+        "text_chars": 376179,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/pdfjs_p1.png",
-          "120": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/pdfjs_p120.png",
-          "60": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/pdfjs_p60.png"
+          "43": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/pdfjs_p43.png",
+          "85": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html.html2pdf/pdfjs_p85.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.9832389380530973,
-            "diff_pct": 0.41814159292035397
+            "mean_diff": 1.783721238938053,
+            "diff_pct": 0.5597345132743363
           },
-          "120": {
-            "mean_diff": 0.8991637168141593,
-            "diff_pct": 0.39778761061946905
+          "43": {
+            "mean_diff": 3.6202610619469024,
+            "diff_pct": 1.2765486725663717
           },
-          "60": {
-            "mean_diff": 1.3795840707964602,
-            "diff_pct": 0.2424778761061947
+          "85": {
+            "mean_diff": 0.6524734513274336,
+            "diff_pct": 0.2610619469026549
           }
         },
-        "worst_pct": 0.41814159292035397,
-        "worst_page": 1,
-        "ms": 1615
+        "worst_pct": 1.2765486725663717,
+        "worst_page": 43,
+        "ms": 1233
       },
       {
         "judge": "quartz",
@@ -2736,30 +2736,30 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 8.700738938053098,
-            "diff_pct": 7.914159292035398
+            "mean_diff": 6.7244424778761065,
+            "diff_pct": 6.15
           }
         },
-        "worst_pct": 7.914159292035398,
+        "worst_pct": 6.15,
         "worst_page": 1,
-        "ms": 241
+        "ms": 140
       }
     ],
     "consensus": {
-      "1": 4.387566371681415,
-      "120": 0.8580383480825958,
-      "60": 1.8035398230088495
+      "1": 3.352300884955752,
+      "43": 4.3039085545722715,
+      "85": 0.7008849557522124
     },
-    "consensus_max": 4.387566371681415,
-    "consensus_page": 1
+    "consensus_max": 4.3039085545722715,
+    "consensus_page": 43
   },
   {
     "file": "out/en-wikipedia-org-wiki-Go_programming_language.pdf",
-    "bytes": 596551,
+    "bytes": 251175,
     "sampled_pages": [
       1,
-      9,
-      18
+      7,
+      13
     ],
     "verdicts": [
       {
@@ -2770,18 +2770,18 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 50
+        "ms": 30
       },
       {
         "judge": "poppler",
         "ok": true,
         "warnings": 0,
-        "pages": 18,
-        "text_chars": 52778,
+        "pages": 13,
+        "text_chars": 47177,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/poppler_p1.png",
-          "18": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/poppler_p18.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/poppler_p9.png"
+          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/poppler_p13.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/poppler_p7.png"
         },
         "worst_pct": 0,
         "worst_page": 0,
@@ -2791,59 +2791,59 @@
         "judge": "mupdf",
         "ok": true,
         "warnings": 0,
-        "pages": 18,
-        "text_chars": 52778,
+        "pages": 13,
+        "text_chars": 47177,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/mupdf_p1.png",
-          "18": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/mupdf_p18.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/mupdf_p9.png"
+          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/mupdf_p13.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/mupdf_p7.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 0.4928274336283186,
-            "diff_pct": 0.33539823008849556
+            "mean_diff": 5.568734513274336,
+            "diff_pct": 4.029203539823009
           },
-          "18": {
-            "mean_diff": 0.715433628318584,
-            "diff_pct": 0.4269911504424779
+          "13": {
+            "mean_diff": 4.078508849557522,
+            "diff_pct": 2.7738938053097346
           },
-          "9": {
-            "mean_diff": 4.416592920353982,
-            "diff_pct": 3.299557522123894
+          "7": {
+            "mean_diff": 3.0896725663716813,
+            "diff_pct": 2.0035398230088495
           }
         },
-        "worst_pct": 3.299557522123894,
-        "worst_page": 9,
-        "ms": 113
+        "worst_pct": 4.029203539823009,
+        "worst_page": 1,
+        "ms": 148
       },
       {
         "judge": "gs",
         "ok": true,
         "warnings": 0,
         "pages": 0,
-        "text_chars": 52778,
+        "text_chars": 47177,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/gs_p1.png",
-          "18": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/gs_p18.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/gs_p9.png"
+          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/gs_p13.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/gs_p7.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.1449159292035398,
-            "diff_pct": 1.0995575221238938
+            "mean_diff": 12.839809734513274,
+            "diff_pct": 11.907522123893806
           },
-          "18": {
-            "mean_diff": 2.2381858407079647,
-            "diff_pct": 2.171238938053097
+          "13": {
+            "mean_diff": 8.16999557522124,
+            "diff_pct": 7.198230088495575
           },
-          "9": {
-            "mean_diff": 12.108482300884956,
-            "diff_pct": 11.737168141592921
+          "7": {
+            "mean_diff": 8.23508407079646,
+            "diff_pct": 7.541592920353982
           }
         },
-        "worst_pct": 11.737168141592921,
-        "worst_page": 9,
-        "ms": 1397
+        "worst_pct": 11.907522123893806,
+        "worst_page": 1,
+        "ms": 1391
       },
       {
         "judge": "pdfium",
@@ -2860,30 +2860,30 @@
         "judge": "pdfjs",
         "ok": true,
         "warnings": 0,
-        "pages": 18,
-        "text_chars": 52778,
+        "pages": 13,
+        "text_chars": 47177,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/pdfjs_p1.png",
-          "18": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/pdfjs_p18.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/pdfjs_p9.png"
+          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/pdfjs_p13.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-Go_programming_language/pdfjs_p7.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 0.4843761061946903,
-            "diff_pct": 0.2243362831858407
+            "mean_diff": 5.169659292035398,
+            "diff_pct": 2.5712389380530976
           },
-          "18": {
-            "mean_diff": 0.7756327433628318,
-            "diff_pct": 0.25265486725663716
+          "13": {
+            "mean_diff": 3.6765530973451326,
+            "diff_pct": 1.7292035398230088
           },
-          "9": {
-            "mean_diff": 4.4406283185840705,
-            "diff_pct": 1.9256637168141593
+          "7": {
+            "mean_diff": 3.2144159292035397,
+            "diff_pct": 1.5765486725663718
           }
         },
-        "worst_pct": 1.9256637168141593,
-        "worst_page": 9,
-        "ms": 1500
+        "worst_pct": 2.5712389380530976,
+        "worst_page": 1,
+        "ms": 1017
       },
       {
         "judge": "quartz",
@@ -2896,30 +2896,30 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.4246194690265486,
-            "diff_pct": 1.2619469026548673
+            "mean_diff": 16.168853982300885,
+            "diff_pct": 14.281858407079646
           }
         },
-        "worst_pct": 1.2619469026548673,
+        "worst_pct": 14.281858407079646,
         "worst_page": 1,
-        "ms": 182
+        "ms": 87
       }
     ],
     "consensus": {
-      "1": 0.7974336283185841,
-      "18": 1.0608407079646016,
-      "9": 5.900884955752212
+      "1": 8.688407079646018,
+      "13": 3.636946902654867,
+      "7": 3.9124631268436576
     },
-    "consensus_max": 5.900884955752212,
-    "consensus_page": 9
+    "consensus_max": 8.688407079646018,
+    "consensus_page": 1
   },
   {
     "file": "out/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.pdf",
-    "bytes": 419279,
+    "bytes": 125708,
     "sampled_pages": [
       1,
-      5,
-      9
+      4,
+      7
     ],
     "verdicts": [
       {
@@ -2930,18 +2930,18 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 31
+        "ms": 20
       },
       {
         "judge": "poppler",
         "ok": true,
         "warnings": 0,
-        "pages": 9,
-        "text_chars": 19704,
+        "pages": 7,
+        "text_chars": 15641,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/poppler_p1.png",
-          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/poppler_p5.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/poppler_p9.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/poppler_p4.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/poppler_p7.png"
         },
         "worst_pct": 0,
         "worst_page": 0,
@@ -2951,59 +2951,59 @@
         "judge": "mupdf",
         "ok": true,
         "warnings": 0,
-        "pages": 9,
-        "text_chars": 19704,
+        "pages": 7,
+        "text_chars": 15641,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/mupdf_p1.png",
-          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/mupdf_p5.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/mupdf_p9.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/mupdf_p4.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/mupdf_p7.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 0.4647345132743363,
-            "diff_pct": 0.31902654867256636
+            "mean_diff": 3.137362831858407,
+            "diff_pct": 1.7778761061946902
           },
-          "5": {
-            "mean_diff": 2.9708938053097347,
-            "diff_pct": 1.6991150442477876
+          "4": {
+            "mean_diff": 3.057283185840708,
+            "diff_pct": 1.915929203539823
           },
-          "9": {
-            "mean_diff": 0,
-            "diff_pct": 0
+          "7": {
+            "mean_diff": 2.4300619469026548,
+            "diff_pct": 1.4402654867256637
           }
         },
-        "worst_pct": 1.6991150442477876,
-        "worst_page": 5,
-        "ms": 101
+        "worst_pct": 1.915929203539823,
+        "worst_page": 4,
+        "ms": 92
       },
       {
         "judge": "gs",
         "ok": true,
         "warnings": 0,
         "pages": 0,
-        "text_chars": 19704,
+        "text_chars": 15641,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/gs_p1.png",
-          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/gs_p5.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/gs_p9.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/gs_p4.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/gs_p7.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.0775929203539822,
-            "diff_pct": 1.0433628318584072
+            "mean_diff": 7.157101769911504,
+            "diff_pct": 6.163716814159292
           },
-          "5": {
-            "mean_diff": 8.090862831858407,
-            "diff_pct": 7.6646017699115045
+          "4": {
+            "mean_diff": 6.1018097345132745,
+            "diff_pct": 5.102654867256637
           },
-          "9": {
-            "mean_diff": 0,
-            "diff_pct": 0
+          "7": {
+            "mean_diff": 4.698323008849558,
+            "diff_pct": 4.0495575221238935
           }
         },
-        "worst_pct": 7.6646017699115045,
-        "worst_page": 5,
-        "ms": 642
+        "worst_pct": 6.163716814159292,
+        "worst_page": 1,
+        "ms": 832
       },
       {
         "judge": "pdfium",
@@ -3020,30 +3020,30 @@
         "judge": "pdfjs",
         "ok": true,
         "warnings": 0,
-        "pages": 9,
-        "text_chars": 19704,
+        "pages": 7,
+        "text_chars": 15641,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/pdfjs_p1.png",
-          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/pdfjs_p5.png",
-          "9": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/pdfjs_p9.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/pdfjs_p4.png",
+          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations/pdfjs_p7.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 0.47401769911504427,
-            "diff_pct": 0.22566371681415928
+            "mean_diff": 3.082690265486726,
+            "diff_pct": 1.3026548672566372
           },
-          "5": {
-            "mean_diff": 2.8277787610619467,
-            "diff_pct": 0.7646017699115044
+          "4": {
+            "mean_diff": 2.6879734513274336,
+            "diff_pct": 1.0265486725663717
           },
-          "9": {
-            "mean_diff": 0,
-            "diff_pct": 0
+          "7": {
+            "mean_diff": 2.239924778761062,
+            "diff_pct": 1.0898230088495575
           }
         },
-        "worst_pct": 0.7646017699115044,
-        "worst_page": 5,
-        "ms": 1227
+        "worst_pct": 1.3026548672566372,
+        "worst_page": 1,
+        "ms": 976
       },
       {
         "judge": "quartz",
@@ -3056,26 +3056,26 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.3675530973451326,
-            "diff_pct": 1.2176991150442478
+            "mean_diff": 10.609181415929203,
+            "diff_pct": 8.988495575221238
           }
         },
-        "worst_pct": 1.2176991150442478,
+        "worst_pct": 8.988495575221238,
         "worst_page": 1,
-        "ms": 167
+        "ms": 106
       }
     ],
     "consensus": {
-      "1": 0.7583185840707964,
-      "5": 3.639749262536873,
-      "9": 0
+      "1": 5.106681415929204,
+      "4": 2.5064896755162245,
+      "7": 2.2086283185840707
     },
-    "consensus_max": 3.639749262536873,
-    "consensus_page": 5
+    "consensus_max": 5.106681415929204,
+    "consensus_page": 1
   },
   {
     "file": "out/example-com.pdf",
-    "bytes": 8336,
+    "bytes": 6887,
     "sampled_pages": [
       1
     ],
@@ -3088,7 +3088,7 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 6
+        "ms": 4
       },
       {
         "judge": "poppler",
@@ -3101,7 +3101,7 @@
         },
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 55
+        "ms": 48
       },
       {
         "judge": "mupdf",
@@ -3120,7 +3120,7 @@
         },
         "worst_pct": 0.0008849557522123894,
         "worst_page": 1,
-        "ms": 36
+        "ms": 32
       },
       {
         "judge": "gs",
@@ -3139,7 +3139,7 @@
         },
         "worst_pct": 0.23716814159292035,
         "worst_page": 1,
-        "ms": 86
+        "ms": 78
       },
       {
         "judge": "pdfium",
@@ -3169,7 +3169,7 @@
         },
         "worst_pct": 0.003097345132743363,
         "worst_page": 1,
-        "ms": 405
+        "ms": 382
       },
       {
         "judge": "quartz",
@@ -3188,7 +3188,7 @@
         },
         "worst_pct": 0.23539823008849559,
         "worst_page": 1,
-        "ms": 86
+        "ms": 67
       }
     ],
     "consensus": {
@@ -3199,169 +3199,11 @@
   },
   {
     "file": "out/go-dev-blog-subtests.pdf",
-    "bytes": 199998,
+    "bytes": 60542,
     "sampled_pages": [
       1,
       3,
-      6
-    ],
-    "verdicts": [
-      {
-        "judge": "qpdf",
-        "ok": true,
-        "warnings": 0,
-        "pages": 0,
-        "text_chars": -1,
-        "worst_pct": 0,
-        "worst_page": 0,
-        "ms": 12
-      },
-      {
-        "judge": "poppler",
-        "ok": true,
-        "warnings": 0,
-        "pages": 6,
-        "text_chars": 11369,
-        "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/poppler_p1.png",
-          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/poppler_p3.png",
-          "6": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/poppler_p6.png"
-        },
-        "worst_pct": 0,
-        "worst_page": 0,
-        "ms": 0
-      },
-      {
-        "judge": "mupdf",
-        "ok": true,
-        "warnings": 0,
-        "pages": 6,
-        "text_chars": 11369,
-        "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/mupdf_p1.png",
-          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/mupdf_p3.png",
-          "6": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/mupdf_p6.png"
-        },
-        "diffs": {
-          "1": {
-            "mean_diff": 0.7487522123893805,
-            "diff_pct": 0.46769911504424777
-          },
-          "3": {
-            "mean_diff": 2.2505442477876105,
-            "diff_pct": 1.6243362831858408
-          },
-          "6": {
-            "mean_diff": 1.2786150442477877,
-            "diff_pct": 0.75
-          }
-        },
-        "worst_pct": 1.6243362831858408,
-        "worst_page": 3,
-        "ms": 80
-      },
-      {
-        "judge": "gs",
-        "ok": true,
-        "warnings": 0,
-        "pages": 0,
-        "text_chars": 11369,
-        "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/gs_p1.png",
-          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/gs_p3.png",
-          "6": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/gs_p6.png"
-        },
-        "diffs": {
-          "1": {
-            "mean_diff": 2.0008938053097345,
-            "diff_pct": 1.9128318584070796
-          },
-          "3": {
-            "mean_diff": 5.057849557522124,
-            "diff_pct": 4.465044247787611
-          },
-          "6": {
-            "mean_diff": 1.8765309734513274,
-            "diff_pct": 1.5008849557522124
-          }
-        },
-        "worst_pct": 4.465044247787611,
-        "worst_page": 3,
-        "ms": 371
-      },
-      {
-        "judge": "pdfium",
-        "skipped": true,
-        "ok": false,
-        "warnings": 0,
-        "pages": 0,
-        "text_chars": -1,
-        "worst_pct": 0,
-        "worst_page": 0,
-        "ms": 0
-      },
-      {
-        "judge": "pdfjs",
-        "ok": true,
-        "warnings": 0,
-        "pages": 6,
-        "text_chars": 11369,
-        "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/pdfjs_p1.png",
-          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/pdfjs_p3.png",
-          "6": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/pdfjs_p6.png"
-        },
-        "diffs": {
-          "1": {
-            "mean_diff": 0.7422168141592921,
-            "diff_pct": 0.2345132743362832
-          },
-          "3": {
-            "mean_diff": 2.219429203539823,
-            "diff_pct": 0.9929203539823008
-          },
-          "6": {
-            "mean_diff": 1.9666504424778761,
-            "diff_pct": 1.4287610619469027
-          }
-        },
-        "worst_pct": 1.4287610619469027,
-        "worst_page": 6,
-        "ms": 911
-      },
-      {
-        "judge": "quartz",
-        "ok": true,
-        "warnings": 0,
-        "pages": 0,
-        "text_chars": -1,
-        "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/quartz_p1.png"
-        },
-        "diffs": {
-          "1": {
-            "mean_diff": 2.612809734513274,
-            "diff_pct": 2.3243362831858407
-          }
-        },
-        "worst_pct": 2.3243362831858407,
-        "worst_page": 1,
-        "ms": 95
-      }
-    ],
-    "consensus": {
-      "1": 1.4343362831858406,
-      "3": 2.419321533923304,
-      "6": 1.350589970501475
-    },
-    "consensus_max": 2.419321533923304,
-    "consensus_page": 3
-  },
-  {
-    "file": "out/news-ycombinator-com.pdf",
-    "bytes": 65460,
-    "sampled_pages": [
-      1
+      5
     ],
     "verdicts": [
       {
@@ -3378,52 +3220,210 @@
         "judge": "poppler",
         "ok": true,
         "warnings": 0,
-        "pages": 1,
-        "text_chars": 3097,
+        "pages": 5,
+        "text_chars": 10119,
         "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com/poppler_p1.png"
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/poppler_p1.png",
+          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/poppler_p3.png",
+          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/poppler_p5.png"
         },
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 177
+        "ms": 0
       },
       {
         "judge": "mupdf",
         "ok": true,
         "warnings": 0,
-        "pages": 1,
-        "text_chars": 3097,
+        "pages": 5,
+        "text_chars": 10135,
         "renders": {
-          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com/mupdf_p1.png"
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/mupdf_p1.png",
+          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/mupdf_p3.png",
+          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/mupdf_p5.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 3.077716814159292,
-            "diff_pct": 1.5123893805309734
+            "mean_diff": 1.971853982300885,
+            "diff_pct": 0.8756637168141593
+          },
+          "3": {
+            "mean_diff": 2.431278761061947,
+            "diff_pct": 1.2721238938053097
+          },
+          "5": {
+            "mean_diff": 1.3252699115044249,
+            "diff_pct": 0.9800884955752213
           }
         },
-        "worst_pct": 1.5123893805309734,
-        "worst_page": 1,
-        "ms": 38
+        "worst_pct": 1.2721238938053097,
+        "worst_page": 3,
+        "ms": 64
       },
       {
         "judge": "gs",
         "ok": true,
         "warnings": 0,
         "pages": 0,
-        "text_chars": 3097,
+        "text_chars": 10259,
+        "renders": {
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/gs_p1.png",
+          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/gs_p3.png",
+          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/gs_p5.png"
+        },
+        "diffs": {
+          "1": {
+            "mean_diff": 5.065092920353982,
+            "diff_pct": 4.538495575221239
+          },
+          "3": {
+            "mean_diff": 5.56495575221239,
+            "diff_pct": 5.095132743362832
+          },
+          "5": {
+            "mean_diff": 1.9346637168141594,
+            "diff_pct": 1.7632743362831858
+          }
+        },
+        "worst_pct": 5.095132743362832,
+        "worst_page": 3,
+        "ms": 328
+      },
+      {
+        "judge": "pdfium",
+        "skipped": true,
+        "ok": false,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "worst_pct": 0,
+        "worst_page": 0,
+        "ms": 0
+      },
+      {
+        "judge": "pdfjs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 5,
+        "text_chars": 10135,
+        "renders": {
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/pdfjs_p1.png",
+          "3": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/pdfjs_p3.png",
+          "5": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/pdfjs_p5.png"
+        },
+        "diffs": {
+          "1": {
+            "mean_diff": 1.9773274336283186,
+            "diff_pct": 0.6110619469026549
+          },
+          "3": {
+            "mean_diff": 2.233057522123894,
+            "diff_pct": 0.684070796460177
+          },
+          "5": {
+            "mean_diff": 1.1068008849557522,
+            "diff_pct": 0.6367256637168142
+          }
+        },
+        "worst_pct": 0.684070796460177,
+        "worst_page": 3,
+        "ms": 948
+      },
+      {
+        "judge": "quartz",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "renders": {
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/go-dev-blog-subtests/quartz_p1.png"
+        },
+        "diffs": {
+          "1": {
+            "mean_diff": 8.474110619469027,
+            "diff_pct": 7.199115044247788
+          }
+        },
+        "worst_pct": 7.199115044247788,
+        "worst_page": 1,
+        "ms": 255
+      }
+    ],
+    "consensus": {
+      "1": 3.9735840707964605,
+      "3": 2.476253687315634,
+      "5": 0.9526548672566372
+    },
+    "consensus_max": 3.9735840707964605,
+    "consensus_page": 1
+  },
+  {
+    "file": "out/news-ycombinator-com.pdf",
+    "bytes": 28032,
+    "sampled_pages": [
+      1
+    ],
+    "verdicts": [
+      {
+        "judge": "qpdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": -1,
+        "worst_pct": 0,
+        "worst_page": 0,
+        "ms": 7
+      },
+      {
+        "judge": "poppler",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 3032,
+        "renders": {
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com/poppler_p1.png"
+        },
+        "worst_pct": 0,
+        "worst_page": 0,
+        "ms": 147
+      },
+      {
+        "judge": "mupdf",
+        "ok": true,
+        "warnings": 0,
+        "pages": 1,
+        "text_chars": 3032,
+        "renders": {
+          "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com/mupdf_p1.png"
+        },
+        "diffs": {
+          "1": {
+            "mean_diff": 1.963424778761062,
+            "diff_pct": 0.0668141592920354
+          }
+        },
+        "worst_pct": 0.0668141592920354,
+        "worst_page": 1,
+        "ms": 30
+      },
+      {
+        "judge": "gs",
+        "ok": true,
+        "warnings": 0,
+        "pages": 0,
+        "text_chars": 3032,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com/gs_p1.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 7.162141592920354,
-            "diff_pct": 7.226991150442478
+            "mean_diff": 3.3671150442477877,
+            "diff_pct": 1.5066371681415929
           }
         },
-        "worst_pct": 7.226991150442478,
+        "worst_pct": 1.5066371681415929,
         "worst_page": 1,
-        "ms": 145
+        "ms": 192
       },
       {
         "judge": "pdfium",
@@ -3441,19 +3441,19 @@
         "ok": true,
         "warnings": 0,
         "pages": 1,
-        "text_chars": 3097,
+        "text_chars": 3032,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/news-ycombinator-com/pdfjs_p1.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 2.547066371681416,
-            "diff_pct": 0.668141592920354
+            "mean_diff": 1.5116725663716815,
+            "diff_pct": 0.023008849557522124
           }
         },
-        "worst_pct": 0.668141592920354,
+        "worst_pct": 0.023008849557522124,
         "worst_page": 1,
-        "ms": 543
+        "ms": 466
       },
       {
         "judge": "quartz",
@@ -3466,28 +3466,28 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 8.98912831858407,
-            "diff_pct": 8.242035398230088
+            "mean_diff": 5.420371681415929,
+            "diff_pct": 3.345575221238938
           }
         },
-        "worst_pct": 8.242035398230088,
+        "worst_pct": 3.345575221238938,
         "worst_page": 1,
-        "ms": 124
+        "ms": 196
       }
     ],
     "consensus": {
-      "1": 4.923982300884956
+      "1": 1.4155752212389383
     },
-    "consensus_max": 4.923982300884956,
+    "consensus_max": 1.4155752212389383,
     "consensus_page": 1
   },
   {
     "file": "out/pkg-go-dev-net-http.pdf",
-    "bytes": 825554,
+    "bytes": 383631,
     "sampled_pages": [
       1,
-      25,
-      49
+      26,
+      51
     ],
     "verdicts": [
       {
@@ -3498,18 +3498,18 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 54
+        "ms": 51
       },
       {
         "judge": "poppler",
         "ok": true,
         "warnings": 0,
-        "pages": 49,
-        "text_chars": 125449,
+        "pages": 51,
+        "text_chars": 120334,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/poppler_p1.png",
-          "25": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/poppler_p25.png",
-          "49": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/poppler_p49.png"
+          "26": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/poppler_p26.png",
+          "51": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/poppler_p51.png"
         },
         "worst_pct": 0,
         "worst_page": 0,
@@ -3519,29 +3519,29 @@
         "judge": "mupdf",
         "ok": true,
         "warnings": 0,
-        "pages": 49,
-        "text_chars": 125449,
+        "pages": 51,
+        "text_chars": 120389,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/mupdf_p1.png",
-          "25": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/mupdf_p25.png",
-          "49": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/mupdf_p49.png"
+          "26": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/mupdf_p26.png",
+          "51": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/mupdf_p51.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 0.8151637168141593,
-            "diff_pct": 0.6053097345132743
+            "mean_diff": 1.6251681415929204,
+            "diff_pct": 0.6929203539823009
           },
-          "25": {
-            "mean_diff": 2.482840707964602,
-            "diff_pct": 1.845575221238938
+          "26": {
+            "mean_diff": 1.856004424778761,
+            "diff_pct": 0.8734513274336283
           },
-          "49": {
-            "mean_diff": 1.5286769911504425,
-            "diff_pct": 0.9221238938053097
+          "51": {
+            "mean_diff": 1.1759911504424778,
+            "diff_pct": 0.5376106194690266
           }
         },
-        "worst_pct": 1.845575221238938,
-        "worst_page": 25,
+        "worst_pct": 0.8734513274336283,
+        "worst_page": 26,
         "ms": 118
       },
       {
@@ -3549,29 +3549,29 @@
         "ok": true,
         "warnings": 0,
         "pages": 0,
-        "text_chars": 125451,
+        "text_chars": 120422,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/gs_p1.png",
-          "25": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/gs_p25.png",
-          "49": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/gs_p49.png"
+          "26": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/gs_p26.png",
+          "51": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/gs_p51.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.8143672566371682,
-            "diff_pct": 1.7508849557522124
+            "mean_diff": 2.896150442477876,
+            "diff_pct": 2.0517699115044246
           },
-          "25": {
-            "mean_diff": 6.286619469026549,
-            "diff_pct": 5.949115044247788
+          "26": {
+            "mean_diff": 3.0705663716814158,
+            "diff_pct": 2.5606194690265487
           },
-          "49": {
-            "mean_diff": 3.4729646017699114,
-            "diff_pct": 3.2827433628318583
+          "51": {
+            "mean_diff": 1.611504424778761,
+            "diff_pct": 1.2938053097345132
           }
         },
-        "worst_pct": 5.949115044247788,
-        "worst_page": 25,
-        "ms": 2205
+        "worst_pct": 2.5606194690265487,
+        "worst_page": 26,
+        "ms": 2621
       },
       {
         "judge": "pdfium",
@@ -3588,30 +3588,30 @@
         "judge": "pdfjs",
         "ok": true,
         "warnings": 0,
-        "pages": 49,
-        "text_chars": 125449,
+        "pages": 51,
+        "text_chars": 120390,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/pdfjs_p1.png",
-          "25": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/pdfjs_p25.png",
-          "49": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/pdfjs_p49.png"
+          "26": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/pdfjs_p26.png",
+          "51": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/pkg-go-dev-net-http/pdfjs_p51.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 0.762570796460177,
-            "diff_pct": 0.3566371681415929
+            "mean_diff": 1.4666725663716813,
+            "diff_pct": 0.5216814159292036
           },
-          "25": {
-            "mean_diff": 2.3487699115044247,
-            "diff_pct": 0.9491150442477876
+          "26": {
+            "mean_diff": 1.6946548672566373,
+            "diff_pct": 0.5632743362831858
           },
-          "49": {
-            "mean_diff": 1.8759734513274335,
-            "diff_pct": 1.2070796460176991
+          "51": {
+            "mean_diff": 0.9818761061946902,
+            "diff_pct": 0.4964601769911504
           }
         },
-        "worst_pct": 1.2070796460176991,
-        "worst_page": 49,
-        "ms": 980
+        "worst_pct": 0.5632743362831858,
+        "worst_page": 26,
+        "ms": 1021
       },
       {
         "judge": "quartz",
@@ -3624,30 +3624,30 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 2.400730088495575,
-            "diff_pct": 2.147345132743363
+            "mean_diff": 5.412761061946902,
+            "diff_pct": 3.7761061946902656
           }
         },
-        "worst_pct": 2.147345132743363,
+        "worst_pct": 3.7761061946902656,
         "worst_page": 1,
-        "ms": 80
+        "ms": 103
       }
     ],
     "consensus": {
-      "1": 1.3253539823008849,
-      "25": 2.999705014749262,
-      "49": 2.1174041297935102
+      "1": 1.9053097345132746,
+      "26": 1.281637168141593,
+      "51": 0.7064159292035398
     },
-    "consensus_max": 2.999705014749262,
-    "consensus_page": 25
+    "consensus_max": 1.9053097345132746,
+    "consensus_page": 1
   },
   {
     "file": "out/react-dev.pdf",
-    "bytes": 4773305,
+    "bytes": 7829423,
     "sampled_pages": [
       1,
-      7,
-      13
+      4,
+      8
     ],
     "verdicts": [
       {
@@ -3658,18 +3658,18 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 27
+        "ms": 35
       },
       {
         "judge": "poppler",
         "ok": true,
         "warnings": 0,
-        "pages": 13,
-        "text_chars": 6647,
+        "pages": 8,
+        "text_chars": 6413,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/poppler_p1.png",
-          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/poppler_p13.png",
-          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/poppler_p7.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/poppler_p4.png",
+          "8": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/poppler_p8.png"
         },
         "worst_pct": 0,
         "worst_page": 0,
@@ -3679,59 +3679,59 @@
         "judge": "mupdf",
         "ok": true,
         "warnings": 0,
-        "pages": 13,
-        "text_chars": 6647,
+        "pages": 8,
+        "text_chars": 6413,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/mupdf_p1.png",
-          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/mupdf_p13.png",
-          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/mupdf_p7.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/mupdf_p4.png",
+          "8": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/mupdf_p8.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 0.9538008849557522,
-            "diff_pct": 0.5592920353982301
+            "mean_diff": 0.8327964601769912,
+            "diff_pct": 0.4646017699115044
           },
-          "13": {
-            "mean_diff": 0.8341858407079646,
-            "diff_pct": 0.35929203539823007
+          "4": {
+            "mean_diff": 1.3192433628318585,
+            "diff_pct": 0.7535398230088496
           },
-          "7": {
-            "mean_diff": 0.6825796460176992,
-            "diff_pct": 0
+          "8": {
+            "mean_diff": 0.2171504424778761,
+            "diff_pct": 0.12743362831858407
           }
         },
-        "worst_pct": 0.5592920353982301,
-        "worst_page": 1,
-        "ms": 90
+        "worst_pct": 0.7535398230088496,
+        "worst_page": 4,
+        "ms": 69
       },
       {
         "judge": "gs",
         "ok": true,
         "warnings": 0,
         "pages": 0,
-        "text_chars": 6647,
+        "text_chars": 6413,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/gs_p1.png",
-          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/gs_p13.png",
-          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/gs_p7.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/gs_p4.png",
+          "8": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/gs_p8.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 2.5436858407079646,
-            "diff_pct": 2.299557522123894
+            "mean_diff": 1.727216814159292,
+            "diff_pct": 1.4628318584070796
           },
-          "13": {
-            "mean_diff": 2.2043053097345133,
-            "diff_pct": 1.8353982300884957
+          "4": {
+            "mean_diff": 2.5538407079646017,
+            "diff_pct": 2.03141592920354
           },
-          "7": {
-            "mean_diff": 0.988929203539823,
-            "diff_pct": 0.19911504424778761
+          "8": {
+            "mean_diff": 0.4829867256637168,
+            "diff_pct": 0.42123893805309737
           }
         },
-        "worst_pct": 2.299557522123894,
-        "worst_page": 1,
-        "ms": 447
+        "worst_pct": 2.03141592920354,
+        "worst_page": 4,
+        "ms": 467
       },
       {
         "judge": "pdfium",
@@ -3748,30 +3748,30 @@
         "judge": "pdfjs",
         "ok": true,
         "warnings": 0,
-        "pages": 13,
-        "text_chars": 6647,
+        "pages": 8,
+        "text_chars": 6413,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/pdfjs_p1.png",
-          "13": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/pdfjs_p13.png",
-          "7": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/pdfjs_p7.png"
+          "4": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/pdfjs_p4.png",
+          "8": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/react-dev/pdfjs_p8.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.1107477876106195,
-            "diff_pct": 0.5
+            "mean_diff": 0.9873716814159292,
+            "diff_pct": 0.6265486725663717
           },
-          "13": {
-            "mean_diff": 1.1996681415929205,
-            "diff_pct": 0.5539823008849557
+          "4": {
+            "mean_diff": 1.4437522123893805,
+            "diff_pct": 0.863716814159292
           },
-          "7": {
-            "mean_diff": 0.9837389380530973,
-            "diff_pct": 0.18805309734513273
+          "8": {
+            "mean_diff": 0.21486725663716813,
+            "diff_pct": 0.10973451327433628
           }
         },
-        "worst_pct": 0.5539823008849557,
-        "worst_page": 13,
-        "ms": 983
+        "worst_pct": 0.863716814159292,
+        "worst_page": 4,
+        "ms": 908
       },
       {
         "judge": "quartz",
@@ -3784,30 +3784,30 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 4.046867256637168,
-            "diff_pct": 3.3880530973451326
+            "mean_diff": 2.9636681415929202,
+            "diff_pct": 2.258407079646018
           }
         },
-        "worst_pct": 3.3880530973451326,
+        "worst_pct": 2.258407079646018,
         "worst_page": 1,
-        "ms": 100
+        "ms": 101
       }
     ],
     "consensus": {
-      "1": 2.025398230088496,
-      "13": 1.0221238938053097,
-      "7": 0.14336283185840706
+      "1": 1.3821681415929201,
+      "4": 1.0910029498525073,
+      "8": 0.20995575221238938
     },
-    "consensus_max": 2.025398230088496,
+    "consensus_max": 1.3821681415929201,
     "consensus_page": 1
   },
   {
     "file": "out/www-rfc-editor-org-rfc-rfc9110-html.pdf",
-    "bytes": 2244491,
+    "bytes": 1055265,
     "sampled_pages": [
       1,
-      60,
-      120
+      43,
+      85
     ],
     "verdicts": [
       {
@@ -3818,18 +3818,18 @@
         "text_chars": -1,
         "worst_pct": 0,
         "worst_page": 0,
-        "ms": 180
+        "ms": 150
       },
       {
         "judge": "poppler",
         "ok": true,
         "warnings": 0,
-        "pages": 120,
-        "text_chars": 378290,
+        "pages": 85,
+        "text_chars": 376178,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/poppler_p1.png",
-          "120": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/poppler_p120.png",
-          "60": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/poppler_p60.png"
+          "43": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/poppler_p43.png",
+          "85": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/poppler_p85.png"
         },
         "worst_pct": 0,
         "worst_page": 0,
@@ -3839,59 +3839,59 @@
         "judge": "mupdf",
         "ok": true,
         "warnings": 0,
-        "pages": 120,
-        "text_chars": 378293,
+        "pages": 85,
+        "text_chars": 376179,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/mupdf_p1.png",
-          "120": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/mupdf_p120.png",
-          "60": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/mupdf_p60.png"
+          "43": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/mupdf_p43.png",
+          "85": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/mupdf_p85.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.751641592920354,
-            "diff_pct": 0.7893805309734513
+            "mean_diff": 1.9363982300884957,
+            "diff_pct": 0.9761061946902655
           },
-          "120": {
-            "mean_diff": 0.9093407079646018,
-            "diff_pct": 0.5858407079646017
+          "43": {
+            "mean_diff": 3.6818318584070795,
+            "diff_pct": 2.043362831858407
           },
-          "60": {
-            "mean_diff": 1.2584823008849557,
-            "diff_pct": 0.5128318584070797
+          "85": {
+            "mean_diff": 0.7065442477876106,
+            "diff_pct": 0.44557522123893806
           }
         },
-        "worst_pct": 0.7893805309734513,
-        "worst_page": 1,
-        "ms": 214
+        "worst_pct": 2.043362831858407,
+        "worst_page": 43,
+        "ms": 220
       },
       {
         "judge": "gs",
         "ok": true,
         "warnings": 0,
         "pages": 0,
-        "text_chars": 378293,
+        "text_chars": 376179,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/gs_p1.png",
-          "120": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/gs_p120.png",
-          "60": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/gs_p60.png"
+          "43": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/gs_p43.png",
+          "85": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/gs_p85.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 6.252269911504425,
-            "diff_pct": 5.840265486725664
+            "mean_diff": 4.586070796460177,
+            "diff_pct": 4.088053097345132
           },
-          "120": {
-            "mean_diff": 2.014849557522124,
-            "diff_pct": 1.854424778761062
+          "43": {
+            "mean_diff": 10.040185840707965,
+            "diff_pct": 9.445132743362832
           },
-          "60": {
-            "mean_diff": 4.345805309734513,
-            "diff_pct": 3.966371681415929
+          "85": {
+            "mean_diff": 1.6267035398230087,
+            "diff_pct": 1.4991150442477876
           }
         },
-        "worst_pct": 5.840265486725664,
-        "worst_page": 1,
-        "ms": 8778
+        "worst_pct": 9.445132743362832,
+        "worst_page": 43,
+        "ms": 9338
       },
       {
         "judge": "pdfium",
@@ -3908,30 +3908,30 @@
         "judge": "pdfjs",
         "ok": true,
         "warnings": 0,
-        "pages": 120,
-        "text_chars": 378293,
+        "pages": 85,
+        "text_chars": 376179,
         "renders": {
           "1": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/pdfjs_p1.png",
-          "120": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/pdfjs_p120.png",
-          "60": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/pdfjs_p60.png"
+          "43": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/pdfjs_p43.png",
+          "85": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/out/judges/www-rfc-editor-org-rfc-rfc9110-html/pdfjs_p85.png"
         },
         "diffs": {
           "1": {
-            "mean_diff": 1.9832389380530973,
-            "diff_pct": 0.41814159292035397
+            "mean_diff": 1.783721238938053,
+            "diff_pct": 0.5597345132743363
           },
-          "120": {
-            "mean_diff": 0.8991637168141593,
-            "diff_pct": 0.39778761061946905
+          "43": {
+            "mean_diff": 3.6202610619469024,
+            "diff_pct": 1.2765486725663717
           },
-          "60": {
-            "mean_diff": 1.3795840707964602,
-            "diff_pct": 0.2424778761061947
+          "85": {
+            "mean_diff": 0.6524734513274336,
+            "diff_pct": 0.2610619469026549
           }
         },
-        "worst_pct": 0.41814159292035397,
-        "worst_page": 1,
-        "ms": 1378
+        "worst_pct": 1.2765486725663717,
+        "worst_page": 43,
+        "ms": 1232
       },
       {
         "judge": "quartz",
@@ -3944,21 +3944,21 @@
         },
         "diffs": {
           "1": {
-            "mean_diff": 8.700738938053098,
-            "diff_pct": 7.914159292035398
+            "mean_diff": 6.7244424778761065,
+            "diff_pct": 6.15
           }
         },
-        "worst_pct": 7.914159292035398,
+        "worst_pct": 6.15,
         "worst_page": 1,
-        "ms": 126
+        "ms": 299
       }
     ],
     "consensus": {
-      "1": 4.387566371681415,
-      "120": 0.8580383480825958,
-      "60": 1.8035398230088495
+      "1": 3.352300884955752,
+      "43": 4.3039085545722715,
+      "85": 0.7008849557522124
     },
-    "consensus_max": 4.387566371681415,
-    "consensus_page": 1
+    "consensus_max": 4.3039085545722715,
+    "consensus_page": 43
   }
 ]

@@ -4,7 +4,7 @@ go 1.26.4
 
 require (
 	github.com/go-pdfkit/html2pdf v0.0.0
-	github.com/go-webengine/engine v0.3.12-0.20260906080832-fa7a628f17d2
+	github.com/go-webengine/engine v0.3.12-0.20260906115442-22511ec80056
 )
 
 require (
@@ -17,22 +17,22 @@ require (
 	github.com/dop251/goja v0.0.0-20260826204918-8f1c0696a37b // indirect
 	github.com/evanw/esbuild v0.28.2 // indirect
 	github.com/go-browserhttp/browserhttp v0.2.0 // indirect
-	github.com/go-crdt/collab v0.37.0 // indirect
-	github.com/go-crdt/crdt v0.39.0 // indirect
+	github.com/go-crdt/collab v0.40.0 // indirect
+	github.com/go-crdt/crdt v0.42.0 // indirect
 	github.com/go-gfx/gfx v0.19.0 // indirect
 	github.com/go-icons/iconoir v0.2.0 // indirect
 	github.com/go-images/images v0.0.0-20260831115433-23d959d868e3 // indirect
 	github.com/go-opentype/fonts v0.9.0 // indirect
 	github.com/go-opentype/opentype v0.12.0 // indirect
 	github.com/go-opentype/shape v0.5.0 // indirect
-	github.com/go-pdfkit/pdfkit v0.11.1-0.20260906084818-9fdac5c3b5c7 // indirect
+	github.com/go-pdfkit/pdfkit v0.11.1-0.20260906121306-2b1cee2c4ed8 // indirect
 	github.com/go-richdoc/richdoc v0.3.0 // indirect
 	github.com/go-sourcemap/sourcemap v2.1.4+incompatible // indirect
 	github.com/go-typeset/bidi v0.3.0 // indirect
 	github.com/go-webengine/esbuildsandbox v0.1.0 // indirect
 	github.com/go-widgets/mvvm v0.9.0 // indirect
-	github.com/go-widgets/painter v0.12.0 // indirect
-	github.com/go-widgets/toolkit v0.301.0 // indirect
+	github.com/go-widgets/painter v0.13.0 // indirect
+	github.com/go-widgets/toolkit v0.307.0 // indirect
 	github.com/google/pprof v0.0.0-20240727154555-813a5fbdbec8 // indirect
 	github.com/klauspost/compress v1.17.4 // indirect
 	github.com/refraction-networking/utls v1.8.2 // indirect

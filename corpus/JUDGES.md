@@ -7,31 +7,31 @@ Cell format: `pages · text ratio · Δworst (page)` — pages the judge reports
 | PDF | Bytes | qpdf | poppler | mupdf | gs | pdfjs | quartz | consensus |
 |---|---|---|---|---|---|---|---|---|
 | out/bench/en-wikipedia-org-wiki-Go_programming_language.chrome.pdf | 1.7 MB | ✅ – · – · – | ✅ 25p · 1.000 · ref | ✅ 25p · 1.000 · Δ7.6% (p25) | ✅ – · 1.000 · Δ9.3% (p25) | ✅ 25p · 1.000 · Δ7.5% (p25) | ✅ – · – · Δ10.8% (p1 only) | 7.2% (p25) |
-| out/bench/en-wikipedia-org-wiki-Go_programming_language.html2pdf.pdf | 583 KB | ✅ – · – · – | ✅ 18p · 1.000 · ref | ✅ 18p · 1.000 · Δ3.3% (p9) | ✅ – · 1.000 · Δ11.7% (p9) | ✅ 18p · 1.000 · Δ1.9% (p9) | ✅ – · – · Δ1.3% (p1 only) | 5.9% (p9) |
-| out/bench/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.chrome.pdf | 1.7 MB | ✅ – · – · – | ✅ 12p · 1.000 · ref | ✅ 12p · 1.000 · Δ5.1% (p6) | ✅ – · 1.015 · Δ5.7% (p6) | ✅ 12p · 1.000 · Δ5.1% (p6) | ✅ – · – · Δ3.0% (p1 only) | 3.9% (p6) |
-| out/bench/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf.pdf | 422 KB | ✅ – · – · – | ✅ 9p · 1.000 · ref | ✅ 9p · 1.000 · Δ1.7% (p5) | ✅ – · 1.000 · Δ7.7% (p5) | ✅ 9p · 1.000 · Δ0.8% (p5) | ✅ – · – · Δ1.2% (p1 only) | 3.6% (p5) |
+| out/bench/en-wikipedia-org-wiki-Go_programming_language.html2pdf.pdf | 241 KB | ✅ – · – · – | ✅ 13p · 1.000 · ref | ✅ 13p · 1.000 · Δ4.0% (p1) | ✅ – · 1.000 · Δ11.9% (p1) | ✅ 13p · 1.000 · Δ2.5% (p1) | ✅ – · – · Δ14.2% (p1 only) | 8.7% (p1) |
+| out/bench/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.chrome.pdf | 1.7 MB | ✅ – · – · – | ✅ 12p · 1.000 · ref | ✅ 12p · 1.000 · Δ4.9% (p6) | ✅ – · 1.015 · Δ5.5% (p6) | ✅ 12p · 1.000 · Δ4.9% (p6) | ✅ – · – · Δ3.0% (p1 only) | 3.8% (p6) |
+| out/bench/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.html2pdf.pdf | 128 KB | ✅ – · – · – | ✅ 7p · 1.000 · ref | ✅ 7p · 1.000 · Δ1.9% (p4) | ✅ – · 1.000 · Δ6.2% (p1) | ✅ 7p · 1.000 · Δ1.3% (p1) | ✅ – · – · Δ9.0% (p1 only) | 5.1% (p1) |
 | out/bench/example-com.chrome.pdf | 35 KB | ✅ – · – · – | ✅ 1p · 1.000 · ref | ✅ 1p · 1.000 · Δ0.4% (p1) | ✅ – · 1.000 · Δ0.6% (p1) | ✅ 1p · 1.000 · Δ0.4% (p1) | ✅ – · – · Δ0.5% (p1 only) | 0.4% (p1) |
-| out/bench/example-com.html2pdf.pdf | 8 KB | ✅ – · – · – | ✅ 1p · 1.000 · ref | ✅ 1p · 1.000 · Δ0.0% (p1) | ✅ – · 1.000 · Δ0.2% (p1) | ✅ 1p · 1.000 · Δ0.0% (p1) | ✅ – · – · Δ0.2% (p1 only) | 0.2% (p1) |
+| out/bench/example-com.html2pdf.pdf | 7 KB | ✅ – · – · – | ✅ 1p · 1.000 · ref | ✅ 1p · 1.000 · Δ0.0% (p1) | ✅ – · 1.000 · Δ0.2% (p1) | ✅ 1p · 1.000 · Δ0.0% (p1) | ✅ – · – · Δ0.2% (p1 only) | 0.2% (p1) |
 | out/bench/fixtures-longdoc-html.chrome.pdf | 2.4 MB | ✅ – · – · – | ✅ 135p · 1.000 · ref | ✅ 135p · 1.000 · Δ3.0% (p1) | ✅ – · 0.991 · Δ7.0% (p1) | ✅ 135p · 1.000 · Δ1.9% (p68) | ✅ – · – · Δ8.4% (p1 only) | 5.1% (p1) |
-| out/bench/fixtures-longdoc-html.html2pdf.pdf | 901 KB | ✅ – · – · – | ✅ 100p · 1.000 · ref | ✅ 100p · 1.000 · Δ2.1% (p1) | ✅ – · 1.000 · Δ8.9% (p1) | ✅ 100p · 1.000 · Δ1.4% (p1) | ✅ – · – · Δ12.7% (p1 only) | 6.9% (p1) |
+| out/bench/fixtures-longdoc-html.html2pdf.pdf | 852 KB | ✅ – · – · – | ✅ 100p · 1.000 · ref | ✅ 100p · 1.000 · Δ2.1% (p1) | ✅ – · 1.000 · Δ8.9% (p1) | ✅ 100p · 1.000 · Δ1.4% (p1) | ✅ – · – · Δ12.7% (p1 only) | 6.9% (p1) |
 | out/bench/go-dev-blog-subtests.chrome.pdf | 225 KB | ✅ – · – · – | ✅ 7p · 1.000 · ref | ✅ 7p · 1.000 · Δ5.6% (p4) | ✅ – · 1.000 · Δ8.6% (p4) | ✅ 7p · 1.000 · Δ5.7% (p4) | ✅ – · – · Δ5.8% (p1 only) | 6.1% (p4) |
-| out/bench/go-dev-blog-subtests.html2pdf.pdf | 200 KB | ✅ – · – · – | ✅ 6p · 1.000 · ref | ✅ 6p · 1.000 · Δ1.6% (p3) | ✅ – · 1.000 · Δ4.5% (p3) | ✅ 6p · 1.000 · Δ1.4% (p6) | ✅ – · – · Δ2.3% (p1 only) | 2.4% (p3) |
-| out/bench/news-ycombinator-com.chrome.pdf | 358 KB | ✅ – · – · – | ✅ 2p · 1.000 · ref | ✅ 2p · 1.000 · Δ1.5% (p1) | ✅ – · 1.000 · Δ2.9% (p1) | ✅ 2p · 1.000 · Δ1.0% (p1) | ✅ – · – · Δ4.7% (p1 only) | 2.6% (p1) |
-| out/bench/news-ycombinator-com.html2pdf.pdf | 65 KB | ✅ – · – · – | ✅ 1p · 1.000 · ref | ✅ 1p · 1.000 · Δ1.5% (p1) | ✅ – · 1.000 · Δ7.2% (p1) | ✅ 1p · 1.000 · Δ0.7% (p1) | ✅ – · – · Δ8.3% (p1 only) | 4.9% (p1) |
+| out/bench/go-dev-blog-subtests.html2pdf.pdf | 61 KB | ✅ – · – · – | ✅ 5p · 1.000 · ref | ✅ 5p · 1.002 · Δ1.3% (p3) | ✅ – · 1.014 · Δ5.1% (p3) | ✅ 5p · 1.002 · Δ0.7% (p3) | ✅ – · – · Δ7.2% (p1 only) | 4.0% (p1) |
+| out/bench/news-ycombinator-com.chrome.pdf | 357 KB | ✅ – · – · – | ✅ 2p · 1.000 · ref | ✅ 2p · 1.000 · Δ1.5% (p1) | ✅ – · 1.000 · Δ2.8% (p1) | ✅ 2p · 1.000 · Δ1.0% (p1) | ✅ – · – · Δ4.2% (p1 only) | 2.3% (p1) |
+| out/bench/news-ycombinator-com.html2pdf.pdf | 28 KB | ✅ – · – · – | ✅ 1p · 1.000 · ref | ✅ 1p · 1.000 · Δ0.1% (p1) | ✅ – · 1.000 · Δ1.5% (p1) | ✅ 1p · 1.000 · Δ0.0% (p1) | ✅ – · – · Δ3.3% (p1 only) | 1.4% (p1) |
 | out/bench/pkg-go-dev-net-http.chrome.pdf | 6.3 MB | ✅ – · – · – | ✅ 86p · 1.000 · ref | ✅ 86p · 1.000 · Δ2.9% (p43) | ✅ – · 1.000 · Δ4.4% (p43) | ✅ 86p · 1.000 · Δ3.0% (p43) | ✅ – · – · Δ2.6% (p1 only) | 3.1% (p43) |
-| out/bench/pkg-go-dev-net-http.html2pdf.pdf | 826 KB | ✅ – · – · – | ✅ 49p · 1.000 · ref | ✅ 49p · 1.000 · Δ1.8% (p25) | ✅ – · 1.000 · Δ5.9% (p25) | ✅ 49p · 1.000 · Δ1.2% (p49) | ✅ – · – · Δ2.1% (p1 only) | 3.0% (p25) |
+| out/bench/pkg-go-dev-net-http.html2pdf.pdf | 384 KB | ✅ – · – · – | ✅ 51p · 1.000 · ref | ✅ 51p · 1.000 · Δ0.9% (p26) | ✅ – · 1.001 · Δ2.6% (p26) | ✅ 51p · 1.000 · Δ0.6% (p26) | ✅ – · – · Δ3.8% (p1 only) | 1.9% (p1) |
 | out/bench/react-dev.chrome.pdf | 2.7 MB | ✅ – · – · – | ✅ 9p · 1.000 · ref | ✅ 9p · 1.000 · Δ0.6% (p5) | ✅ – · 1.000 · Δ1.4% (p5) | ✅ 9p · 1.000 · Δ0.6% (p5) | ✅ – · – · Δ0.4% (p1 only) | 0.9% (p5) |
-| out/bench/react-dev.html2pdf.pdf | 4.8 MB | ✅ – · – · – | ✅ 13p · 1.000 · ref | ✅ 13p · 1.000 · Δ0.6% (p1) | ✅ – · 1.000 · Δ2.3% (p1) | ✅ 13p · 1.000 · Δ0.6% (p13) | ✅ – · – · Δ3.4% (p1 only) | 2.0% (p1) |
+| out/bench/react-dev.html2pdf.pdf | 7.8 MB | ✅ – · – · – | ✅ 8p · 1.000 · ref | ✅ 8p · 1.000 · Δ0.8% (p4) | ✅ – · 1.000 · Δ2.0% (p4) | ✅ 8p · 1.000 · Δ0.9% (p4) | ✅ – · – · Δ2.3% (p1 only) | 1.4% (p1) |
 | out/bench/www-rfc-editor-org-rfc-rfc9110-html.chrome.pdf | 4.5 MB | ✅ – · – · – | ✅ 169p · 1.000 · ref | ✅ 169p · 1.000 · Δ6.2% (p85) | ✅ – · 1.002 · Δ12.6% (p85) | ✅ 169p · 1.000 · Δ6.1% (p85) | ✅ – · – · Δ7.3% (p1 only) | 7.3% (p85) |
-| out/bench/www-rfc-editor-org-rfc-rfc9110-html.html2pdf.pdf | 2.2 MB | ✅ – · – · – | ✅ 120p · 1.000 · ref | ✅ 120p · 1.000 · Δ0.8% (p1) | ✅ – · 1.000 · Δ5.8% (p1) | ✅ 120p · 1.000 · Δ0.4% (p1) | ✅ – · – · Δ7.9% (p1 only) | 4.4% (p1) |
-| out/en-wikipedia-org-wiki-Go_programming_language.pdf | 597 KB | ✅ – · – · – | ✅ 18p · 1.000 · ref | ✅ 18p · 1.000 · Δ3.3% (p9) | ✅ – · 1.000 · Δ11.7% (p9) | ✅ 18p · 1.000 · Δ1.9% (p9) | ✅ – · – · Δ1.3% (p1 only) | 5.9% (p9) |
-| out/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.pdf | 419 KB | ✅ – · – · – | ✅ 9p · 1.000 · ref | ✅ 9p · 1.000 · Δ1.7% (p5) | ✅ – · 1.000 · Δ7.7% (p5) | ✅ 9p · 1.000 · Δ0.8% (p5) | ✅ – · – · Δ1.2% (p1 only) | 3.6% (p5) |
-| out/example-com.pdf | 8 KB | ✅ – · – · – | ✅ 1p · 1.000 · ref | ✅ 1p · 1.000 · Δ0.0% (p1) | ✅ – · 1.000 · Δ0.2% (p1) | ✅ 1p · 1.000 · Δ0.0% (p1) | ✅ – · – · Δ0.2% (p1 only) | 0.2% (p1) |
-| out/go-dev-blog-subtests.pdf | 200 KB | ✅ – · – · – | ✅ 6p · 1.000 · ref | ✅ 6p · 1.000 · Δ1.6% (p3) | ✅ – · 1.000 · Δ4.5% (p3) | ✅ 6p · 1.000 · Δ1.4% (p6) | ✅ – · – · Δ2.3% (p1 only) | 2.4% (p3) |
-| out/news-ycombinator-com.pdf | 65 KB | ✅ – · – · – | ✅ 1p · 1.000 · ref | ✅ 1p · 1.000 · Δ1.5% (p1) | ✅ – · 1.000 · Δ7.2% (p1) | ✅ 1p · 1.000 · Δ0.7% (p1) | ✅ – · – · Δ8.2% (p1 only) | 4.9% (p1) |
-| out/pkg-go-dev-net-http.pdf | 826 KB | ✅ – · – · – | ✅ 49p · 1.000 · ref | ✅ 49p · 1.000 · Δ1.8% (p25) | ✅ – · 1.000 · Δ5.9% (p25) | ✅ 49p · 1.000 · Δ1.2% (p49) | ✅ – · – · Δ2.1% (p1 only) | 3.0% (p25) |
-| out/react-dev.pdf | 4.8 MB | ✅ – · – · – | ✅ 13p · 1.000 · ref | ✅ 13p · 1.000 · Δ0.6% (p1) | ✅ – · 1.000 · Δ2.3% (p1) | ✅ 13p · 1.000 · Δ0.6% (p13) | ✅ – · – · Δ3.4% (p1 only) | 2.0% (p1) |
-| out/www-rfc-editor-org-rfc-rfc9110-html.pdf | 2.2 MB | ✅ – · – · – | ✅ 120p · 1.000 · ref | ✅ 120p · 1.000 · Δ0.8% (p1) | ✅ – · 1.000 · Δ5.8% (p1) | ✅ 120p · 1.000 · Δ0.4% (p1) | ✅ – · – · Δ7.9% (p1 only) | 4.4% (p1) |
+| out/bench/www-rfc-editor-org-rfc-rfc9110-html.html2pdf.pdf | 1.1 MB | ✅ – · – · – | ✅ 85p · 1.000 · ref | ✅ 85p · 1.000 · Δ2.0% (p43) | ✅ – · 1.000 · Δ9.4% (p43) | ✅ 85p · 1.000 · Δ1.3% (p43) | ✅ – · – · Δ6.2% (p1 only) | 4.3% (p43) |
+| out/en-wikipedia-org-wiki-Go_programming_language.pdf | 251 KB | ✅ – · – · – | ✅ 13p · 1.000 · ref | ✅ 13p · 1.000 · Δ4.0% (p1) | ✅ – · 1.000 · Δ11.9% (p1) | ✅ 13p · 1.000 · Δ2.6% (p1) | ✅ – · – · Δ14.3% (p1 only) | 8.7% (p1) |
+| out/en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations.pdf | 126 KB | ✅ – · – · – | ✅ 7p · 1.000 · ref | ✅ 7p · 1.000 · Δ1.9% (p4) | ✅ – · 1.000 · Δ6.2% (p1) | ✅ 7p · 1.000 · Δ1.3% (p1) | ✅ – · – · Δ9.0% (p1 only) | 5.1% (p1) |
+| out/example-com.pdf | 7 KB | ✅ – · – · – | ✅ 1p · 1.000 · ref | ✅ 1p · 1.000 · Δ0.0% (p1) | ✅ – · 1.000 · Δ0.2% (p1) | ✅ 1p · 1.000 · Δ0.0% (p1) | ✅ – · – · Δ0.2% (p1 only) | 0.2% (p1) |
+| out/go-dev-blog-subtests.pdf | 61 KB | ✅ – · – · – | ✅ 5p · 1.000 · ref | ✅ 5p · 1.002 · Δ1.3% (p3) | ✅ – · 1.014 · Δ5.1% (p3) | ✅ 5p · 1.002 · Δ0.7% (p3) | ✅ – · – · Δ7.2% (p1 only) | 4.0% (p1) |
+| out/news-ycombinator-com.pdf | 28 KB | ✅ – · – · – | ✅ 1p · 1.000 · ref | ✅ 1p · 1.000 · Δ0.1% (p1) | ✅ – · 1.000 · Δ1.5% (p1) | ✅ 1p · 1.000 · Δ0.0% (p1) | ✅ – · – · Δ3.3% (p1 only) | 1.4% (p1) |
+| out/pkg-go-dev-net-http.pdf | 384 KB | ✅ – · – · – | ✅ 51p · 1.000 · ref | ✅ 51p · 1.000 · Δ0.9% (p26) | ✅ – · 1.001 · Δ2.6% (p26) | ✅ 51p · 1.000 · Δ0.6% (p26) | ✅ – · – · Δ3.8% (p1 only) | 1.9% (p1) |
+| out/react-dev.pdf | 7.8 MB | ✅ – · – · – | ✅ 8p · 1.000 · ref | ✅ 8p · 1.000 · Δ0.8% (p4) | ✅ – · 1.000 · Δ2.0% (p4) | ✅ 8p · 1.000 · Δ0.9% (p4) | ✅ – · – · Δ2.3% (p1 only) | 1.4% (p1) |
+| out/www-rfc-editor-org-rfc-rfc9110-html.pdf | 1.1 MB | ✅ – · – · – | ✅ 85p · 1.000 · ref | ✅ 85p · 1.000 · Δ2.0% (p43) | ✅ – · 1.000 · Δ9.4% (p43) | ✅ 85p · 1.000 · Δ1.3% (p43) | ✅ – · – · Δ6.2% (p1 only) | 4.3% (p43) |
 
 <!-- BEGIN ANALYSIS -->
 

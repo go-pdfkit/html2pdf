@@ -9,10 +9,15 @@
 //
 // # Scope
 //
-// This is a static renderer: no JavaScript, no external stylesheets or
-// @font-face (text uses the three families go-webengine's own paint package
-// bundles — Inter for sans, Lora for serif, Go Mono for mono — so the glyphs
-// drawn always match the metrics layout measured against). Inline-level
+// This is a static renderer: no JavaScript and no @font-face (text uses the
+// three families go-webengine's own paint package bundles — Inter for sans,
+// Lora for serif, Go Mono for mono — so the glyphs drawn always match the
+// metrics layout measured against). External stylesheets — <link
+// rel="stylesheet"> and their @import chains — are fetched through the
+// engine's own bounded loader (Engine.LoadStylesheets) and cascaded for the
+// print medium by default (Options.Media), so a page's @media print rules
+// apply and its screen-only ones do not, as in a browser's print preview.
+// Inline-level
 // background and borders paint per line fragment from the engine's own
 // LineBox.Inlines (box-decoration-break: slice); border-radius,
 // background-image and box-shadow on an inline element do not.
@@ -21,8 +26,8 @@
 // decoded and sized by the engine's own pipeline (Engine.LoadImages) and
 // embedded as bitmaps, so they are laid out and drawn exactly as the engine's
 // raster canvas would. A relative src resolves against Options.BaseURL; an
-// image that fails to fetch or decode is simply left out. This is the one
-// place Export touches the network.
+// image that fails to fetch or decode is simply left out. Stylesheets and
+// images are the two places Export touches the network.
 //
 // # Navigation
 //
@@ -97,6 +102,14 @@ type Options struct {
 	// Title, Author, Subject and Keywords fill the PDF's information
 	// dictionary. An empty Title is taken from the document's <title>.
 	Title, Author, Subject, Keywords string
+
+	// Media is the CSS medium the page is styled for: "print" (the zero
+	// value) applies the page's @media print rules and print-only
+	// stylesheets and skips its screen-only ones — a browser's print
+	// preview, where a site's navigation, sidebars and footers are usually
+	// hidden; "screen" styles the page as displayed. Width features
+	// (min-width, max-width) are evaluated at ViewportPx under either.
+	Media string
 }
 
 func (o Options) resolved() Options {
@@ -108,6 +121,9 @@ func (o Options) resolved() Options {
 	}
 	if o.ViewportPx == 0 {
 		o.ViewportPx = defaultViewportPx
+	}
+	if o.Media == "" {
+		o.Media = css.Print
 	}
 	return o
 }
@@ -122,7 +138,6 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	if err != nil {
 		return nil, fmt.Errorf("html2pdf: parse: %w", err)
 	}
-	sm := css.Cascade(root)
 	fonts := paint.NewFonts()
 
 	pageWPt := opts.PageSize.Width
@@ -140,12 +155,20 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	scale := contentWPx / viewportPx
 	pageHViewportPx := contentHPx / scale // page-height budget in viewport space
 
-	// Images go through the engine's own fetch/decode/size pipeline so their
-	// boxes are laid out at the exact size the bitmaps come back at (an image
-	// wider than the viewport is already scaled down there) — the same maps
-	// RenderDocument feeds to its raster painter.
-	imgDoc := &engine.Document{URL: opts.BaseURL, Root: root, HTML: htmlSrc}
-	imgSizes, imgs := engine.New().LoadImages(context.Background(), imgDoc, sm, int(viewportPx))
+	// Stylesheets and images go through the engine's own pipelines — the
+	// bounded <link>/@import fetch with media selection, then fetch/decode/
+	// size for images — so the page is styled exactly as the engine styles
+	// it and image boxes are laid out at the exact size the bitmaps come
+	// back at (an image wider than the viewport is already scaled down
+	// there): the same sheets and maps RenderDocument feeds its own cascade
+	// and raster painter, cascaded here for opts.Media at the layout width.
+	ctx := context.Background()
+	eng := engine.New()
+	webDoc := &engine.Document{URL: opts.BaseURL, Root: root, HTML: htmlSrc}
+	media := css.Media{Type: opts.Media, Width: viewportPx}
+	sheets := eng.LoadStylesheets(ctx, webDoc, media)
+	sm := css.CascadeMedia(root, media, sheets)
+	imgSizes, imgs := eng.LoadImages(ctx, webDoc, sm, int(viewportPx))
 
 	box, _ := layout.LayoutDocument(root, sm, viewportPx, fonts, imgSizes)
 
@@ -175,8 +198,11 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	}
 	// Compress content and font streams: a text-heavy page's PDF is 6–16×
 	// smaller for it (RFC 9110 29 → ~5 MB) and the output stays deterministic,
-	// flate being deterministic. Image streams pick their own filter.
-	doc := pdfkit.New(pdfkit.Options{Compress: true, Title: title, Author: opts.Author, Subject: opts.Subject, Keywords: opts.Keywords})
+	// flate being deterministic. Image streams pick their own filter. Object
+	// streams (PDF 1.5) pack the thousands of small non-stream objects a
+	// linked document carries — one annotation per clickable line — into
+	// flated streams: ~14 B per link instead of ~200 (pdfkit #29).
+	doc := pdfkit.New(pdfkit.Options{Compress: true, ObjectStreams: true, Title: title, Author: opts.Author, Subject: opts.Subject, Keywords: opts.Keywords})
 	e := &exporter{fonts: fs, imgs: imgs, pageWPt: pageWPt, pageHPt: pageHPt, marginPt: marginPt, scale: scale}
 	for i, top := range tops {
 		bot := pageHViewportPx * 1e9 // effectively unbounded: the last page

@@ -67,11 +67,20 @@ fragments nobody anchors are dropped rather than written as dead links.
 
 ## Scope
 
-This renders **static** HTML: no JavaScript, no external stylesheets, no
-`@font-face`. Text is set in the three families go-webengine's own paint
-package bundles — Inter (sans), Lora (serif), Go Mono (mono) — so the glyphs
-drawn always match the metrics the layout pass measured against; there is no
-web-font fetch to fail silently.
+This renders **static** HTML: no JavaScript, no `@font-face`. Text is set in
+the three families go-webengine's own paint package bundles — Inter (sans),
+Lora (serif), Go Mono (mono) — so the glyphs drawn always match the metrics
+the layout pass measured against; there is no web-font fetch to fail silently.
+
+External stylesheets — `<link rel="stylesheet">` and their `@import` chains —
+are fetched through the engine's own bounded loader (`Engine.LoadStylesheets`:
+64 sheets, 4 MB each, two `@import` levels, 10 s) and cascaded for the
+**print** medium by default (`Options.Media`, CLI `-media`): a page's
+`@media print` rules and print-only stylesheets apply, its screen-only ones do
+not — a browser's print preview, where a site's navigation, sidebars and
+footers are usually hidden. `-media screen` styles the page as displayed.
+Width features (`min-width`, `max-width`) are evaluated at `ViewportPx` under
+either.
 
 Images — raster `<img>`, `<img src="*.svg">` and inline `<svg>` — go through
 the engine's own fetch/decode/size pipeline (`Engine.LoadImages`) and are
@@ -88,6 +97,16 @@ engine's own `LineBox.Inlines` (go-webengine/engine#128), so a badge or pill
 lands exactly where the raster canvas puts it. Not painted on inline
 elements: `border-radius`, `background-image`/gradients, `box-shadow` — a
 fragment paints a flat background and straight borders.
+
+## Output
+
+PDF 1.5. Content and font streams are flated; every non-stream object — the
+link annotations (one per clickable line), named destinations, outline
+items, the Info dictionary — is packed into flated object streams with a
+cross-reference stream (pdfkit's `ObjectStreams`), which is what keeps a
+document with thousands of links close to its text size (RFC 9110: 3 398
+links, 1.06 MB; Chrome 4.5 MB). Fonts are embedded as subsets. Output is
+deterministic: the same input gives the same bytes.
 
 ## Status
 

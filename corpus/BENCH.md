@@ -1,18 +1,18 @@
 # html2pdf vs headless Chrome — 2026-09-06
 
-Machine: Apple M4 Max, 16 cores; load average at start: { 12.44 11.75 10.27 }. Chrome: Google Chrome 152.0.7977.76. 5 runs per tool per input, interleaved; medians. Both tools timed as child processes under `/usr/bin/time -l` (wall-clock to PDF on disk, start-up and any fetch included; RSS = peak resident set).
+Machine: Apple M4 Max, 16 cores; load average at start: { 15.55 14.25 13.40 }. Chrome: Google Chrome 152.0.7977.76. 5 runs per tool per input, interleaved; medians. Both tools timed as child processes under `/usr/bin/time -l` (wall-clock to PDF on disk, start-up and any fetch included; RSS = peak resident set).
 
 | Input | html2pdf | Chrome | Chrome ÷ html2pdf | PDF html2pdf | PDF Chrome | Pages | Text chars | Links | RSS html2pdf | RSS Chrome |
 |---|---|---|---|---|---|---|---|---|---|---|
-| https://example.com/ | 0.07 s | 2.44 s | 34.9× | 0.0 MB | 0.0 MB | 1 / 1 | 127 / 128 | 1 / 1 | 47.9 MB | 241.5 MB |
-| https://en.wikipedia.org/wiki/Go_(programming_language) | 0.36 s | 2.83 s | 7.9× | 0.6 MB | 1.7 MB | 18 / 25 | 63079 / 67289 | 1143 / 838 | 108.9 MB | 366.4 MB |
-| https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations) | 0.53 s | 2.79 s | 5.3× | 0.4 MB | 1.7 MB | 9 / 12 | 22951 / 21977 | 1119 / 1481 | 97.7 MB | 357.4 MB |
-| https://go.dev/blog/subtests | 0.72 s | 3.64 s | 5.1× | 0.2 MB | 0.2 MB | 6 / 7 | 13481 / 11742 | 90 / 15 | 76.3 MB | 352.3 MB |
-| https://pkg.go.dev/net/http | 1.40 s | 4.10 s | 2.9× | 0.8 MB | 6.3 MB | 49 / 86 | 151040 / 150480 | 2013 / 16374 | 122.7 MB | 677.2 MB |
-| https://www.rfc-editor.org/rfc/rfc9110.html | 0.71 s | 3.96 s | 5.6× | 2.2 MB | 4.5 MB | 120 / 169 | 449848 / 445667 | 5553 / 3506 | 177.7 MB | 549.3 MB |
-| https://news.ycombinator.com/ | 0.98 s | 3.23 s | 3.3× | 0.1 MB | 0.4 MB | 1 / 2 | 3757 / 3821 | 198 / 260 | 57.2 MB | 252.0 MB |
-| https://react.dev/ | 0.73 s | 3.02 s | 4.1× | 4.8 MB | 2.7 MB | 13 / 9 | 8045 / 6809 | 140 / 59 | 154.5 MB | 303.1 MB |
-| fixtures/longdoc.html | 0.39 s | 2.58 s | 6.6× | 0.9 MB | 2.4 MB | 100 / 135 | 590571 / 591170 | 0 / 0 | 164.3 MB | 375.7 MB |
+| https://example.com/ | 0.08 s | 2.37 s | 29.6× | 0.0 MB | 0.0 MB | 1 / 1 | 127 / 128 | 1 / 1 | 49.2 MB | 241.1 MB |
+| https://en.wikipedia.org/wiki/Go_(programming_language) | 0.62 s | 2.98 s | 4.8× | 0.2 MB | 1.7 MB | 13 / 25 | 55984 / 67289 | 710 / 838 | 100.3 MB | 362.3 MB |
+| https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations) | 0.75 s | 2.84 s | 3.8× | 0.1 MB | 1.7 MB | 7 / 12 | 19479 / 21977 | 876 / 1481 | 100.4 MB | 358.2 MB |
+| https://go.dev/blog/subtests | 0.88 s | 3.87 s | 4.4× | 0.1 MB | 0.2 MB | 5 / 7 | 12031 / 11742 | 31 / 15 | 69.9 MB | 352.7 MB |
+| https://pkg.go.dev/net/http | 1.61 s | 4.39 s | 2.7× | 0.4 MB | 6.3 MB | 51 / 86 | 145137 / 150480 | 1790 / 16374 | 119.9 MB | 677.3 MB |
+| https://www.rfc-editor.org/rfc/rfc9110.html | 0.79 s | 4.50 s | 5.7× | 1.1 MB | 4.5 MB | 85 / 169 | 444905 / 445667 | 3398 / 3506 | 180.5 MB | 550.0 MB |
+| https://news.ycombinator.com/ | 1.23 s | 3.27 s | 2.7× | 0.0 MB | 0.4 MB | 1 / 2 | 3657 / 3710 | 228 / 260 | 57.1 MB | 257.8 MB |
+| https://react.dev/ | 0.99 s | 3.12 s | 3.2× | 7.8 MB | 2.7 MB | 8 / 9 | 7737 / 6809 | 158 / 59 | 251.6 MB | 301.4 MB |
+| fixtures/longdoc.html | 0.41 s | 2.53 s | 6.2× | 0.9 MB | 2.4 MB | 100 / 135 | 590571 / 591170 | 0 / 0 | 144.7 MB | 372.3 MB |
 
 <!-- BEGIN ANALYSIS -->
 
@@ -130,3 +130,64 @@ object with an uncompressed dictionary and an xref entry, which is how PDF
 but the fix is known: PDF 1.5 *object streams* flate the non-stream objects
 together, and belong in pdfkit, not here. `longdoc` (no links) is unchanged
 at 0.9 MB.
+
+### Two changes, measured one at a time — 2026-09-06
+
+The afternoon's two changes were run through the harness separately, so each
+one's effect is on record alone (commit "corpus/bench/judges rerun with
+external stylesheets and print media" holds the first stage's tables).
+
+**1. External stylesheets + print medium** (engine #133; see CORPUS.md for the
+page-by-page table and the renders). For the bench this means the layout is
+now the page's *printed* layout, so the pages / text / links columns are
+closer to Chrome's than they have ever been — RFC 9110 3398 links vs 3506,
+Hacker News 228 vs 260 — while what remains different is now nameable:
+Chrome's extra pages come from printing at 1:1 rather than our 0.63×
+ViewportPx scale; its extra links on pkg.go.dev from JavaScript-built
+content; its fewer links on go.dev/blog and react.dev from per-fragment
+splitting on their side vs per-line on ours. Time moved with the work: a
+page whose stylesheet now lays out a real design costs more to cascade and
+paint (Wikipedia 0.36 → 0.60 s, react.dev 0.73 → 1.07 s), a page that lost
+its sidebar costs less to paginate (RFC 0.71 → 0.87 s includes fetching its
+stylesheet). Peak RSS *fell* on the text pages (Wikipedia 109 → 97 MB,
+pkg.go.dev 123 → 104 MB) and rose on react.dev (155 → 246 MB) — see below.
+
+**2. Object streams** (pdfkit #29; `Options.ObjectStreams`, PDF 1.5). Every
+annotation, destination and outline item is now packed into flated object
+streams instead of being a bare indirect object. Same pages, same morning,
+corpus bytes:
+
+| Page | Links | Before | After | Chrome |
+|---|---|---|---|---|
+| Wikipedia (Go) | 710 | 482 KB | **251 KB** | 1.7 MB |
+| countries table | 876 | 368 KB | **126 KB** | 1.7 MB |
+| pkg.go.dev | 1790 | 735 KB | **384 KB** | 6.3 MB |
+| RFC 9110 | 3398 | 1.80 MB | **1.06 MB** | 4.5 MB |
+| Hacker News | 228 | 72 KB | **28 KB** | 358 KB |
+| go.dev/blog | 31 | 71 KB | 61 KB | 225 KB |
+| react.dev | 158 | 7.87 MB | 7.83 MB | 2.7 MB |
+
+The #14 residual ("RFC 9110 1.0 → 2.2 MB for its annotations") is closed:
+the RFC is back at 1.06 MB with every link, and every reader on the machine
+reads the PDF 1.5 files with no warning (JUDGES.md, rerun on these files).
+Nothing else in the file changed — page count, text, link count and the
+judges' consensus are identical between the two stages.
+
+**The one page where we are now larger than Chrome, and why.** react.dev is
+7.8 MB against Chrome's 2.7 MB. `pdfimages -list` says where it goes: its
+stylesheet lays out the eight conference photographs the site serves as
+**WebP**, which the engine decodes and we embed as flate RGB bitmaps at the
+1024 px they were fetched at — 0.5 to 1.3 MB each, ~7 MB of the file,
+deduplicated (8 objects for 16 uses) but painted in a grid ~300 px wide.
+Two levers, both outside this change: embed a bitmap at its *painted* size
+(times a print scale), not its fetched size; and pass a JPEG source through
+as a DCTDecode stream instead of re-encoding it. The same explains the RSS
+rise on that page.
+
+**A counting trap this stage found**: the Links column used to count
+`/Subtype /Link` in the raw bytes, which object streams hide; the counter
+now inflates every flate stream first (`corpus/internal/pdfstat`) — and its
+first version lost exactly one object stream of 1 000 annotations because
+its regexp ate a data byte before `endstream` when the flate data ended in
+0x0D. The number that exposed it was pdf.js's `getAnnotations` (3398), not
+anything in the file. A count of the PDF's bytes is not a reader's count.

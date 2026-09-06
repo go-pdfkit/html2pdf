@@ -19,6 +19,7 @@ import (
 	"time"
 
 	"github.com/go-pdfkit/html2pdf"
+	"github.com/go-pdfkit/html2pdf/corpus/internal/pdfstat"
 	"github.com/go-webengine/engine"
 )
 
@@ -159,7 +160,7 @@ func run() int {
 			continue
 		}
 		r.PDFBytes = len(pdfBytes)
-		r.Links = bytes.Count(pdfBytes, []byte("/Subtype /Link"))
+		r.Links = pdfstat.CountLinks(pdfBytes)
 
 		outPath := filepath.Join(*outDir, r.Slug+".pdf")
 		if err := os.WriteFile(outPath, pdfBytes, 0o644); err != nil {
