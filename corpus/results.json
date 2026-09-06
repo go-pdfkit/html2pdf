@@ -3,88 +3,96 @@
     "url": "https://example.com/",
     "slug": "example-com",
     "ok": true,
-    "fetch_ms": 44,
+    "fetch_ms": 43,
     "render_ms": 31,
-    "pdf_bytes": 7905,
+    "pdf_bytes": 8336,
     "pages": 1,
     "text_chars": 127,
-    "html_bytes": 559
+    "html_bytes": 559,
+    "links": 1
   },
   {
     "url": "https://en.wikipedia.org/wiki/Go_(programming_language)",
     "slug": "en-wikipedia-org-wiki-Go_programming_language",
     "ok": true,
-    "fetch_ms": 123,
-    "render_ms": 236,
-    "pdf_bytes": 215610,
+    "fetch_ms": 114,
+    "render_ms": 234,
+    "pdf_bytes": 596551,
     "pages": 18,
     "text_chars": 63079,
-    "html_bytes": 734695
+    "html_bytes": 734695,
+    "links": 1143
   },
   {
     "url": "https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)",
     "slug": "en-wikipedia-org-wiki-List_of_countries_by_population_United_Nations",
     "ok": true,
     "fetch_ms": 34,
-    "render_ms": 496,
-    "pdf_bytes": 78288,
+    "render_ms": 506,
+    "pdf_bytes": 419279,
     "pages": 9,
     "text_chars": 22951,
-    "html_bytes": 773535
+    "html_bytes": 773535,
+    "links": 1119
   },
   {
     "url": "https://go.dev/blog/subtests",
     "slug": "go-dev-blog-subtests",
     "ok": true,
-    "fetch_ms": 263,
-    "render_ms": 524,
-    "pdf_bytes": 180648,
+    "fetch_ms": 209,
+    "render_ms": 513,
+    "pdf_bytes": 199998,
     "pages": 6,
     "text_chars": 13481,
-    "html_bytes": 46512
+    "html_bytes": 46512,
+    "links": 90
   },
   {
     "url": "https://pkg.go.dev/net/http",
     "slug": "pkg-go-dev-net-http",
     "ok": true,
-    "fetch_ms": 212,
-    "render_ms": 1179,
-    "pdf_bytes": 385845,
+    "fetch_ms": 339,
+    "render_ms": 1107,
+    "pdf_bytes": 825554,
     "pages": 49,
     "text_chars": 151040,
-    "html_bytes": 482331
+    "html_bytes": 482331,
+    "links": 2013
   },
   {
     "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
     "slug": "www-rfc-editor-org-rfc-rfc9110-html",
     "ok": true,
-    "fetch_ms": 218,
-    "render_ms": 466,
-    "pdf_bytes": 981952,
+    "fetch_ms": 238,
+    "render_ms": 497,
+    "pdf_bytes": 2244491,
     "pages": 120,
     "text_chars": 449848,
-    "html_bytes": 1187554
+    "html_bytes": 1187554,
+    "links": 5553
   },
   {
     "url": "https://news.ycombinator.com/",
     "slug": "news-ycombinator-com",
     "ok": true,
-    "fetch_ms": 492,
-    "render_ms": 514,
-    "pdf_bytes": 21686,
+    "fetch_ms": 467,
+    "render_ms": 490,
+    "pdf_bytes": 65460,
     "pages": 1,
-    "text_chars": 3812,
-    "html_bytes": 34730
+    "text_chars": 3757,
+    "html_bytes": 34659,
+    "links": 198
   },
   {
     "url": "https://react.dev/",
     "slug": "react-dev",
     "ok": true,
-    "fetch_ms": 171,
-    "render_ms": 543,
-    "pdf_bytes": 4734109,
+    "fetch_ms": 134,
+    "render_ms": 559,
+    "pdf_bytes": 4773305,
     "pages": 13,
     "text_chars": 8045,
-    "html_bytes": 272458
+    "html_bytes": 272458,
+    "links": 140
   }
 ]

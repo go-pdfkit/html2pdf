@@ -1,18 +1,18 @@
 # html2pdf vs headless Chrome — 2026-09-06
 
-Machine: Apple M4 Max, 16 cores; load average at start: { 17.83 12.36 10.96 }. Chrome: Google Chrome 152.0.7977.76. 5 runs per tool per input, interleaved; medians. Both tools timed as child processes under `/usr/bin/time -l` (wall-clock to PDF on disk, start-up and any fetch included; RSS = peak resident set).
+Machine: Apple M4 Max, 16 cores; load average at start: { 12.44 11.75 10.27 }. Chrome: Google Chrome 152.0.7977.76. 5 runs per tool per input, interleaved; medians. Both tools timed as child processes under `/usr/bin/time -l` (wall-clock to PDF on disk, start-up and any fetch included; RSS = peak resident set).
 
-| Input | html2pdf | Chrome | Chrome ÷ html2pdf | PDF html2pdf | PDF Chrome | Pages | Text chars | RSS html2pdf | RSS Chrome |
-|---|---|---|---|---|---|---|---|---|---|
-| https://example.com/ | 0.07 s | 1.67 s | 23.9× | 0.0 MB | 0.0 MB | 1 / 1 | 127 / 128 | 48.0 MB | 242.1 MB |
-| https://en.wikipedia.org/wiki/Go_(programming_language) | 0.35 s | 2.23 s | 6.4× | 0.2 MB | 1.7 MB | 18 / 25 | 63079 / 67289 | 102.6 MB | 361.9 MB |
-| https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations) | 0.54 s | 2.30 s | 4.3× | 0.1 MB | 1.6 MB | 9 / 12 | 22951 / 21987 | 96.6 MB | 356.6 MB |
-| https://go.dev/blog/subtests | 0.72 s | 3.09 s | 4.3× | 0.2 MB | 0.2 MB | 6 / 7 | 13481 / 11742 | 71.2 MB | 352.7 MB |
-| https://pkg.go.dev/net/http | 1.66 s | 3.67 s | 2.2× | 0.4 MB | 6.3 MB | 49 / 86 | 151040 / 150480 | 110.3 MB | 677.5 MB |
-| https://www.rfc-editor.org/rfc/rfc9110.html | 0.78 s | 3.90 s | 5.0× | 1.0 MB | 4.5 MB | 120 / 169 | 449848 / 445667 | 187.3 MB | 549.7 MB |
-| https://news.ycombinator.com/ | 0.96 s | 2.53 s | 2.6× | 0.0 MB | 0.4 MB | 1 / 2 | 3812 / 3875 | 56.6 MB | 252.6 MB |
-| https://react.dev/ | 0.73 s | 2.52 s | 3.5× | 4.7 MB | 2.7 MB | 13 / 9 | 8045 / 6809 | 152.6 MB | 302.1 MB |
-| fixtures/longdoc.html | 0.41 s | 1.99 s | 4.9× | 0.9 MB | 2.4 MB | 100 / 135 | 590571 / 591170 | 169.0 MB | 372.1 MB |
+| Input | html2pdf | Chrome | Chrome ÷ html2pdf | PDF html2pdf | PDF Chrome | Pages | Text chars | Links | RSS html2pdf | RSS Chrome |
+|---|---|---|---|---|---|---|---|---|---|---|
+| https://example.com/ | 0.07 s | 2.44 s | 34.9× | 0.0 MB | 0.0 MB | 1 / 1 | 127 / 128 | 1 / 1 | 47.9 MB | 241.5 MB |
+| https://en.wikipedia.org/wiki/Go_(programming_language) | 0.36 s | 2.83 s | 7.9× | 0.6 MB | 1.7 MB | 18 / 25 | 63079 / 67289 | 1143 / 838 | 108.9 MB | 366.4 MB |
+| https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations) | 0.53 s | 2.79 s | 5.3× | 0.4 MB | 1.7 MB | 9 / 12 | 22951 / 21977 | 1119 / 1481 | 97.7 MB | 357.4 MB |
+| https://go.dev/blog/subtests | 0.72 s | 3.64 s | 5.1× | 0.2 MB | 0.2 MB | 6 / 7 | 13481 / 11742 | 90 / 15 | 76.3 MB | 352.3 MB |
+| https://pkg.go.dev/net/http | 1.40 s | 4.10 s | 2.9× | 0.8 MB | 6.3 MB | 49 / 86 | 151040 / 150480 | 2013 / 16374 | 122.7 MB | 677.2 MB |
+| https://www.rfc-editor.org/rfc/rfc9110.html | 0.71 s | 3.96 s | 5.6× | 2.2 MB | 4.5 MB | 120 / 169 | 449848 / 445667 | 5553 / 3506 | 177.7 MB | 549.3 MB |
+| https://news.ycombinator.com/ | 0.98 s | 3.23 s | 3.3× | 0.1 MB | 0.4 MB | 1 / 2 | 3757 / 3821 | 198 / 260 | 57.2 MB | 252.0 MB |
+| https://react.dev/ | 0.73 s | 3.02 s | 4.1× | 4.8 MB | 2.7 MB | 13 / 9 | 8045 / 6809 | 140 / 59 | 154.5 MB | 303.1 MB |
+| fixtures/longdoc.html | 0.39 s | 2.58 s | 6.6× | 0.9 MB | 2.4 MB | 100 / 135 | 590571 / 591170 | 0 / 0 | 164.3 MB | 375.7 MB |
 
 <!-- BEGIN ANALYSIS -->
 
@@ -103,3 +103,30 @@ Chrome prints at CSS px with no shrink. Set `ViewportPx` to the column width
 for a 1:1 comparison. Extracted text agrees within ~5% except where Chrome
 runs the page's JavaScript and print stylesheet and html2pdf does not
 (`react.dev` 13 vs 9 pages, `go.dev/blog` hiding its nav in print CSS).
+
+### Links — parity with Chrome is not a count — 2026-09-06
+
+The **Links** column is `/Subtype /Link` annotations, html2pdf / Chrome. The
+counts differ in both directions and neither side's number is a correctness
+measure:
+
+| Input | html2pdf | Chrome | Why they differ |
+|---|---|---|---|
+| Wikipedia (Go) | 1143 | 838 | Chrome prints under `@media print`, which hides the sidebar, TOC and edit links; we lay out the screen stylesheet (no `@media print` support yet) |
+| go.dev/blog, react.dev | 90, 140 | 15, 59 | same: site navs hidden in print |
+| RFC 9110 | 5553 | 3506 | same: the TOC sidebar's links hidden in print; ours are one rectangle per line, which also splits a wrapped anchor |
+| countries table | 1119 | 1481 | Chrome writes one annotation per text fragment, so a flag + name cell is two; ours merges an anchor's atoms on a line into one |
+| pkg.go.dev | 2013 | 16374 | Chrome ran the page's JavaScript, which builds the per-symbol index; this is a static renderer |
+| Hacker News | 198 | 260 | 30 are vote arrows sized only by HN's external stylesheet, which we do not load (0 × 0 px, no rectangle); the rest are `mailto:` and per-fragment splits — see CORPUS.md |
+
+What *is* a correctness measure was done in CORPUS.md: every GoTo resolves
+in pdf.js, the bookmarks point at the pages the headings are on, every reader
+still passes with no warning (JUDGES.md, rerun on these files).
+
+**Size residual, stated plainly**: RFC 9110 went 1.0 MB → 2.2 MB for its
+5 553 annotations, i.e. ~220 B each — every annotation is its own indirect
+object with an uncompressed dictionary and an xref entry, which is how PDF
+1.4 has to write it. Chrome's file (4.5 MB, 3 506 links) is still twice ours,
+but the fix is known: PDF 1.5 *object streams* flate the non-stream objects
+together, and belong in pdfkit, not here. `longdoc` (no links) is unchanged
+at 0.9 MB.
