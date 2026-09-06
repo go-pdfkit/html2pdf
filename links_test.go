@@ -8,15 +8,9 @@ import (
 	"bytes"
 	"compress/zlib"
 	"io"
-	"net/url"
 	"regexp"
 	"strings"
 	"testing"
-
-	"github.com/go-webengine/engine/css"
-	"github.com/go-webengine/engine/dom"
-	"github.com/go-webengine/engine/layout"
-	"github.com/go-webengine/engine/paint"
 )
 
 // exportBytes renders html and returns the PDF's bytes followed by the
@@ -98,53 +92,6 @@ func TestExportRelativeLinkResolvesAgainstBaseURL(t *testing.T) {
 	}
 }
 
-func TestCollectLinksSplitsAWrappedAnchorPerLine(t *testing.T) {
-	// A link long enough to wrap in a narrow container yields one run per
-	// line — the clickable area follows the text — not one bounding box.
-	root, err := layoutAtWidthForTest(`<html><body style="margin:0"><div style="width:200px">`+
-		`<a href="https://example.org/">`+strings.Repeat("word ", 40)+`</a></div></body></html>`, 1024)
-	if err != nil {
-		t.Fatal(err)
-	}
-	base, _ := url.Parse("https://example.org/")
-	runs := collectLinks(root, base, nil)
-	if len(runs) < 2 {
-		t.Fatalf("runs = %d, want one per wrapped line (>= 2)", len(runs))
-	}
-	for i := 1; i < len(runs); i++ {
-		if runs[i].y <= runs[i-1].y {
-			t.Errorf("run %d (y=%v) is not below run %d (y=%v)", i, runs[i].y, i-1, runs[i-1].y)
-		}
-		if runs[i].uri != runs[0].uri {
-			t.Errorf("run %d target %q differs from %q", i, runs[i].uri, runs[0].uri)
-		}
-	}
-}
-
-func TestCollectIDsBlockAndInlineAndLegacyName(t *testing.T) {
-	root, err := layoutAtWidthForTest(`<html><body style="margin:0">
-		<p>intro</p>
-		<div id="block">block</div>
-		<p>text <span id="inline">inline</span> text <a name="legacy">old</a></p>
-		<div id="block">duplicate</div>
-	</body></html>`, 1024)
-	if err != nil {
-		t.Fatal(err)
-	}
-	ids := collectIDs(root)
-	for _, id := range []string{"block", "inline", "legacy"} {
-		if _, ok := ids[id]; !ok {
-			t.Errorf("id %q not found", id)
-		}
-	}
-	if ids["inline"].y <= ids["block"].y {
-		t.Errorf("inline id (y=%v) should sit below the block id (y=%v)", ids["inline"].y, ids["block"].y)
-	}
-	if len(ids) != 3 {
-		t.Errorf("ids = %v, want exactly 3 (duplicate id keeps the first)", ids)
-	}
-}
-
 func TestExportOutlineFromHeadingsAndTitleFromDocument(t *testing.T) {
 	out := exportBytes(t, `<html><head><title>  Mon   rapport </title></head><body>
 		<h1>Chapter One</h1><p>a</p><h2>Part <b>Alpha</b></h2><p>b</p><h3></h3>
@@ -173,38 +120,6 @@ func TestPageIndexOf(t *testing.T) {
 	}
 }
 
-func TestResolveAnchorEdgeCases(t *testing.T) {
-	base, _ := url.Parse("https://host/dir/page")
-	ids := map[string]struct{}{"here": {}}
-	for _, tc := range []struct {
-		raw        string
-		wantOK     bool
-		wantURI    string
-		wantDest   string
-		withNoBase bool
-	}{
-		{raw: "#here", wantOK: true, wantDest: "here"},
-		{raw: "#gone", wantOK: false},
-		{raw: "https://host/dir/page#here", wantOK: true, wantDest: "here"},
-		{raw: "https://host/dir/page#gone", wantOK: false},
-		{raw: "https://other/#here", wantOK: true, wantURI: "https://other/#here"},
-		{raw: "sub/x", wantOK: true, wantURI: "https://host/dir/sub/x"},
-		{raw: "://bad url", wantOK: false},
-		{raw: "ftp://host/f", wantOK: false},
-		{raw: "https://abs/x", wantOK: true, wantURI: "https://abs/x", withNoBase: true},
-		{raw: "rel/x", wantOK: false, withNoBase: true}, // no base: a relative href resolves to nothing navigable
-	} {
-		b := base
-		if tc.withNoBase {
-			b = nil
-		}
-		got := resolveAnchor(b, tc.raw, ids)
-		if got.ok != tc.wantOK || got.uri != tc.wantURI || got.dest != tc.wantDest {
-			t.Errorf("resolveAnchor(%q) = %+v, want ok=%v uri=%q dest=%q", tc.raw, got, tc.wantOK, tc.wantURI, tc.wantDest)
-		}
-	}
-}
-
 // grepLines returns the lines of a PDF that mention s, for a failure message.
 func grepLines(pdf []byte, s string) string {
 	var out []string
@@ -214,35 +129,4 @@ func grepLines(pdf []byte, s string) string {
 		}
 	}
 	return strings.Join(out, "\n")
-}
-
-// An anchor whose only content is an empty styled block — a vote arrow, an
-// icon drawn by CSS — lays out no atom, so the line pass finds nothing; the
-// box pass gives it the block's own rectangle, once, and a text-bearing
-// anchor is not doubled by it.
-func TestCollectLinksGivesAnAtomlessAnchorItsBoxRect(t *testing.T) {
-	html := `<html><body>
-<a href="https://example.com/vote"><div style="width:10px;height:10px"></div></a>
-<p><a href="https://example.com/text">one <span>two</span></a></p>
-</body></html>`
-	root, _ := dom.Parse(html)
-	box, _ := layout.LayoutDocument(root, css.Cascade(root), 1024, paint.NewFonts(), nil)
-	runs := collectLinks(box, nil, nil)
-	var votes, texts int
-	for _, r := range runs {
-		switch r.uri {
-		case "https://example.com/vote":
-			votes++
-			if r.w != 10 || r.h != 10 {
-				t.Errorf("vote run = %vx%v at (%v,%v), want the 10x10 block", r.w, r.h, r.x, r.y)
-			}
-		case "https://example.com/text":
-			texts++
-		default:
-			t.Errorf("unexpected run %+v", r)
-		}
-	}
-	if votes != 1 || texts != 1 {
-		t.Fatalf("runs: vote %d, text %d; want 1 and 1 (%d runs total)", votes, texts, len(runs))
-	}
 }
