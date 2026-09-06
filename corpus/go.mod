@@ -4,7 +4,7 @@ go 1.26.4
 
 require (
 	github.com/go-pdfkit/html2pdf v0.0.0
-	github.com/go-webengine/engine v0.3.12-0.20260904213653-218d80e0325d
+	github.com/go-webengine/engine v0.3.12-0.20260905202745-e27d464fe8f6
 )
 
 require (
@@ -25,7 +25,7 @@ require (
 	github.com/go-opentype/fonts v0.9.0 // indirect
 	github.com/go-opentype/opentype v0.12.0 // indirect
 	github.com/go-opentype/shape v0.5.0 // indirect
-	github.com/go-pdfkit/pdfkit v0.9.0 // indirect
+	github.com/go-pdfkit/pdfkit v0.11.0 // indirect
 	github.com/go-richdoc/richdoc v0.3.0 // indirect
 	github.com/go-sourcemap/sourcemap v2.1.4+incompatible // indirect
 	github.com/go-typeset/bidi v0.3.0 // indirect
