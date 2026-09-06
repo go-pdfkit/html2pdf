@@ -37,7 +37,7 @@
 // An <a href> becomes a link annotation — a URI action for an http(s)
 // target, a GoTo to a named destination for a fragment that points at an
 // element id in the document — one clickable rectangle per line the anchor
-// spans, or the box of an anchor that lays out no text (see links.go). Every
+// spans, or the box of an anchor that lays out no text (engine.LinkRuns). Every
 // element id becomes a named destination, and
 // the headings become the viewer's bookmark tree (<h1> at the top level,
 // deeper headings nested under the last shallower one). The <title> fills
@@ -199,13 +199,13 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	// Navigation: the anchors' clickable runs, the ids they can jump to, and
 	// the headings that become the viewer's bookmark tree.
 	base, _ := url.Parse(opts.BaseURL)
-	ids := collectIDs(box)
+	ids := engine.DocumentIDs(box)
 	idSet := make(map[string]struct{}, len(ids))
 	for id := range ids {
 		idSet[id] = struct{}{}
 	}
-	links := collectLinks(box, base, idSet)
-	heads := collectHeadings(box)
+	links := engine.LinkRuns(box, base, idSet)
+	heads := engine.Headings(box)
 
 	title := opts.Title
 	if title == "" {
@@ -234,43 +234,7 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 		e.addDests(ids)
 	}
 	for _, h := range heads {
-		doc.AddOutlineItem(h.title, h.level, pageIndexOf(h.y, tops))
+		doc.AddOutlineItem(h.Title, h.Level, pageIndexOf(h.Y, tops))
 	}
 	return doc, nil
-}
-
-// addLinks attaches the clickable runs that start on the current page: a
-// URI action for an external target, a GoTo to a named destination for an
-// in-document one. A text run breaks per line, and pagination breaks between
-// lines, so it is on exactly one page; a box run (an atom-less anchor) may
-// straddle a break and is clipped to the page it starts on.
-func (e *exporter) addLinks(links []linkRun) {
-	for _, l := range links {
-		if l.y < e.pageTop || l.y >= e.pageBot {
-			continue
-		}
-		bottom := l.y + l.h
-		if bottom > e.pageBot {
-			bottom = e.pageBot
-		}
-		x0, y0 := e.toPdf(l.x, l.y)
-		x1, y1 := e.toPdf(l.x+l.w, bottom)
-		r := pdfkit.Rect{X: x0, Y: y1, Width: x1 - x0, Height: y0 - y1}
-		if l.uri != "" {
-			e.p.AddLink(r, l.uri)
-		} else {
-			e.p.AddNamedLink(r, l.dest)
-		}
-	}
-}
-
-// addDests anchors, on the current page, every id whose element sits on it.
-func (e *exporter) addDests(ids map[string]anchorPoint) {
-	for id, pt := range ids {
-		if pt.y < e.pageTop || pt.y >= e.pageBot {
-			continue
-		}
-		x, y := e.toPdf(pt.x, pt.y)
-		e.p.AddNamedDest(id, x, y)
-	}
 }
