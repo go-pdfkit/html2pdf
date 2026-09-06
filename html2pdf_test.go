@@ -413,6 +413,30 @@ func TestPaintDecorationClipsToThePageSlice(t *testing.T) {
 	}
 }
 
+func TestExportCompressesContentStreams(t *testing.T) {
+	// Without Compress, a text-only document's PDF was 6–16× the size of the
+	// same page printed by Chrome — every content stream written raw. Guard
+	// that the streams are flate-encoded and that the output is still
+	// byte-deterministic across two exports.
+	html := `<html><body>` + strings.Repeat("<p>compressible prose, repeated.</p>", 200) + `</body></html>`
+	var a, b bytes.Buffer
+	for _, buf := range []*bytes.Buffer{&a, &b} {
+		doc, err := Export(html, Options{})
+		if err != nil {
+			t.Fatalf("Export: %v", err)
+		}
+		if err := doc.Write(buf); err != nil {
+			t.Fatalf("Write: %v", err)
+		}
+	}
+	if !bytes.Contains(a.Bytes(), []byte("/FlateDecode")) {
+		t.Error("no FlateDecode stream in the output: content streams are written uncompressed")
+	}
+	if !bytes.Equal(a.Bytes(), b.Bytes()) {
+		t.Error("two exports of the same document differ byte-for-byte")
+	}
+}
+
 func TestExportRespectsCustomMargin(t *testing.T) {
 	doc, err := Export(`<html><body>x</body></html>`, Options{MarginMm: 40})
 	if err != nil {

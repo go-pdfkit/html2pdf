@@ -22,10 +22,13 @@ defer f.Close()
 doc.Write(f)
 ```
 
-Or from the shell:
+Or from the shell — a local file, or a page fetched through the engine's own
+client (its final URL then resolves relative image sources; use `-base` for
+that with `-in`):
 
 ```sh
 go run ./cmd/html2pdf -in report.html -out report.pdf
+go run ./cmd/html2pdf -url https://example.org/report -out report.pdf
 ```
 
 ## Pagination

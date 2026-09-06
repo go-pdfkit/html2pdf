@@ -5,6 +5,8 @@
 package main
 
 import (
+	"net/http"
+	"net/http/httptest"
 	"os"
 	"path/filepath"
 	"testing"
@@ -13,6 +15,46 @@ import (
 func TestRunMissingIn(t *testing.T) {
 	if code := run(nil, os.Stderr); code != 2 {
 		t.Errorf("run(nil) = %d, want 2", code)
+	}
+}
+
+func TestRunRejectsBothInAndURL(t *testing.T) {
+	if code := run([]string{"-in", "x.html", "-url", "http://127.0.0.1:1/"}, os.Stderr); code != 2 {
+		t.Errorf("run(-in and -url) = %d, want 2", code)
+	}
+}
+
+func TestRunURLFetchesAndRenders(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path == "/page" {
+			w.Header().Set("Content-Type", "text/html; charset=utf-8")
+			// A relative image that 404s: the base URL must resolve it (so the
+			// fetch is attempted against this server) and its failure must be
+			// silent, as on the raster canvas.
+			w.Write([]byte(`<html><body><h1>fetched</h1><img src="missing.png"><p>body text</p></body></html>`))
+			return
+		}
+		http.NotFound(w, r)
+	}))
+	defer srv.Close()
+
+	out := filepath.Join(t.TempDir(), "out.pdf")
+	if code := run([]string{"-url", srv.URL + "/page", "-out", out}, os.Stderr); code != 0 {
+		t.Fatalf("run(-url) = %d, want 0", code)
+	}
+	data, err := os.ReadFile(out)
+	if err != nil {
+		t.Fatalf("read output: %v", err)
+	}
+	if len(data) < 5 || string(data[:5]) != "%PDF-" {
+		t.Errorf("output is not a PDF")
+	}
+}
+
+func TestRunURLFetchFailure(t *testing.T) {
+	// A closed port: the fetch fails fast and the exit code says so.
+	if code := run([]string{"-url", "http://127.0.0.1:1/nothing", "-out", filepath.Join(t.TempDir(), "o.pdf"), "-timeout", "5s"}, os.Stderr); code != 1 {
+		t.Errorf("run(-url unreachable) = %d, want 1", code)
 	}
 }
 

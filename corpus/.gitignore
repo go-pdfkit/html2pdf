@@ -2,3 +2,4 @@
 # page-1 PNG previews (small, useful as a visual record) but not these.
 out/*.pdf
 corpus
+out/**/*.pdf

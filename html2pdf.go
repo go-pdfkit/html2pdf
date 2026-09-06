@@ -139,7 +139,10 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	breaks := pageBreaks(atoms, pageHViewportPx)
 	tops := append([]float64{0}, breaks...)
 
-	doc := pdfkit.New(pdfkit.Options{})
+	// Compress content and font streams: a text-heavy page's PDF is 6–16×
+	// smaller for it (RFC 9110 29 → ~5 MB) and the output stays deterministic,
+	// flate being deterministic. Image streams pick their own filter.
+	doc := pdfkit.New(pdfkit.Options{Compress: true})
 	e := &exporter{fonts: fs, imgs: imgs, pageWPt: pageWPt, pageHPt: pageHPt, marginPt: marginPt, scale: scale}
 	for i, top := range tops {
 		bot := pageHViewportPx * 1e9 // effectively unbounded: the last page
