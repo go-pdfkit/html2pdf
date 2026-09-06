@@ -1,0 +1,20 @@
+# L4/L5: Chrome cuts the orphans/widows-3 paragraph 4+4; 3+5 or 5+3 satisfy the same constraint and depend only on the font, so either page is accepted for those two.
+# Chrome 141 headless --print-to-pdf of breaks.html, 2026-09-06: marker → page (A5, 15mm margins; 9 pages)
+P1-B	1
+T-row-1	3
+T-row-8	3
+P2-B	3
+H2-keep	5
+P3-B	5
+P4-A	6
+L1 line	6
+L2 line	6
+L3 line	6
+L4 line	6|7
+L5 line	6|7
+L6 line	7
+L7 line	7
+L8 line	7
+P4-B	7
+F-1	9
+F-5	9

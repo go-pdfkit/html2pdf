@@ -13,12 +13,13 @@ import (
 	"github.com/go-webengine/engine/css"
 	"github.com/go-webengine/engine/dom"
 	"github.com/go-webengine/engine/layout"
+	"github.com/go-webengine/engine/paginate"
 	"github.com/go-webengine/engine/paint"
 )
 
 // parseAndLayoutForTest mirrors Export's own parse+cascade+layout steps at
 // the print column's own width (no viewport scaling), for tests that need to
-// inspect the box tree collectAtoms sees rather than only the final PDF
+// inspect the box tree the paginator sees rather than only the final PDF
 // bytes.
 func parseAndLayoutForTest(htmlSrc string) (*layout.Box, error) {
 	o := (Options{}).resolved()
@@ -66,7 +67,7 @@ func TestExportEmptyBodyProducesOnePage(t *testing.T) {
 	}
 	// A page count assertion would require parsing the emitted PDF; the write
 	// succeeding without panic on a boxless document is the property under
-	// test (collectAtoms/pageBreaks must handle zero atoms).
+	// test (the paginator must handle a document with nothing to cut between).
 }
 
 func TestExportInvalidOptionsFallBackToDefaults(t *testing.T) {
@@ -88,37 +89,6 @@ func TestExportRejectsUnparsableInput(t *testing.T) {
 	// behaviour unnoticed.
 	if _, err := Export("", Options{}); err != nil {
 		t.Errorf("Export(\"\") = %v, want nil error (HTML5 parsing has no hard failures)", err)
-	}
-}
-
-func TestPageBreaksNeverSplitAnAtom(t *testing.T) {
-	atoms := []atom{{0, 10}, {10, 20}, {20, 30}, {30, 40}, {40, 50}}
-	breaks := pageBreaks(atoms, 22) // fits 2 atoms (20px) per page, not a 3rd
-	want := []float64{20, 40}
-	if len(breaks) != len(want) {
-		t.Fatalf("breaks = %v, want %v", breaks, want)
-	}
-	for i, b := range breaks {
-		if b != want[i] {
-			t.Errorf("breaks[%d] = %v, want %v", i, b, want[i])
-		}
-	}
-}
-
-func TestPageBreaksEmptyAtomsNoPanic(t *testing.T) {
-	if got := pageBreaks(nil, 100); got != nil {
-		t.Errorf("pageBreaks(nil, ...) = %v, want nil", got)
-	}
-}
-
-func TestPageBreaksOversizedAtomStillAdvances(t *testing.T) {
-	// A single atom taller than one page (an oversized image, an enormous
-	// table row) cannot be split — it gets its own page(s) worth of room
-	// rather than looping forever or being silently dropped.
-	atoms := []atom{{0, 500}, {500, 520}}
-	breaks := pageBreaks(atoms, 100)
-	if len(breaks) != 1 || breaks[0] != 500 {
-		t.Errorf("breaks = %v, want [500]", breaks)
 	}
 }
 
@@ -225,27 +195,15 @@ func TestExportNestedLayoutTableSplitsAcrossPages(t *testing.T) {
 	if err := doc.Write(&buf); err != nil {
 		t.Fatalf("Write: %v", err)
 	}
-	// The nested rows must show up as their own atoms, not one atom for the
-	// whole nested table.
+	// The nested rows must be cut between, not carried as one atom the size
+	// of the whole nested table: 60 rows of ~38px on 500px pages is four
+	// pages at least (the paginator's own tests cover the wrapper-row rule).
 	root, err := parseAndLayoutForTest(html)
 	if err != nil {
 		t.Fatalf("layout: %v", err)
 	}
-	atoms := collectAtoms(root)
-	if len(atoms) < 60 {
-		t.Errorf("collectAtoms found %d atoms, want >= 60 (one per nested row, not one for the whole nested table)", len(atoms))
-	}
-}
-
-func TestHasDescendantTrNilChildren(t *testing.T) {
-	if hasDescendantTr(&layout.Box{}) {
-		t.Error("hasDescendantTr on a childless box = true, want false")
-	}
-}
-
-func TestCollectAtomsHandlesNilBox(t *testing.T) {
-	if got := collectAtoms(nil); got != nil {
-		t.Errorf("collectAtoms(nil) = %v, want nil", got)
+	if breaks := paginate.Breaks(root, 500); len(breaks) < 3 {
+		t.Errorf("paginate.Breaks cut %d times, want >= 3 (the nested rows must paginate as rows)", len(breaks))
 	}
 }
 
@@ -265,13 +223,13 @@ func TestExportScalesAWideFixedWidthPageToFitTheColumn(t *testing.T) {
 	if err != nil {
 		t.Fatalf("layout: %v", err)
 	}
-	narrowLines := len(collectAtoms(narrow))
+	narrowLines := countLines(narrow)
 
 	wideBox, err := layoutAtWidthForTest(html, 1024)
 	if err != nil {
 		t.Fatalf("layout: %v", err)
 	}
-	wideLines := len(collectAtoms(wideBox))
+	wideLines := countLines(wideBox)
 
 	if wideLines >= narrowLines {
 		t.Errorf("wide-viewport layout produced %d line atoms, want fewer than the %d from a 642px-equivalent layout", wideLines, narrowLines)
@@ -389,13 +347,14 @@ func TestPaintDecorationClipsToThePageSlice(t *testing.T) {
 
 	doc := pdfkit.New(pdfkit.Options{})
 	e := &exporter{
-		pageWPt:  pdfkit.A4.Width,
-		pageHPt:  pdfkit.A4.Height,
-		marginPt: pdfkit.Mm(20),
-		scale:    1,
-		pageTop:  100,
-		pageBot:  200,
-		p:        doc.AddPage(pdfkit.A4),
+		pageWPt:      pdfkit.A4.Width,
+		pageHPt:      pdfkit.A4.Height,
+		marginLeftPt: pdfkit.Mm(20),
+		marginTopPt:  pdfkit.Mm(20),
+		scale:        1,
+		pageTop:      100,
+		pageBot:      200,
+		p:            doc.AddPage(pdfkit.A4),
 	}
 	e.paintDecoration(st, 10, 10, 50, 20, true, true)    // fully above: skipped
 	e.paintDecoration(st, 10, 90, 50, 20, true, true)    // straddles top
@@ -449,4 +408,16 @@ func TestExportRespectsCustomMargin(t *testing.T) {
 	if !strings.Contains(buf.String(), "PDF") {
 		t.Errorf("output does not look like a PDF")
 	}
+}
+
+// countLines counts the text lines laid out under b.
+func countLines(b *layout.Box) int {
+	if b == nil {
+		return 0
+	}
+	n := len(b.Lines)
+	for _, c := range b.Children {
+		n += countLines(c)
+	}
+	return n
 }

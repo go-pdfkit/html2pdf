@@ -4,8 +4,11 @@
 
 // Package html2pdf renders static HTML straight to a vector PDF: it drives
 // go-webengine's own layout tree (no screenshot, no raster slicing) into
-// go-pdfkit text/rect/stroke calls. Pagination breaks between atoms — a text
-// line, or a whole table row — never through one; see atoms.go.
+// go-pdfkit text/rect/stroke calls. Pagination is the engine's
+// (paginate.Breaks): it cuts between atoms — a text line, a whole table
+// row — never through one, and honours the document's CSS fragmentation
+// (break-before/after: page, break-inside: avoid, break-after: avoid,
+// orphans, widows) and its @page size and margins.
 //
 // # Scope
 //
@@ -55,6 +58,7 @@ package html2pdf
 import (
 	"context"
 	"fmt"
+	"math"
 	"net/url"
 	"strings"
 
@@ -63,6 +67,7 @@ import (
 	"github.com/go-webengine/engine/css"
 	"github.com/go-webengine/engine/dom"
 	"github.com/go-webengine/engine/layout"
+	"github.com/go-webengine/engine/paginate"
 	"github.com/go-webengine/engine/paint"
 )
 
@@ -75,10 +80,13 @@ const pxToPt = 72.0 / 96.0
 const defaultViewportPx = 1024
 
 // Options configures a single Export call. The zero value is A4, 20mm
-// margins on all sides, and a 1024px layout viewport.
+// margins on all sides, and a 1024px layout viewport — unless the document
+// says otherwise: an @page rule's size and margins win over PageSize and
+// MarginMm, as they do in a browser's print (Chrome honours @page size in
+// headless print-to-PDF; WeasyPrint always has).
 type Options struct {
-	PageSize pdfkit.PageSize // zero value: pdfkit.A4
-	MarginMm float64         // zero value: 20
+	PageSize pdfkit.PageSize // zero value: pdfkit.A4; overridden by @page { size }
+	MarginMm float64         // zero value: 20; overridden by @page { margin }
 
 	// ViewportPx is the width (CSS px) the page is laid out against, then
 	// uniformly scaled down to fit the print column. Many real pages carry a
@@ -91,8 +99,11 @@ type Options struct {
 	// needs to — confirmed against RFC 9110's HTML edition, whose
 	// table-of-contents sidebar did exactly this (428 pages laid out at the
 	// print column's own ~642px width vs. 184 at 1024px). Zero value: 1024,
-	// a common small-desktop/tablet breakpoint. Set below the print column's
-	// own width (rare) to lay out 1:1 with no scaling.
+	// a common small-desktop/tablet breakpoint — unless the document carries
+	// an @page rule: a document that names its paper was designed for it,
+	// its absolute units (a 12pt body, a 40mm figure) must print at their
+	// true size, and it is laid out 1:1 as a browser prints it. Set below
+	// the print column's own width (rare) to lay out 1:1 with no scaling.
 	ViewportPx float64
 
 	// BaseURL is the document's own URL, used to resolve a relative <img src>
@@ -131,7 +142,7 @@ func (o Options) resolved() Options {
 		o.MarginMm = 20
 	}
 	if o.ViewportPx == 0 {
-		o.ViewportPx = defaultViewportPx
+		o.ViewportPx = -defaultViewportPx // the default, marked as such (see Export)
 	}
 	if o.Media == "" {
 		o.Media = css.Print
@@ -151,33 +162,45 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	}
 	fonts := paint.NewFonts()
 
-	pageWPt := opts.PageSize.Width
-	pageHPt := opts.PageSize.Height
-	marginPt := pdfkit.Mm(opts.MarginMm)
-	contentWPt := pageWPt - 2*marginPt
-	contentHPt := pageHPt - 2*marginPt
+	// Stylesheets go through the engine's own bounded <link>/@import fetch
+	// with media selection, so the page is styled exactly as the engine
+	// styles it; they are fetched first because the document's @page rule
+	// — size and margins — may live in one of them and decides the geometry
+	// everything below is laid out against.
+	ctx := context.Background()
+	eng := engine.New()
+	webDoc := &engine.Document{URL: opts.BaseURL, Root: root, HTML: htmlSrc}
+	media := css.Media{Type: opts.Media, Width: math.Abs(opts.ViewportPx)}
+	sheets := eng.LoadStylesheets(ctx, webDoc, media)
+
+	page := css.DocumentPage(root, sheets, media, "")
+	pageWPt, pageHPt, margins := pageGeometry(opts, page)
+	contentWPt := pageWPt - margins[3] - margins[1]
+	contentHPt := pageHPt - margins[0] - margins[2]
 	contentWPx := contentWPt / pxToPt
 	contentHPx := contentHPt / pxToPt
 
+	// The layout width: the caller's, or the default — which yields to 1:1
+	// for a document that declared its paper (see Options.ViewportPx).
 	viewportPx := opts.ViewportPx
+	if viewportPx < 0 {
+		viewportPx = -viewportPx
+		if page.Width > 0 || page.MarginSet != [4]bool{} {
+			viewportPx = contentWPx
+		}
+	}
 	if viewportPx < contentWPx {
 		viewportPx = contentWPx // never upscale — 1:1 is the narrowest layout
 	}
 	scale := contentWPx / viewportPx
 	pageHViewportPx := contentHPx / scale // page-height budget in viewport space
 
-	// Stylesheets and images go through the engine's own pipelines — the
-	// bounded <link>/@import fetch with media selection, then fetch/decode/
-	// size for images — so the page is styled exactly as the engine styles
-	// it and image boxes are laid out at the exact size the bitmaps come
-	// back at (an image wider than the viewport is already scaled down
-	// there): the same sheets and maps RenderDocument feeds its own cascade
-	// and raster painter, cascaded here for opts.Media at the layout width.
-	ctx := context.Background()
-	eng := engine.New()
-	webDoc := &engine.Document{URL: opts.BaseURL, Root: root, HTML: htmlSrc}
-	media := css.Media{Type: opts.Media, Width: viewportPx}
-	sheets := eng.LoadStylesheets(ctx, webDoc, media)
+	// Images go through the engine's fetch/decode/size pipeline too, so
+	// image boxes are laid out at the exact size the bitmaps come back at
+	// (an image wider than the viewport is already scaled down there): the
+	// same sheets and maps RenderDocument feeds its own cascade and raster
+	// painter, cascaded here for opts.Media at the layout width.
+	media.Width = viewportPx
 	sm := css.CascadeMedia(root, media, sheets)
 	imgs := eng.LoadImageSet(ctx, webDoc, sm, int(viewportPx))
 	imgSizes := make(map[*dom.Node][2]float64, len(imgs))
@@ -192,8 +215,7 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 		return nil, fmt.Errorf("html2pdf: load fonts: %w", err)
 	}
 
-	atoms := collectAtoms(box)
-	breaks := pageBreaks(atoms, pageHViewportPx)
+	breaks := paginate.Breaks(box, pageHViewportPx)
 	tops := append([]float64{0}, breaks...)
 
 	// Navigation: the anchors' clickable runs, the ids they can jump to, and
@@ -218,7 +240,8 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	// linked document carries — one annotation per clickable line — into
 	// flated streams: ~14 B per link instead of ~200 (pdfkit #29).
 	doc := pdfkit.New(pdfkit.Options{Compress: true, ObjectStreams: true, Title: title, Author: opts.Author, Subject: opts.Subject, Keywords: opts.Keywords})
-	e := &exporter{fonts: fs, imgs: imgs, imageDPI: opts.ImageDPI, pageWPt: pageWPt, pageHPt: pageHPt, marginPt: marginPt, scale: scale}
+	pageSize := pdfkit.PageSize{Width: pageWPt, Height: pageHPt}
+	e := &exporter{fonts: fs, imgs: imgs, imageDPI: opts.ImageDPI, pageWPt: pageWPt, pageHPt: pageHPt, marginLeftPt: margins[3], marginTopPt: margins[0], scale: scale}
 	for i, top := range tops {
 		bot := pageHViewportPx * 1e9 // effectively unbounded: the last page
 		if i+1 < len(tops) {
@@ -228,7 +251,7 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 		if bot < e.pageBot {
 			e.pageBot = bot
 		}
-		e.p = doc.AddPage(opts.PageSize)
+		e.p = doc.AddPage(pageSize)
 		e.paintBox(box)
 		e.addLinks(links)
 		e.addDests(ids)
@@ -237,4 +260,22 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 		doc.AddOutlineItem(h.Title, h.Level, pageIndexOf(h.Y, tops))
 	}
 	return doc, nil
+}
+
+// pageGeometry resolves the page box: Options' size and uniform margin,
+// overridden by whatever the document's @page rule set — a size when it
+// gave one, each margin side it named. Everything in PDF points; margins
+// are top, right, bottom, left.
+func pageGeometry(opts Options, page css.PageSpec) (wPt, hPt float64, margins [4]float64) {
+	wPt, hPt = opts.PageSize.Width, opts.PageSize.Height
+	if page.Width > 0 && page.Height > 0 {
+		wPt, hPt = page.Width*pxToPt, page.Height*pxToPt
+	}
+	for i := range margins {
+		margins[i] = pdfkit.Mm(opts.MarginMm)
+		if page.MarginSet[i] {
+			margins[i] = page.Margin[i] * pxToPt
+		}
+	}
+	return wPt, hPt, margins
 }

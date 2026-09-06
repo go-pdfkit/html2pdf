@@ -191,7 +191,7 @@ func fmtMB(b int64) string { return fmt.Sprintf("%.1f MB", float64(b)/1e6) }
 
 func run() int {
 	urlsPath := flag.String("urls", "urls.txt", "corpus URL list (blank to skip URLs)")
-	files := flag.String("files", "fixtures/longdoc.html", "comma-separated local HTML files (self-contained, no network for either tool)")
+	files := flag.String("files", "fixtures/longdoc.html,fixtures/breaks.html", "comma-separated local HTML files (self-contained, no network for either tool)")
 	n := flag.Int("n", 5, "runs per tool per input, interleaved; medians are reported")
 	chrome := flag.String("chrome", envOr("CHROME_BIN", defaultChrome), "Chrome/Chromium binary")
 	bin := flag.String("html2pdf", "html2pdf", "html2pdf CLI binary (build it first so timings exclude compilation)")
