@@ -42,6 +42,8 @@ github.com/go-opentype/shape v0.5.0 h1:jHNaOMHNBdDj5EixOevlrrsi92svMxvVMKN7GYaPf
 github.com/go-opentype/shape v0.5.0/go.mod h1:3ImRYNIj6zpwWQ/DV3BWhgMFfmzDITH6XpZw2auQHTo=
 github.com/go-pdfkit/pdfkit v0.11.1-0.20260906121306-2b1cee2c4ed8 h1:4CoLkyLRHQrQZCuGfIqw/8XTyn1AQ6QJW5exrzW24a4=
 github.com/go-pdfkit/pdfkit v0.11.1-0.20260906121306-2b1cee2c4ed8/go.mod h1:LpQxQDLkZ/0zc8zg9lQsEbUFNo2NOlvcT2Tn/l3hI5M=
+github.com/go-pdfkit/reader v0.6.0 h1:KAabNOYUcTlZlNBTbG9bEhWP1NiZhjuhzUdavdTdfes=
+github.com/go-pdfkit/reader v0.6.0/go.mod h1:fQFOVfCMUui1AdvD4qhimdyvvNr9KvvJ1S7IuKZjyV8=
 github.com/go-richdoc/richdoc v0.3.0 h1:BPUHZ0NUrmDVffs2jJcj6ur8mqlccZpZVpCOsuQT9gQ=
 github.com/go-richdoc/richdoc v0.3.0/go.mod h1:aCX8ulqg5CoKqSWgWeEWul1Oj0d2VxQeaQNI0+jsm7c=
 github.com/go-sourcemap/sourcemap v2.1.4+incompatible h1:a+iTbH5auLKxaNwQFg0B+TCYl6lbukKPc7b5x0n1s6Q=
