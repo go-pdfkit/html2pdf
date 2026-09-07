@@ -5,6 +5,7 @@
 package html2pdf
 
 import (
+	"github.com/go-opentype/fonts/dejavusans"
 	"github.com/go-opentype/fonts/gomono"
 	"github.com/go-opentype/fonts/inter"
 	"github.com/go-opentype/fonts/lora"
@@ -20,6 +21,10 @@ type fontSet struct {
 	sans, sansB, sansI, sansBI     *pdfkit.Font
 	serif, serifB, serifI, serifBI *pdfkit.Font
 	mono                           *pdfkit.Font
+	// The last-resort family the engine sets a character in when the
+	// family's face has no glyph for it (paint.Fonts.Runs): the same DejaVu
+	// Sans, so the PDF's glyphs are the ones the layout measured with.
+	fb, fbB, fbI, fbBI *pdfkit.Font
 }
 
 // loadFonts embeds the three families go-webengine's own paint package
@@ -34,6 +39,7 @@ func loadFonts() (*fontSet, error) {
 		{&fs.sans, inter.TTF}, {&fs.sansB, inter.BoldTTF}, {&fs.sansI, inter.ItalicTTF}, {&fs.sansBI, inter.BoldItalicTTF},
 		{&fs.serif, lora.TTF}, {&fs.serifB, lora.BoldTTF}, {&fs.serifI, lora.ItalicTTF}, {&fs.serifBI, lora.BoldItalicTTF},
 		{&fs.mono, gomono.TTF},
+		{&fs.fb, dejavusans.TTF}, {&fs.fbB, dejavusans.BoldTTF}, {&fs.fbI, dejavusans.ItalicTTF}, {&fs.fbBI, dejavusans.BoldItalicTTF},
 	} {
 		f, err := pdfkit.LoadFont(pair.b)
 		if err != nil {
@@ -73,4 +79,17 @@ func (fs *fontSet) pick(fam css.FontFamily, bold, italic bool) *pdfkit.Font {
 			return fs.sans
 		}
 	}
+}
+
+// fallback returns the last-resort face for a weight/slant.
+func (fs *fontSet) fallback(bold, italic bool) *pdfkit.Font {
+	switch {
+	case bold && italic:
+		return fs.fbBI
+	case bold:
+		return fs.fbB
+	case italic:
+		return fs.fbI
+	}
+	return fs.fb
 }

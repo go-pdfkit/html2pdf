@@ -14,8 +14,9 @@
 //
 // This is a static renderer: no JavaScript and no @font-face (text uses the
 // three families go-webengine's own paint package bundles — Inter for sans,
-// Lora for serif, Go Mono for mono — so the glyphs drawn always match the
-// metrics layout measured against). External stylesheets — <link
+// Lora for serif, Go Mono for mono — plus its last-resort DejaVu Sans for a
+// character the family has no glyph for, so the glyphs drawn always match
+// the metrics layout measured against). External stylesheets — <link
 // rel="stylesheet"> and their @import chains — are fetched through the
 // engine's own bounded loader (Engine.LoadStylesheets) and cascaded for the
 // print medium by default (Options.Media), so a page's @media print rules
@@ -241,7 +242,7 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	// flated streams: ~14 B per link instead of ~200 (pdfkit #29).
 	doc := pdfkit.New(pdfkit.Options{Compress: true, ObjectStreams: true, Title: title, Author: opts.Author, Subject: opts.Subject, Keywords: opts.Keywords})
 	pageSize := pdfkit.PageSize{Width: pageWPt, Height: pageHPt}
-	e := &exporter{fonts: fs, imgs: imgs, imageDPI: opts.ImageDPI, pageWPt: pageWPt, pageHPt: pageHPt, marginLeftPt: margins[3], marginTopPt: margins[0], scale: scale}
+	e := &exporter{fonts: fs, measure: fonts, imgs: imgs, imageDPI: opts.ImageDPI, pageWPt: pageWPt, pageHPt: pageHPt, marginLeftPt: margins[3], marginTopPt: margins[0], scale: scale}
 	for i, top := range tops {
 		bot := pageHViewportPx * 1e9 // effectively unbounded: the last page
 		if i+1 < len(tops) {
