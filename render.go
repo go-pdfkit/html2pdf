@@ -14,23 +14,23 @@ import (
 
 // exporter holds the state for painting one page's slice of the box tree.
 type exporter struct {
-	fonts    *fontSet
-	imgs     map[*dom.Node]*engine.LoadedImage // bitmaps and their sources, keyed by <img>/<svg> element
-	imageDPI float64                           // Options.ImageDPI; 0 = keep the engine's pixels
-	pageWPt  float64
-	pageHPt  float64
-	marginPt float64
-	scale    float64 // viewport px -> print-column px (see Options.ViewportPx)
-	pageTop  float64 // viewport px, top of the current page's content slice
-	pageBot  float64 // viewport px
-	p        *pdfkit.Page
+	fonts                     *fontSet
+	imgs                      map[*dom.Node]*engine.LoadedImage // bitmaps and their sources, keyed by <img>/<svg> element
+	imageDPI                  float64                           // Options.ImageDPI; 0 = keep the engine's pixels
+	pageWPt                   float64
+	pageHPt                   float64
+	marginLeftPt, marginTopPt float64 // the page area's origin, PDF points
+	scale                     float64 // viewport px -> print-column px (see Options.ViewportPx)
+	pageTop                   float64 // viewport px, top of the current page's content slice
+	pageBot                   float64 // viewport px
+	p                         *pdfkit.Page
 }
 
 // toPdf converts a viewport-space (px) point to this page's PDF point space,
 // applying the print-column scale.
 func (e *exporter) toPdf(xPx, yPx float64) (x, y float64) {
-	x = e.marginPt + xPx*e.scale*pxToPt
-	y = e.pageHPt - e.marginPt - (yPx-e.pageTop)*e.scale*pxToPt
+	x = e.marginLeftPt + xPx*e.scale*pxToPt
+	y = e.pageHPt - e.marginTopPt - (yPx-e.pageTop)*e.scale*pxToPt
 	return
 }
 

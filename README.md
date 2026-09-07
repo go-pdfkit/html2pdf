@@ -33,16 +33,28 @@ go run ./cmd/html2pdf -url https://example.org/report -out report.pdf
 
 ## Pagination
 
-Page breaks land between atoms — a text line, or a whole `<tr>` — never
-through one. A table row that would overflow the page moves to the next page
-whole; a paragraph may still break between its own lines, same as printed
-text always has.
+Page breaks are the engine's (`paginate.Breaks`): they land between atoms —
+a text line, a whole `<tr>`, a rule or spacer — never through one, and they
+honour the document's CSS Fragmentation: `break-before` / `break-after:
+page` (and the `page-break-*` aliases) force a page; `break-inside: avoid`
+keeps a table, a figure, a code block whole when it can fit a page;
+`break-after: avoid` on a heading keeps it with what follows;
+`orphans` / `widows` (2 by default) keep a paragraph from leaving a lone
+line at either edge — with the spec's own order of relaxation when a page
+cannot be cut any other way. The answer key is Chrome: `corpus/cmd/breakcheck`
+renders [`corpus/fixtures/breaks.html`](corpus/fixtures/breaks.html) and
+puts every marker on the page headless Chrome put it on (18/18, nine pages).
+
+`@page { size: …; margin: … }` sets the paper and margins, over
+`Options.PageSize` / `MarginMm` — A4, A5, letter, `landscape`, explicit
+lengths, per-side margins. Margin boxes (`@top-center { content:
+counter(page) }`) and `:first` / `:left` / `:right` pages are not read yet.
 
 ## Layout width vs. print width
 
-A page is laid out at `Options.ViewportPx` (default 1024px), then scaled down
-to fit the print column — not laid out directly at the print column's own
-width (a plain A4 page is under 650px wide). Many real pages carry a
+A web page is laid out at `Options.ViewportPx` (default 1024px), then scaled
+down to fit the print column — not laid out directly at the print column's
+own width (a plain A4 page is under 650px wide). Many real pages carry a
 fixed-width element sized for a desktop viewport (a sidebar, a multi-column
 nav) that a browser's own responsive CSS only collapses below some
 breakpoint; laying out narrower than that breakpoint just squeezes the rest
@@ -50,6 +62,11 @@ of the page into a sliver instead of dropping the sidebar. Confirmed against
 RFC 9110's HTML edition, whose table-of-contents sidebar did exactly this —
 see [`corpus/CORPUS.md`](corpus/CORPUS.md) for the before/after page counts
 across all 8 corpus pages.
+
+A document that declares `@page` is another matter: it was designed for its
+paper, its absolute units (a 12pt body, a 40mm figure) must print at their
+true size, and it is laid out 1:1, as a browser prints it — unless
+`ViewportPx` is set explicitly.
 
 ## Navigation
 

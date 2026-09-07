@@ -1,0 +1,63 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Fragmentation answer key</title>
+<style>
+  @page { size: A5; margin: 15mm; }
+  body { font-family: sans-serif; font-size: 12pt; line-height: 1.4; margin: 0; }
+  h1 { break-before: page; font-size: 20pt; margin: 0 0 8pt; }
+  h1.first { break-before: auto; }
+  h2 { break-after: avoid; font-size: 14pt; margin: 14pt 0 4pt; }
+  table { border-collapse: collapse; break-inside: avoid; width: 100%; }
+  td { border: 1px solid #888; padding: 3pt 6pt; }
+  figure { break-inside: avoid; margin: 8pt 0; padding: 6pt; border: 1px solid #333; }
+  p { margin: 0 0 8pt; }
+  p.ow { orphans: 3; widows: 3; }
+  .spacer { height: 40mm; background: #eee; }
+</style></head><body>
+
+<h1 class="first">Section 1: forced breaks</h1>
+<p>P1-A. Each h1 below has break-before: page, so every section starts a new page.</p>
+<p>P1-B. This paragraph stays on page 1.</p>
+
+<h1>Section 2: keep a table whole</h1>
+<p>P2-A. A spacer pushes the table so that it would straddle the page end; break-inside: avoid must move the whole table to the next page.</p>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<table>
+<tr><td>T-row-1</td><td>one</td></tr>
+<tr><td>T-row-2</td><td>two</td></tr>
+<tr><td>T-row-3</td><td>three</td></tr>
+<tr><td>T-row-4</td><td>four</td></tr>
+<tr><td>T-row-5</td><td>five</td></tr>
+<tr><td>T-row-6</td><td>six</td></tr>
+<tr><td>T-row-7</td><td>seven</td></tr>
+<tr><td>T-row-8</td><td>eight</td></tr>
+</table>
+<p>P2-B. After the table.</p>
+
+<h1>Section 3: heading kept with its paragraph</h1>
+<p>P3-A. Spacers leave room for exactly the heading at the page bottom; break-after: avoid must carry it to the next page with its paragraph.</p>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<h2>H2-keep-with-next</h2>
+<p>P3-B. The paragraph that follows the heading.</p>
+
+<h1>Section 4: orphans and widows</h1>
+<p>P4-A. Three spacers leave room for about seven of the eight lines below; with orphans and widows at 3 the paragraph must split with at least three lines on each side, or move whole.</p>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<p class="ow">L1 line one<br>L2 line two<br>L3 line three<br>L4 line four<br>L5 line five<br>L6 line six<br>L7 line seven<br>L8 line eight</p>
+<p>P4-B. After the eight-line paragraph.</p>
+
+<h1>Section 5: figure kept whole</h1>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<figure>F-1 figure line one<br>F-2 figure line two<br>F-3 figure line three<br>F-4 figure line four<br>F-5 figure line five</figure>
+<p>P5-B. After the figure.</p>
+
+</body></html>
