@@ -2,16 +2,16 @@
 
 8/8 succeeded.
 
-| URL | Status | Pages | PDF | Text chars | Links | Lost chars | Fetch | Render |
-|---|---|---|---|---|---|---|---|---|
-| [https://example.com/](https://example.com/) | ✅ | 1 | 6887 B | 127 | 1 | 0 | 33ms | 49ms |
-| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 13 | 252361 B | 56043 | 710 | 0 | 213ms | 3789ms |
-| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 7 | 158367 B | 19482 | 873 | 0 | 36ms | 16045ms |
-| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 5 | 60578 B | 12031 | 31 | 0 | 147ms | 1717ms |
-| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 51 | 383572 B | 145138 | 1790 | 0 | 631ms | 3931ms |
-| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 172 | 999532 B | 443933 | 3421 | 3 | 243ms | 540ms |
-| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 28648 B | 4057 | 225 | 0 | 452ms | 818ms |
-| [https://react.dev/](https://react.dev/) | ✅ | 8 | 782182 B | 7740 | 144 | 3 | 69ms | 776ms |
+| URL | Status | Pages | PDF | Text chars | Links | Lost chars | Glued | Fetch | Render |
+|---|---|---|---|---|---|---|---|---|---|
+| [https://example.com/](https://example.com/) | ✅ | 1 | 6794 B | 127 | 1 | 0 | 0 | 39ms | 49ms |
+| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 13 | 247305 B | 55614 | 706 | 0 | 0 | 119ms | 3654ms |
+| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 7 | 169778 B | 19474 | 873 | 0 | 0 | 55ms | 844ms |
+| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 5 | 56696 B | 12024 | 31 | 0 | 0 | 276ms | 1912ms |
+| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 51 | 342242 B | 141298 | 1790 | 0 | 0 | 198ms | 3782ms |
+| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 173 | 969828 B | 445044 | 3419 | 3 | 0 | 215ms | 395ms |
+| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 27736 B | 4015 | 224 | 0 | 0 | 460ms | 783ms |
+| [https://react.dev/](https://react.dev/) | ✅ | 8 | 778857 B | 7739 | 144 | 3 | 0 | 31ms | 639ms |
 
 <!-- BEGIN ANALYSIS -->
 
@@ -432,3 +432,40 @@ sets it for mono and serif); on react.dev it sits in the search **button**
 (`<kbd data-platform="mac">` inside `<button>`), a form control the engine
 paints on its own path — html2pdf's walker paints text lines only. That is
 the "second walker" row of the mutualisation audit, not a font.
+
+### Glued words — 2026-09-07 (engine [#147](https://github.com/go-webengine/engine/pull/147), [#148](https://github.com/go-webengine/engine/pull/148))
+
+The user reported "wrong characters, lost spaces" in a report PDF whose
+fonts passed every structural check and which five renderers (Quartz,
+poppler, pdfium, MuPDF, pdf.js) drew identically — the agreement being the
+proof that the *drawing* was wrong, not its decoding. A word-level census
+named the words: the PDF's extracted text held `PuissanceIT`,
+`MémoireCalculBande`, `≈15,8TB/s`, all in table headers. The engine scaled
+each column's max-content width to fit the table with no floor, so a
+column of short words next to a long-text column got 41 px for a 100 px
+word and the word ran into the next cell; Chrome laid the same tables out
+with every column at least its longest word wide. Engine #147 is the CSS
+2.1 §17.5.2.2 automatic layout (minimum = longest unbreakable unit,
+percentage and fixed cell widths honoured, surplus to the auto columns)
+plus `white-space: nowrap`, which had been parsed as `normal`.
+
+The census is now the **Glued** column of the table above
+(`cmd/corpus/glued.go`): the PDF's words that are two consecutive words
+of the page run together, where the two were separated by whitespace or a
+block boundary in the source — never a bare inline boundary such as
+`kW<sup>‡</sup>`, and never a pair the page itself joins somewhere. Its
+first run reported **pkg.go.dev 64, RFC 9110 282**, three causes deep:
+
+| Cause | Where | Fix |
+|---|---|---|
+| A no-break space was dropped — `strings.Fields` splits on `unicode.IsSpace`, true for U+00A0 | RFC 9110's table of contents, `<a>15.2.1</a>.&nbsp;&nbsp;<a>100 Continue</a>` → "15.2.1 .100" | engine #148: words split on collapsible whitespace only |
+| A tab in `<pre>` stayed in the text: measured at 0 (no glyph), drawn as the `.notdef` box at its width | pkg.go.dev's source listings, `= 100 // RFC` → `= 100// RFC` behind a tofu box | engine #148: tabs expand to 8-column tab stops, counted across a line's segments |
+| The exporter drew with `TextShaped` (GPOS kerning) while the engine measures plain advances; a kerned run ended short of its slot and the gap read as a space | RFC 9110, "15.2.1 ." | `Text`: glyph by glyph at the measured advance; kerning enters the engine's measure first |
+
+After: **Glued 0 on all eight pages**; the PDFs are 3–11 % smaller (no
+per-glyph kerning corrections in the streams): pkg.go.dev 383 572 →
+342 242 B, RFC 9110 999 532 → 969 828 B. The user's report went from five
+glued tokens to none. What the census cannot see: a break placed at an
+inline boundary with no whitespace (`152,3<sup>†</sup>` wrapping before
+the dagger) — the words stay apart in the text; engine
+[#149](https://github.com/go-webengine/engine/issues/149).

@@ -94,6 +94,13 @@ Cyrillic, ①–⑩), embedded beside the family, the way a browser falls back
 per character to the system's fonts; CJK is beyond it and draws as nothing.
 The corpus report's **Lost chars** column counts what still vanishes.
 
+Text is written glyph by glyph at each glyph's own advance — no kerning, no
+ligatures — because that is exactly how the engine measures and rasterises
+it; a kerned run would end short of its layout slot and the gap would read
+as a space. Kerning belongs in the engine's measure first. The corpus
+report's **Glued** column counts the words of the extracted text that are
+two of the page's words run together — a space lost in layout.
+
 External stylesheets — `<link rel="stylesheet">` and their `@import` chains —
 are fetched through the engine's own bounded loader (`Engine.LoadStylesheets`:
 64 sheets, 4 MB each, two `@import` levels, 10 s) and cascaded for the
