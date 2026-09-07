@@ -7,7 +7,7 @@ require (
 	github.com/go-pdfkit/html2pdf v0.0.0
 	github.com/go-pdfkit/pdfkit v0.11.1-0.20260906121306-2b1cee2c4ed8
 	github.com/go-pdfkit/reader v0.6.0
-	github.com/go-webengine/engine v0.3.12-0.20260907110905-3c1019850b31
+	github.com/go-webengine/engine v0.3.12-0.20260907143452-bcfa61eb9b74
 )
 
 require (

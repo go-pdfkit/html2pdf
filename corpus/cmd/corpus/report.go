@@ -22,15 +22,15 @@ func writeReport(path string, results []result) error {
 	}
 	fmt.Fprintf(&b, "%d/%d succeeded.\n\n", ok, len(results))
 
-	b.WriteString("| URL | Status | Pages | PDF | Text chars | Links | Lost chars | Fetch | Render |\n")
-	b.WriteString("|---|---|---|---|---|---|---|---|---|\n")
+	b.WriteString("| URL | Status | Pages | PDF | Text chars | Links | Lost chars | Glued | Fetch | Render |\n")
+	b.WriteString("|---|---|---|---|---|---|---|---|---|---|\n")
 	for _, r := range results {
 		status := "✅"
 		if !r.OK {
 			status = "❌ " + r.Error
 		}
-		fmt.Fprintf(&b, "| [%s](%s) | %s | %d | %d B | %d | %d | %d | %dms | %dms |\n",
-			r.URL, r.URL, status, r.Pages, r.PDFBytes, r.TextChars, r.Links, r.LostChars, r.FetchMs, r.RenderMs)
+		fmt.Fprintf(&b, "| [%s](%s) | %s | %d | %d B | %d | %d | %d | %d | %dms | %dms |\n",
+			r.URL, r.URL, status, r.Pages, r.PDFBytes, r.TextChars, r.Links, r.LostChars, r.Glued, r.FetchMs, r.RenderMs)
 	}
 	b.WriteString("\n")
 	return mdreport.Write(path, b.String())

@@ -154,7 +154,13 @@ func (e *exporter) paintLine(line *layout.LineBox) {
 				f = e.fonts.fallback(st.Bold(), st.Italic)
 			}
 			e.p.SetFont(f, st.FontSize*e.scale*pxToPt)
-			_ = e.p.TextShaped(x, y, run.Text)
+			// Plain cmap text, not the shaped path: the engine measures
+			// each glyph's own advance with no kerning and its raster draws
+			// the same, so a kerned run here ended short of its layout
+			// slot and the gap read as a space ("15.2.1 ." on RFC 9110's
+			// table of contents). Kerning and ligatures belong in both
+			// places at once — the engine's measure first.
+			_ = e.p.Text(x, y, run.Text)
 			x += e.measure.Measure(run.Text, st.FontFamily, st.FontSize, st.FontWeight, st.Italic) * e.scale * pxToPt
 		}
 	}

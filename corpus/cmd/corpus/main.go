@@ -45,6 +45,10 @@ type result struct {
 	// a glyph the fonts could not draw, most often. Lost lists them.
 	LostChars int    `json:"lost_chars"`
 	Lost      string `json:"lost,omitempty"`
+	// Glued counts the PDF's words that are two of the page's words run
+	// together ("PuissanceIT") — a space lost in layout. GluedWords lists them.
+	Glued      int    `json:"glued"`
+	GluedWords string `json:"glued_words,omitempty"`
 }
 
 func slugify(rawurl string) string {
@@ -185,6 +189,7 @@ func run() int {
 		}
 		r.TextChars = pdfTextChars(outPath)
 		r.LostChars, r.Lost = lostChars(e, doc, outPath)
+		r.Glued, r.GluedWords = gluedWords(e, doc, outPath)
 		r.OK = true
 
 		pngBase := filepath.Join(*outDir, r.Slug+"-p1")
