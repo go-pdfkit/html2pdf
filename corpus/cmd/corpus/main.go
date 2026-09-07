@@ -15,12 +15,16 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"sort"
 	"strings"
 	"time"
+	"unicode"
 
 	"github.com/go-pdfkit/html2pdf"
 	"github.com/go-pdfkit/html2pdf/corpus/internal/pdfstat"
 	"github.com/go-webengine/engine"
+	"github.com/go-webengine/engine/css"
+	"github.com/go-webengine/engine/dom"
 )
 
 type result struct {
@@ -36,6 +40,11 @@ type result struct {
 	HTMLBytes  int    `json:"html_bytes"`
 	PdfInfoErr string `json:"pdfinfo_err,omitempty"`
 	Links      int    `json:"links"` // link annotations written (external URI + in-document GoTo)
+	// LostChars counts the distinct non-space characters of the page's text
+	// (the DOM's text nodes) that the PDF's extracted text never contains —
+	// a glyph the fonts could not draw, most often. Lost lists them.
+	LostChars int    `json:"lost_chars"`
+	Lost      string `json:"lost,omitempty"`
 }
 
 func slugify(rawurl string) string {
@@ -175,6 +184,7 @@ func run() int {
 			r.Pages = pages
 		}
 		r.TextChars = pdfTextChars(outPath)
+		r.LostChars, r.Lost = lostChars(e, doc, outPath)
 		r.OK = true
 
 		pngBase := filepath.Join(*outDir, r.Slug+"-p1")
@@ -205,3 +215,57 @@ func run() int {
 }
 
 func main() { os.Exit(run()) }
+
+// lostChars compares the characters of the document's rendered text — text
+// nodes under elements the print cascade displays — with the characters
+// poppler extracts from the PDF, and returns how many distinct non-space
+// characters the PDF never contains, with the list (a glyph census: a
+// character the fonts have no glyph for is drawn as nothing, and no page
+// count or text length notices).
+func lostChars(e *engine.Engine, doc *engine.Document, pdf string) (int, string) {
+	// Cascade as Export does — the print medium, the page's own external
+	// stylesheets — so what a site hides in print (Wikipedia's language
+	// list, a nav) is not counted as lost.
+	media := css.Media{Type: css.Print, Width: 1024}
+	sheets := e.LoadStylesheets(context.Background(), doc, media)
+	sm := css.CascadeMedia(doc.Root, media, sheets)
+	src := map[rune]bool{}
+	var walk func(n *dom.Node, hidden bool)
+	walk = func(n *dom.Node, hidden bool) {
+		if n.Type == dom.Element {
+			if st := sm[n]; st != nil && st.Display == css.DisplayNone {
+				hidden = true
+			}
+			if n.Tag == "script" || n.Tag == "style" || n.Tag == "noscript" || n.Tag == "template" {
+				return
+			}
+		}
+		if n.Type == dom.Text && !hidden {
+			for _, r := range n.Text {
+				if !unicode.IsSpace(r) && r > ' ' && r != '\u00a0' && r != '\u200a' && r != '\u200b' {
+					src[r] = true // a character, not a space of any width
+				}
+			}
+		}
+		for _, c := range n.Children {
+			walk(c, hidden)
+		}
+	}
+	walk(doc.Root, false)
+	out, err := exec.Command("pdftotext", "-enc", "UTF-8", pdf, "-").Output()
+	if err != nil {
+		return -1, ""
+	}
+	got := map[rune]bool{}
+	for _, r := range string(out) {
+		got[r] = true
+	}
+	var lost []rune
+	for r := range src {
+		if !got[r] {
+			lost = append(lost, r)
+		}
+	}
+	sort.Slice(lost, func(i, j int) bool { return lost[i] < lost[j] })
+	return len(lost), string(lost)
+}

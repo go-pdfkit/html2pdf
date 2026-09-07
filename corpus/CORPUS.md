@@ -1,17 +1,17 @@
-# html2pdf corpus run — 2026-09-06
+# html2pdf corpus run — 2026-09-07
 
 8/8 succeeded.
 
-| URL | Status | Pages | PDF | Text chars | Links | Fetch | Render |
-|---|---|---|---|---|---|---|---|
-| [https://example.com/](https://example.com/) | ✅ | 1 | 6887 B | 127 | 1 | 52ms | 36ms |
-| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 13 | 252361 B | 56043 | 710 | 118ms | 3636ms |
-| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 7 | 158838 B | 19482 | 873 | 58ms | 16588ms |
-| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 5 | 60578 B | 12031 | 31 | 214ms | 1639ms |
-| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 51 | 383572 B | 145138 | 1790 | 676ms | 4326ms |
-| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 172 | 999532 B | 443933 | 3421 | 288ms | 542ms |
-| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 28799 B | 3858 | 225 | 468ms | 935ms |
-| [https://react.dev/](https://react.dev/) | ✅ | 8 | 782493 B | 7737 | 158 | 128ms | 1334ms |
+| URL | Status | Pages | PDF | Text chars | Links | Lost chars | Fetch | Render |
+|---|---|---|---|---|---|---|---|---|
+| [https://example.com/](https://example.com/) | ✅ | 1 | 6887 B | 127 | 1 | 0 | 44ms | 30ms |
+| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 13 | 252361 B | 56043 | 710 | 1 | 116ms | 3631ms |
+| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 7 | 158586 B | 19482 | 873 | 0 | 67ms | 15870ms |
+| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 5 | 60578 B | 12031 | 31 | 0 | 159ms | 1563ms |
+| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 51 | 383572 B | 145138 | 1790 | 0 | 196ms | 3796ms |
+| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 172 | 999532 B | 443933 | 3421 | 3 | 304ms | 492ms |
+| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 28647 B | 4057 | 225 | 0 | 443ms | 796ms |
+| [https://react.dev/](https://react.dev/) | ✅ | 8 | 782182 B | 7740 | 144 | 3 | 37ms | 562ms |
 
 <!-- BEGIN ANALYSIS -->
 
@@ -340,3 +340,76 @@ One thing the comparison with Chrome had hidden: Chrome's react.dev PDF
 (2.7 MB) contains **no photographs at all** — they are `loading="lazy"` and
 headless print-to-PDF never fetched them; its 41 JPEGs are rasterised
 gradients. Our file has all eight and is now a third of Chrome's.
+
+### Page breaks where a browser puts them — 2026-09-06/07 (engine [#141](https://github.com/go-webengine/engine/pull/141), [#142](https://github.com/go-webengine/engine/pull/142), [#144](https://github.com/go-webengine/engine/pull/144))
+
+Bibliography first (CSS Fragmentation 3, CSS Paged Media 3, WeasyPrint's
+feature list), then Chrome measured rather than read: its headless
+print-to-PDF honours `@page { size }` and every fragmentation constraint,
+and its print of [`fixtures/breaks.html`](fixtures/breaks.html) — sections
+with `break-before: page`, a table and a figure with `break-inside: avoid`
+placed to straddle a page end, an `h2` with `break-after: avoid`, an
+eight-line paragraph with `orphans`/`widows` 3, on A5 with 15 mm margins —
+is the answer key, frozen as `fixtures/breaks.expected.tsv`.
+
+The baseline was **1 marker of 18 on Chrome's page, on one page** — and
+the reason was not pagination: the engine's `parseLength` had no absolute
+units at all (pt, mm, cm, in, pc were 0 px), so the fixture's 40 mm spacers
+were 0 mm tall, and the report rendered for the user the evening before had
+been setting its `12pt` body at the default size without anyone noticing.
+
+What landed: the engine reads `break-before/after/inside`, the
+`page-break-*` aliases, `orphans`/`widows` and `@page` (size, margins),
+plus the absolute units; a new engine package `paginate` cuts between the
+same atoms as before (lines, whole rows, leaf boxes) and honours forced
+breaks, avoid-inside boxes that can fit a page, keep-with-next/previous,
+orphans/widows — relaxing orphans/widows first and the avoid rules second
+when a page cannot otherwise be cut, as css-break-3 §5.4 prescribes.
+`Export` uses it, lets `@page` override `Options.PageSize`/`MarginMm`, and
+lays out a document that declares `@page` **1:1** rather than at 1024 px
+scaled down: such a document was designed for its paper, and its absolute
+units must print at their true size.
+
+`cmd/breakcheck`: **18/18 markers on Chrome's page, nine pages** (the
+orphans paragraph is cut with at least three lines on each side, as the
+constraint says; Chrome's own split is 4 + 4, ours depends on the font, and
+the key accepts both). The bench carries the fixture: 9 / 9 pages,
+1 225 / 1 225 characters.
+
+On the corpus the visible mover is RFC 9110: its stylesheet declares
+`@page`, so it is laid out 1:1 now — **172 pages against Chrome's 169**
+(it was 85 at 0.63×), the closest page count to Chrome's in this corpus.
+The first version of the paginator scanned every `break-inside: avoid`
+box for every candidate boundary, and Wikipedia's print stylesheet puts
+`break-inside: avoid` on table rows: the countries table paginated in
+13.7 s. Engine #144 marks the blocked boundaries once (a sweep with a
+binary search each) — the pagination is now a lookup per boundary. The
+countries page still takes 12 s in the bench, for another reason entirely:
+see BENCH.md.
+
+Not read yet: `@page :first` / `:left` / `:right`, margin boxes
+(`@top-center { content: counter(page) }`), named pages; margins adjoining
+an unforced break are not truncated.
+
+### A glyph census — 2026-09-07
+
+The user noticed characters present in the HTML and absent from the PDF of
+the report rendered the evening before: six of its 106 distinct
+characters — `↔` and ①③④⑤⑥ — because its body is serif (Lora has neither),
+and a character the family's face has no glyph for was drawn as nothing,
+where a browser falls back per character to the system's fonts. The
+**Lost chars** column now counts, per page, the distinct non-space
+characters of the DOM's displayed text (cascaded as `Export` cascades:
+print medium, the page's own stylesheets) that `pdftotext` never returns.
+Baseline, with the fonts this repository was pinned to:
+
+| Page | Lost | Which |
+|---|---|---|
+| RFC 9110 | 3 | 一奥穂 — CJK in an internationalised-domain example |
+| react.dev | 3 | ⌘ 玄黄 — the command key, and CJK |
+| the other six | 0 | — |
+
+The corpus pages, being screen pages set in Inter, lose almost nothing;
+the report, set in Lora, did. The next stage embeds a last-resort font
+(DejaVu Sans, through the engine's own fallback) and re-runs this column;
+CJK stays beyond it and is stated as such.

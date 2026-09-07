@@ -1,18 +1,19 @@
-# html2pdf vs headless Chrome — 2026-09-06
+# html2pdf vs headless Chrome — 2026-09-07
 
-Machine: Apple M4 Max, 16 cores; load average at start: { 96.94 90.16 57.72 }. Chrome: Google Chrome 152.0.7977.76. 5 runs per tool per input, interleaved; medians. Both tools timed as child processes under `/usr/bin/time -l` (wall-clock to PDF on disk, start-up and any fetch included; RSS = peak resident set).
+Machine: Apple M4 Max, 16 cores; load average at start: { 6.23 5.01 4.72 }. Chrome: Google Chrome 152.0.7977.76. 5 runs per tool per input, interleaved; medians. Both tools timed as child processes under `/usr/bin/time -l` (wall-clock to PDF on disk, start-up and any fetch included; RSS = peak resident set).
 
 | Input | html2pdf | Chrome | Chrome ÷ html2pdf | PDF html2pdf | PDF Chrome | Pages | Text chars | Links | RSS html2pdf | RSS Chrome |
 |---|---|---|---|---|---|---|---|---|---|---|
-| https://example.com/ | 0.10 s | 2.12 s | 21.2× | 0.0 MB | 0.0 MB | 1 / 1 | 127 / 128 | 1 / 1 | 49.0 MB | 237.1 MB |
-| https://en.wikipedia.org/wiki/Go_(programming_language) | 0.85 s | 2.69 s | 3.2× | 0.2 MB | 1.7 MB | 13 / 25 | 55984 / 67289 | 710 / 838 | 100.1 MB | 357.1 MB |
-| https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations) | 1.08 s | 2.76 s | 2.6× | 0.1 MB | 1.7 MB | 7 / 12 | 19479 / 21977 | 876 / 1481 | 99.2 MB | 353.2 MB |
-| https://go.dev/blog/subtests | 0.90 s | 3.37 s | 3.7× | 0.1 MB | 0.2 MB | 5 / 7 | 12031 / 11742 | 31 / 15 | 69.4 MB | 347.9 MB |
-| https://pkg.go.dev/net/http | 1.86 s | 5.84 s | 3.1× | 0.4 MB | 6.3 MB | 51 / 86 | 145128 / 150472 | 1790 / 16374 | 109.7 MB | 674.0 MB |
-| https://www.rfc-editor.org/rfc/rfc9110.html | 1.24 s | 5.70 s | 4.6× | 1.1 MB | 4.5 MB | 85 / 169 | 444905 / 445667 | 3398 / 3506 | 182.1 MB | 544.0 MB |
-| https://news.ycombinator.com/ | 1.27 s | 29.33 s | 23.1× | 0.0 MB | 0.4 MB | 1 / 2 | 3759 / 3815 | 228 / 260 | 56.0 MB | 248.1 MB |
-| https://react.dev/ | 1.00 s | 2.39 s | 2.4× | 0.8 MB | 2.7 MB | 8 / 9 | 7737 / 6809 | 158 / 59 | 302.2 MB | 298.6 MB |
-| fixtures/longdoc.html | 0.38 s | 1.85 s | 4.9× | 0.9 MB | 2.4 MB | 100 / 135 | 590571 / 591170 | 0 / 0 | 146.3 MB | 367.7 MB |
+| https://example.com/ | 0.06 s | 1.49 s | 24.8× | 0.0 MB | 0.0 MB | 1 / 1 | 127 / 128 | 1 / 1 | 49.3 MB | 241.9 MB |
+| https://en.wikipedia.org/wiki/Go_(programming_language) | 3.89 s | 2.02 s | 0.5× | 0.3 MB | 1.7 MB | 13 / 25 | 56043 / 67289 | 710 / 838 | 95.6 MB | 361.8 MB |
+| https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations) | 12.77 s | 2.10 s | 0.2× | 0.2 MB | 1.7 MB | 7 / 12 | 19482 / 21977 | 873 / 1481 | 103.1 MB | 357.1 MB |
+| https://go.dev/blog/subtests | 1.96 s | 2.82 s | 1.4× | 0.1 MB | 0.2 MB | 5 / 7 | 12031 / 11742 | 31 / 15 | 68.9 MB | 353.2 MB |
+| https://pkg.go.dev/net/http | 4.32 s | 3.35 s | 0.8× | 0.4 MB | 6.3 MB | 51 / 86 | 145138 / 150480 | 1790 / 16374 | 117.7 MB | 675.7 MB |
+| https://www.rfc-editor.org/rfc/rfc9110.html | 0.68 s | 3.19 s | 4.7× | 1.0 MB | 4.5 MB | 172 / 169 | 443933 / 445667 | 3421 / 3506 | 191.5 MB | 551.7 MB |
+| https://news.ycombinator.com/ | 1.26 s | 2.39 s | 1.9× | 0.0 MB | 0.4 MB | 1 / 2 | 4057 / 4079 | 225 / 257 | 56.3 MB | 251.9 MB |
+| https://react.dev/ | 0.62 s | 2.16 s | 3.5× | 0.8 MB | 2.7 MB | 8 / 9 | 7740 / 6809 | 144 / 59 | 245.4 MB | 301.4 MB |
+| fixtures/longdoc.html | 0.38 s | 1.88 s | 4.9× | 0.9 MB | 2.4 MB | 100 / 135 | 590576 / 591170 | 0 / 0 | 148.1 MB | 372.8 MB |
+| fixtures/breaks.html | 0.03 s | 1.49 s | 49.7× | 0.0 MB | 0.0 MB | 9 / 9 | 1225 / 1225 | 0 / 0 | 52.3 MB | 243.2 MB |
 
 <!-- BEGIN ANALYSIS -->
 
@@ -217,3 +218,23 @@ flate with a soft mask. `Options.ImageDPI` / `-image-dpi` is the cap
 WeasyPrint calls `--dpi`; 0, the default, keeps every fetched pixel as both
 references do. The resampler is go-gfx's, the engine's own — not a second
 library for the same job.
+
+### Fragmentation stage — 2026-09-07, and a throttle that is not code
+
+Page counts moved where the document asked: RFC 9110 **172 / 169**
+(Chrome) — its stylesheet declares `@page`, so it is laid out 1:1 now, as
+Chrome prints it — and the new `fixtures/breaks.html` **9 / 9** with the
+same 1 225 characters on both sides. Everything else kept its page count.
+
+**The Wikipedia timings in this run are a throttle, not our code.** The Go
+article takes 3.9 s and the countries table 12.8 s where they took 0.6 and
+0.9 s the day before. Phase by phase (fetch 0.12 s, stylesheets 0.04 s,
+cascade 0.2 s, layout 0.04 s) the whole of it is the image fetch: 22 flag
+thumbnails from `upload.wikimedia.org`, of which the CDN answers about
+**100 of 125 requests with 429** whatever the concurrency — measured at 2,
+4, 6 and 8 in-flight requests per host: 11.9, 12.9, 12.9 and 12.9 s, 97 to
+116 × 429 each — because a day of corpus runs from this address tripped
+its rate limiter. The engine's per-host cap (#140, 2 in flight) is
+therefore not the lever, and no knob was added for it; the engine's
+Retry-After-honouring retry is doing exactly what it should. Chrome's own
+2.0 s on the same page is Chrome not fetching those images at all.

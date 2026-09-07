@@ -7,28 +7,28 @@
     "html2pdf": {
       "samples": [
         {
-          "real_sec": 0.61,
-          "max_rss_bytes": 48709632
+          "real_sec": 0.06,
+          "max_rss_bytes": 55394304
         },
         {
-          "real_sec": 0.1,
-          "max_rss_bytes": 48005120
+          "real_sec": 0.06,
+          "max_rss_bytes": 49315840
         },
         {
-          "real_sec": 0.09,
-          "max_rss_bytes": 49577984
+          "real_sec": 0.06,
+          "max_rss_bytes": 49135616
         },
         {
-          "real_sec": 0.09,
-          "max_rss_bytes": 49004544
+          "real_sec": 0.05,
+          "max_rss_bytes": 48955392
         },
         {
-          "real_sec": 0.1,
-          "max_rss_bytes": 49070080
+          "real_sec": 0.06,
+          "max_rss_bytes": 49348608
         }
       ],
-      "median_sec": 0.1,
-      "median_rss_bytes": 49004544,
+      "median_sec": 0.06,
+      "median_rss_bytes": 49315840,
       "failures": 0,
       "pdf_bytes": 6887,
       "pages": 1,
@@ -38,28 +38,28 @@
     "chrome": {
       "samples": [
         {
-          "real_sec": 2.12,
-          "max_rss_bytes": 240205824
+          "real_sec": 1.58,
+          "max_rss_bytes": 241270784
         },
         {
-          "real_sec": 2.34,
-          "max_rss_bytes": 237338624
+          "real_sec": 1.48,
+          "max_rss_bytes": 241893376
         },
         {
-          "real_sec": 1.88,
-          "max_rss_bytes": 237060096
+          "real_sec": 1.49,
+          "max_rss_bytes": 241893376
         },
         {
-          "real_sec": 2.01,
-          "max_rss_bytes": 237043712
+          "real_sec": 1.49,
+          "max_rss_bytes": 244039680
         },
         {
-          "real_sec": 2.14,
-          "max_rss_bytes": 237027328
+          "real_sec": 1.47,
+          "max_rss_bytes": 243384320
         }
       ],
-      "median_sec": 2.12,
-      "median_rss_bytes": 237060096,
+      "median_sec": 1.49,
+      "median_rss_bytes": 241893376,
       "failures": 0,
       "pdf_bytes": 35456,
       "pages": 1,
@@ -75,59 +75,59 @@
     "html2pdf": {
       "samples": [
         {
-          "real_sec": 0.79,
-          "max_rss_bytes": 100089856
+          "real_sec": 3.8,
+          "max_rss_bytes": 94830592
         },
         {
-          "real_sec": 0.85,
-          "max_rss_bytes": 98631680
+          "real_sec": 3.9,
+          "max_rss_bytes": 98926592
         },
         {
-          "real_sec": 0.92,
-          "max_rss_bytes": 98353152
+          "real_sec": 3.9,
+          "max_rss_bytes": 95649792
         },
         {
-          "real_sec": 1.01,
-          "max_rss_bytes": 102531072
+          "real_sec": 3.88,
+          "max_rss_bytes": 94814208
         },
         {
-          "real_sec": 0.76,
-          "max_rss_bytes": 105267200
+          "real_sec": 3.89,
+          "max_rss_bytes": 99352576
         }
       ],
-      "median_sec": 0.85,
-      "median_rss_bytes": 100089856,
+      "median_sec": 3.89,
+      "median_rss_bytes": 95649792,
       "failures": 0,
-      "pdf_bytes": 243377,
+      "pdf_bytes": 252331,
       "pages": 13,
-      "text_chars": 55984,
+      "text_chars": 56043,
       "links": 710
     },
     "chrome": {
       "samples": [
         {
-          "real_sec": 2.54,
-          "max_rss_bytes": 354484224
+          "real_sec": 2.06,
+          "max_rss_bytes": 360415232
         },
         {
-          "real_sec": 2.68,
-          "max_rss_bytes": 357072896
+          "real_sec": 2.01,
+          "max_rss_bytes": 361512960
         },
         {
-          "real_sec": 2.83,
-          "max_rss_bytes": 355860480
+          "real_sec": 1.51,
+          "max_rss_bytes": 361775104
         },
         {
-          "real_sec": 2.69,
-          "max_rss_bytes": 362397696
+          "real_sec": 2.05,
+          "max_rss_bytes": 368181248
         },
         {
-          "real_sec": 3.1,
-          "max_rss_bytes": 362627072
+          "real_sec": 2.02,
+          "max_rss_bytes": 366215168
         }
       ],
-      "median_sec": 2.69,
-      "median_rss_bytes": 357072896,
+      "median_sec": 2.02,
+      "median_rss_bytes": 361775104,
       "failures": 0,
       "pdf_bytes": 1671976,
       "pages": 25,
@@ -143,61 +143,61 @@
     "html2pdf": {
       "samples": [
         {
-          "real_sec": 0.93,
-          "max_rss_bytes": 92880896
+          "real_sec": 13.86,
+          "max_rss_bytes": 99647488
         },
         {
-          "real_sec": 0.87,
-          "max_rss_bytes": 98729984
+          "real_sec": 12.54,
+          "max_rss_bytes": 103137280
         },
         {
-          "real_sec": 1.08,
-          "max_rss_bytes": 103596032
+          "real_sec": 12.35,
+          "max_rss_bytes": 102137856
         },
         {
-          "real_sec": 1.1,
-          "max_rss_bytes": 102023168
+          "real_sec": 13.66,
+          "max_rss_bytes": 105250816
         },
         {
-          "real_sec": 1.11,
-          "max_rss_bytes": 99155968
+          "real_sec": 12.77,
+          "max_rss_bytes": 103153664
         }
       ],
-      "median_sec": 1.08,
-      "median_rss_bytes": 99155968,
+      "median_sec": 12.77,
+      "median_rss_bytes": 103137280,
       "failures": 0,
-      "pdf_bytes": 128573,
+      "pdf_bytes": 163326,
       "pages": 7,
-      "text_chars": 19479,
-      "links": 876
+      "text_chars": 19482,
+      "links": 873
     },
     "chrome": {
       "samples": [
         {
-          "real_sec": 2.76,
-          "max_rss_bytes": 353861632
+          "real_sec": 2.1,
+          "max_rss_bytes": 356483072
         },
         {
-          "real_sec": 2.94,
-          "max_rss_bytes": 361250816
+          "real_sec": 2.02,
+          "max_rss_bytes": 357056512
         },
         {
-          "real_sec": 2.62,
-          "max_rss_bytes": 351977472
+          "real_sec": 2.04,
+          "max_rss_bytes": 356990976
         },
         {
-          "real_sec": 2.88,
-          "max_rss_bytes": 353222656
+          "real_sec": 2.16,
+          "max_rss_bytes": 357941248
         },
         {
-          "real_sec": 2.75,
-          "max_rss_bytes": 352337920
+          "real_sec": 2.15,
+          "max_rss_bytes": 357253120
         }
       ],
-      "median_sec": 2.76,
-      "median_rss_bytes": 353222656,
+      "median_sec": 2.1,
+      "median_rss_bytes": 357056512,
       "failures": 0,
-      "pdf_bytes": 1733189,
+      "pdf_bytes": 1730500,
       "pages": 12,
       "text_chars": 21977,
       "links": 1481
@@ -211,30 +211,30 @@
     "html2pdf": {
       "samples": [
         {
-          "real_sec": 0.97,
-          "max_rss_bytes": 69369856
+          "real_sec": 1.92,
+          "max_rss_bytes": 71204864
         },
         {
-          "real_sec": 0.88,
-          "max_rss_bytes": 69550080
+          "real_sec": 1.84,
+          "max_rss_bytes": 68861952
         },
         {
-          "real_sec": 0.87,
-          "max_rss_bytes": 68943872
+          "real_sec": 1.98,
+          "max_rss_bytes": 68403200
         },
         {
-          "real_sec": 0.9,
-          "max_rss_bytes": 70860800
+          "real_sec": 2.25,
+          "max_rss_bytes": 66437120
         },
         {
-          "real_sec": 0.92,
-          "max_rss_bytes": 66994176
+          "real_sec": 1.96,
+          "max_rss_bytes": 69402624
         }
       ],
-      "median_sec": 0.9,
-      "median_rss_bytes": 69369856,
+      "median_sec": 1.96,
+      "median_rss_bytes": 68861952,
       "failures": 0,
-      "pdf_bytes": 60542,
+      "pdf_bytes": 60578,
       "pages": 5,
       "text_chars": 12031,
       "links": 31
@@ -242,28 +242,28 @@
     "chrome": {
       "samples": [
         {
-          "real_sec": 3.67,
-          "max_rss_bytes": 347848704
+          "real_sec": 2.65,
+          "max_rss_bytes": 353091584
         },
         {
-          "real_sec": 3.37,
-          "max_rss_bytes": 348454912
+          "real_sec": 3.03,
+          "max_rss_bytes": 353189888
         },
         {
-          "real_sec": 3.33,
-          "max_rss_bytes": 347865088
+          "real_sec": 3.06,
+          "max_rss_bytes": 353681408
         },
         {
-          "real_sec": 3.5,
-          "max_rss_bytes": 348291072
+          "real_sec": 2.65,
+          "max_rss_bytes": 352796672
         },
         {
-          "real_sec": 3.32,
-          "max_rss_bytes": 347848704
+          "real_sec": 2.82,
+          "max_rss_bytes": 353845248
         }
       ],
-      "median_sec": 3.37,
-      "median_rss_bytes": 347865088,
+      "median_sec": 2.82,
+      "median_rss_bytes": 353189888,
       "failures": 0,
       "pdf_bytes": 225264,
       "pages": 7,
@@ -279,63 +279,63 @@
     "html2pdf": {
       "samples": [
         {
-          "real_sec": 2.16,
-          "max_rss_bytes": 124698624
+          "real_sec": 5.34,
+          "max_rss_bytes": 124583936
         },
         {
-          "real_sec": 2.23,
-          "max_rss_bytes": 102989824
+          "real_sec": 4.16,
+          "max_rss_bytes": 115867648
         },
         {
-          "real_sec": 1.86,
-          "max_rss_bytes": 99794944
+          "real_sec": 4.5,
+          "max_rss_bytes": 123092992
         },
         {
-          "real_sec": 1.69,
-          "max_rss_bytes": 109707264
+          "real_sec": 4.32,
+          "max_rss_bytes": 117686272
         },
         {
-          "real_sec": 1.71,
-          "max_rss_bytes": 123731968
+          "real_sec": 4.32,
+          "max_rss_bytes": 98549760
         }
       ],
-      "median_sec": 1.86,
-      "median_rss_bytes": 109707264,
+      "median_sec": 4.32,
+      "median_rss_bytes": 117686272,
       "failures": 0,
-      "pdf_bytes": 383530,
+      "pdf_bytes": 383572,
       "pages": 51,
-      "text_chars": 145128,
+      "text_chars": 145138,
       "links": 1790
     },
     "chrome": {
       "samples": [
         {
-          "real_sec": 4.61,
-          "max_rss_bytes": 679460864
+          "real_sec": 3.35,
+          "max_rss_bytes": 672268288
         },
         {
-          "real_sec": 30.77,
-          "max_rss_bytes": 672940032
+          "real_sec": 3.37,
+          "max_rss_bytes": 675725312
         },
         {
-          "real_sec": 4.26,
-          "max_rss_bytes": 673988608
+          "real_sec": 3.3,
+          "max_rss_bytes": 681197568
         },
         {
-          "real_sec": 5.84,
-          "max_rss_bytes": 683573248
+          "real_sec": 3.41,
+          "max_rss_bytes": 670564352
         },
         {
-          "real_sec": 5.97,
-          "max_rss_bytes": 673038336
+          "real_sec": 3.34,
+          "max_rss_bytes": 676200448
         }
       ],
-      "median_sec": 5.84,
-      "median_rss_bytes": 673988608,
+      "median_sec": 3.35,
+      "median_rss_bytes": 675725312,
       "failures": 0,
-      "pdf_bytes": 6340003,
+      "pdf_bytes": 6341743,
       "pages": 86,
-      "text_chars": 150472,
+      "text_chars": 150480,
       "links": 16374
     }
   },
@@ -347,59 +347,59 @@
     "html2pdf": {
       "samples": [
         {
-          "real_sec": 1.26,
-          "max_rss_bytes": 199737344
+          "real_sec": 0.72,
+          "max_rss_bytes": 191463424
         },
         {
-          "real_sec": 0.97,
-          "max_rss_bytes": 174833664
+          "real_sec": 0.67,
+          "max_rss_bytes": 181846016
         },
         {
-          "real_sec": 1.33,
-          "max_rss_bytes": 175849472
+          "real_sec": 0.66,
+          "max_rss_bytes": 178388992
         },
         {
-          "real_sec": 1.06,
-          "max_rss_bytes": 182091776
+          "real_sec": 0.71,
+          "max_rss_bytes": 194330624
         },
         {
-          "real_sec": 1.24,
-          "max_rss_bytes": 206159872
+          "real_sec": 0.68,
+          "max_rss_bytes": 193150976
         }
       ],
-      "median_sec": 1.24,
-      "median_rss_bytes": 182091776,
+      "median_sec": 0.68,
+      "median_rss_bytes": 191463424,
       "failures": 0,
-      "pdf_bytes": 1055265,
-      "pages": 85,
-      "text_chars": 444905,
-      "links": 3398
+      "pdf_bytes": 999532,
+      "pages": 172,
+      "text_chars": 443933,
+      "links": 3421
     },
     "chrome": {
       "samples": [
         {
-          "real_sec": 4.36,
-          "max_rss_bytes": 543408128
+          "real_sec": 3.19,
+          "max_rss_bytes": 552255488
         },
         {
-          "real_sec": 4.04,
-          "max_rss_bytes": 544030720
+          "real_sec": 3.35,
+          "max_rss_bytes": 549404672
         },
         {
-          "real_sec": 17.06,
-          "max_rss_bytes": 489226240
+          "real_sec": 3.09,
+          "max_rss_bytes": 551747584
         },
         {
-          "real_sec": 5.7,
-          "max_rss_bytes": 584597504
+          "real_sec": 3.05,
+          "max_rss_bytes": 551714816
         },
         {
-          "real_sec": 46.28,
-          "max_rss_bytes": 544768000
+          "real_sec": 3.34,
+          "max_rss_bytes": 551124992
         }
       ],
-      "median_sec": 5.7,
-      "median_rss_bytes": 544030720,
+      "median_sec": 3.19,
+      "median_rss_bytes": 551714816,
       "failures": 0,
       "pdf_bytes": 4543104,
       "pages": 169,
@@ -415,64 +415,64 @@
     "html2pdf": {
       "samples": [
         {
-          "real_sec": 1.3,
-          "max_rss_bytes": 56672256
-        },
-        {
           "real_sec": 1.33,
-          "max_rss_bytes": 54935552
+          "max_rss_bytes": 56410112
         },
         {
-          "real_sec": 1.24,
-          "max_rss_bytes": 64487424
+          "real_sec": 1.26,
+          "max_rss_bytes": 55443456
+        },
+        {
+          "real_sec": 1.2,
+          "max_rss_bytes": 56311808
         },
         {
           "real_sec": 1.25,
-          "max_rss_bytes": 55459840
+          "max_rss_bytes": 56279040
         },
         {
-          "real_sec": 1.27,
-          "max_rss_bytes": 56000512
+          "real_sec": 1.38,
+          "max_rss_bytes": 57491456
         }
       ],
-      "median_sec": 1.27,
-      "median_rss_bytes": 56000512,
+      "median_sec": 1.26,
+      "median_rss_bytes": 56311808,
       "failures": 0,
-      "pdf_bytes": 28261,
+      "pdf_bytes": 28608,
       "pages": 1,
-      "text_chars": 3759,
-      "links": 228
+      "text_chars": 4057,
+      "links": 225
     },
     "chrome": {
       "samples": [
         {
-          "real_sec": 29.33,
-          "max_rss_bytes": 247054336
+          "real_sec": 2.39,
+          "max_rss_bytes": 255066112
         },
         {
-          "real_sec": 46.32,
-          "max_rss_bytes": 249233408
+          "real_sec": 2.56,
+          "max_rss_bytes": 251215872
         },
         {
-          "real_sec": 13.34,
-          "max_rss_bytes": 248070144
+          "real_sec": 2.35,
+          "max_rss_bytes": 254050304
         },
         {
-          "real_sec": 29.33,
-          "max_rss_bytes": 247988224
+          "real_sec": 2.39,
+          "max_rss_bytes": 251854848
         },
         {
-          "real_sec": 40.34,
-          "max_rss_bytes": 250626048
+          "real_sec": 2.39,
+          "max_rss_bytes": 251887616
         }
       ],
-      "median_sec": 29.33,
-      "median_rss_bytes": 248070144,
+      "median_sec": 2.39,
+      "median_rss_bytes": 251887616,
       "failures": 0,
-      "pdf_bytes": 357120,
+      "pdf_bytes": 355001,
       "pages": 2,
-      "text_chars": 3815,
-      "links": 260
+      "text_chars": 4079,
+      "links": 257
     }
   },
   {
@@ -483,59 +483,59 @@
     "html2pdf": {
       "samples": [
         {
-          "real_sec": 1.21,
-          "max_rss_bytes": 269860864
+          "real_sec": 0.6,
+          "max_rss_bytes": 225067008
         },
         {
-          "real_sec": 1,
-          "max_rss_bytes": 332775424
+          "real_sec": 0.62,
+          "max_rss_bytes": 230866944
         },
         {
-          "real_sec": 0.96,
-          "max_rss_bytes": 315686912
+          "real_sec": 0.62,
+          "max_rss_bytes": 268042240
         },
         {
-          "real_sec": 1,
-          "max_rss_bytes": 302153728
+          "real_sec": 0.62,
+          "max_rss_bytes": 245366784
         },
         {
-          "real_sec": 0.86,
-          "max_rss_bytes": 249806848
+          "real_sec": 0.61,
+          "max_rss_bytes": 302137344
         }
       ],
-      "median_sec": 1,
-      "median_rss_bytes": 302153728,
+      "median_sec": 0.62,
+      "median_rss_bytes": 245366784,
       "failures": 0,
-      "pdf_bytes": 782493,
+      "pdf_bytes": 782182,
       "pages": 8,
-      "text_chars": 7737,
-      "links": 158
+      "text_chars": 7740,
+      "links": 144
     },
     "chrome": {
       "samples": [
         {
-          "real_sec": 16.97,
-          "max_rss_bytes": 291749888
+          "real_sec": 2.2,
+          "max_rss_bytes": 302743552
         },
         {
-          "real_sec": 2.39,
-          "max_rss_bytes": 299745280
+          "real_sec": 2.47,
+          "max_rss_bytes": 301350912
         },
         {
-          "real_sec": 2.65,
-          "max_rss_bytes": 304119808
+          "real_sec": 1.62,
+          "max_rss_bytes": 302088192
         },
         {
-          "real_sec": 2.37,
-          "max_rss_bytes": 297795584
+          "real_sec": 2.16,
+          "max_rss_bytes": 300597248
         },
         {
-          "real_sec": 2.35,
-          "max_rss_bytes": 298631168
+          "real_sec": 2.1,
+          "max_rss_bytes": 298795008
         }
       ],
-      "median_sec": 2.39,
-      "median_rss_bytes": 298631168,
+      "median_sec": 2.16,
+      "median_rss_bytes": 301350912,
       "failures": 0,
       "pdf_bytes": 2678577,
       "pages": 9,
@@ -552,62 +552,130 @@
       "samples": [
         {
           "real_sec": 0.38,
-          "max_rss_bytes": 144736256
+          "max_rss_bytes": 140279808
+        },
+        {
+          "real_sec": 0.36,
+          "max_rss_bytes": 147701760
         },
         {
           "real_sec": 0.38,
-          "max_rss_bytes": 146604032
-        },
-        {
-          "real_sec": 0.37,
-          "max_rss_bytes": 142098432
+          "max_rss_bytes": 176537600
         },
         {
           "real_sec": 0.38,
-          "max_rss_bytes": 178159616
+          "max_rss_bytes": 148094976
         },
         {
-          "real_sec": 0.38,
-          "max_rss_bytes": 146341888
+          "real_sec": 0.39,
+          "max_rss_bytes": 172032000
         }
       ],
       "median_sec": 0.38,
-      "median_rss_bytes": 146341888,
+      "median_rss_bytes": 148094976,
       "failures": 0,
-      "pdf_bytes": 852005,
+      "pdf_bytes": 851967,
       "pages": 100,
-      "text_chars": 590571,
+      "text_chars": 590576,
       "links": 0
     },
     "chrome": {
       "samples": [
         {
+          "real_sec": 1.88,
+          "max_rss_bytes": 373030912
+        },
+        {
+          "real_sec": 1.86,
+          "max_rss_bytes": 372686848
+        },
+        {
           "real_sec": 1.89,
-          "max_rss_bytes": 367771648
+          "max_rss_bytes": 372834304
         },
         {
-          "real_sec": 1.84,
-          "max_rss_bytes": 367673344
+          "real_sec": 1.95,
+          "max_rss_bytes": 372768768
         },
         {
-          "real_sec": 1.85,
-          "max_rss_bytes": 367558656
-        },
-        {
-          "real_sec": 1.85,
-          "max_rss_bytes": 367771648
-        },
-        {
-          "real_sec": 1.87,
-          "max_rss_bytes": 367493120
+          "real_sec": 1.86,
+          "max_rss_bytes": 372965376
         }
       ],
-      "median_sec": 1.85,
-      "median_rss_bytes": 367673344,
+      "median_sec": 1.88,
+      "median_rss_bytes": 372834304,
       "failures": 0,
       "pdf_bytes": 2411082,
       "pages": 135,
       "text_chars": 591170,
+      "links": 0
+    }
+  },
+  {
+    "input": {
+      "name": "fixtures/breaks.html",
+      "file": "/Users/david_delavennat/Documents/VCS/GIT/localhost/html2pdf/corpus/fixtures/breaks.html"
+    },
+    "html2pdf": {
+      "samples": [
+        {
+          "real_sec": 0.03,
+          "max_rss_bytes": 52314112
+        },
+        {
+          "real_sec": 0.03,
+          "max_rss_bytes": 52051968
+        },
+        {
+          "real_sec": 0.03,
+          "max_rss_bytes": 53100544
+        },
+        {
+          "real_sec": 0.03,
+          "max_rss_bytes": 54722560
+        },
+        {
+          "real_sec": 0.03,
+          "max_rss_bytes": 51642368
+        }
+      ],
+      "median_sec": 0.03,
+      "median_rss_bytes": 52314112,
+      "failures": 0,
+      "pdf_bytes": 15036,
+      "pages": 9,
+      "text_chars": 1225,
+      "links": 0
+    },
+    "chrome": {
+      "samples": [
+        {
+          "real_sec": 1.51,
+          "max_rss_bytes": 245301248
+        },
+        {
+          "real_sec": 1.47,
+          "max_rss_bytes": 242909184
+        },
+        {
+          "real_sec": 1.45,
+          "max_rss_bytes": 244006912
+        },
+        {
+          "real_sec": 1.49,
+          "max_rss_bytes": 243154944
+        },
+        {
+          "real_sec": 1.49,
+          "max_rss_bytes": 242368512
+        }
+      ],
+      "median_sec": 1.49,
+      "median_rss_bytes": 243154944,
+      "failures": 0,
+      "pdf_bytes": 42663,
+      "pages": 9,
+      "text_chars": 1225,
       "links": 0
     }
   }
