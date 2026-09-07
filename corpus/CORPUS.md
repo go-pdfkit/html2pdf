@@ -4,14 +4,14 @@
 
 | URL | Status | Pages | PDF | Text chars | Links | Lost chars | Fetch | Render |
 |---|---|---|---|---|---|---|---|---|
-| [https://example.com/](https://example.com/) | ✅ | 1 | 6887 B | 127 | 1 | 0 | 44ms | 30ms |
-| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 13 | 252361 B | 56043 | 710 | 1 | 116ms | 3631ms |
-| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 7 | 158586 B | 19482 | 873 | 0 | 67ms | 15870ms |
-| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 5 | 60578 B | 12031 | 31 | 0 | 159ms | 1563ms |
-| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 51 | 383572 B | 145138 | 1790 | 0 | 196ms | 3796ms |
-| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 172 | 999532 B | 443933 | 3421 | 3 | 304ms | 492ms |
-| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 28647 B | 4057 | 225 | 0 | 443ms | 796ms |
-| [https://react.dev/](https://react.dev/) | ✅ | 8 | 782182 B | 7740 | 144 | 3 | 37ms | 562ms |
+| [https://example.com/](https://example.com/) | ✅ | 1 | 6887 B | 127 | 1 | 0 | 33ms | 49ms |
+| [https://en.wikipedia.org/wiki/Go_(programming_language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | ✅ | 13 | 252361 B | 56043 | 710 | 0 | 213ms | 3789ms |
+| [https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)](https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)) | ✅ | 7 | 158367 B | 19482 | 873 | 0 | 36ms | 16045ms |
+| [https://go.dev/blog/subtests](https://go.dev/blog/subtests) | ✅ | 5 | 60578 B | 12031 | 31 | 0 | 147ms | 1717ms |
+| [https://pkg.go.dev/net/http](https://pkg.go.dev/net/http) | ✅ | 51 | 383572 B | 145138 | 1790 | 0 | 631ms | 3931ms |
+| [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html) | ✅ | 172 | 999532 B | 443933 | 3421 | 3 | 243ms | 540ms |
+| [https://news.ycombinator.com/](https://news.ycombinator.com/) | ✅ | 1 | 28648 B | 4057 | 225 | 0 | 452ms | 818ms |
+| [https://react.dev/](https://react.dev/) | ✅ | 8 | 782182 B | 7740 | 144 | 3 | 69ms | 776ms |
 
 <!-- BEGIN ANALYSIS -->
 
@@ -413,3 +413,22 @@ The corpus pages, being screen pages set in Inter, lose almost nothing;
 the report, set in Lora, did. The next stage embeds a last-resort font
 (DejaVu Sans, through the engine's own fallback) and re-runs this column;
 CJK stays beyond it and is stated as such.
+
+### Glyph fallback — 2026-09-07 (engine [#145](https://github.com/go-webengine/engine/pull/145), go-opentype/fonts [#18](https://github.com/go-opentype/fonts/pull/18))
+
+The engine now falls back per character to DejaVu Sans when the family's
+face has no glyph (`paint.Fonts.Runs`), and `Export` walks the same runs,
+embedding DejaVu beside the family only where it is used — no corpus PDF
+grew (RFC 9110 and react.dev are byte-identical; their fonts are still
+Inter and Go Mono only). The user's report — body in Lora, which has
+neither `↔` nor a circled digit — goes from 6 lost characters to **0 of
+106**. The fonts module moved to the commit carrying DejaVu, and its newer
+Inter covers arrows and ①–⑩ by itself.
+
+Lost chars after: RFC 9110 3 (一奥穂), react.dev 3 (⌘玄黄), 0 elsewhere.
+CJK is beyond DejaVu Sans and stated as such. The `⌘` is the one honest
+oddity: in isolation it renders and extracts in all three families (DejaVu
+sets it for mono and serif); on react.dev it sits in the search **button**
+(`<kbd data-platform="mac">` inside `<button>`), a form control the engine
+paints on its own path — html2pdf's walker paints text lines only. That is
+the "second walker" row of the mutualisation audit, not a font.

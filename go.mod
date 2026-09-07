@@ -4,9 +4,9 @@ go 1.26.4
 
 require (
 	github.com/go-gfx/gfx v0.19.0
-	github.com/go-opentype/fonts v0.9.0
+	github.com/go-opentype/fonts v0.9.1-0.20260907071658-dd9656234a3d
 	github.com/go-pdfkit/pdfkit v0.11.1-0.20260906121306-2b1cee2c4ed8
-	github.com/go-webengine/engine v0.3.12-0.20260907071309-0aee5d63430c
+	github.com/go-webengine/engine v0.3.12-0.20260907072239-bd351df66901
 )
 
 require (

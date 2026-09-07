@@ -1,19 +1,19 @@
 # html2pdf vs headless Chrome — 2026-09-07
 
-Machine: Apple M4 Max, 16 cores; load average at start: { 6.23 5.01 4.72 }. Chrome: Google Chrome 152.0.7977.76. 5 runs per tool per input, interleaved; medians. Both tools timed as child processes under `/usr/bin/time -l` (wall-clock to PDF on disk, start-up and any fetch included; RSS = peak resident set).
+Machine: Apple M4 Max, 16 cores; load average at start: { 4.39 4.14 4.31 }. Chrome: Google Chrome 152.0.7977.76. 5 runs per tool per input, interleaved; medians. Both tools timed as child processes under `/usr/bin/time -l` (wall-clock to PDF on disk, start-up and any fetch included; RSS = peak resident set).
 
 | Input | html2pdf | Chrome | Chrome ÷ html2pdf | PDF html2pdf | PDF Chrome | Pages | Text chars | Links | RSS html2pdf | RSS Chrome |
 |---|---|---|---|---|---|---|---|---|---|---|
-| https://example.com/ | 0.06 s | 1.49 s | 24.8× | 0.0 MB | 0.0 MB | 1 / 1 | 127 / 128 | 1 / 1 | 49.3 MB | 241.9 MB |
-| https://en.wikipedia.org/wiki/Go_(programming_language) | 3.89 s | 2.02 s | 0.5× | 0.3 MB | 1.7 MB | 13 / 25 | 56043 / 67289 | 710 / 838 | 95.6 MB | 361.8 MB |
-| https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations) | 12.77 s | 2.10 s | 0.2× | 0.2 MB | 1.7 MB | 7 / 12 | 19482 / 21977 | 873 / 1481 | 103.1 MB | 357.1 MB |
-| https://go.dev/blog/subtests | 1.96 s | 2.82 s | 1.4× | 0.1 MB | 0.2 MB | 5 / 7 | 12031 / 11742 | 31 / 15 | 68.9 MB | 353.2 MB |
-| https://pkg.go.dev/net/http | 4.32 s | 3.35 s | 0.8× | 0.4 MB | 6.3 MB | 51 / 86 | 145138 / 150480 | 1790 / 16374 | 117.7 MB | 675.7 MB |
-| https://www.rfc-editor.org/rfc/rfc9110.html | 0.68 s | 3.19 s | 4.7× | 1.0 MB | 4.5 MB | 172 / 169 | 443933 / 445667 | 3421 / 3506 | 191.5 MB | 551.7 MB |
-| https://news.ycombinator.com/ | 1.26 s | 2.39 s | 1.9× | 0.0 MB | 0.4 MB | 1 / 2 | 4057 / 4079 | 225 / 257 | 56.3 MB | 251.9 MB |
-| https://react.dev/ | 0.62 s | 2.16 s | 3.5× | 0.8 MB | 2.7 MB | 8 / 9 | 7740 / 6809 | 144 / 59 | 245.4 MB | 301.4 MB |
-| fixtures/longdoc.html | 0.38 s | 1.88 s | 4.9× | 0.9 MB | 2.4 MB | 100 / 135 | 590576 / 591170 | 0 / 0 | 148.1 MB | 372.8 MB |
-| fixtures/breaks.html | 0.03 s | 1.49 s | 49.7× | 0.0 MB | 0.0 MB | 9 / 9 | 1225 / 1225 | 0 / 0 | 52.3 MB | 243.2 MB |
+| https://example.com/ | 0.07 s | 1.51 s | 21.6× | 0.0 MB | 0.0 MB | 1 / 1 | 127 / 128 | 1 / 1 | 70.5 MB | 241.8 MB |
+| https://en.wikipedia.org/wiki/Go_(programming_language) | 3.91 s | 2.07 s | 0.5× | 0.3 MB | 1.7 MB | 13 / 25 | 56043 / 67289 | 710 / 838 | 124.8 MB | 361.8 MB |
+| https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations) | 12.78 s | 2.07 s | 0.2× | 0.2 MB | 1.7 MB | 7 / 12 | 19482 / 21977 | 873 / 1481 | 121.8 MB | 356.7 MB |
+| https://go.dev/blog/subtests | 1.92 s | 2.94 s | 1.5× | 0.1 MB | 0.2 MB | 5 / 7 | 12031 / 11742 | 31 / 15 | 94.1 MB | 353.1 MB |
+| https://pkg.go.dev/net/http | 4.17 s | 3.20 s | 0.8× | 0.4 MB | 6.3 MB | 51 / 86 | 145138 / 150480 | 1790 / 16374 | 132.9 MB | 674.0 MB |
+| https://www.rfc-editor.org/rfc/rfc9110.html | 0.75 s | 3.19 s | 4.3× | 1.0 MB | 4.5 MB | 172 / 169 | 443933 / 445667 | 3421 / 3506 | 230.4 MB | 551.4 MB |
+| https://news.ycombinator.com/ | 1.26 s | 2.41 s | 1.9× | 0.0 MB | 0.4 MB | 1 / 2 | 4032 / 4056 | 225 / 257 | 75.4 MB | 251.8 MB |
+| https://react.dev/ | 0.61 s | 2.17 s | 3.6× | 0.8 MB | 2.7 MB | 8 / 9 | 7740 / 6809 | 144 / 59 | 243.8 MB | 301.3 MB |
+| fixtures/longdoc.html | 0.41 s | 1.86 s | 4.5× | 0.9 MB | 2.4 MB | 100 / 135 | 590576 / 591170 | 0 / 0 | 211.8 MB | 372.8 MB |
+| fixtures/breaks.html | 0.04 s | 1.50 s | 37.5× | 0.0 MB | 0.0 MB | 9 / 9 | 1225 / 1225 | 0 / 0 | 72.7 MB | 242.6 MB |
 
 <!-- BEGIN ANALYSIS -->
 

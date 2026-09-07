@@ -10,12 +10,14 @@ import (
 	"github.com/go-webengine/engine/css"
 	"github.com/go-webengine/engine/dom"
 	"github.com/go-webengine/engine/layout"
+	"github.com/go-webengine/engine/paint"
 )
 
 // exporter holds the state for painting one page's slice of the box tree.
 type exporter struct {
 	fonts                     *fontSet
 	imgs                      map[*dom.Node]*engine.LoadedImage // bitmaps and their sources, keyed by <img>/<svg> element
+	measure                   *paint.Fonts                      // the faces the layout measured with; its Runs decide the fallback
 	imageDPI                  float64                           // Options.ImageDPI; 0 = keep the engine's pixels
 	pageWPt                   float64
 	pageHPt                   float64
@@ -140,11 +142,21 @@ func (e *exporter) paintLine(line *layout.LineBox) {
 		if it.Text == "" || it.Style == nil {
 			continue
 		}
-		f := e.fonts.pick(it.Style.FontFamily, it.Style.Bold(), it.Style.Italic)
-		e.p.SetFont(f, it.Style.FontSize*e.scale*pxToPt)
-		e.p.SetFillColor(toRGB(it.Style.Color))
+		// The engine set this text in the family's face, and in the fallback
+		// face for the characters the family has no glyph for; walk the same
+		// runs with the same fonts, advancing by the widths the layout used.
+		st := it.Style
+		e.p.SetFillColor(toRGB(st.Color))
 		x, y := e.toPdf(it.X, it.Y+it.Ascent)
-		_ = e.p.TextShaped(x, y, it.Text)
+		for _, run := range e.measure.Runs(it.Text, st.FontFamily, st.FontWeight, st.Italic) {
+			f := e.fonts.pick(st.FontFamily, st.Bold(), st.Italic)
+			if run.Fallback {
+				f = e.fonts.fallback(st.Bold(), st.Italic)
+			}
+			e.p.SetFont(f, st.FontSize*e.scale*pxToPt)
+			_ = e.p.TextShaped(x, y, run.Text)
+			x += e.measure.Measure(run.Text, st.FontFamily, st.FontSize, st.FontWeight, st.Italic) * e.scale * pxToPt
+		}
 	}
 }
 

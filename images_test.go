@@ -85,3 +85,16 @@ func TestIsOpaqueAndJPEGPassable(t *testing.T) {
 		t.Error("jpegPassable: a YCbCr JPEG yes, a PNG no")
 	}
 }
+
+// A character the family's face lacks is set in the engine's fallback face
+// (DejaVu Sans), embedded beside the family, instead of vanishing: Lora has
+// no "↔", Inter no box-drawing "─".
+func TestExportFallsBackForMissingGlyphs(t *testing.T) {
+	pdf := exportBytes(t, `<html><body><p style="font-family:serif">A ↔ B</p><p>x ─ y</p></body></html>`, Options{})
+	if !bytes.Contains(pdf, []byte("DejaVuSans")) {
+		t.Error("the fallback font is not embedded")
+	}
+	if n := bytes.Count(pdf, []byte("/Type /Font")) + bytes.Count(pdf, []byte("/Type/Font")); n < 3 {
+		t.Errorf("font dictionaries: %d, want the serif, the sans and the fallback at least", n)
+	}
+}
