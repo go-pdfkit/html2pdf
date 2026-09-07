@@ -7,7 +7,7 @@ require (
 	github.com/go-pdfkit/html2pdf v0.0.0
 	github.com/go-pdfkit/pdfkit v0.11.1-0.20260906121306-2b1cee2c4ed8
 	github.com/go-pdfkit/reader v0.6.0
-	github.com/go-webengine/engine v0.3.12-0.20260907071309-0aee5d63430c
+	github.com/go-webengine/engine v0.3.12-0.20260907072239-bd351df66901
 )
 
 require (
@@ -25,7 +25,7 @@ require (
 	github.com/go-gfx/gfx v0.19.0 // indirect
 	github.com/go-icons/iconoir v0.2.0 // indirect
 	github.com/go-images/images v0.0.0-20260831115433-23d959d868e3 // indirect
-	github.com/go-opentype/fonts v0.9.0 // indirect
+	github.com/go-opentype/fonts v0.9.1-0.20260907071658-dd9656234a3d // indirect
 	github.com/go-opentype/opentype v0.12.0 // indirect
 	github.com/go-opentype/shape v0.5.0 // indirect
 	github.com/go-richdoc/richdoc v0.3.0 // indirect

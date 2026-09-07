@@ -88,6 +88,11 @@ This renders **static** HTML: no JavaScript, no `@font-face`. Text is set in
 the three families go-webengine's own paint package bundles — Inter (sans),
 Lora (serif), Go Mono (mono) — so the glyphs drawn always match the metrics
 the layout pass measured against; there is no web-font fetch to fail silently.
+A character the family has no glyph for is set in the engine's last-resort
+DejaVu Sans (arrows, mathematical operators, box drawing, braille, Greek,
+Cyrillic, ①–⑩), embedded beside the family, the way a browser falls back
+per character to the system's fonts; CJK is beyond it and draws as nothing.
+The corpus report's **Lost chars** column counts what still vanishes.
 
 External stylesheets — `<link rel="stylesheet">` and their `@import` chains —
 are fetched through the engine's own bounded loader (`Engine.LoadStylesheets`:
