@@ -3,10 +3,10 @@ module github.com/go-pdfkit/html2pdf
 go 1.26.4
 
 require (
-	github.com/go-gfx/gfx v0.19.0
+	github.com/go-gfx/gfx v0.24.0
 	github.com/go-opentype/fonts v0.9.1-0.20260907071658-dd9656234a3d
-	github.com/go-pdfkit/pdfkit v0.11.1-0.20260907190400-f7399fcad987
-	github.com/go-webengine/engine v0.3.12-0.20260907212526-c71d07c9a32b
+	github.com/go-pdfkit/pdfkit v0.12.0
+	github.com/go-webengine/engine v0.3.12-0.20260909200704-7b7169ea4d0e
 )
 
 require (
@@ -31,7 +31,7 @@ require (
 	github.com/go-webengine/esbuildsandbox v0.1.0 // indirect
 	github.com/go-widgets/mvvm v0.9.0 // indirect
 	github.com/go-widgets/painter v0.13.0 // indirect
-	github.com/go-widgets/toolkit v0.313.0 // indirect
+	github.com/go-widgets/toolkit v0.316.0 // indirect
 	github.com/google/pprof v0.0.0-20240727154555-813a5fbdbec8 // indirect
 	github.com/klauspost/compress v1.17.4 // indirect
 	github.com/refraction-networking/utls v1.8.2 // indirect
@@ -41,10 +41,10 @@ require (
 	github.com/srwiley/rasterx v0.0.0-20220730225603-2ab79fcdd4ef // indirect
 	github.com/tannevaled/gobig2 v0.1.0 // indirect
 	golang.org/x/crypto v0.55.0 // indirect
-	golang.org/x/image v0.45.0 // indirect
+	golang.org/x/image v0.46.0 // indirect
 	golang.org/x/net v0.58.0 // indirect
-	golang.org/x/sys v0.47.0 // indirect
-	golang.org/x/text v0.41.0 // indirect
+	golang.org/x/sys v0.48.0 // indirect
+	golang.org/x/text v0.42.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260526163538-3dc84a4a5aaa // indirect
 	google.golang.org/grpc v1.83.2 // indirect
 	google.golang.org/protobuf v1.36.12 // indirect
