@@ -7,7 +7,7 @@ require (
 	github.com/go-pdfkit/html2pdf v0.0.0
 	github.com/go-pdfkit/pdfkit v0.12.0
 	github.com/go-pdfkit/reader v0.6.0
-	github.com/go-webengine/engine v0.3.12-0.20260909200704-7b7169ea4d0e
+	github.com/go-webengine/engine v0.3.12-0.20260914070417-dc49d443790b
 )
 
 require (
@@ -17,14 +17,14 @@ require (
 	github.com/breml/rootcerts v0.3.7 // indirect
 	github.com/coder/websocket v1.8.15 // indirect
 	github.com/dlclark/regexp2/v2 v2.5.2 // indirect
-	github.com/dop251/goja v0.0.0-20260826204918-8f1c0696a37b // indirect
+	github.com/dop251/goja v0.0.0-20260911104922-fabc3b8078ad // indirect
 	github.com/evanw/esbuild v0.28.2 // indirect
 	github.com/go-browserhttp/browserhttp v0.2.0 // indirect
 	github.com/go-crdt/collab v0.45.0 // indirect
 	github.com/go-crdt/crdt v0.46.0 // indirect
 	github.com/go-gfx/gfx v0.24.0 // indirect
 	github.com/go-icons/iconoir v0.2.0 // indirect
-	github.com/go-images/images v0.0.0-20260831115433-23d959d868e3 // indirect
+	github.com/go-images/images v0.0.0-20260912071231-12ebfec58453 // indirect
 	github.com/go-opentype/fonts v0.9.1-0.20260907071658-dd9656234a3d // indirect
 	github.com/go-opentype/opentype v0.12.0 // indirect
 	github.com/go-opentype/shape v0.5.0 // indirect
@@ -43,9 +43,9 @@ require (
 	github.com/srwiley/oksvg v0.0.0-20221011165216-be6e8873101c // indirect
 	github.com/srwiley/rasterx v0.0.0-20220730225603-2ab79fcdd4ef // indirect
 	github.com/tannevaled/gobig2 v0.1.0 // indirect
-	golang.org/x/crypto v0.55.0 // indirect
+	golang.org/x/crypto v0.57.0 // indirect
 	golang.org/x/image v0.46.0 // indirect
-	golang.org/x/net v0.58.0 // indirect
+	golang.org/x/net v0.59.0 // indirect
 	golang.org/x/sys v0.48.0 // indirect
 	golang.org/x/text v0.42.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260526163538-3dc84a4a5aaa // indirect
