@@ -6,7 +6,7 @@ require (
 	github.com/go-gfx/gfx v0.24.0
 	github.com/go-opentype/fonts v0.9.1-0.20260907071658-dd9656234a3d
 	github.com/go-pdfkit/pdfkit v0.12.0
-	github.com/go-webengine/engine v0.3.12-0.20260914070417-dc49d443790b
+	github.com/go-webengine/engine v0.3.12-0.20260917063904-e11d14daf8e1
 )
 
 require (
@@ -16,7 +16,7 @@ require (
 	github.com/breml/rootcerts v0.3.7 // indirect
 	github.com/coder/websocket v1.8.15 // indirect
 	github.com/dlclark/regexp2/v2 v2.5.2 // indirect
-	github.com/dop251/goja v0.0.0-20260911104922-fabc3b8078ad // indirect
+	github.com/dop251/goja v0.0.0-20260915173639-b3fa02110dbd // indirect
 	github.com/evanw/esbuild v0.28.2 // indirect
 	github.com/go-browserhttp/browserhttp v0.2.0 // indirect
 	github.com/go-crdt/collab v0.45.0 // indirect
