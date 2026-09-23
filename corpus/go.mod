@@ -3,28 +3,28 @@ module github.com/go-pdfkit/html2pdf/corpus
 go 1.26.4
 
 require (
-	github.com/go-pdfkit/conformance v0.0.0-20260912052849-f16641c9add6
+	github.com/go-pdfkit/conformance v0.0.0-20260922110404-24dba59e6b1f
 	github.com/go-pdfkit/html2pdf v0.0.0
 	github.com/go-pdfkit/pdfkit v0.12.0
 	github.com/go-pdfkit/reader v0.6.0
-	github.com/go-webengine/engine v0.3.12-0.20260917063904-e11d14daf8e1
+	github.com/go-webengine/engine v0.3.12-0.20260922114235-e1815373911e
 )
 
 require (
 	github.com/ajroetker/go-highway v0.0.4 // indirect
-	github.com/ajroetker/go-jpeg2000 v0.0.2 // indirect
 	github.com/andybalholm/brotli v1.2.3 // indirect
 	github.com/breml/rootcerts v0.3.7 // indirect
 	github.com/coder/websocket v1.8.15 // indirect
 	github.com/dlclark/regexp2/v2 v2.5.2 // indirect
-	github.com/dop251/goja v0.0.0-20260915173639-b3fa02110dbd // indirect
+	github.com/dop251/goja v0.0.0-20260917113740-793a2a65c13b // indirect
 	github.com/evanw/esbuild v0.28.2 // indirect
 	github.com/go-browserhttp/browserhttp v0.2.0 // indirect
 	github.com/go-crdt/collab v0.45.0 // indirect
 	github.com/go-crdt/crdt v0.46.0 // indirect
-	github.com/go-gfx/gfx v0.24.0 // indirect
+	github.com/go-gfx/gfx v0.26.0 // indirect
 	github.com/go-icons/iconoir v0.2.0 // indirect
 	github.com/go-images/images v0.0.0-20260912071231-12ebfec58453 // indirect
+	github.com/go-images/jpeg2000 v0.1.0 // indirect
 	github.com/go-opentype/fonts v0.9.1-0.20260907071658-dd9656234a3d // indirect
 	github.com/go-opentype/opentype v0.12.0 // indirect
 	github.com/go-opentype/shape v0.5.0 // indirect
