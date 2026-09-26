@@ -3,10 +3,10 @@ module github.com/go-pdfkit/html2pdf
 go 1.26.4
 
 require (
-	github.com/go-gfx/gfx v0.26.0
-	github.com/go-opentype/fonts v0.9.1-0.20260907071658-dd9656234a3d
+	github.com/go-gfx/gfx v0.34.0
+	github.com/go-opentype/fonts v0.10.0
 	github.com/go-pdfkit/pdfkit v0.12.0
-	github.com/go-webengine/engine v0.3.12-0.20260922114235-e1815373911e
+	github.com/go-webengine/engine v0.3.12-0.20260925203208-304eadfe0f41
 )
 
 require (
@@ -39,7 +39,7 @@ require (
 	github.com/sergeymakinen/go-ico v1.0.0 // indirect
 	github.com/srwiley/oksvg v0.0.0-20221011165216-be6e8873101c // indirect
 	github.com/srwiley/rasterx v0.0.0-20220730225603-2ab79fcdd4ef // indirect
-	github.com/tannevaled/gobig2 v0.1.0 // indirect
+	github.com/tannevaled/gobig2 v0.2.0 // indirect
 	golang.org/x/crypto v0.57.0 // indirect
 	golang.org/x/image v0.46.0 // indirect
 	golang.org/x/net v0.59.0 // indirect
