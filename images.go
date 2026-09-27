@@ -72,6 +72,13 @@ func (e *exporter) paintImage(it *layout.InlineItem) {
 			return
 		}
 	}
+	// An inline <svg> or an <img src="*.svg"> is a DRAWING, not pixels: the
+	// engine rasterised it once at its CSS box, which is 96 dpi on paper.
+	// Render it again at the density this page is being made at.
+	if bmp, ok := svgAtDensity(li, r, e.imageDPI); ok {
+		e.p.DrawImage(bmp, r)
+		return
+	}
 	bmp := sourcePixels(li)
 	if e.imageDPI > 0 {
 		bmp = downsampleFor(bmp, r, e.imageDPI)
@@ -192,4 +199,46 @@ func isOpaque(img image.Image) bool {
 		}
 	}
 	return true
+}
+
+// svgPrintDPI is the density an SVG is rendered at when the caller named
+// none. Unlike a photograph, an SVG has no pixels to "keep", so Options.
+// ImageDPI's zero value — keep every pixel the source has — says nothing
+// here and this stands in for it. 150 is the value Options.ImageDPI's own
+// documentation calls a sound print figure: on A0 it puts the 21 px labels
+// inside a schematic at some 33 px tall, and it is ~2.4x the pixels of the
+// engine's 96 dpi raster rather than the ~10x that 300 would cost on a
+// drawing the width of the page.
+const svgPrintDPI = 150
+
+// svgAtDensity re-renders an SVG element into the rectangle it is painted
+// into, at imageDPI when the caller set one and at svgPrintDPI otherwise.
+//
+// The engine rasterises an SVG once, at the element's CSS box, for a canvas
+// where one CSS px is one device px — a hard 96 dpi ceiling on paper, and
+// the drawings that hit it are exactly the ones that most need to be crisp:
+// schematics, charts, diagrams. Unlike a photograph there is nothing lost to
+// recover, so this does not resample the bitmap: it renders the drawing
+// again from its source (engine.RasterizeSVG), which is available for an
+// inline <svg> as its own serialisation and for an <img src="*.svg"> as the
+// bytes fetched.
+//
+// ok is false when there is no source to render from, when the rectangle is
+// degenerate, or when the density asked for would gain nothing over the
+// bitmap the engine already made — so a screen-density export keeps doing
+// exactly what it did.
+func svgAtDensity(li *engine.LoadedImage, r pdfkit.Rect, imageDPI float64) (image.Image, bool) {
+	if li.Format != "svg" || len(li.Data) == 0 || r.Width <= 0 || r.Height <= 0 {
+		return nil, false
+	}
+	dpi := imageDPI
+	if dpi <= 0 {
+		dpi = svgPrintDPI
+	}
+	w := int(math.Round(r.Width / 72 * dpi))
+	h := int(math.Round(r.Height / 72 * dpi))
+	if b := li.Bitmap.Bounds(); w <= b.Dx() || h <= b.Dy() {
+		return nil, false
+	}
+	return engine.RasterizeSVG(li.Data, w, h, "")
 }
