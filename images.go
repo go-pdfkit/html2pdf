@@ -11,6 +11,7 @@ import (
 	"image/jpeg"
 	"math"
 
+	"github.com/go-gfx/gfx/codec"
 	"github.com/go-gfx/gfx/raster"
 	"github.com/go-gfx/gfx/resample"
 	"github.com/go-pdfkit/pdfkit"
@@ -28,33 +29,52 @@ const jpegQuality = 85
 // paintImage draws one replaced element, choosing how the pixels are
 // stored by what the engine fetched (see Options.ImageDPI for the sizing):
 //
-//   - a JPEG source whose bitmap the engine did not resize is embedded as it
-//     is — a DCTDecode stream of the original bytes, the rule Skia (Chrome's
-//     PDF backend) applies; only YCbCr and grey JPEGs qualify, a CMYK JPEG
+//   - a JPEG source a PDF reader decodes directly is embedded as it is — a
+//     DCTDecode stream of the original bytes, the rule Skia (Chrome's PDF
+//     backend) applies; only YCbCr and grey JPEGs qualify, a CMYK JPEG
 //     would need an inverted Decode array Adobe writers expect;
-//   - any other lossy source (a resized JPEG, a lossy WebP) that is opaque
-//     is re-encoded as JPEG at jpegQuality — lossy again, as Chrome does,
-//     rather than stored losslessly at ten times the size;
+//   - any other lossy source (a WebP, a JPEG that had to be resampled for
+//     an ImageDPI cap) that is opaque is re-encoded as JPEG at
+//     jpegQuality — lossy again, as Chrome does, rather than stored
+//     losslessly at ten times the size;
 //   - everything else — PNG, GIF, SVG rasters, anything with transparency —
 //     is a flate bitmap with a soft mask when it has alpha, so line art and
 //     screenshots keep every pixel.
+//
+// The pixels come from the source rather than from the engine's bitmap
+// wherever the source bytes are still around — see sourcePixels.
 func (e *exporter) paintImage(it *layout.InlineItem) {
 	li, ok := e.imgs[it.Image]
 	if !ok || li == nil || li.Bitmap == nil || it.ImgW <= 0 || it.ImgH <= 0 {
 		return
 	}
+	// The box LAYOUT gives the element, not the bitmap's own size. ImgW/ImgH
+	// are the loaded bitmap's pixels — paint's resample SOURCE — while Width
+	// and LineHeight carry the display size, after the element's own width and
+	// max-width are resolved against its real containing width (engine
+	// layout.resolvedReplacedSize). The two coincide only for an image no CSS
+	// resized, so drawing at ImgW/ImgH put every `max-width: 100%` image on
+	// the page at its source size: on the A0 poster the photographs landed
+	// 3179 px wide inside 912 px columns.
+	dw, dh := it.Width, it.LineHeight
+	if dw <= 0 || dh <= 0 {
+		dw, dh = it.ImgW, it.ImgH
+	}
 	x0, y0 := e.toPdf(it.X, it.Y)
-	x1, y1 := e.toPdf(it.X+it.ImgW, it.Y+it.ImgH)
+	x1, y1 := e.toPdf(it.X+dw, it.Y+dh)
 	r := pdfkit.Rect{X: x0, Y: y1, Width: x1 - x0, Height: y0 - y1}
 
-	bmp := li.Bitmap
-	if e.imageDPI > 0 {
-		bmp = downsampleFor(bmp, r, e.imageDPI)
-	}
-	if li.Format == "jpeg" && bmp == li.Bitmap && bitmapIsSource(li) && jpegPassable(li.Data) {
+	// The source's own bytes, byte for byte, whenever a PDF reader decodes
+	// them and no cap asks for fewer pixels than they carry — whether or
+	// not the engine kept that many for its own canvas.
+	if li.Format == "jpeg" && len(li.Data) > 0 && !overDPI(li.SourceW, li.SourceH, r, e.imageDPI) && jpegPassable(li.Data) {
 		if e.p.DrawJPEG(li.Data, r) == nil {
 			return
 		}
+	}
+	bmp := sourcePixels(li)
+	if e.imageDPI > 0 {
+		bmp = downsampleFor(bmp, r, e.imageDPI)
 	}
 	if li.Lossy && isOpaque(bmp) {
 		var buf bytes.Buffer
@@ -63,6 +83,42 @@ func (e *exporter) paintImage(it *layout.InlineItem) {
 		}
 	}
 	e.p.DrawImage(bmp, r)
+}
+
+// sourcePixels returns the pixels to embed for one image: the source's own
+// wherever its bytes are still around, else the engine's bitmap.
+//
+// The engine decodes and sizes an image for its raster canvas, where one
+// CSS px is one device px — so LoadedImage.Bitmap carries the element's CSS
+// box worth of pixels and no more. On paper that is a ceiling of exactly 96
+// dpi for a document laid out 1:1 against its own @page (the A0 poster this
+// was found on: every one of its 51 images landed at 96 dpi, and its 1800 px
+// photograph had been resampled UP to 3179 to fill the viewport, so the file
+// was larger than the source and carried less of it). A PDF has no such
+// constraint — the printer's RIP resamples at whatever density the paper
+// deserves — so where Data is still there (every <img>; an inline <svg> has
+// none) the source is decoded again at full size and embedded instead. This
+// is what Chrome's print does: its own output of that poster carries images
+// from 121 to 739 dpi. Options.ImageDPI caps the result.
+func sourcePixels(li *engine.LoadedImage) image.Image {
+	if bitmapIsSource(li) || len(li.Data) == 0 || li.Format == "svg" || li.SourceW <= 0 || li.SourceH <= 0 {
+		return li.Bitmap
+	}
+	img, err := codec.Decode(li.Data)
+	if err != nil || img == nil || img.W != li.SourceW || img.H != li.SourceH {
+		return li.Bitmap // undecodable a second time, or not the image the engine measured
+	}
+	return img.ToNRGBA()
+}
+
+// overDPI reports whether a w×h source carries more pixels than dpi allows
+// over the rectangle it is painted into — the test that decides whether the
+// source bytes can be passed through untouched. A zero cap never does.
+func overDPI(w, h int, r pdfkit.Rect, dpi float64) bool {
+	if dpi <= 0 {
+		return false
+	}
+	return float64(w) > math.Ceil(r.Width/72*dpi) || float64(h) > math.Ceil(r.Height/72*dpi)
 }
 
 // downsampleFor scales bmp down so that it carries no more than dpi pixels

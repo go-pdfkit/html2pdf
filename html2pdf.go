@@ -28,8 +28,10 @@
 //
 // Images — raster <img>, <img src="*.svg"> and inline <svg> — are fetched,
 // decoded and sized by the engine's own pipeline (Engine.LoadImageSet) and
-// embedded so they are laid out and drawn exactly as the engine's raster
-// canvas would: a JPEG source as its own bytes (DCTDecode), any other lossy
+// laid out in the boxes it gives them — but embedded at the SOURCE's own
+// resolution rather than at the canvas-sized bitmap the engine decoded for
+// itself, which on paper would be a 96 dpi ceiling (see sourcePixels):
+// a JPEG source as its own bytes (DCTDecode), any other lossy
 // source re-encoded as JPEG when opaque, everything else as a flate bitmap
 // with a soft mask for transparency — see images.go and Options.ImageDPI. A
 // relative src resolves against Options.BaseURL; an image that fails to
@@ -121,7 +123,8 @@ type Options struct {
 	// ImageDPI caps the pixel density of an embedded bitmap at its painted
 	// size: a bitmap that would exceed it — a 1024 px photograph painted
 	// 60 mm wide is 430 dpi — is downsampled to it. Zero (the default) keeps
-	// every pixel the engine fetched, which is what Chrome's print and
+	// every pixel the SOURCE has, not merely the ones the engine kept for
+	// its own canvas (see sourcePixels), which is what Chrome's print and
 	// WeasyPrint do by default; WeasyPrint's --dpi is the same lever. 150
 	// is a sound print value, 96 the screen's.
 	ImageDPI float64

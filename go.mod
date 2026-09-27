@@ -6,7 +6,7 @@ require (
 	github.com/go-gfx/gfx v0.26.0
 	github.com/go-opentype/fonts v0.9.1-0.20260907071658-dd9656234a3d
 	github.com/go-pdfkit/pdfkit v0.12.0
-	github.com/go-webengine/engine v0.3.12-0.20260922114235-e1815373911e
+	github.com/go-webengine/engine v0.3.12-0.20260927133700-0e11c7d5f82e
 )
 
 require (
