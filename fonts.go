@@ -53,8 +53,14 @@ func loadFonts() (*fontSet, error) {
 // pick returns the loaded face matching a CSS font-family/weight/style
 // request.
 func (fs *fontSet) pick(fam css.FontFamily, bold, italic bool) *pdfkit.Font {
-	switch fam {
-	case css.Serif:
+	// The GENERIC bucket, not the whole FontFamily. It used to be an enum of
+	// three values, so comparing the value itself was comparing the bucket;
+	// since it became {Names, Generic} (go-webengine/engine#233) a declaration
+	// that NAMES a family matched none of these cases and fell through to
+	// sans. Every serif and monospace run on a page that names its typefaces —
+	// which is every real page — was being embedded in Inter.
+	switch fam.Generic {
+	case css.GenericSerif:
 		switch {
 		case bold && italic:
 			return fs.serifBI
@@ -65,7 +71,7 @@ func (fs *fontSet) pick(fam css.FontFamily, bold, italic bool) *pdfkit.Font {
 		default:
 			return fs.serif
 		}
-	case css.Mono:
+	case css.GenericMono:
 		return fs.mono
 	default:
 		switch {
