@@ -51,11 +51,13 @@ func TestExportEmbedsImagesByTheirSource(t *testing.T) {
 	}
 }
 
-// ImageDPI downsamples a bitmap denser than the cap at its painted size and
-// leaves one below it alone; zero keeps every pixel.
+// ImageDPI downsamples a source denser than the cap at its painted size and
+// leaves one below it alone; zero embeds every pixel the source has, even
+// when the engine kept far fewer for its own canvas.
 func TestExportImageDPICapsDensity(t *testing.T) {
 	// 1000 px wide, painted 100 CSS px wide: at the default layout scale
-	// that is ~47 pt, ~0.65 in — 1500 dpi.
+	// that is ~47 pt, ~0.65 in — so the source is ~1500 dpi there, and the
+	// engine's own bitmap, resized to the CSS box, is 100 px / ~150 dpi.
 	html := `<html><body><img src="` + dataURI("image/jpeg", fxJPEG1000) + `" style="width:100px"></body></html>`
 	widthRe := regexp.MustCompile(`/Width (\d+)`)
 	width := func(pdf []byte) int {
@@ -66,17 +68,41 @@ func TestExportImageDPICapsDensity(t *testing.T) {
 		n, _ := strconv.Atoi(string(m[1]))
 		return n
 	}
-	// The engine resizes the bitmap to the CSS width (100 px) itself, so the
-	// JPEG is re-encoded rather than passed through, and at 0 the 100 px stay.
-	if w := width(exportBytes(t, html, Options{})); w != 100 {
-		t.Errorf("ImageDPI 0: width %d, want 100 (the engine's CSS-sized bitmap, every pixel kept)", w)
+	// Uncapped, the source's own 1000 px go in — as its own bytes, since
+	// nothing had to touch them. The engine's 100 px bitmap would have
+	// thrown nine pixels in ten away before this package ever saw them.
+	pdf := exportBytes(t, html, Options{})
+	if w := width(pdf); w != 1000 {
+		t.Errorf("ImageDPI 0: width %d, want 1000 (the source's own pixels)", w)
 	}
-	// 100 px over ~0.65 in is ~150 dpi: a 72 dpi cap halves it, a 300 cap does nothing.
-	if w := width(exportBytes(t, html, Options{ImageDPI: 72})); w >= 100 || w < 40 {
+	if !bytes.Contains(pdf, raw(fxJPEG1000)) {
+		t.Error("ImageDPI 0: the source JPEG bytes are not in the file verbatim")
+	}
+	// A cap resamples the source down to it: ~0.65 in at 72 dpi is ~47 px,
+	// at 300 dpi ~195 — both far below the source's 1000.
+	if w := width(exportBytes(t, html, Options{ImageDPI: 72})); w > 60 || w < 35 {
 		t.Errorf("ImageDPI 72: width %d, want about 47", w)
 	}
-	if w := width(exportBytes(t, html, Options{ImageDPI: 300})); w != 100 {
-		t.Errorf("ImageDPI 300: width %d, want 100 (already below the cap)", w)
+	if w := width(exportBytes(t, html, Options{ImageDPI: 300})); w > 230 || w < 160 {
+		t.Errorf("ImageDPI 300: width %d, want about 195", w)
+	}
+}
+
+// A source the engine resized for its canvas is still embedded whole: the
+// 16x12 JPEG forced to 8 CSS px goes in as its own 16 px bytes, and the
+// PNG's bitmap keeps its own pixels rather than the halved ones.
+func TestExportKeepsSourcePixelsThroughACSSResize(t *testing.T) {
+	pdf := exportBytes(t, `<html><body>
+<img src="`+dataURI("image/jpeg", fxJPEG)+`" style="width:8px">
+<img src="`+dataURI("image/png", fxPNGAlpha)+`" style="width:8px">
+</body></html>`, Options{})
+	if !bytes.Contains(pdf, raw(fxJPEG)) {
+		t.Error("the CSS-resized JPEG must still be its own source bytes")
+	}
+	for _, m := range regexp.MustCompile(`/Width (\d+)`).FindAllSubmatch(pdf, -1) {
+		if n, _ := strconv.Atoi(string(m[1])); n != 16 {
+			t.Errorf("embedded image width %d, want 16 (the source's), not the 8 px the CSS box wanted", n)
+		}
 	}
 }
 
