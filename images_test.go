@@ -124,3 +124,41 @@ func TestExportFallsBackForMissingGlyphs(t *testing.T) {
 		t.Errorf("font dictionaries: %d, want the serif, the sans and the fallback at least", n)
 	}
 }
+
+// An SVG is a drawing, not pixels: the engine rasterises it once at the
+// element's CSS box — 96 dpi on paper — and we render it again at the
+// density the page is being made at. The one place the CSS-pixel ceiling
+// bit hardest was line art: schematics and charts, drawn inline.
+func TestExportRendersSVGAtPrintDensity(t *testing.T) {
+	// 200 CSS px wide on a page laid out 1:1 against its own @page, so the
+	// engine's own raster is 200 px and 96 dpi.
+	html := `<html><head><style>@page{size:400px 300px;margin:0}body{margin:0}</style></head><body>` +
+		`<svg viewBox="0 0 100 50" style="width:200px;height:auto"><rect width="100" height="50" fill="#c33"/></svg>` +
+		`</body></html>`
+	widthRe := regexp.MustCompile(`/Width (\d+)`)
+	widest := func(pdf []byte) int {
+		max := 0
+		for _, m := range widthRe.FindAllSubmatch(pdf, -1) {
+			if n, _ := strconv.Atoi(string(m[1])); n > max {
+				max = n
+			}
+		}
+		return max
+	}
+	// 200 px at 96 dpi is ~2.08 in; at svgPrintDPI (150) that is ~312 px.
+	if w := widest(exportBytes(t, html, Options{})); w < 290 || w > 330 {
+		t.Errorf("default: widest embedded image %d px, want about 312 (200 px of CSS box at %d dpi)", w, svgPrintDPI)
+	}
+	// An explicit cap is a target here, not a ceiling over source pixels:
+	// an SVG has none. 300 dpi over ~2.08 in is ~625 px.
+	if w := widest(exportBytes(t, html, Options{ImageDPI: 300})); w < 590 || w > 660 {
+		t.Errorf("ImageDPI 300: widest embedded image %d px, want about 625", w)
+	}
+	// Asking for less than the engine already made does not re-render: the
+	// engine's own 200 px bitmap goes down the ordinary path and the cap
+	// downsamples it like any other, ~2.08 in at 72 dpi being ~150 px. A
+	// screen-density export therefore keeps doing exactly what it did.
+	if w := widest(exportBytes(t, html, Options{ImageDPI: 72})); w < 135 || w > 165 {
+		t.Errorf("ImageDPI 72: widest embedded image %d px, want about 150 (the engine's bitmap, capped)", w)
+	}
+}
