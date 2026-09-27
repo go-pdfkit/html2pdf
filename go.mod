@@ -6,12 +6,12 @@ require (
 	github.com/go-gfx/gfx v0.26.0
 	github.com/go-opentype/fonts v0.9.1-0.20260907071658-dd9656234a3d
 	github.com/go-pdfkit/pdfkit v0.12.0
-	github.com/go-webengine/engine v0.3.12-0.20260927154504-daef37e1453e
+	github.com/go-webengine/engine v0.3.12-0.20260927181450-a8537ad23fd3
 )
 
 require (
 	github.com/ajroetker/go-highway v0.0.4 // indirect
-	github.com/andybalholm/brotli v1.2.3 // indirect
+	github.com/andybalholm/brotli v1.2.5 // indirect
 	github.com/breml/rootcerts v0.3.7 // indirect
 	github.com/coder/websocket v1.8.15 // indirect
 	github.com/dlclark/regexp2/v2 v2.5.2 // indirect
@@ -23,7 +23,7 @@ require (
 	github.com/go-icons/iconoir v0.2.0 // indirect
 	github.com/go-images/images v0.0.0-20260912071231-12ebfec58453 // indirect
 	github.com/go-images/jpeg2000 v0.1.0 // indirect
-	github.com/go-opentype/opentype v0.12.0 // indirect
+	github.com/go-opentype/opentype v0.13.1-0.20260927180318-ae6327b14eac // indirect
 	github.com/go-opentype/shape v0.5.0 // indirect
 	github.com/go-richdoc/richdoc v0.3.0 // indirect
 	github.com/go-sourcemap/sourcemap v2.1.4+incompatible // indirect
