@@ -32,8 +32,8 @@ github.com/go-images/images v0.0.0-20260927173152-87444e36aac4 h1:Likv0wVxr9vDo2
 github.com/go-images/images v0.0.0-20260927173152-87444e36aac4/go.mod h1:bc99LrkZxVUjP+Di3JCmf4SoHzim/PNcHEJfKd1yUtg=
 github.com/go-images/jpeg v0.2.0 h1:dn55cTczPdOJf+NQq+sETCFeov/KeP1haF1ES+FJa+4=
 github.com/go-images/jpeg v0.2.0/go.mod h1:2C1DevAM+HaQlysTLbSdyol8X/RlvmsXmHAXs9teAqo=
-github.com/go-images/jpeg2000 v0.9.1 h1:vn817Lm2h+cS4UghT+WlX5KUZKv3BTxrE5H65Ff6z4U=
-github.com/go-images/jpeg2000 v0.9.1/go.mod h1:Qqxz1gBrUwFDBOGkA4RGyTsX7wifr0wvaTQ7k8FK0wY=
+github.com/go-images/jpeg2000 v0.13.2 h1:wthA3iZkyqWXzNXxd6EjjsrsQ7GOYX7vYZbaI4vU6+I=
+github.com/go-images/jpeg2000 v0.13.2/go.mod h1:Qqxz1gBrUwFDBOGkA4RGyTsX7wifr0wvaTQ7k8FK0wY=
 github.com/go-images/png v0.1.0 h1:OI4yHotS0lA75sLnG2FTL2Vooh4PWpVWEidre1msSe0=
 github.com/go-images/png v0.1.0/go.mod h1:V9vaEbr2nrZGorUWn4xv9F24Yuu1/qLVtmailM9GBVo=
 github.com/go-logr/logr v1.4.3 h1:CjnDlHq8ikf6E492q6eKboGOC0T8CDaOvkHCIg8idEI=
@@ -46,8 +46,8 @@ github.com/go-opentype/opentype v0.13.1-0.20260927180318-ae6327b14eac h1:mpzfJQe
 github.com/go-opentype/opentype v0.13.1-0.20260927180318-ae6327b14eac/go.mod h1:UjZOTCMtkHheDPzfP0ZghDoQ7wIr6L72T/kuC9Ph1hw=
 github.com/go-opentype/shape v0.5.0 h1:jHNaOMHNBdDj5EixOevlrrsi92svMxvVMKN7GYaPfxo=
 github.com/go-opentype/shape v0.5.0/go.mod h1:3ImRYNIj6zpwWQ/DV3BWhgMFfmzDITH6XpZw2auQHTo=
-github.com/go-pdfkit/conformance v0.0.0-20260930110009-657c41e8186c h1:gNcaY8WjL1G5U2B823Rpw2ZDcufohglX7HUELakDymo=
-github.com/go-pdfkit/conformance v0.0.0-20260930110009-657c41e8186c/go.mod h1:Pn7yYbB+m8XpRiy+CG6mStsVjMvyJ8O8XOyWegbCunk=
+github.com/go-pdfkit/conformance v0.0.0-20261003060714-d03a6485ff97 h1:3Iy5RV348SI5CsiQFy0EJTnd4HwKKQ7QfSKQmw8vmb0=
+github.com/go-pdfkit/conformance v0.0.0-20261003060714-d03a6485ff97/go.mod h1:VbSvxVwntiR2W/ZyknnFvIP4TPD2Foy1hrfC/FcGKGI=
 github.com/go-pdfkit/pdfkit v0.12.0 h1:5hot3DuFYCMT2IyGuPOPE+af7mpEP1tPHqdQ+jdTFwk=
 github.com/go-pdfkit/pdfkit v0.12.0/go.mod h1:XksteXlOe0lEU7cu8E32ClQOjEDjSAN4yAu/IDn19rM=
 github.com/go-pdfkit/reader v0.6.0 h1:KAabNOYUcTlZlNBTbG9bEhWP1NiZhjuhzUdavdTdfes=
