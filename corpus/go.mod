@@ -3,7 +3,7 @@ module github.com/go-pdfkit/html2pdf/corpus
 go 1.26.4
 
 require (
-	github.com/go-pdfkit/conformance v0.0.0-20260930110009-657c41e8186c
+	github.com/go-pdfkit/conformance v0.0.0-20261003060714-d03a6485ff97
 	github.com/go-pdfkit/html2pdf v0.0.0
 	github.com/go-pdfkit/pdfkit v0.12.0
 	github.com/go-pdfkit/reader v0.6.0
@@ -26,7 +26,7 @@ require (
 	github.com/go-images/gif v0.1.0 // indirect
 	github.com/go-images/images v0.0.0-20260927173152-87444e36aac4 // indirect
 	github.com/go-images/jpeg v0.2.0 // indirect
-	github.com/go-images/jpeg2000 v0.9.1 // indirect
+	github.com/go-images/jpeg2000 v0.13.2 // indirect
 	github.com/go-images/png v0.1.0 // indirect
 	github.com/go-opentype/fonts v0.10.0 // indirect
 	github.com/go-opentype/opentype v0.13.1-0.20260927180318-ae6327b14eac // indirect
