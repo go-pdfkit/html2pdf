@@ -1,7 +1,9 @@
 # Rendered PDFs are large and fully regenerable from urls.txt — keep the
 # page-1 PNG previews (small, useful as a visual record) but not these.
 out/*.pdf
-corpus
+# The binary `go build ./cmd/corpus` leaves here. Anchored: a bare `corpus`
+# also matched cmd/corpus/ and silently kept glued.go out of #24.
+/corpus
 out/**/*.pdf
 out/judges/
 .judges-node/
