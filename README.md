@@ -162,6 +162,17 @@ pixel as Chrome and WeasyPrint do; WeasyPrint's `--dpi` is the same lever. A
 relative `src` resolves against `BaseURL`; an image that fails to fetch or
 decode is left out.
 
+List markers are real text in the PDF: the engine (v0.18.0 and later) lays
+out each list item's `::marker` with its text — "•", "3.", "iv." — and
+html2pdf draws it where the layout put it, so a marker is selectable and
+extractable like the item's words. `list-style-type` (`disc`, `circle`,
+`square`, `decimal`, `decimal-leading-zero`, `lower-`/`upper-alpha`,
+`lower-`/`upper-roman`, a `<string>`, `none`), `list-style-position`
+(`outside`, `inside`), `::marker` colour and `content`, and `<ol start>`,
+`reversed`, `<li value>` and `type` all come from the engine, as do
+`::before`/`::after` with CSS escapes (`content: "\2022\00a0"`), `counter()`
+and `counters()` over `counter-reset`/`counter-increment`/`counter-set`.
+
 Inline-level decoration — a styled `<span>`, `<code>`, `<a>`… with a
 background, border or padding — paints too, fragmented per line the way CSS
 does (`box-decoration-break: slice`: the left border only on an element's
