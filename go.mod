@@ -6,7 +6,9 @@ require (
 	github.com/go-gfx/gfx v0.36.1
 	github.com/go-opentype/fonts v0.14.0
 	github.com/go-pdfkit/pdfkit v0.20.0
+	github.com/go-pdfkit/reader v0.9.0
 	github.com/go-webengine/engine v0.17.3
+	github.com/spf13/cobra v1.10.2
 )
 
 require (
@@ -28,10 +30,12 @@ require (
 	github.com/go-webengine/esbuildsandbox v0.1.0 // indirect
 	github.com/go-widgets/painter v0.16.0 // indirect
 	github.com/google/pprof v0.0.0-20240727154555-813a5fbdbec8 // indirect
+	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/klauspost/compress v1.18.7 // indirect
 	github.com/refraction-networking/utls v1.8.2 // indirect
 	github.com/sergeymakinen/go-bmp v1.0.0 // indirect
 	github.com/sergeymakinen/go-ico v1.0.0 // indirect
+	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/srwiley/rasterx v0.0.0-20220730225603-2ab79fcdd4ef // indirect
 	github.com/tannevaled/gobig2 v0.2.0 // indirect
 	golang.org/x/crypto v0.58.0 // indirect
