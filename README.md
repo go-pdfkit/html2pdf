@@ -24,12 +24,20 @@ doc.Write(f)
 
 Or from the shell — a local file, or a page fetched through the engine's own
 client (its final URL then resolves relative image sources; use `-base` for
-that with `-in`):
+that with `--in`):
 
 ```sh
-go run ./cmd/html2pdf -in report.html -out report.pdf
-go run ./cmd/html2pdf -url https://example.org/report -out report.pdf
+go run ./cmd/html2pdf --in report.html --out report.pdf
+go run ./cmd/html2pdf --url https://example.org/report --out report.pdf
+go run ./cmd/html2pdf --in report.html --title "Q3 report" --author "A. Writer"
 ```
+
+The CLI is a [cobra](https://github.com/spf13/cobra) command with POSIX flags:
+`--in/-i`, `--url/-u`, `--out/-o`, `--base/-b`, `--margin/-m` (mm),
+`--media`, `--image-dpi`, `--timeout`, and the PDF information entries
+`--title`, `--author`, `--subject`, `--keywords`. The single-dash spellings of
+earlier builds (`-in`, `-out`, `-margin` …) are still accepted. Exit status 2
+is a usage error, 1 a runtime failure.
 
 ## Pagination
 
