@@ -55,8 +55,37 @@ puts every marker on the page headless Chrome put it on (18/18, nine pages).
 
 `@page { size: …; margin: … }` sets the paper and margins, over
 `Options.PageSize` / `MarginMm` — A4, A5, letter, `landscape`, explicit
-lengths, per-side margins. Margin boxes (`@top-center { content:
-counter(page) }`) and `:first` / `:left` / `:right` pages are not read yet.
+lengths, per-side margins. `:first` / `:left` / `:right` and named pages are
+not read yet.
+
+### Page numbers and a table of contents
+
+[CSS Paged Media 3 §5](https://www.w3.org/TR/css-page-3/#margin-boxes)
+margin boxes are painted on every page: `@top-left`, `@top-center`,
+`@top-right`, `@bottom-left`, `@bottom-center`, `@bottom-right`, with a
+`content` of strings (CSS escapes included), `counter(page)` and
+`counter(pages)`, and `font-size`, `font-family`, `font-weight`,
+`font-style`, `color`, `text-align`:
+
+```css
+@page { size: A4; margin: 20mm;
+  @bottom-center { content: counter(page) " / " counter(pages); font-size: 9pt } }
+```
+
+`target-counter(attr(href url), page)`
+([CSS Content 3 §2.6.1](https://www.w3.org/TR/css-content-3/#target-counter))
+prints the page an `href="#id"` points to, in a `::before` / `::after`:
+
+```css
+a.toc::after { content: target-counter(attr(href url), page) }
+```
+
+The layout runs again until the numbers are stable (at most four passes).
+`leader()` is accepted and ignored: no dotted fill is drawn. Not supported: the corner and side margin boxes,
+`target-counters()`, `target-text()`, counter styles other than decimal.
+Margin box positions match headless Chrome 156 to within half a point
+(`@top-*`, `@bottom-*` on A4); Chrome has no `target-counter()`, so that half
+has no oracle and is covered by the tests alone.
 
 ## Layout width vs. print width
 

@@ -212,20 +212,48 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 		imgSizes[n] = li.Size
 	}
 
-	box, _ := layout.LayoutDocument(root, sm, viewportPx, fonts, imgSizes)
-
 	fs, err := loadFonts()
 	if err != nil {
 		return nil, fmt.Errorf("html2pdf: load fonts: %w", err)
 	}
 
-	breaks := paginate.Breaks(box, pageHViewportPx)
-	tops := append([]float64{0}, breaks...)
+	// Paged media (see pagedmedia.go): the margin boxes are read from the CSS,
+	// and a target-counter() reference needs the pages its targets landed on,
+	// so layout and pagination run again — with the references handed to the
+	// engine as plain strings — until the numbers stop moving.
+	sources := append(append([]string(nil), sheets...), css.InlineStyleText(root))
+	mboxes := buildMarginBoxes(pageBoxDecls(sources, media))
+	usesTC := usesTargetCounter(sources)
+
+	var (
+		box   *layout.Box
+		tops  []float64
+		ids   map[string]engine.Anchor
+		extra string
+	)
+	for pass := 0; ; pass++ {
+		if extra != "" {
+			sm = css.CascadeMedia(root, media, append(append([]string(nil), sheets...), extra))
+		}
+		box, _ = layout.LayoutDocument(root, sm, viewportPx, fonts, imgSizes)
+		tops = append([]float64{0}, paginate.Breaks(box, pageHViewportPx)...)
+		ids = engine.DocumentIDs(box)
+		if !usesTC {
+			break
+		}
+		next := targetCounterSheet(sources, media, root, func(id string) (int, bool) {
+			a, ok := ids[id]
+			return pageIndexOf(a.Y, tops) + 1, ok
+		})
+		if next == extra || pass+1 >= maxPassCount {
+			break
+		}
+		extra = next
+	}
 
 	// Navigation: the anchors' clickable runs, the ids they can jump to, and
 	// the headings that become the viewer's bookmark tree.
 	base, _ := url.Parse(opts.BaseURL)
-	ids := engine.DocumentIDs(box)
 	idSet := make(map[string]struct{}, len(ids))
 	for id := range ids {
 		idSet[id] = struct{}{}
@@ -245,7 +273,7 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	// flated streams: ~14 B per link instead of ~200 (pdfkit #29).
 	doc := pdfkit.New(pdfkit.Options{Compress: true, ObjectStreams: true, Title: title, Author: opts.Author, Subject: opts.Subject, Keywords: opts.Keywords})
 	pageSize := pdfkit.PageSize{Width: pageWPt, Height: pageHPt}
-	e := &exporter{fonts: fs, measure: fonts, imgs: imgs, imageDPI: opts.ImageDPI, pageWPt: pageWPt, pageHPt: pageHPt, marginLeftPt: margins[3], marginTopPt: margins[0], scale: scale}
+	e := &exporter{fonts: fs, measure: fonts, imgs: imgs, imageDPI: opts.ImageDPI, pageWPt: pageWPt, pageHPt: pageHPt, marginLeftPt: margins[3], marginTopPt: margins[0], marginRightPt: margins[1], marginBottomPt: margins[2], scale: scale}
 	for i, top := range tops {
 		bot := pageHViewportPx * 1e9 // effectively unbounded: the last page
 		if i+1 < len(tops) {
@@ -259,6 +287,7 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 		e.paintBox(box)
 		e.addLinks(links)
 		e.addDests(ids)
+		e.paintMarginBoxes(mboxes, i+1, len(tops))
 	}
 	for _, h := range heads {
 		doc.AddOutlineItem(h.Title, h.Level, pageIndexOf(h.Y, tops))
