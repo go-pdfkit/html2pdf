@@ -8,7 +8,7 @@ require (
 	github.com/go-pdfkit/extract v0.9.0
 	github.com/go-pdfkit/pdfkit v0.20.0
 	github.com/go-pdfkit/reader v0.9.0
-	github.com/go-webengine/engine v0.17.3
+	github.com/go-webengine/engine v0.18.0
 	github.com/spf13/cobra v1.10.2
 )
 

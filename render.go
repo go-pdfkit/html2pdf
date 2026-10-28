@@ -49,6 +49,7 @@ func (e *exporter) paintBox(b *layout.Box) {
 		return
 	}
 	e.paintDecoration(b.Style, b.X, b.Y, b.W, b.H, true, true)
+	e.paintMarker(b.Marker)
 	for _, line := range b.Lines {
 		e.paintLine(line)
 	}
@@ -144,27 +145,47 @@ func (e *exporter) paintLine(line *layout.LineBox) {
 		if it.Text == "" || it.Style == nil {
 			continue
 		}
-		// The engine set this text in the family's face, and in the fallback
-		// face for the characters the family has no glyph for; walk the same
-		// runs with the same fonts, advancing by the widths the layout used.
-		st := it.Style
-		e.p.SetFillColor(toRGB(st.Color))
-		x, y := e.toPdf(it.X, it.Y+it.Ascent)
-		for _, run := range e.measure.Runs(it.Text, st.FontFamily, st.FontWeight, st.Italic) {
-			f := e.fonts.pick(st.FontFamily, st.Bold(), st.Italic)
-			if run.Fallback {
-				f = e.fonts.fallback(st.Bold(), st.Italic)
-			}
-			e.p.SetFont(f, st.FontSize*e.scale*pxToPt)
-			// Plain cmap text, not the shaped path: the engine measures
-			// each glyph's own advance with no kerning and its raster draws
-			// the same, so a kerned run here ended short of its layout
-			// slot and the gap read as a space ("15.2.1 ." on RFC 9110's
-			// table of contents). Kerning and ligatures belong in both
-			// places at once — the engine's measure first.
-			_ = e.p.Text(x, y, run.Text)
-			x += e.measure.Measure(run.Text, st.FontFamily, st.FontSize, st.FontWeight, st.Italic) * e.scale * pxToPt
+		e.text(it.Style, it.Text, it.X, it.Y+it.Ascent)
+	}
+}
+
+// paintMarker draws a list item's outside marker — "•", "3.", "iv." — as real
+// text, from the text and position the engine's layout gave it (layout.Marker:
+// every marker carries its Text, a bullet too). An inside marker is not here:
+// the engine lays it out as the first inline item of the item's first line,
+// which paintLine already draws.
+func (e *exporter) paintMarker(m *layout.Marker) {
+	if m == nil || m.Text == "" || m.Style == nil || m.Style.Visibility != css.VisibilityVisible {
+		return
+	}
+	if m.TextY+m.Ascent <= e.pageTop || m.TextY >= e.pageBot {
+		return
+	}
+	e.text(m.Style, m.Text, m.TextX, m.TextY+m.Ascent)
+}
+
+// text draws one run of text with its baseline at (xPx, baselinePx). The
+// engine set this text in the family's face, and in the fallback face for the
+// characters the family has no glyph for (a bullet U+2022 in a face without
+// it); walk the same runs with the same fonts, advancing by the widths the
+// layout used.
+func (e *exporter) text(st *css.Style, s string, xPx, baselinePx float64) {
+	e.p.SetFillColor(toRGB(st.Color))
+	x, y := e.toPdf(xPx, baselinePx)
+	for _, run := range e.measure.Runs(s, st.FontFamily, st.FontWeight, st.Italic) {
+		f := e.fonts.pick(st.FontFamily, st.Bold(), st.Italic)
+		if run.Fallback {
+			f = e.fonts.fallback(st.Bold(), st.Italic)
 		}
+		e.p.SetFont(f, st.FontSize*e.scale*pxToPt)
+		// Plain cmap text, not the shaped path: the engine measures
+		// each glyph's own advance with no kerning and its raster draws
+		// the same, so a kerned run here ended short of its layout
+		// slot and the gap read as a space ("15.2.1 ." on RFC 9110's
+		// table of contents). Kerning and ligatures belong in both
+		// places at once — the engine's measure first.
+		_ = e.p.Text(x, y, run.Text)
+		x += e.measure.Measure(run.Text, st.FontFamily, st.FontSize, st.FontWeight, st.Italic) * e.scale * pxToPt
 	}
 }
 
