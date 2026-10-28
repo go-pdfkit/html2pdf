@@ -5,6 +5,7 @@ go 1.27.2
 require (
 	github.com/go-gfx/gfx v0.36.1
 	github.com/go-opentype/fonts v0.14.0
+	github.com/go-pdfkit/extract v0.9.0
 	github.com/go-pdfkit/pdfkit v0.20.0
 	github.com/go-pdfkit/reader v0.9.0
 	github.com/go-webengine/engine v0.17.3
@@ -25,6 +26,7 @@ require (
 	github.com/go-images/jpeg2000 v0.13.8 // indirect
 	github.com/go-images/png v0.2.0 // indirect
 	github.com/go-opentype/opentype v0.16.0 // indirect
+	github.com/go-pdfkit/pdffont v0.4.0 // indirect
 	github.com/go-simd/highway v0.0.14 // indirect
 	github.com/go-sourcemap/sourcemap v2.1.4+incompatible // indirect
 	github.com/go-webengine/esbuildsandbox v0.1.0 // indirect

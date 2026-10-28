@@ -22,6 +22,8 @@ type exporter struct {
 	pageWPt                   float64
 	pageHPt                   float64
 	marginLeftPt, marginTopPt float64 // the page area's origin, PDF points
+	marginRightPt             float64 // the other two margins, for the page-margin boxes
+	marginBottomPt            float64
 	scale                     float64 // viewport px -> print-column px (see Options.ViewportPx)
 	pageTop                   float64 // viewport px, top of the current page's content slice
 	pageBot                   float64 // viewport px
