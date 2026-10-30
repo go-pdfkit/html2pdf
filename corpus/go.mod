@@ -4,10 +4,10 @@ go 1.27.2
 
 require (
 	github.com/go-pdfkit/conformance v0.0.0-20261026002156-aa06f483a744
-	github.com/go-pdfkit/html2pdf v0.0.0
+	github.com/go-pdfkit/html2pdf v0.3.0
 	github.com/go-pdfkit/pdfkit v0.20.0
 	github.com/go-pdfkit/reader v0.9.0
-	github.com/go-webengine/engine v0.17.3
+	github.com/go-webengine/engine v0.18.1
 )
 
 require (
