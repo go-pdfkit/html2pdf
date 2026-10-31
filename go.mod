@@ -8,7 +8,7 @@ require (
 	github.com/go-pdfkit/extract v0.9.0
 	github.com/go-pdfkit/pdfkit v0.20.0
 	github.com/go-pdfkit/reader v0.9.0
-	github.com/go-webengine/engine v0.18.1
+	github.com/go-webengine/engine v0.19.1
 	github.com/spf13/cobra v1.10.2
 )
 
@@ -40,6 +40,7 @@ require (
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/srwiley/rasterx v0.0.0-20220730225603-2ab79fcdd4ef // indirect
 	github.com/tannevaled/gobig2 v0.2.0 // indirect
+	github.com/tetratelabs/wazero v1.12.0 // indirect
 	golang.org/x/crypto v0.58.0 // indirect
 	golang.org/x/image v0.47.0 // indirect
 	golang.org/x/net v0.61.0 // indirect
