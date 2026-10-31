@@ -3,11 +3,11 @@ module github.com/go-pdfkit/html2pdf/corpus
 go 1.27.2
 
 require (
-	github.com/go-pdfkit/conformance v0.0.0-20261026002156-aa06f483a744
+	github.com/go-pdfkit/conformance v0.0.0-20261031064418-23502872fecc
 	github.com/go-pdfkit/html2pdf v0.3.0
 	github.com/go-pdfkit/pdfkit v0.20.0
 	github.com/go-pdfkit/reader v0.9.0
-	github.com/go-webengine/engine v0.18.1
+	github.com/go-webengine/engine v0.19.1
 )
 
 require (
@@ -37,6 +37,7 @@ require (
 	github.com/sergeymakinen/go-ico v1.0.0 // indirect
 	github.com/srwiley/rasterx v0.0.0-20220730225603-2ab79fcdd4ef // indirect
 	github.com/tannevaled/gobig2 v0.2.0 // indirect
+	github.com/tetratelabs/wazero v1.12.0 // indirect
 	golang.org/x/crypto v0.58.0 // indirect
 	golang.org/x/image v0.47.0 // indirect
 	golang.org/x/net v0.61.0 // indirect
