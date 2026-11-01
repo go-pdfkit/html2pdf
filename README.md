@@ -162,6 +162,15 @@ pixel as Chrome and WeasyPrint do; WeasyPrint's `--dpi` is the same lever. A
 relative `src` resolves against `BaseURL`; an image that fails to fetch or
 decode is left out.
 
+**Images above 40 megapixels.** Since `go-gfx/gfx` v0.37.0 the codec refuses an
+image of more than `codec.DefaultMaxPixels` (40 million pixels, width times
+height) from its header, before allocating anything: the size comes from the
+file, and a compressed format describes a huge image in a few bytes. The second,
+full-size decode of an `<img>` described above is subject to it. Above the
+ceiling it fails with `codec.ErrTooLarge`, and the embedded image is then the
+engine's box-size bitmap instead of the full-size source (a source that
+large is replaced, not dropped). There is no option to raise the ceiling here.
+
 ### Rendering with no network access
 
 Stylesheets (`<link>`, `@import`) and `<img>` images are the only places
