@@ -12,6 +12,8 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"strings"
+	"sync/atomic"
 	"testing"
 
 	"github.com/go-pdfkit/reader"
@@ -94,6 +96,42 @@ func TestRejectsBothInAndURL(t *testing.T) {
 	err, _ := exec(t, "--in", "x.html", "--url", "http://127.0.0.1:1/")
 	if !isUsage(err) {
 		t.Errorf("both: err = %v, want usage error", err)
+	}
+}
+
+// --offline sends nothing: a loopback server records zero hits for a page
+// that links a stylesheet and an image, and the refusals are named on stderr.
+// Without the flag (the control) the same page reaches the server.
+func TestOfflineFlagMakesNoRequest(t *testing.T) {
+	var hits atomic.Int64
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		hits.Add(1)
+		http.NotFound(w, r)
+	}))
+	defer srv.Close()
+	dir, in := writeHTML(t, `<html><head><link rel=stylesheet href="`+srv.URL+`/a.css"></head><body><p>x</p><img src="`+srv.URL+`/a.png"></body></html>`)
+	out := filepath.Join(dir, "out.pdf")
+
+	if err, msg := exec(t, "--in", in, "--out", out); err != nil {
+		t.Fatalf("control: %v %s", err, msg)
+	}
+	if hits.Load() == 0 {
+		t.Fatal("control: the default run made no request; the test cannot see a fetch")
+	}
+	hits.Store(0)
+	err, msg := exec(t, "--in", in, "--out", out, "--offline")
+	if err != nil {
+		t.Fatalf("--offline: %v %s", err, msg)
+	}
+	isPDF(t, out)
+	if n := hits.Load(); n != 0 {
+		t.Errorf("--offline: the server saw %d request(s)", n)
+	}
+	if !strings.Contains(msg, "refused "+srv.URL+"/a.css") {
+		t.Errorf("--offline: refusals not reported: %q", msg)
+	}
+	if err, _ := exec(t, "--url", srv.URL, "--offline"); !isUsage(err) {
+		t.Errorf("--offline with --url: err = %v, want usage error", err)
 	}
 }
 

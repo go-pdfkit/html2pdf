@@ -88,6 +88,7 @@ func RootCmd() *cobra.Command {
 		in, url, base, out, media        string
 		title, author, subject, keywords string
 		marginMm, imageDPI               float64
+		offline                          bool
 		timeout                          time.Duration
 	)
 	cmd := &cobra.Command{
@@ -102,6 +103,9 @@ required.`,
 		RunE: func(cmd *cobra.Command, _ []string) error {
 			if (in == "") == (url == "") {
 				return &usageError{"exactly one of --in or --url is required"}
+			}
+			if offline && url != "" {
+				return &usageError{"--offline cannot be combined with --url (the page itself is a fetch)"}
 			}
 			var src string
 			baseURL := base
@@ -121,10 +125,15 @@ required.`,
 				src, baseURL = page.HTML, page.URL
 			}
 
-			doc, err := html2pdf.Export(src, html2pdf.Options{
+			opts := html2pdf.Options{
 				MarginMm: marginMm, BaseURL: baseURL, Media: media, ImageDPI: imageDPI,
 				Title: title, Author: author, Subject: subject, Keywords: keywords,
-			})
+			}
+			if offline {
+				opts.Fetch = html2pdf.Offline
+				opts.OnRefused = func(u string) { fmt.Fprintf(cmd.ErrOrStderr(), "html2pdf: offline: refused %s\n", u) }
+			}
+			doc, err := html2pdf.Export(src, opts)
 			if err != nil {
 				return err
 			}
@@ -151,6 +160,7 @@ required.`,
 	f.Float64VarP(&marginMm, "margin", "m", 20, "page margin, in millimetres, on all four sides")
 	f.StringVar(&media, "media", "print", `CSS medium the page is styled for: "print" (the page's @media print rules apply, its screen-only ones do not) or "screen"`)
 	f.Float64Var(&imageDPI, "image-dpi", 0, "cap on embedded bitmap density at painted size (0 = keep every fetched pixel; 150 is a print value)")
+	f.BoolVar(&offline, "offline", false, "make no network request at all: stylesheets and images that are not data: URLs are left out (only with --in)")
 	f.DurationVar(&timeout, "timeout", 45*time.Second, "fetch timeout for --url")
 	f.StringVar(&title, "title", "", "PDF Title (default: the document's <title>)")
 	f.StringVar(&author, "author", "", "PDF Author")
