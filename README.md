@@ -34,7 +34,7 @@ go run ./cmd/html2pdf --in report.html --title "Q3 report" --author "A. Writer"
 
 The CLI is a [cobra](https://github.com/spf13/cobra) command with POSIX flags:
 `--in/-i`, `--url/-u`, `--out/-o`, `--base/-b`, `--margin/-m` (mm),
-`--media`, `--image-dpi`, `--timeout`, and the PDF information entries
+`--media`, `--image-dpi`, `--offline`, `--timeout`, and the PDF information entries
 `--title`, `--author`, `--subject`, `--keywords`. The single-dash spellings of
 earlier builds (`-in`, `-out`, `-margin` …) are still accepted. Exit status 2
 is a usage error, 1 a runtime failure.
@@ -161,6 +161,35 @@ a bitmap's density at its painted size — 0, the default, keeps every fetched
 pixel as Chrome and WeasyPrint do; WeasyPrint's `--dpi` is the same lever. A
 relative `src` resolves against `BaseURL`; an image that fails to fetch or
 decode is left out.
+
+### Rendering with no network access
+
+Stylesheets (`<link>`, `@import`) and `<img>` images are the only places
+`Export` opens a connection. There is no script engine, no `@font-face` fetch,
+and an `<iframe>`, `<object>` or `<embed>` is never loaded; CSS `background`
+images are not painted. By default the engine's own client is used: it
+follows redirects (Go's limit of 10 hops, to any host — a loopback or private
+address included), times out after 30 s, and has no allow-list. A server that
+renders HTML built from untrusted text should not rely on escaping alone to
+keep that out of its own network:
+
+```go
+var refused atomic.Int64
+doc, err := html2pdf.Export(src, html2pdf.Options{
+    Fetch:     html2pdf.Offline,                   // no request is ever sent
+    OnRefused: func(string) { refused.Add(1) },    // optional; may run concurrently
+})
+```
+
+`Options.Fetch` replaces the client for every http(s) sub-resource (it is the
+engine's `Engine.Fetcher` hook); `html2pdf.Offline` refuses all of them with
+`ErrOffline`. A refused resource is treated as missing — the layout continues,
+`Export` does not fail — and `OnRefused` is called with its URL (it counts only
+errors wrapping `ErrOffline`). Nothing is sent, so no redirect can be followed
+and no DNS lookup happens. `data:` URLs are decoded in place and still render.
+`file:` URLs are never read, with or without `Offline`, whatever `BaseURL` is
+(the engine's `FileRoot` stays empty). From the shell: `--offline` (only with
+`--in`; refusals are listed on stderr).
 
 List markers are real text in the PDF: the engine (v0.18.0 and later) lays
 out each list item's `::marker` with its text — "•", "3.", "iv." — and

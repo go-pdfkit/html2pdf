@@ -35,8 +35,11 @@
 // source re-encoded as JPEG when opaque, everything else as a flate bitmap
 // with a soft mask for transparency — see images.go and Options.ImageDPI. A
 // relative src resolves against Options.BaseURL; an image that fails to
-// fetch or decode is simply left out. Stylesheets and images are the two
-// places Export touches the network.
+// fetch or decode is simply left out. Stylesheets (<link>, @import) and
+// images (<img>, CSS url()) are the only places Export touches the network:
+// there is no script engine, no @font-face, and an <iframe>, <object> or
+// <embed> is never loaded. Options.Fetch replaces the network client, and
+// Offline refuses every request — see offline.go.
 //
 // # Navigation
 //
@@ -136,6 +139,21 @@ type Options struct {
 	// hidden; "screen" styles the page as displayed. Width features
 	// (min-width, max-width) are evaluated at ViewportPx under either.
 	Media string
+
+	// Fetch replaces the network client for every http(s) sub-resource
+	// (stylesheets, @import chains, images). Nil, the default, keeps the
+	// engine's own browser-like client: it follows redirects (net/http's
+	// default of up to 10 hops, to any host, including a loopback or private
+	// one), has a 30 s timeout per request, and honours no allow-list — so a
+	// document built from untrusted text can make the server running Export
+	// send GET requests to any address it can reach. A server that renders
+	// such documents should set Fetch: Offline refuses everything.
+	Fetch Fetcher
+
+	// OnRefused, when non-nil, is called with the URL of each request Fetch
+	// refused by returning an error that wraps ErrOffline (as Offline does).
+	// It may be called from several goroutines at once; count with an atomic.
+	OnRefused func(rawurl string)
 }
 
 func (o Options) resolved() Options {
@@ -173,6 +191,10 @@ func Export(htmlSrc string, opts Options) (*pdfkit.Document, error) {
 	// everything below is laid out against.
 	ctx := context.Background()
 	eng := engine.New()
+	if f := opts.fetcher(); f != nil {
+		eng.Fetcher = f
+	}
+	eng.FileRoot = "" // never read file: URLs, whatever BaseURL says
 	webDoc := &engine.Document{URL: opts.BaseURL, Root: root, HTML: htmlSrc}
 	media := css.Media{Type: opts.Media, Width: math.Abs(opts.ViewportPx)}
 	sheets := eng.LoadStylesheets(ctx, webDoc, media)
